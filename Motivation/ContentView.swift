@@ -34,10 +34,7 @@ struct ContentView: View {
                 }
                 .padding()
             })
-        }
-        if showingQuote == true {
-            show: quoteDiscription()
-        }
+        }.sheet(isPresented: $showingQuote) { quoteDiscription() }
                 
         
     }
@@ -45,25 +42,33 @@ struct ContentView: View {
 
 // Vista de la descripción de la cita
 struct quoteDiscription: View {
-    let currectDate: Int = 1
-    
+    var currectDate: Int = 5
+    @Environment(\.dismiss) var dismiss
+//    @Binding var showingQuote:Bool
     var body: some View {
-        let discriptionView = ZStack {
-            
-            
-            VStack(spacing: 15) {
-                Text("discribe the world")
-                    .font(.title2)
-                    .foregroundStyle(.black)
-                    .multilineTextAlignment(.center)
+
+            ZStack {
                 
-                // Ejemplo de contenido adicional
-                Text("Contenido del día \(currectDate)")
-                    .font(.subheadline)
-                    .foregroundStyle(.black.opacity(0.8))
+                
+                VStack(spacing: 15) {
+                    Button("come back")
+                    {
+                        dismiss()
+                    }.frame(width: 100, height: 100)
+                        .background(.mainSistem)
+                    
+                    Text("discribe the world")
+                        .font(.title2)
+                        .foregroundStyle(.black)
+                        .multilineTextAlignment(.center)
+                    
+                    // Ejemplo de contenido adicional
+                    Text("Contenido del día \(currectDate)")
+                        .font(.subheadline)
+                        .foregroundStyle(.black.opacity(0.8))
+                }
             }
-            
-        }
+//        }
 //        Button("Close"){
 //            onDismiss()
 //        }
