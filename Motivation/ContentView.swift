@@ -4,7 +4,7 @@
 //
 //  Created by Leonardo Aurelio on 04/10/2025.
 //
-
+import Foundation
 import SwiftUI
 
 struct ContentView: View {
@@ -36,7 +36,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showingQuote) {
             quoteDiscription()
-                .presentationDetents([.large]) // Grande; puedes usar [.medium, .large]
+                .presentationDetents([.medium]) // Grande; puedes usar [.medium, .large]
         }
     }
 }
@@ -46,22 +46,25 @@ struct quoteDiscription: View {
     let currectDate: Int = 1
 
     var body: some View {
-        ZStack {
+        let discriptionView = ZStack {
            
 
             VStack(spacing: 16) {
                 Text("discribe the world")
                     .font(.title2)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.black)
                     .multilineTextAlignment(.center)
 
                 // Ejemplo de contenido adicional
                 Text("Contenido del día \(currectDate)")
                     .font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.8))
+                    .foregroundStyle(.black.opacity(0.8))
             }
            
         }
+        DialogExample(onDismissOutside: true, closeDialog: {
+                            clearFrom()
+                        }, content: discriptionView)
     }
 }
 
