@@ -8,6 +8,7 @@
 import SwiftUI
 
 // Shared quotes array accessible from any file in the app target.
+// You can add more quotes here; keep them as comma-separated Swift string literals.
 let quotes: [String] = [
     "You have power over your mind — not outside events. — Marcus Aurelius",
     "Waste no more time arguing what a good man should be. Be one. — Marcus Aurelius",
@@ -45,7 +46,6 @@ let quotes: [String] = [
     "It is not that we have a short time to live, but that we waste a lot of it. — Seneca"
 ]
 
-// Optional: a simple browser for all quotes, using the shared array above.
 struct QuoteLibrary: View {
     var body: some View {
         VStack(alignment: .leading) {
