@@ -85,16 +85,23 @@ struct DayQuoteView: View {
 
     var body: some View {
         let text: String = {
-            guard !quotes.isEmpty else { return "No quotes available." }
-            let safeIndex = max(0, min(index, quotes.count - 1))
-            return quotes[safeIndex]
+            if todayIndex < 370 || quotes.count >= 0{
+                if !quotes.isEmpty {
+                    return quotes[quotes.count]}}
+            else{
+                return ("No quotes available.")
+            }
+            
+//            guard !quotes.isEmpty else { return "No quotes available." }
+//            let safeIndex = max(0, min(index, quotes.count - 1))
+//            return quotes[safeIndex]
         }()
 
         return Text(text)
             .font(.body)
             .multilineTextAlignment(.center)
             .foregroundStyle(.white)
-            .padding(.vertical, 8)
+            .padding(.vertical, 60)
     }
 }
 
