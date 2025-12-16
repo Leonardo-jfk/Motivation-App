@@ -84,17 +84,17 @@ struct ContentView: View {
                 }
                
                 .toolbar {
-                    Toolbaritem(placement: .topbarleading) {
-                        Navigationlink(destination: quotelibrary()) {
-                            Image(systemname: "apple.books.pages")
+                    ToolbarItem(placement: .topBarLeading) {
+                        NavigationLink(destination: QuoteLibrary()) {
+                            Image(systemName: "apple.books.pages")
                                 .resizable()
                                 .frame(width: 35, height: 35)
-                                .foregroundstyle(.primary)
+                                .foregroundStyle(.primary)
                                 .padding(15) // touch target
                         }
                     }
-                    Toolbaritem(placement: .topbartrailing) {
-                        navigationlink(destination: HouseMenu()) {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink(destination: HouseMenu()) {
                             Image(systemName: "house")
                                 .resizable()
                                 .frame(width: 35, height: 35)
