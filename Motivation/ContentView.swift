@@ -32,11 +32,31 @@ struct ContentView: View {
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
-
+            
+            
+            //                    NavigationStack{
+            //                        List{
+            //                            NavigationLink(destination:QuoteLibrary()){
+            //                                Text("Full library ")
+            //                            }
+            Button(action:{
+                NavigationLink(destination: QuoteLibrary()){
+                    Text("Fav Places")
+                }
+//        }
+            }, label:{
+                ZStack {
+                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                        .fill(Color.black.opacity(0.8))
+                        .frame(width: 50, height: 50)
+                    Image(systemName: "apple.books.pages")
+                        .resizable()
+                })
             // Botón que abre la descripción
             Button(action: {
                 showingQuote.toggle()
-            }, label: {
+            }
+                   , label: {
                 if showingQuote {
                     ZStack {
                         RoundedRectangle(cornerRadius: 40, style: .continuous)
@@ -45,6 +65,7 @@ struct ContentView: View {
 
                         VStack {
                             Spacer()
+                            Spacer()
                             Text("Today's wisdom dose:")
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 4)
@@ -52,29 +73,34 @@ struct ContentView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                                 .font(.title2)
                                 .foregroundStyle(.white)
-                            Spacer()
+                            
 
                             DayQuoteView(index: todayIndex)
                                 .padding(.horizontal)
-
+                                .frame(maxWidth: 350, maxHeight: 300)
+                                
+                            Spacer()
                             Spacer()
                         }
                         .padding()
                     }
                     .padding()
-                } else {
+                }
+                    else {
                     ZStack {
                         RoundedRectangle(cornerRadius: 30, style: .continuous)
                             .fill(Color.black.opacity(0.8))
-                            .frame(width: 100, height: 100)
+                            .frame(width: 200, height: 100)
 
-                        Text("Hello, world!")
-                            .font(.caption2)
+                        Text("Get today's wisdom ")
+                            .font(.title3)
+                            .bold()
                             .foregroundStyle(.white)
+                            .background(.gray.opacity(0.5))
                     }
                     .padding()
                 }
-            })
+            })//.frame(width: 5, height: 5)
         }
     }
 }
