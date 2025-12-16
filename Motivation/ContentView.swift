@@ -39,68 +39,78 @@ struct ContentView: View {
             //                            NavigationLink(destination:QuoteLibrary()){
             //                                Text("Full library ")
             //                            }
-            Button(action:{
-                NavigationLink(destination: QuoteLibrary()){
-                    Text("Fav Places")
-                }
-//        }
-            }, label:{
-                ZStack {
-                    RoundedRectangle(cornerRadius: 4, style: .continuous)
-                        .fill(Color.black.opacity(0.8))
-                        .frame(width: 50, height: 50)
-                    Image(systemName: "apple.books.pages")
-                        .resizable()
-                })
-            // Botón que abre la descripción
-            Button(action: {
-                showingQuote.toggle()
-            }
-                   , label: {
-                if showingQuote {
+            VStack{
+                NavigationStack{
+                    
                     ZStack {
-                        RoundedRectangle(cornerRadius: 40, style: .continuous)
-                            .fill(Color.black.opacity(0.8))
-                            .frame(width: 350, height: 350)
-
-                        VStack {
-                            Spacer()
-                            Spacer()
-                            Text("Today's wisdom dose:")
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .background(.gray.opacity(0.4))
-                                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                                .font(.title2)
-                                .foregroundStyle(.white)
+                        NavigationLink(destination: QuoteLibrary()){
                             
-
-                            DayQuoteView(index: todayIndex)
-                                .padding(.horizontal)
-                                .frame(maxWidth: 350, maxHeight: 300)
+                            Image(systemName: "apple.books.pages")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                        }}
+                }
+                //            Button(action:{
+                //                NavigationLink(destination: QuoteLibrary())
+                //                //        }
+                //            }, label:{
+                //                ZStack {
+                //                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                //                        .fill(Color.black.opacity(0.8))
+                //                        .frame(width: 50, height: 50)
+                //                    Image(systemName: "apple.books.pages")
+                //                        .resizable()
+                //                }})
+                // Botón que abre la descripción
+                Button(action: {
+                    showingQuote.toggle()
+                }
+                       , label: {
+                    if showingQuote {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 40, style: .continuous)
+                                .fill(Color.black.opacity(0.8))
+                                .frame(width: 350, height: 350)
+                            
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                Text("Today's wisdom dose:")
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(.gray.opacity(0.4))
+                                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                    .font(.title2)
+                                    .foregroundStyle(.white)
                                 
-                            Spacer()
-                            Spacer()
+                                
+                                DayQuoteView(index: todayIndex)
+                                    .padding(.horizontal)
+                                    .frame(maxWidth: 350, maxHeight: 300)
+                                
+                                Spacer()
+                                Spacer()
+                            }
+                            .padding()
                         }
                         .padding()
                     }
-                    .padding()
-                }
                     else {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .fill(Color.black.opacity(0.8))
-                            .frame(width: 200, height: 100)
-
-                        Text("Get today's wisdom ")
-                            .font(.title3)
-                            .bold()
-                            .foregroundStyle(.white)
-                            .background(.gray.opacity(0.5))
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                .fill(Color.black.opacity(0.8))
+                                .frame(width: 200, height: 100)
+                            
+                            Text("Get today's wisdom ")
+                                .font(.title3)
+                                .bold()
+                                .foregroundStyle(.white)
+                                .background(.gray.opacity(0.5))
+                        }
+                        .padding()
                     }
-                    .padding()
-                }
-            })//.frame(width: 5, height: 5)
+                })//.frame(width: 5, height: 5)
+            }
         }
     }
 }
