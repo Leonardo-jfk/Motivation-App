@@ -123,10 +123,11 @@ struct MainSettings: View {
     
     var body: some View {
         if showing {
-            NavigationLink(destination: SettingsList())
-            {
-                
-            }}
+            NavigationStack{
+                NavigationLink(destination: SettingsList())
+                {
+                    
+                }}}
         else {
             ZStack {
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
