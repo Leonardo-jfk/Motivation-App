@@ -407,7 +407,7 @@ struct QuoteLibrary: View {
             Text("Quote Library")
                 .font(.largeTitle)
                 .bold()
-                .padding(.horizontal)
+                .padding(20)
 
             List {
                 ForEach(quotes, id: \.self) { quote in
@@ -415,8 +415,8 @@ struct QuoteLibrary: View {
                         .padding(.vertical, 4)
                 }
             }
-//            .scrollContentBackground(.hidden)
-//            .background(Color.clear)
+            .scrollContentBackground(.hidden)
+            .background(Color.clear)
             .listStyle(.insetGrouped)
         }
     }

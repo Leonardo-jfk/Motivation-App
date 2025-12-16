@@ -20,7 +20,6 @@ struct ContentView: View {
     // Use 0-based index for arrays; clamp to valid range based on quotes.count.
     private var todayIndex: Int {
         let day = dayOfYear() // 1-based
-        // Map to 0...(quotes.count - 1) by modulo, guarding empty array.
         guard !quotes.isEmpty else { return 0 }
         return (day - 1) % quotes.count
     }
@@ -70,7 +69,7 @@ struct ContentView: View {
                                 RoundedRectangle(cornerRadius: 30, style: .continuous)
                                     .fill(Color.black.opacity(0.8))
                                     .frame(width: 200, height: 100)
-                                    
+
                                 Text("Get today's wisdom ")
                                     .font(.title3)
                                     .bold()
@@ -78,15 +77,13 @@ struct ContentView: View {
                                     .background(.gray.opacity(0.5))
                             }
                             .padding()
-                      
                         }
-                         
-                    }) //.frame(width: 5, height: 5)
+                    })
                     Spacer()
                 }
-                // Make the navigation content transparent
-//                .scrollContentBackground(.hidden) // if a ScrollView/List appears, its bg is hidden
-//                .background(Color.clear)          // ensure container itself is transparent
+                // If you ever add a List/ScrollView here, uncomment these:
+                // .scrollContentBackground(.hidden)
+                // .background(Color.clear)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         NavigationLink(destination: QuoteLibrary()) {
@@ -97,8 +94,6 @@ struct ContentView: View {
                                 .padding(10) // touch target
                         }
                     }
-                }
-                .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         NavigationLink(destination: QuoteLibrary()) {
                             Image(systemName: "apple.books.pages")
@@ -109,6 +104,9 @@ struct ContentView: View {
                         }
                     }
                 }
+                // Make the nav bar itself transparent over your background image
+                .toolbarBackground(.clear, for: .navigationBar)
+                .toolbarBackgroundVisibility(.visible, for: .navigationBar)
             }
         }
     }
