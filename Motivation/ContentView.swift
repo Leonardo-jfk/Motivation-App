@@ -84,22 +84,22 @@ struct ContentView: View {
                 }
                
                 .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        NavigationLink(destination: QuoteLibrary()) {
-                            Image(systemName: "apple.books.pages")
+                    Toolbaritem(placement: .topbarleading) {
+                        Navigationlink(destination: quotelibrary()) {
+                            Image(systemname: "apple.books.pages")
                                 .resizable()
-                                .frame(width: 50, height: 50)
-                                .foregroundStyle(.primary)
-                                .padding(10) // touch target
+                                .frame(width: 35, height: 35)
+                                .foregroundstyle(.primary)
+                                .padding(15) // touch target
                         }
                     }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: QuoteLibrary()) {
-                            Image(systemName: "apple.books.pages")
+                    Toolbaritem(placement: .topbartrailing) {
+                        navigationlink(destination: HouseMenu()) {
+                            Image(systemName: "house")
                                 .resizable()
-                                .frame(width: 50, height: 50)
+                                .frame(width: 35, height: 35)
                                 .foregroundStyle(.primary)
-                                .padding(10) // touch target
+                                .padding(15) // touch target
                         }
                     }
                 }
