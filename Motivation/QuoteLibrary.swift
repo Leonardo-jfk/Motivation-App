@@ -5,6 +5,22 @@
 //  Created by Leonardo Aurelio on 28/10/2025.
 //
 
+
+
+
+
+
+//ATTENTION
+//feature: make a star with every quote and the list of underlined quotes
+
+
+
+
+
+
+
+
+
 import SwiftUI
 
 // Shared quotes array accessible from any file in the app target.

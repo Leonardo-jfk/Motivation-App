@@ -16,25 +16,27 @@ import SwiftUI
 struct HouseMenu: View {
     @State private var showingFeedbackMenu = false
 
-    // Reuse the same “todayIndex” logic you used in ContentView
-    private var todayIndex: Int {
-        let calendar = Calendar.current
-        let day = calendar.ordinality(of: .day, in: .year, for: .now) ?? 1
-        guard !quotes.isEmpty else { return 0 }
-        return (day - 1) % quotes.count
-    }
+
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Quote Library")
-                .font(.largeTitle)
-                .bold()
-                .padding(20)
-
+            ZStack{
+                Rectangle()
+                    .size(width: 200, height: 100)
+                    .cornerRadius(30)
+                    .opacity(0.3)
+                    .scenePadding(.top)
+                   
+                Text("Quote Library")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(20)
+                    
+            }
             Button(action: {
                 showingFeedbackMenu.toggle()
             }) {
-                GetFeedback(showing: showingFeedbackMenu, todayIndex: todayIndex)
+                GetFeedback(showing: showingFeedbackMenu)
             }
             .buttonStyle(.plain)
 
@@ -46,7 +48,7 @@ struct HouseMenu: View {
 
 struct GetFeedback: View {
     let showing: Bool
-    let todayIndex: Int
+   
 
     var body: some View {
         if showing {
@@ -64,9 +66,7 @@ struct GetFeedback: View {
                         .font(.title2)
                         .foregroundStyle(.white)
 
-                    DayQuoteView(index: todayIndex)
-                        .padding(.horizontal)
-                        .frame(maxWidth: 350, maxHeight: 300)
+                
                 }
                 .padding()
             }
@@ -93,5 +93,5 @@ struct GetFeedback: View {
 }
 
 #Preview {
-    GetFeedback(showing: true, todayIndex: 0)
+    GetFeedback(showing: true)
 }
