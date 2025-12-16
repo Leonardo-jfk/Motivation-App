@@ -40,7 +40,7 @@ struct HouseMenu: View {
             Button(action: {
                 showingPersonalNotes.toggle()
             }) {
-                GetFeedback(showing: showingPersonalNotes)
+                PersonalNotes(showing: showingPersonalNotes)
             }
             .buttonStyle(.plain)
 
@@ -48,7 +48,7 @@ struct HouseMenu: View {
                 Button(action: {
                     showingMainSettings.toggle()
                 }) {
-                    GetFeedback(showing: showingMainSettings)
+                    MainSettings(showing: showingMainSettings)
                 }
                 .buttonStyle(.plain)
 
@@ -57,7 +57,7 @@ struct HouseMenu: View {
                 Button(action: {
                     showingResourses.toggle()
                 }) {
-                    GetFeedback(showing: showingResourses)
+                    Resourses(showing: showingResourses)
                 }
                 .buttonStyle(.plain)
 
@@ -106,8 +106,8 @@ struct PersonalNotes: View {
                     .fill(Color.black.opacity(0.8))
                     .frame(width: 200, height: 100)
 
-                Text("Feedback ")
-                    .font(.title3)
+                Text("Personal Notes ")
+                    .font(.title2)
                     .bold()
                     .foregroundStyle(.white)
                     .background(.gray.opacity(0.5))
@@ -148,8 +148,8 @@ struct MainSettings: View {
                     .fill(Color.black.opacity(0.8))
                     .frame(width: 200, height: 100)
 
-                Text("Get today's wisdom ")
-                    .font(.title3)
+                Text("Settings ")
+                    .font(.title2)
                     .bold()
                     .foregroundStyle(.white)
                     .background(.gray.opacity(0.5))
@@ -191,7 +191,7 @@ struct Resourses: View {
                     .frame(width: 200, height: 100)
 
                 Text("Best sourses of wisdom ")
-                    .font(.title3)
+                    .font(.title2)
                     .bold()
                     .foregroundStyle(.white)
                     .background(.gray.opacity(0.5))
@@ -233,7 +233,7 @@ struct GetFeedback: View {
                     .frame(width: 200, height: 100)
 
                 Text("Give us feedback ")
-                    .font(.title3)
+                    .font(.title2)
                     .bold()
                     .foregroundStyle(.white)
                     .background(.gray.opacity(0.5))
