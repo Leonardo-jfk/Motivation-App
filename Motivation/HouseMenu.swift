@@ -19,15 +19,18 @@ struct HouseMenu: View {
 
 
     var body: some View {
-        VStack(alignment: .leading) {
-        
+        //VStack(alignment: .leading) {
+            VStack{
                    Text("MENU")
                     .font(.largeTitle)
                     .bold()
                     .padding(20)
+                    
+                    .frame(maxWidth: 150)
                     .background(
                         Color.gray
-                            .clipShape(RoundedRectangle(cornerRadius: 20)))
+                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                            .opacity(0.6))
                     Spacer()
             Button(action: {
                 showingFeedbackMenu.toggle()
@@ -36,7 +39,32 @@ struct HouseMenu: View {
             }
             .buttonStyle(.plain)
 
-            Spacer()
+           
+                Button(action: {
+                    showingFeedbackMenu.toggle()
+                }) {
+                    GetFeedback(showing: showingFeedbackMenu)
+                }
+                .buttonStyle(.plain)
+
+                
+                
+                Button(action: {
+                    showingFeedbackMenu.toggle()
+                }) {
+                    GetFeedback(showing: showingFeedbackMenu)
+                }
+                .buttonStyle(.plain)
+
+               
+                    Button(action: {
+                        showingFeedbackMenu.toggle()
+                    }) {
+                        GetFeedback(showing: showingFeedbackMenu)
+                    }
+                    .buttonStyle(.plain)
+
+                    Spacer()
         }
         .padding(.horizontal)
     }
