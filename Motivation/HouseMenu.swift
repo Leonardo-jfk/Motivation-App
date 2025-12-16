@@ -20,19 +20,15 @@ struct HouseMenu: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            ZStack{
-                Rectangle()
-                    .size(width: 200, height: 100)
-                    .cornerRadius(30)
-                    .opacity(0.3)
-                    .scenePadding(.top)
-                   
-                Text("Quote Library")
+        
+                   Text("MENU")
                     .font(.largeTitle)
                     .bold()
                     .padding(20)
-                    
-            }
+                    .background(
+                        Color.gray
+                            .clipShape(RoundedRectangle(cornerRadius: 20)))
+                    Spacer()
             Button(action: {
                 showingFeedbackMenu.toggle()
             }) {
