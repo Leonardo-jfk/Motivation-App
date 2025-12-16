@@ -19,7 +19,7 @@ let sections: [String] = [
         ]
         
         
-struct SettingList: View {
+struct SettingsList: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Settings")
@@ -39,5 +39,5 @@ struct SettingList: View {
 }
 
 #Preview {
-    SettingList()
+    SettingsList()
 }
