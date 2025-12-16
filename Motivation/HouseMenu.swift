@@ -213,13 +213,22 @@ struct GetFeedback: View {
                     .frame(width: 350, height: 350)
 
                 VStack {
-                    Text("Today's wisdom dose:")
+                    Text("How to give us feedback:")
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(.gray.opacity(0.4))
                         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                         .font(.title2)
                         .foregroundStyle(.white)
+                    
+                    Text("Open the link to the Google Form and answer the questions")
+                        .foregroundStyle(.white)
+                        .padding(.horizontal)
+                        .padding(.vertical)
+                    Text("The link:https://docs.google.com/forms/d/e/1FAIpQLSfspdMNWKv3vDnIB2WAuPbTMwECwIgIDgom0Dp9KNcuXFF-GQ/viewform?usp=dialog")
+                        .foregroundStyle(.white)
+                        .padding(.horizontal)
+                        .padding(.vertical)
 
                 
                 }
