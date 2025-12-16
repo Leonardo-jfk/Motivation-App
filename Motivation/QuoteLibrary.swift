@@ -415,9 +415,9 @@ struct QuoteLibrary: View {
                         .padding(.vertical, 4)
                 }
             }
-            .scrollContentBackground(.hidden)
-            .background(Color.clear)
-            .listStyle(.insetGrouped)
+//            .scrollContentBackground(.hidden)
+//            .background(Color.clear)
+//            .listStyle(.insetGrouped)
         }
     }
 }

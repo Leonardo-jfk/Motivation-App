@@ -25,65 +25,64 @@ struct ContentView: View {
     }
 
     var body: some View {
-        ZStack {
-            // Fondo
-            Image(.backgroundDark)
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
+        
 
             // Wrap the whole interactive content in a single NavigationStack
             NavigationStack {
-                VStack {
-                    // Spacer to push main content below the nav bar if needed
-                    Spacer(minLength: 0)
-
-                    // Botón que abre la descripción
-                    Button(action: {
-                        showingQuote.toggle()
-                    }, label: {
-                        if showingQuote {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 40, style: .continuous)
-                                    .fill(Color.black.opacity(0.8))
-                                    .frame(width: 350, height: 350)
-
-                                VStack {
-                                    Text("Today's wisdom dose:")
-                                        .padding(.horizontal, 8)
-                                        .padding(.vertical, 4)
-                                        .background(.gray.opacity(0.4))
-                                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                                        .font(.title2)
+                ZStack{
+                Image(.backgroundDark)
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
+                    VStack {
+                        // Spacer to push main content below the nav bar if needed
+                        Spacer(minLength: 0)
+                        
+                        // Botón que abre la descripción
+                        Button(action: {
+                            showingQuote.toggle()
+                        }, label: {
+                            if showingQuote {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 40, style: .continuous)
+                                        .fill(Color.black.opacity(0.8))
+                                        .frame(width: 350, height: 350)
+                                    
+                                    VStack {
+                                        Text("Today's wisdom dose:")
+                                            .padding(.horizontal, 8)
+                                            .padding(.vertical, 4)
+                                            .background(.gray.opacity(0.4))
+                                            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                            .font(.title2)
+                                            .foregroundStyle(.white)
+                                        
+                                        DayQuoteView(index: todayIndex)
+                                            .padding(.horizontal)
+                                            .frame(maxWidth: 350, maxHeight: 300)
+                                    }
+                                    .padding()
+                                }
+                                .padding()
+                            } else {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                        .fill(Color.black.opacity(0.8))
+                                        .frame(width: 200, height: 100)
+                                    
+                                    Text("Get today's wisdom ")
+                                        .font(.title3)
+                                        .bold()
                                         .foregroundStyle(.white)
-
-                                    DayQuoteView(index: todayIndex)
-                                        .padding(.horizontal)
-                                        .frame(maxWidth: 350, maxHeight: 300)
+                                        .background(.gray.opacity(0.5))
                                 }
                                 .padding()
                             }
-                            .padding()
-                        } else {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                    .fill(Color.black.opacity(0.8))
-                                    .frame(width: 200, height: 100)
-
-                                Text("Get today's wisdom ")
-                                    .font(.title3)
-                                    .bold()
-                                    .foregroundStyle(.white)
-                                    .background(.gray.opacity(0.5))
-                            }
-                            .padding()
-                        }
-                    })
-                    Spacer()
+                        })
+                        Spacer()
+                    }
                 }
-                // If you ever add a List/ScrollView here, uncomment these:
-                // .scrollContentBackground(.hidden)
-                // .background(Color.clear)
+               
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         NavigationLink(destination: QuoteLibrary()) {
@@ -104,11 +103,8 @@ struct ContentView: View {
                         }
                     }
                 }
-                // Make the nav bar itself transparent over your background image
-                .toolbarBackground(.clear, for: .navigationBar)
-                .toolbarBackgroundVisibility(.visible, for: .navigationBar)
+             
             }
-        }
     }
 }
 
