@@ -18,7 +18,7 @@ func dayOfYear(for date: Date = .now) -> Int {
 
 struct ContentView: View {
     @State private var showingQuote = false
-    @Environment(.colorScheme) var colorScheme
+    @Environment(\.colorScheme) var colorScheme
     
     // Use 0-based index for arrays; clamp to valid range based on quotes.count.
     private var todayIndex: Int {
@@ -35,6 +35,12 @@ struct ContentView: View {
                 ZStack{
                     if colorScheme == .dark {
                         Image(.backgroundDark)
+                            .resizable()
+                            .scaledToFill()
+                            .ignoresSafeArea()
+                    }
+                    else{
+                        Image(.backgroundLight)
                             .resizable()
                             .scaledToFill()
                             .ignoresSafeArea()
