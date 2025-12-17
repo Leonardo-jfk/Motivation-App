@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+
+
 // Helper: día del año (1...365/366)
 func dayOfYear(for date: Date = .now) -> Int {
     let calendar = Calendar.current
@@ -16,7 +18,8 @@ func dayOfYear(for date: Date = .now) -> Int {
 
 struct ContentView: View {
     @State private var showingQuote = false
-
+    @Environment(.colorScheme) var colorScheme
+    
     // Use 0-based index for arrays; clamp to valid range based on quotes.count.
     private var todayIndex: Int {
         let day = dayOfYear() // 1-based
@@ -26,14 +29,18 @@ struct ContentView: View {
 
     var body: some View {
         
-
+      
             // Wrap the whole interactive content in a single NavigationStack
             NavigationStack {
                 ZStack{
-                Image(.backgroundDark)
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
+                    if colorScheme == .dark {
+                        Image(.backgroundDark)
+                            .resizable()
+                            .scaledToFill()
+                            .ignoresSafeArea()
+                    }
+                    
+                    
                     VStack {
                         // Spacer to push main content below the nav bar if needed
                         Spacer(minLength: 0)
@@ -77,6 +84,9 @@ struct ContentView: View {
                                         .background(.gray.opacity(0.5))
                                 }
                                 .padding()
+                                
+                                
+                                NavigationLink(destination: SettingsList()){}
                             }
                         })
                         Spacer()

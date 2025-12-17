@@ -123,7 +123,6 @@ struct MainSettings: View {
     
     var body: some View {
         
-            NavigationStack{
                 NavigationLink(destination: SettingsList())
                 {
                     ZStack {
@@ -141,7 +140,6 @@ struct MainSettings: View {
                 }
             }
        
-    }
 }
             //            ZStack {
             //                RoundedRectangle(cornerRadius: 40, style: .continuous)
