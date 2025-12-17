@@ -11,18 +11,20 @@ import SwiftUI
 let sections: [String] = [
     
         // Enero (1-31)
-        "Mode - light / dark",
         "Music -- on / off",
         "Notifications -- on / off",
         "Language / Idioma",
         "Delete the account",
-        ]
-        
-        
+]
+
 struct SettingsList: View {
     // Bind to the same key used in MotivationApp
     @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
+    @AppStorage("musicEnabled") private var musicEnabled: Bool = true
 
+//    @AudioManager.shared.setMusicEnabled(true)
+    @StateObject private var audioManager = AudioManager.shared
+    
     private var selectionBinding: Binding<AppColorScheme> {
         Binding(
             get: { AppColorScheme(rawValue: storedScheme) ?? .system },
@@ -47,16 +49,23 @@ struct SettingsList: View {
                     .pickerStyle(.segmented)
                 }
 
+                Section("Music") {
+                    Toggle("Music", isOn:  $audioManager.isMusicEnabled)
+                    }
+//                        AudioManager.shared.musicEnabled(true)
+                    $audioManager.setMusicEnabled(true)
+                    }
+                }
+
                 Section("Other") {
-                    ForEach(sections, id: \.self) { quote in
-                        Text(quote)
+                    ForEach(sections, id: \.self) { item in
+                        Text(item)
                             .padding(.vertical, 4)
                     }
                 }
             }
-        
         }
-    }
+    
 }
 
 #Preview {
