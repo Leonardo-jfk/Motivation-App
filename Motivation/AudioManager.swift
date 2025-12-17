@@ -17,7 +17,7 @@ final class AudioManager: ObservableObject {
     // Persisted user preference (shared with SettingsList via the same key)
 //    @Published private(set) var musicEnabled: Bool {
         @Published  var musicEnabled: Bool
-    @Published var isMusicEnabled: Bool = false
+    @Published var isMusicEnabled: Bool =  UserDefaults.standard.bool(forKey: "musicEnabled")
     {
         didSet {
             // Persist to UserDefaults so @AppStorage in SettingsList stays in sync
@@ -60,6 +60,7 @@ final class AudioManager: ObservableObject {
     func setMusicEnabled(_ enabled: Bool) {
         // Setting the property triggers didSet which persists and applies changes
         isMusicEnabled = enabled
+        UserDefaults.standard.set(enabled, forKey: "musicEnabled")
     }
 
     // MARK: - Playback

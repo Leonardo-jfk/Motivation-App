@@ -21,9 +21,10 @@ struct SettingsList: View {
     // Bind to the same key used in MotivationApp
     @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
     @AppStorage("musicEnabled") private var musicEnabled: Bool = true
-
-//    @AudioManager.shared.setMusicEnabled(true)
+    
+    //    @AudioManager.shared.setMusicEnabled(true)
     @StateObject private var audioManager = AudioManager.shared
+    
     
     private var selectionBinding: Binding<AppColorScheme> {
         Binding(
@@ -31,14 +32,14 @@ struct SettingsList: View {
             set: { storedScheme = $0.rawValue }
         )
     }
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Settings")
                 .font(.largeTitle)
                 .bold()
                 .padding(20)
-
+            
             List {
                 Section("Appearance") {
                     Picker("Appearance", selection: selectionBinding) {
@@ -48,24 +49,31 @@ struct SettingsList: View {
                     }
                     .pickerStyle(.segmented)
                 }
-
+                
                 Section("Music") {
                     Toggle("Music", isOn:  $audioManager.isMusicEnabled)
+                        .onChange(of: audioManager.isMusicEnabled)
+                    { oldValue, newValue in
+                        // oldValue: previous value
+                        // newValue: current value
+                        AudioManager.shared.setMusicEnabled(newValue)
                     }
-//                        AudioManager.shared.musicEnabled(true)
-                    $audioManager.setMusicEnabled(true)
-                    }
+//                    { newValue in
+                    //                            audioManager.setMusicEnabled(newValue)
+                    //                        }
+                    //                        AudioManager.shared.musicEnabled(true)
+                    //                    $audioManager.setMusicEnabled(true)
                 }
-
-                Section("Other") {
-                    ForEach(sections, id: \.self) { item in
-                        Text(item)
-                            .padding(.vertical, 4)
-                    }
+            }
+            
+            Section("Other") {
+                ForEach(sections, id: \.self) { item in
+                    Text(item)
+                        .padding(.vertical, 4)
                 }
             }
         }
-    
+    }
 }
 
 #Preview {
