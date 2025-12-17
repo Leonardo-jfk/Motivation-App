@@ -30,28 +30,52 @@ final class AudioManager: ObservableObject {
         }
     }
     // NEW: Volume control (0.0 to 1.0)
-//      @Published var musicVolume: Float {
-//          didSet {
-//              player?.volume = musicVolume
-//              UserDefaults.standard.set(musicVolume, forKey: "musicVolume")
-//          }
-//      }
+      @Published var musicVolume: Float {
+          didSet {
+              player?.volume = musicVolume
+              UserDefaults.standard.set(musicVolume, forKey: "musicVolume")
+          }
+      }
     private var player: AVAudioPlayer?
 
     private init() {
         // Load initial value from UserDefaults (defaults to true if not set)
         self.musicEnabled = UserDefaults.standard.object(forKey: "musicEnabled") as? Bool ?? true
         // Apply current preference on creation
-        if musicEnabled {
-            startBackgroundMusicIfNeeded()
-        }
+        let savedVolume = UserDefaults.standard.float(forKey: "musicVolume")
+                self.musicVolume = savedVolume > 0 ? savedVolume : 0.5 // Default to 50%
    }
-
+//    if musicVolume == 0 {
+//        musicVolume = 0.5
+//    }
+//    if musicEnabled{
+//        startBackgroundMusicIfNeeded()
+//    }
+    
+    
+    // PUBLIC
     // Expose a method to be called when toggle changes from elsewhere, if needed.
     func setMusicEnabled(_ enabled: Bool) {
-        // Setting the property triggers didSet which persists and applies changes
-        musicEnabled = enabled
+            musicEnabled = enabled
+        }
+    
+    func setMusicVolume(_ volume: Float) {
+        musicVolume = max(0.0 ,min(1.0, volume))
     }
+    
+    func increaseVolume( by amount: Float = 0.1){
+        setMusicVolume(musicVolume + amount)
+    }
+    func dicraseVolume(by amount: Float = 0.1){
+        setMusicVolume(musicVolume - amount)
+    }
+    func mute() {
+        setMusicVolume(0.0)
+    }
+    func maxVolume() {
+        setMusicVolume(1.0)
+    }
+    
 
     // MARK: - Playback
 
