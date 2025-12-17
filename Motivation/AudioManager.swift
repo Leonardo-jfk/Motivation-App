@@ -16,8 +16,8 @@ final class AudioManager: ObservableObject {
 
     // Persisted user preference (shared with SettingsList via the same key)
 //    @Published private(set) var musicEnabled: Bool {
-        @Published  var musicEnabled: Bool
-    @Published var isMusicEnabled: Bool =  UserDefaults.standard.bool(forKey: "musicEnabled")
+//        @Published  var musicEnabled: Bool
+    @Published var musicEnabled: Bool =  UserDefaults.standard.bool(forKey: "musicEnabled")
     {
         didSet {
             // Persist to UserDefaults so @AppStorage in SettingsList stays in sync
@@ -36,31 +36,33 @@ final class AudioManager: ObservableObject {
 
     private init() {
         // Load initial value from UserDefaults (defaults to true if not set)
-        let initial = UserDefaults.standard.object(forKey: "musicEnabled") as? Bool ?? true
-        self.musicEnabled = initial
+//        let initial = UserDefaults.standard.object(forKey: "musicEnabled") as? Bool ?? true
+//        self.musicEnabled = initial
 
+        self.musicEnabled = UserDefaults.standard.object(forKey: "musicEnabled") as? Bool ?? true
         // Apply current preference on creation
         if musicEnabled {
             startBackgroundMusicIfNeeded()
-        } else {
-            stopBackgroundMusic()
         }
+//        else {
+//            stopBackgroundMusic()
+//        }
     }
 
     // Call once on app launch (e.g., from MotivationApp) if you prefer explicit configuration
-    func configureAndApplyPreference() {
-        if musicEnabled {
-            startBackgroundMusicIfNeeded()
-        } else {
-            stopBackgroundMusic()
-        }
-    }
+//    func configureAndApplyPreference() {
+//        if musicEnabled {
+//            startBackgroundMusicIfNeeded()
+//        } else {
+//            stopBackgroundMusic()
+//        }
+//    }
 
     // Expose a method to be called when toggle changes from elsewhere, if needed.
     func setMusicEnabled(_ enabled: Bool) {
         // Setting the property triggers didSet which persists and applies changes
-        isMusicEnabled = enabled
-        UserDefaults.standard.set(enabled, forKey: "musicEnabled")
+        musicEnabled = enabled
+//        UserDefaults.standard.set(enabled, forKey: "musicEnabled")
     }
 
     // MARK: - Playback
@@ -69,9 +71,9 @@ final class AudioManager: ObservableObject {
         // If already playing, do nothing
         if let player, player.isPlaying { return }
 
-        guard let url = Bundle.main.url(forResource: "background", withExtension: "mp3") else {
+        guard let url = Bundle.main.url(forResource: "BackWitcher", withExtension: "mp3") else {
             // If your file has a different name or type, adjust above.
-            print("AudioManager: background.mp3 not found in bundle.")
+            print("AudioManager: BackWitcher.mp3 not found in bundle.")
             return
         }
 

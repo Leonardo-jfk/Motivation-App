@@ -51,8 +51,8 @@ struct SettingsList: View {
                 }
                 
                 Section("Music") {
-                    Toggle("Music", isOn:  $audioManager.isMusicEnabled)
-                        .onChange(of: audioManager.isMusicEnabled)
+                    Toggle("Music", isOn:  $audioManager.musicEnabled)
+                        .onChange(of: audioManager.musicEnabled)
                     { oldValue, newValue in
                         // oldValue: previous value
                         // newValue: current value
