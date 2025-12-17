@@ -20,6 +20,16 @@ let sections: [String] = [
         
         
 struct SettingsList: View {
+    // Bind to the same key used in MotivationApp
+    @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
+
+    private var selectionBinding: Binding<AppColorScheme> {
+        Binding(
+            get: { AppColorScheme(rawValue: storedScheme) ?? .system },
+            set: { storedScheme = $0.rawValue }
+        )
+    }
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Settings")
@@ -28,9 +38,20 @@ struct SettingsList: View {
                 .padding(20)
 
             List {
-                ForEach(sections, id: \.self) { quote in
-                    Text(quote)
-                        .padding(.vertical, 4)
+                Section("Appearance") {
+                    Picker("Appearance", selection: selectionBinding) {
+                        ForEach(AppColorScheme.allCases) { option in
+                            Text(option.displayName).tag(option)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+
+                Section("Other") {
+                    ForEach(sections, id: \.self) { quote in
+                        Text(quote)
+                            .padding(.vertical, 4)
+                    }
                 }
             }
         

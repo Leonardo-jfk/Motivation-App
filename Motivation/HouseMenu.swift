@@ -122,26 +122,27 @@ struct MainSettings: View {
     
     
     var body: some View {
-        if showing {
+        
             NavigationStack{
                 NavigationLink(destination: SettingsList())
                 {
-                    
-                }}}
-        else {
-            ZStack {
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
-                    .fill(Color.black.opacity(0.8))
-                    .frame(width: 200, height: 100)
-                
-                Text("Settings ")
-                    .font(.title2)
-                    .bold()
-                    .foregroundStyle(.white)
-                    .background(.gray.opacity(0.5))
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .fill(Color.black.opacity(0.8))
+                            .frame(width: 200, height: 100)
+                        
+                        Text("Settings ")
+                            .font(.title2)
+                            .bold()
+                            .foregroundStyle(.white)
+                            .background(.gray.opacity(0.5))
+                    }
+//                    .padding()
+                }
             }
-            .padding()
-        }}}
+       
+    }
+}
             //            ZStack {
             //                RoundedRectangle(cornerRadius: 40, style: .continuous)
             //                    .fill(Color.black.opacity(0.8))
