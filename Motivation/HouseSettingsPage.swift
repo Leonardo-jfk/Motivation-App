@@ -58,6 +58,9 @@ struct SettingsList: View {
                         // newValue: current value
                         AudioManager.shared.setMusicEnabled(newValue)
                     }
+                    Slider(value: $audioManager.musicVolume, in: 0...1, step: 0.1)
+                                    .tint(.blue)
+                            }
 //                    { newValue in
                     //                            audioManager.setMusicEnabled(newValue)
                     //                        }
