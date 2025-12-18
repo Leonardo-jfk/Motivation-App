@@ -417,7 +417,7 @@ let quotes: [String] = [
     ]
 
 struct QuoteLibrary: View {
-    @State private var chosenQuotes = false
+    @State private var favoriteQuotes = Set<String>()
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -427,27 +427,28 @@ struct QuoteLibrary: View {
                 .padding(20)
 
             List {
-                ForEach(quotes, id: \.self) { quote in
+                ForEach(quotes, id: \.self) { quote, in 
                     HStack {
                         Text(quote)
                             .padding(.vertical, 7)
                     Spacer()
                         Button(action: {
-                            chosenQuotes.toggle()
+                            favoriteQuotes.toggle()
                         }) {
-                            ForEach(quotes, id: \.self) {
-                                if chosenQuotes == true{
+                            
+                            if isFavorite == favoriteQuotes.contains(quote){
                                     Image(systemName: "heart.fill")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 20)
                                 }
                                 else{
+                                    
                                     Image(systemName: "heart")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 20)
-                                }
+                                
                             }
                         }
                     }
