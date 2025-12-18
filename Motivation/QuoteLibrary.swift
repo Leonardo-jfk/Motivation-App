@@ -416,16 +416,9 @@ let quotes: [String] = [
         "It is not that we have a short time to live, but that we waste a lot of it. — Seneca"
     ]
 
-
-
-
-
-
 struct QuoteLibrary: View {
-    
-    
-    
     @State private var chosenQuotes = false
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Quote Library")
@@ -435,14 +428,20 @@ struct QuoteLibrary: View {
 
             List {
                 ForEach(quotes, id: \.self) { quote in
-                    HStack{
-               
-                    Text(quote)
-                        .padding(.vertical, 7)
-                    Button(action: {
+                    HStack {
+                        Text(quote)
+                            .padding(.vertical, 7)
+                    Spacer()
+                        Button(action: {
                             chosenQuotes.toggle()
-                        }, label: Image(systemName: "heart"))
-                }
+                        }) {
+                            Image(systemName: "heart")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20)
+                                
+                        }
+                    }
                 }
             }
         }
