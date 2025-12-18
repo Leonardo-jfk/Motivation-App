@@ -51,21 +51,19 @@ struct SettingsList: View {
                 }
                 
                 Section("Music") {
-                    Toggle("Music", isOn:  $audioManager.musicEnabled)
+                    Toggle("Volume", isOn:  $audioManager.musicEnabled)
                         .onChange(of: audioManager.musicEnabled)
                     { oldValue, newValue in
                         // oldValue: previous value
                         // newValue: current value
                         AudioManager.shared.setMusicEnabled(newValue)
                     }
-                    Slider(value: $audioManager.musicVolume, in: 0...1, step: 0.1)
-                                    .tint(.blue)
-                            }
-//                    { newValue in
-                    //                            audioManager.setMusicEnabled(newValue)
-                    //                        }
-                    //                        AudioManager.shared.musicEnabled(true)
-                    //                    $audioManager.setMusicEnabled(true)
+                    if musicEnabled == true{
+                        Slider(value: $audioManager.musicVolume, in: 0...1, step: 0.1)
+                            .tint(.blue)
+                    }
+                    
+                }
                 }
             }
             
@@ -77,7 +75,6 @@ struct SettingsList: View {
             }
         }
     }
-}
 
 #Preview {
     SettingsList()
