@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+import UserNotifications
 
 
 // Helper: día del año (1...365/366)
@@ -50,8 +50,7 @@ struct ContentView: View {
                     VStack {
                         // Spacer to push main content below the nav bar if needed
                         Spacer(minLength: 0)
-                        
-                        // Botón que abre la descripción
+                       // Botón que abre la descripción
                         Button(action: {
                             showingQuote.toggle()
                         }, label: {

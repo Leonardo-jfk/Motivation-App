@@ -25,4 +25,81 @@ class NotificationManager {
             }
         }
     }
+    
+    func sheduleDailyNotification(hour: Int, minute: Int, title: String, body: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+        
+        
+        let trigger = UNCalendarNotificationTrigger(
+            dateMatching: dateComponents,
+            repeats: true
+            
+        )
+        let identifier = "daily-\(hour)-\(minute)"
+        let request = UNNotificationRequest(
+            identifier: identifier,
+            content: content,
+            trigger: trigger
+        )
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error scheduling daily notification: \(error)")
+            }
+            else {
+                print("Daily notification scheduled for \(hour):\(minute)")
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    //if i will need fast locan notifications
+    func sendLocalNotification(title: String, body: String, timeInterval: TimeInterval) {
+      let content = UNMutableNotificationContent()
+
+      content.title = title
+
+      content.body = body
+
+      content.sound = .default
+
+
+      let trigger = UNTimeIntervalNotificationTrigger(timeInterval: max(1, timeInterval), repeats: false)
+
+      let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+
+      UNUserNotificationCenter.current().add(request) { error in
+
+          if let error = error {
+
+              print("Error scheduling local notification: \(error)")
+
+          } else {
+
+              print("Local notification scheduled in \(timeInterval) seconds")
+
+          }
+
+      }
+
+    }
 }
+    //USAGE:
+//sheduleDailyNotification(
+//    hour:10
+//    minute: 10
+//    title: "Your wisdom"
+//    body: "Marco Aurelio"
+    
+

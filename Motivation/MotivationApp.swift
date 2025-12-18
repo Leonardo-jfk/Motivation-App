@@ -53,6 +53,13 @@ struct MotivationApp: App {
                 .preferredColorScheme(appScheme.preferredColorScheme)
                 .onAppear {
                     NotificationManager.shared.requestPermission()
+                    
+                    NotificationManager.shared.sheduleDailyNotification(
+                        hour:10,
+                        minute: 17,
+                        title: "Your wisdom",
+                        body: "Marco Aurelio"
+                        )
                 }
         }
     }
