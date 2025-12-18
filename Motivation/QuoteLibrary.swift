@@ -435,11 +435,20 @@ struct QuoteLibrary: View {
                         Button(action: {
                             chosenQuotes.toggle()
                         }) {
-                            Image(systemName: "heart")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20)
-                                
+                            ForEach(quotes, id: \.self) {
+                                if chosenQuotes == true{
+                                    Image(systemName: "heart.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20)
+                                }
+                                else{
+                                    Image(systemName: "heart")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20)
+                                }
+                            }
                         }
                     }
                 }
@@ -447,6 +456,21 @@ struct QuoteLibrary: View {
         }
     }
 }
+
+
+struct ChosenQuotesView: View {
+    
+    
+    var body: some View {
+        
+    }
+}
+
+
+
+
+
+
 
 #Preview {
     QuoteLibrary()
