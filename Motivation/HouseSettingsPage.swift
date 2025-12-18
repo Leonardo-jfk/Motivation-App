@@ -11,7 +11,7 @@ import SwiftUI
 let sections: [String] = [
     
         // Enero (1-31)
-        "Music -- on / off",
+      
         "Notifications -- on / off",
         "Language / Idioma",
         "Delete the account",

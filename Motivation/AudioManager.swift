@@ -45,12 +45,7 @@ final class AudioManager: ObservableObject {
         let savedVolume = UserDefaults.standard.float(forKey: "musicVolume")
                 self.musicVolume = savedVolume > 0 ? savedVolume : 0.5 // Default to 50%
    }
-//    if musicVolume == 0 {
-//        musicVolume = 0.5
-//    }
-//    if musicEnabled{
-//        startBackgroundMusicIfNeeded()
-//    }
+
     
     
     // PUBLIC

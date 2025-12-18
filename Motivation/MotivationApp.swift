@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 // Persisted app-wide color scheme preference
 enum AppColorScheme: String, CaseIterable, Identifiable {
@@ -43,11 +44,24 @@ struct MotivationApp: App {
     private var appScheme: AppColorScheme {
         AppColorScheme(rawValue: storedScheme) ?? .system
     }
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(appScheme.preferredColorScheme)
+                .onAppear {
+                    NotificationManager.shared.requestPermission()
+                }
         }
+    }
+}
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
+                     [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
+    {
+        NotificationManager.shared.requestPermission()
+        return true
     }
 }
