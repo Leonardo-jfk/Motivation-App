@@ -13,13 +13,6 @@
 //ATTENTION
 //feature: make a star with every quote and the list of underlined quotes
 
-
-
-
-
-
-
-
 import SwiftUI
 
 // Shared quotes array accessible from any file in the app target.
@@ -427,30 +420,26 @@ struct QuoteLibrary: View {
                 .padding(20)
 
             List {
-                ForEach(quotes, id: \.self) { quote, in 
+                ForEach(quotes, id: \.self) { quote in
                     HStack {
                         Text(quote)
                             .padding(.vertical, 7)
-                    Spacer()
-                        Button(action: {
-                            favoriteQuotes.toggle()
-                        }) {
-                            
-                            if isFavorite == favoriteQuotes.contains(quote){
-                                    Image(systemName: "heart.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20)
-                                }
-                                else{
-                                    
-                                    Image(systemName: "heart")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 20)
-                                
+                        Spacer()
+                        let isFavorite = favoriteQuotes.contains(quote)
+                        Button {
+                            if isFavorite {
+                                favoriteQuotes.remove(quote)
+                            } else {
+                                favoriteQuotes.insert(quote)
                             }
+                        } label: {
+                            Image(systemName: isFavorite ? "heart.fill" : "heart")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20)
+                                .foregroundStyle(isFavorite ? .red : .secondary)
                         }
+                        .buttonStyle(.plain)
                     }
                 }
             }
@@ -458,20 +447,11 @@ struct QuoteLibrary: View {
     }
 }
 
-
 struct ChosenQuotesView: View {
-    
-    
     var body: some View {
-        
+        Text("Favorites go here")
     }
 }
-
-
-
-
-
-
 
 #Preview {
     QuoteLibrary()

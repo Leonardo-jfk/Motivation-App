@@ -55,8 +55,8 @@ struct MotivationApp: App {
                     NotificationManager.shared.requestPermission()
                     
                     NotificationManager.shared.sheduleDailyNotification(
-                        hour:10,
-                        minute: 17,
+                        hour:9,
+                        minute: 0,
                         title: "Your wisdom",
                         body: "Marco Aurelio"
                         )
