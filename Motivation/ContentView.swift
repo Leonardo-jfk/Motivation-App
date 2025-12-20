@@ -25,8 +25,8 @@ struct ContentView: View {
 
     private var todayIndex: Int {
         let day = dayOfYear() // 1-based
-        guard !quotes.isEmpty else { return 0 }
-        return (day - 1) % quotes.count
+        guard !quotesEng.isEmpty else { return 0 }
+        return (day - 1) % quotesEng.count
     }
 
     var body: some View {
@@ -131,9 +131,9 @@ struct DayQuoteView: View {
     
     var body: some View {
         let text: String = {
-            guard !quotes.isEmpty else { return "No quotes available." }
-            let safeIndex = max(0, min(index, quotes.count - 1))
-            return quotes[safeIndex]
+            guard !quotesEng.isEmpty else { return "No quotes available." }
+            let safeIndex = max(0, min(index, quotesEng.count - 1))
+            return quotesEng[safeIndex]
         }()
         
         return Text(text)
