@@ -20,13 +20,45 @@ struct QuoteLibrary: View {
     
     var body: some View {
 //        NavigationStack{
-            VStack(alignment: .leading) {
-                Text("Quote Library")
-                    .font(.largeTitle)
-                    .bold()
-                    .padding(20)
+        VStack(alignment: .leading) {
+            Text("Quote Library")
+                .font(.largeTitle)
+                .bold()
+                .padding(20)
+            HStack{
+            // Button to open favorites list (as a sheet)
+//                Spacer(minLength: 16)
                 
-                // Button to open favorites list (as a sheet)
+            Button(action: {
+                showFavorites.toggle()
+            }, label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+                        .fill(Color.black.opacity(0.8))
+                        .frame(width: 200, height: 60)
+                        
+                    
+                    Text("Favorites")
+                        .font(.title3)
+                        .bold()
+                        .foregroundStyle(.white)
+                        .background(.gray.opacity(0.5))
+                }
+                .padding(.horizontal, 4)
+            })
+            .buttonStyle(.plain)
+            .sheet(isPresented: $showFavorites) {
+                NavigationStack {
+                    ChosenQuotesView(favoriteQuotes: favoriteQuotes)
+                        .navigationTitle("Favorites")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .topBarTrailing) {
+                                Button("Done") { showFavorites = false }
+                            }
+                        }
+                }
+            }
                 Button(action: {
                     showFavorites.toggle()
                 }, label: {
@@ -34,15 +66,17 @@ struct QuoteLibrary: View {
                         RoundedRectangle(cornerRadius: 30, style: .continuous)
                             .fill(Color.black.opacity(0.8))
                             .frame(width: 200, height: 60)
+//                            .padding(.horizontal, 20)
                         
-                        Text("Show favorites")
+                        Text("Your own ideas")
                             .font(.title3)
                             .bold()
                             .foregroundStyle(.white)
                             .background(.gray.opacity(0.5))
                     }
-                    .padding(.horizontal)
+                    .padding(.horizontal, 4)
                 })
+                
                 .buttonStyle(.plain)
                 .sheet(isPresented: $showFavorites) {
                     NavigationStack {
@@ -55,8 +89,9 @@ struct QuoteLibrary: View {
                                 }
                             }
                     }
-                }
-                
+                }.padding(.horizontal, 4)
+//                Spacer(minLength: 16)
+        }.padding(.horizontal, 10)
                 List {
                     ForEach(quotesEng, id: \.self) { quote in
                         HStack {
