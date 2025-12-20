@@ -407,30 +407,46 @@ let quotes: [String] = [
 struct QuoteLibrary: View {
     // Binding source of truth is provided by a parent view.
     @Binding var favoriteQuotes: Set<String>
-    @State var showFavorites:Bool = false
+    @State var showFavorites: Bool = false
     
     var body: some View {
-        NavigationStack{
+//        NavigationStack{
             VStack(alignment: .leading) {
                 Text("Quote Library")
                     .font(.largeTitle)
                     .bold()
                     .padding(20)
-                Button(action: {showFavorites.toggle(ChosenQuotesView)}, label: {
+                
+                // Button to open favorites list (as a sheet)
+                Button(action: {
+                    showFavorites.toggle()
+                }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 30, style: .continuous)
                             .fill(Color.black.opacity(0.8))
-                            .frame(width: 50, height: 100)
+                            .frame(width: 200, height: 60)
                         
-                        Text("Get today's wisdom ")
+                        Text("Show favorites")
                             .font(.title3)
                             .bold()
                             .foregroundStyle(.white)
                             .background(.gray.opacity(0.5))
                     }
-                    .padding()
-                    
+                    .padding(.horizontal)
                 })
+                .buttonStyle(.plain)
+                .sheet(isPresented: $showFavorites) {
+                    NavigationStack {
+                        ChosenQuotesView(favoriteQuotes: favoriteQuotes)
+                            .navigationTitle("Favorites")
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbar {
+                                ToolbarItem(placement: .topBarTrailing) {
+                                    Button("Done") { showFavorites = false }
+                                }
+                            }
+                    }
+                }
                 
                 List {
                     ForEach(quotes, id: \.self) { quote in
@@ -459,7 +475,7 @@ struct QuoteLibrary: View {
             }
         }
     }
-}
+//}
 
 // MARK: - Favorites list
 
@@ -469,9 +485,12 @@ struct ChosenQuotesView: View {
     var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
 
     var body: some View {
-       
-            VStack {
-                Text("Favorites go here")
+        VStack {
+            if favoriteQuotes.isEmpty {
+                Text("No favorites yet")
+                    .foregroundStyle(.secondary)
+                    .padding()
+            } else {
                 List {
                     // Convert Set to Array for deterministic order (optional: .sorted())
                     ForEach(Array(favoriteQuotes), id: \.self) { quote in
@@ -481,10 +500,12 @@ struct ChosenQuotesView: View {
                 }
             }
         }
+        .padding(.top)
+        
     }
-
+}
 
 #Preview {
     // Preview with a constant binding for design-time
-    QuoteLibrary(favoriteQuotes: .constant(["Sample favorite 1", "Sample favorite 2"]))
+    QuoteLibrary(favoriteQuotes: .constant(["gg"]))
 }
