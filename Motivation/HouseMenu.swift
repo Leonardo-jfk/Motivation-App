@@ -19,7 +19,9 @@ struct HouseMenu: View {
     @State private var showingMainSettings = false
     @State private var showingResourses = false
     @State private var showingFeedbackMenu = false
-
+    
+    @State private var savedUserNotes: Set<String> = []
+   
 
 
     var body: some View {
@@ -40,7 +42,7 @@ struct HouseMenu: View {
             Button(action: {
                 showingPersonalNotes.toggle()
             }) {
-                PersonalNotes(showing: showingPersonalNotes)
+                PersonalNotes(showing: showingPersonalNotes, savedUserNotes: $savedUserNotes)
             }
             .buttonStyle(.plain)
 
@@ -49,6 +51,7 @@ struct HouseMenu: View {
                     showingMainSettings.toggle()
                 }) {
                     MainSettings(showing: showingMainSettings)
+                    
                 }
                 .buttonStyle(.plain)
 
@@ -73,11 +76,16 @@ struct HouseMenu: View {
         }
         .padding(.horizontal)
     }
+        .onAppear{
+        savedUserNotes = NotesStorage.load()
+    }
+//}  .onAppear{
+//    savedUserNotes = NotesStorage.load()
 }
 
 struct PersonalNotes: View {
     let showing: Bool
-   
+    @Binding var savedUserNotes: Set<String>
 
     var body: some View {
         if showing {
@@ -87,7 +95,8 @@ struct PersonalNotes: View {
                     .frame(width: 350, height: 350)
 
                 VStack {
-                    Text("Feedback")
+                    UserNotesView(savedUserNotes: $savedUserNotes)
+                    Text("ff")
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
                         .background(.gray.opacity(0.4))
@@ -274,7 +283,7 @@ struct GetFeedback: View {
 }
 
 #Preview {
-    PersonalNotes(showing: true)
+    PersonalNotes(showing: true, savedUserNotes: $savedUserNotes)
 }
 #Preview {
     MainSettings(showing: true)

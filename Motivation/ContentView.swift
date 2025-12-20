@@ -19,9 +19,10 @@ func dayOfYear(for date: Date = .now) -> Int {
 struct ContentView: View {
     @State private var showingQuote = false
     @Environment(\.colorScheme) var colorScheme
-
-    // Source of truth for favorites lives here
-    @State private var favoriteQuotes: Set<String> = []
+       // Source of truth for favorites - load from storage on init
+    @State private var favoriteQuotes: Set<String> = {
+            return FavoriteStorage.load()
+        }()
 
     private var todayIndex: Int {
         let day = dayOfYear() // 1-based
