@@ -5,11 +5,6 @@
 //  Created by Leonardo Aurelio on 28/10/2025.
 //
 
-
-
-
-
-
 //ATTENTION
 //feature: make a star with every quote and the list of underlined quotes
 
@@ -410,36 +405,55 @@ let quotes: [String] = [
     ]
 
 struct QuoteLibrary: View {
-    @State private var favoriteQuotes = Set<String>()
-
+    // Binding source of truth is provided by a parent view.
+    @Binding var favoriteQuotes: Set<String>
+    @State var showFavorites:Bool = false
+    
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Quote Library")
-                .font(.largeTitle)
-                .bold()
-                .padding(20)
-
-            List {
-                ForEach(quotes, id: \.self) { quote in
-                    HStack {
-                        Text(quote)
-                            .padding(.vertical, 7)
-                        Spacer()
-                        let isFavorite = favoriteQuotes.contains(quote)
-                        Button {
-                            if isFavorite {
-                                favoriteQuotes.remove(quote)
-                            } else {
-                                favoriteQuotes.insert(quote)
+        NavigationStack{
+            VStack(alignment: .leading) {
+                Text("Quote Library")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(20)
+                Button(action: {showFavorites.toggle(ChosenQuotesView)}, label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .fill(Color.black.opacity(0.8))
+                            .frame(width: 50, height: 100)
+                        
+                        Text("Get today's wisdom ")
+                            .font(.title3)
+                            .bold()
+                            .foregroundStyle(.white)
+                            .background(.gray.opacity(0.5))
+                    }
+                    .padding()
+                    
+                })
+                
+                List {
+                    ForEach(quotes, id: \.self) { quote in
+                        HStack {
+                            Text(quote)
+                                .padding(.vertical, 7)
+                            Spacer()
+                            let isFavorite = favoriteQuotes.contains(quote)
+                            Button {
+                                if isFavorite {
+                                    favoriteQuotes.remove(quote)
+                                } else {
+                                    favoriteQuotes.insert(quote)
+                                }
+                            } label: {
+                                Image(systemName: isFavorite ? "heart.fill" : "heart")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20)
+                                    .foregroundStyle(isFavorite ? .red : .secondary)
                             }
-                        } label: {
-                            Image(systemName: isFavorite ? "heart.fill" : "heart")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20)
-                                .foregroundStyle(isFavorite ? .red : .secondary)
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     }
                 }
             }
@@ -447,12 +461,30 @@ struct QuoteLibrary: View {
     }
 }
 
+// MARK: - Favorites list
+
 struct ChosenQuotesView: View {
+    // Pass favorites in; you can use a binding if you need to mutate here too.
+    let favoriteQuotes: Set<String>
+    var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
+
     var body: some View {
-        Text("Favorites go here")
+       
+            VStack {
+                Text("Favorites go here")
+                List {
+                    // Convert Set to Array for deterministic order (optional: .sorted())
+                    ForEach(Array(favoriteQuotes), id: \.self) { quote in
+                        Text(quote)
+                            .padding(.vertical, 7)
+                    }
+                }
+            }
+        }
     }
-}
+
 
 #Preview {
-    QuoteLibrary()
+    // Preview with a constant binding for design-time
+    QuoteLibrary(favoriteQuotes: .constant(["Sample favorite 1", "Sample favorite 2"]))
 }

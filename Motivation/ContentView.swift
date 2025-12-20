@@ -19,8 +19,10 @@ func dayOfYear(for date: Date = .now) -> Int {
 struct ContentView: View {
     @State private var showingQuote = false
     @Environment(\.colorScheme) var colorScheme
-    
-    // Use 0-based index for arrays; clamp to valid range based on quotes.count.
+
+    // Source of truth for favorites lives here
+    @State private var favoriteQuotes: Set<String> = []
+
     private var todayIndex: Int {
         let day = dayOfYear() // 1-based
         guard !quotes.isEmpty else { return 0 }
@@ -100,7 +102,7 @@ struct ContentView: View {
                
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        NavigationLink(destination: QuoteLibrary()) {
+                        NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
                             Image(systemName: "apple.books.pages")
                                 .resizable()
                                 .frame(width: 35, height: 35)
@@ -126,14 +128,14 @@ struct ContentView: View {
 // A small view that safely shows the quote for a given index.
 struct DayQuoteView: View {
     let index: Int
-
+    
     var body: some View {
         let text: String = {
             guard !quotes.isEmpty else { return "No quotes available." }
             let safeIndex = max(0, min(index, quotes.count - 1))
             return quotes[safeIndex]
         }()
-
+        
         return Text(text)
             .font(.body)
             .multilineTextAlignment(.center)
@@ -141,7 +143,6 @@ struct DayQuoteView: View {
             .padding(.vertical, 60)
     }
 }
-
 #Preview {
     ContentView()
 }
