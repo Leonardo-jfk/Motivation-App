@@ -78,9 +78,9 @@ struct QuoteLibrary: View {
                 })
                 
                 .buttonStyle(.plain)
-                .sheet(isPresented: $showFavorites) {
+                .sheet(isPresented: $showUserNotes) {
                     NavigationStack {
-                        ChosenQuotesView(favoriteQuotes: favoriteQuotes)
+                        userNotesView(savedUserNotes:  savedUserNotes)
                             .navigationTitle("Favorites")
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbar {
@@ -147,6 +147,45 @@ struct ChosenQuotesView: View {
         .padding(.top)
         
     }
+}
+
+
+
+struct userNotesView: View {
+    
+    @State var showUserNotes:Bool = false
+    @State var savedUserNotes: Set<String> = []ç
+    
+    var body: some View {
+        VStack {
+            TextField("Write your note", text: $savedUserNotes)
+                .keyboardType(.emailAddress)
+                               .padding(16)
+                               .background(.gray.opacity(0.2))
+                               .cornerRadius(16)
+                               .padding(.horizontal, 32)
+                               .onChange(of: userNotes) { oldValue, newValue in
+                                   print("El antiguo valor era \(oldValue) y el nuevo es \(newValue)")
+            if showUserNotes.isEmpty {
+                Text("No notes yet")
+                    .foregroundStyle(.secondary)
+                    .padding()
+            } else {
+                
+                List {
+                    // Convert Set to Array for deterministic order (optional: .sorted())
+                    ForEach(Array(showUserNotes), id: \.self) { quote in
+                        Text(showUserNotes)
+                            .padding(.vertical, 7)
+                    }
+                }
+            }
+        }
+        .padding(.top)
+        
+    }
+    }
+    
 }
 
 #Preview {
