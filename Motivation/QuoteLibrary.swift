@@ -118,6 +118,13 @@ struct QuoteLibrary: View {
                 }
             }
         }
+        .onAppear {
+            // Load notes when library opens so the sheet has the latest
+            savedUserNotes = NotesStorage.load()
+        }
+        .onChange(of: savedUserNotes) { _, newValue in
+            NotesStorage.save(newValue)
+        }
     }
 }
 
@@ -163,6 +170,7 @@ struct UserNotesView: View {
                     let trimmed = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
                     guard !trimmed.isEmpty else { return }
                     savedUserNotes.insert(trimmed)
+                    NotesStorage.save(savedUserNotes) // persist immediately
                     noteText = ""
                 }
                 .buttonStyle(.borderedProminent)
@@ -188,12 +196,36 @@ struct UserNotesView: View {
                             let toRemove = sorted[index]
                             savedUserNotes.remove(toRemove)
                         }
+                        NotesStorage.save(savedUserNotes) // persist deletion
                     }
                 }
             }
             Spacer()
         }
         .padding(.top)
+        .onAppear {
+            // Ensure binding is populated when the sheet opens
+            savedUserNotes = NotesStorage.load()
+        }
+    }
+}
+
+// MARK: - Simple persistence for notes
+
+private enum NotesStorage {
+    private static let key = "userNotes"
+    static func load() -> Set<String> {
+        guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
+        if let decoded = try? JSONDecoder().decode([String].self, from: data) {
+            return Set(decoded)
+        }
+        return []
+    }
+    static func save(_ notes: Set<String>) {
+        let array = Array(notes)
+        if let data = try? JSONEncoder().encode(array) {
+            UserDefaults.standard.set(data, forKey: key)
+        }
     }
 }
 
