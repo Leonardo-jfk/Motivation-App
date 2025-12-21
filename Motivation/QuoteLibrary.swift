@@ -35,9 +35,7 @@ struct QuoteLibrary: View {
                     showFavorites.toggle()
                 }, label: {
                     ZStack {
-//                        HouseMenu.ButtonStyleSrt.init(.QuoteLibButton)
-                        
-                        ButtonStyleSrt.init(.QuoteLibButton)
+                        ButtonStyleSrt(.quoteLib)
                         Text("Favorites")
                             .font(.title3)
                             .bold()
@@ -65,7 +63,7 @@ struct QuoteLibrary: View {
                     showUserNotes.toggle()
                 }, label: {
                     ZStack {
-                        HouseMenu.ButtonStyleSrt.init(.QuoteLibButton)
+                        ButtonStyleSrt(.quoteLib)
                         Text("Your own ideas")
                             .font(.title3)
                             .bold()
@@ -113,17 +111,12 @@ struct QuoteLibrary: View {
                                 .frame(width: 20)
                                 .foregroundStyle(isFavorite ? .red : .secondary)
                         }
-                        //                        FavoriteStorage.save(favoriteQuotes)
                         .buttonStyle(.plain)
                     }
                 }
             }.onAppear {
                 // Load notes when library opens so the sheet has the latest
                 savedUserNotes = NotesStorage.load()
-                //        }
-                //        .onAppear {
-                //            // Load notes when library opens so the sheet has the latest
-                //            savedUserNotes = NotesStorage.load()
             }
             .onChange(of: savedUserNotes) { _, newValue in
                 NotesStorage.save(newValue)
@@ -156,11 +149,7 @@ struct QuoteLibrary: View {
                 }
             }
             .padding(.top)
-            //        .onAppear{
-            //                favoriteQuotes = FavoriteStorage.load()
         }
-        
-        
     }
     
     // MARK: - User notes
@@ -225,8 +214,6 @@ struct QuoteLibrary: View {
         
         var body: some View {
             VStack(spacing: 16) {
-               
-                
                 if savedUserNotes.isEmpty {
                     Text("No notes yet")
                         .foregroundStyle(.secondary)
@@ -295,27 +282,8 @@ struct QuoteLibrary: View {
     }
 }
 
-//public struct ButtonStyleSrtLibrary: View {
-//    @Environment(\.colorScheme) var colorScheme
-//    var tileFillColor: Color { colorScheme == .light ? Color.black.opacity(0.8)  : Color.gray.opacity(0.6) }
-//    
-//    var body: some View {
-//        
-//       let QuoteLibButton =  RoundedRectangle(cornerRadius: 30, style: .continuous)
-//            .fill(tileFillColor)
-//            .frame(width: 200, height: 60)
-//        
-//        let HouseMenuButton = RoundedRectangle(cornerRadius: 40, style: .continuous)
-//            .fill(tileFillColor)
-//            .frame(width: 200, height: 100)
-//      
-//    }
-//}
-
-
-
-
 #Preview {
     // Preview with a constant binding for design-time
     QuoteLibrary(favoriteQuotes: .constant(["gg"]))
 }
+
