@@ -221,6 +221,44 @@ struct QuoteLibrary: View {
         }
     }
     
+    struct QuickNotesView: View {
+        @Binding var savedUserNotes: Set<String>
+        @State private var noteText: String = ""
+        
+        var body: some View {
+            VStack(spacing: 16) {
+               
+                
+                if savedUserNotes.isEmpty {
+                    Text("No notes yet")
+                        .foregroundStyle(.secondary)
+                        .padding()
+                } else {
+                    List {
+                        ForEach(Array(savedUserNotes).sorted(), id: \.self) { note in
+                            Text(note)
+                                .padding(.vertical, 7)
+                        }
+                        .onDelete { indexSet in
+                            // Support swipe-to-delete
+                            let sorted = Array(savedUserNotes).sorted()
+                            for index in indexSet {
+                                let toRemove = sorted[index]
+                                savedUserNotes.remove(toRemove)
+                            }
+                            NotesStorage.save(savedUserNotes) // persist deletion
+                        }
+                    }
+                }
+                Spacer()
+            }
+            .padding(.top)
+            .onAppear {
+                // Ensure binding is populated when the sheet opens
+                savedUserNotes = NotesStorage.load()
+            }
+        }
+    }
     // MARK: - Simple persistence for notes
     
     public enum NotesStorage {

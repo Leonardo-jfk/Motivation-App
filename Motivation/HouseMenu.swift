@@ -13,6 +13,14 @@
 //
 import SwiftUI
 
+if systemColorScheme == .light {
+    var tileFillColor = Color.black.opacity(0.8)
+    tileFillColor = Color.gray.opacity(0.5)
+}
+else{
+   var tileFillColorDark = Color.black.opacity(0.8)
+}
+
 struct HouseMenu: View {
     
     @State private var showingPersonalNotes = false
@@ -96,20 +104,16 @@ struct PersonalNotes: View {
                     .frame(width: 350, height: 350)
 
                 VStack {
-                    QuoteLibrary.UserNotesView(savedUserNotes: $savedUserNotes)
-                    Text("ff")
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(.gray.opacity(0.4))
-                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                        .font(.title2)
-                        .foregroundStyle(.white)
+                    QuoteLibrary.QuickNotesView(savedUserNotes: $savedUserNotes)
 
                 
                 }
-                .padding()
+                .frame(width: 350, height: 400)
+                .cornerRadius(40)
+                
+//                .padding()
             }
-            .padding()
+//            .padding()
         } else {
             ZStack {
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
