@@ -119,14 +119,13 @@ struct QuoteLibrary: View {
                         .buttonStyle(.plain)
                     }
                 }
-            }
-            //            .onAppear {
-            //                // Load notes when library opens so the sheet has the latest
-            //                savedUserNotes = NotesStorage.load()
-            //        }
-            .onAppear {
+            }.onAppear {
                 // Load notes when library opens so the sheet has the latest
                 savedUserNotes = NotesStorage.load()
+                //        }
+                //        .onAppear {
+                //            // Load notes when library opens so the sheet has the latest
+                //            savedUserNotes = NotesStorage.load()
             }
             .onChange(of: savedUserNotes) { _, newValue in
                 NotesStorage.save(newValue)
@@ -224,7 +223,7 @@ struct QuoteLibrary: View {
     
     // MARK: - Simple persistence for notes
     
-    private enum NotesStorage {
+    public enum NotesStorage {
         private static let key = "userNotes"
         static func load() -> Set<String> {
             guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
@@ -259,6 +258,7 @@ struct QuoteLibrary: View {
         }
     }
 }
+
 #Preview {
     // Preview with a constant binding for design-time
     QuoteLibrary(favoriteQuotes: .constant(["gg"]))

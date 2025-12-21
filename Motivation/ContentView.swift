@@ -21,7 +21,7 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
        // Source of truth for favorites - load from storage on init
     @State private var favoriteQuotes: Set<String> = {
-            return FavoriteStorage.load()
+        return QuoteLibrary.FavoriteStorage.load()
         }()
 
     private var todayIndex: Int {

@@ -75,10 +75,11 @@ struct HouseMenu: View {
                     Spacer()
         }
         .padding(.horizontal)
-    }
         .onAppear{
         savedUserNotes = NotesStorage.load()
     }
+    }
+     
 //}  .onAppear{
 //    savedUserNotes = NotesStorage.load()
 }
@@ -95,7 +96,7 @@ struct PersonalNotes: View {
                     .frame(width: 350, height: 350)
 
                 VStack {
-                    UserNotesView(savedUserNotes: $savedUserNotes)
+                    QuoteLibrary.UserNotesView(savedUserNotes: $savedUserNotes)
                     Text("ff")
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
@@ -278,12 +279,38 @@ struct GetFeedback: View {
                 }
             }
 
+
+
+private enum NotesStorage {
+    private static let key = "userNotes"
+    static func load() -> Set<String> {
+        guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
+        if let decoded = try? JSONDecoder().decode([String].self, from: data) {
+            return Set(decoded)
+        }
+        return []
+    }
+    static func save(_ notes: Set<String>) {
+        let array = Array(notes)
+        if let data = try? JSONEncoder().encode(array) {
+            UserDefaults.standard.set(data, forKey: key)
+        }
+    }
+}
+
+
+
+
+
 #Preview {
     HouseMenu()
 }
 
-#Preview {
-    PersonalNotes(showing: true, savedUserNotes: $savedUserNotes)
+#Preview("Personal Notes - showing") {
+    PersonalNotes(showing: true, savedUserNotes: .constant(["test"]))
+}
+#Preview("Personal Notes - Hidden") {
+    PersonalNotes(showing: false, savedUserNotes: .constant([]))
 }
 #Preview {
     MainSettings(showing: true)
