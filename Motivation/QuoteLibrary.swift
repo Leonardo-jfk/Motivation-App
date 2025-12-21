@@ -35,9 +35,7 @@ struct QuoteLibrary: View {
                     showFavorites.toggle()
                 }, label: {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .fill(Color.black.opacity(0.8))
-                            .frame(width: 200, height: 60)
+                        ButtonStyleSrtLibrary.init()
                         Text("Favorites")
                             .font(.title3)
                             .bold()
@@ -65,9 +63,7 @@ struct QuoteLibrary: View {
                     showUserNotes.toggle()
                 }, label: {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .fill(Color.black.opacity(0.8))
-                            .frame(width: 200, height: 60)
+                        ButtonStyleSrtLibrary.init()
                         Text("Your own ideas")
                             .font(.title3)
                             .bold()
@@ -296,6 +292,22 @@ struct QuoteLibrary: View {
         }
     }
 }
+
+struct ButtonStyleSrtLibrary: View {
+    @Environment(\.colorScheme) var colorScheme
+    var tileFillColor: Color { colorScheme == .light ? Color.black.opacity(0.8)  : Color.gray.opacity(0.6) }
+    
+    var body: some View {
+        
+        RoundedRectangle(cornerRadius: 30, style: .continuous)
+            .fill(tileFillColor)
+            .frame(width: 200, height: 60)
+      
+    }
+}
+
+
+
 
 #Preview {
     // Preview with a constant binding for design-time

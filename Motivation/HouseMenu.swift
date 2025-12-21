@@ -230,10 +230,8 @@ struct Resourses: View {
                         .padding()
                     } else {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                .fill(Color.black.opacity(0.8))
-                                .frame(width: 200, height: 100)
-                            
+                            ButtonStyleSrt.init()
+
                             Text("Best sourses of wisdom ")
                                 .font(.title2)
                                 .bold()
@@ -280,10 +278,8 @@ struct GetFeedback: View {
                         .padding()
                     } else {
                         ZStack {
-                            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                .fill(Color.black.opacity(0.8))
-                                .frame(width: 200, height: 100)
-                            
+                            ButtonStyleSrt.init()
+
                             Text("Give us feedback ")
                                 .font(.title2)
                                 .bold()
