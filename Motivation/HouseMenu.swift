@@ -13,14 +13,18 @@
 //
 import SwiftUI
 
-if systemColorScheme == .light {
-    var tileFillColor = Color.black.opacity(0.8)
-    tileFillColor = Color.gray.opacity(0.5)
+struct ButtonStyleSrt: View {
+    @Environment(\.colorScheme) var colorScheme
+    var tileFillColor: Color { colorScheme == .light ? Color.black.opacity(0.8)  : Color.gray.opacity(0.6) }
+    
+    var body: some View {
+        
+        RoundedRectangle(cornerRadius: 40, style: .continuous)
+            .fill(tileFillColor)
+            .frame(width: 200, height: 100)
+        
+    }
 }
-else{
-   var tileFillColorDark = Color.black.opacity(0.8)
-}
-
 struct HouseMenu: View {
     
     @State private var showingPersonalNotes = false
@@ -30,7 +34,15 @@ struct HouseMenu: View {
     
     @State private var savedUserNotes: Set<String> = []
    
-
+//if systemColorScheme == .light {
+//    var tileFillColor = Color.black.opacity(0.8)
+//    tileFillColor = Color.gray.opacity(0.5)
+//}
+//else{
+//   var tileFillColorDark = Color.black.opacity(0.8)
+//}
+//    @Environment(.colorScheme) var colorScheme
+//    var tileFillColor: Color { colorScheme == .light ? Color.gray.opacity(0.5) : Color.black.opacity(0.8) }
 
     var body: some View {
         //VStack(alignment: .leading) {
@@ -84,7 +96,7 @@ struct HouseMenu: View {
         }
         .padding(.horizontal)
         .onAppear{
-        savedUserNotes = NotesStorage.load()
+            savedUserNotes = QuoteLibrary.NotesStorage.load()
     }
     }
      
@@ -99,7 +111,7 @@ struct PersonalNotes: View {
     var body: some View {
         if showing {
             ZStack {
-                RoundedRectangle(cornerRadius: 40, style: .continuous)
+  RoundedRectangle(cornerRadius: 40, style: .continuous)
                     .fill(Color.black.opacity(0.8))
                     .frame(width: 350, height: 350)
 
@@ -116,9 +128,11 @@ struct PersonalNotes: View {
 //            .padding()
         } else {
             ZStack {
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
-                    .fill(Color.black.opacity(0.8))
-                    .frame(width: 200, height: 100)
+                
+                ButtonStyleSrt.init()
+//                RoundedRectangle(cornerRadius: 30, style: .continuous)
+//                    .fill(Color.black.opacity(0.8))
+//                    .frame(width: 200, height: 100)
 
                 Text("Personal Notes ")
                     .font(.title2)
@@ -140,10 +154,8 @@ struct MainSettings: View {
                 NavigationLink(destination: SettingsList())
                 {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .fill(Color.black.opacity(0.8))
-                            .frame(width: 200, height: 100)
-                        
+                        ButtonStyleSrt.init()
+
                         Text("Settings ")
                             .font(.title2)
                             .bold()
@@ -285,22 +297,22 @@ struct GetFeedback: View {
 
 
 
-private enum NotesStorage {
-    private static let key = "userNotes"
-    static func load() -> Set<String> {
-        guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
-        if let decoded = try? JSONDecoder().decode([String].self, from: data) {
-            return Set(decoded)
-        }
-        return []
-    }
-    static func save(_ notes: Set<String>) {
-        let array = Array(notes)
-        if let data = try? JSONEncoder().encode(array) {
-            UserDefaults.standard.set(data, forKey: key)
-        }
-    }
-}
+//private enum NotesStorage {
+//    private static let key = "userNotes"
+//    static func load() -> Set<String> {
+//        guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
+//        if let decoded = try? JSONDecoder().decode([String].self, from: data) {
+//            return Set(decoded)
+//        }
+//        return []
+//    }
+//    static func save(_ notes: Set<String>) {
+//        let array = Array(notes)
+//        if let data = try? JSONEncoder().encode(array) {
+//            UserDefaults.standard.set(data, forKey: key)
+//        }
+//    }
+//}
 
 
 
