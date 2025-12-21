@@ -111,48 +111,35 @@ struct HouseMenu: View {
         }
     }
 }
-    struct PersonalNotes: View {
-        let showing: Bool
-        @Binding var savedUserNotes: Set<String>
+
+struct UserNotesViewWrapper: View {
+    @Binding var savedUserNotes: Set<String>
+    
+    var body: some View {
+        QuoteLibrary.UserNotesView(savedUserNotes: $savedUserNotes)
+    }
+}
+
+struct PersonalNotes: View {
+    let showing: Bool
+    @Binding var savedUserNotes: Set<String>
+    
+    var body: some View {
         
-        var body: some View {
-            if showing {
-                ZStack {
-                    //                    ButtonStyleSrt(.houseMenuBack)
-                    //                    
-                    //                    VStack {
-                    //                        QuoteLibrary.QuickNotesView(savedUserNotes: $savedUserNotes)
-                    //                    }
-                    //                    .frame(width: 350, height: 400)
-                    //                    .cornerRadius(40)
-                    //                }
-                    NavigationLink(destination: SettingsList())
-                    {
-                        ZStack {
-                            ButtonStyleSrt() // defaults to .houseMenu
-                            Text("Settings ")
-                                .font(.title2)
-                                .bold()
-                                .foregroundStyle(.white)
-                                .background(.gray.opacity(0.5))
-                        }
-                    }
-                    
-                }
-            } else {
-                ZStack {
-                    ButtonStyleSrt() // defaults to .houseMenu
-                    Text("Personal Notes ")
-                        .font(.title2)
-                        .bold()
-                        .foregroundStyle(.white)
-                        .background(.gray.opacity(0.5))
-                }
-                .padding()
+        ZStack {
+            ButtonStyleSrt()
+            NavigationLink(destination: UserNotesViewWrapper(savedUserNotes: $savedUserNotes)){
+                 // defaults to .houseMenu
+                Text("Personal Notes ")
+                    .font(.title2)
+                    .bold()
+                    .foregroundStyle(.white)
+                    .background(.gray.opacity(0.5))
             }
+            .padding()
         }
     }
-    
+}
     struct MainSettings: View {
         let showing: Bool
         
@@ -246,6 +233,9 @@ struct HouseMenu: View {
             }
         }
     }
+
+
+
 
 #Preview {
     HouseMenu()
