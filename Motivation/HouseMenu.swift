@@ -13,19 +13,29 @@
 //
 import SwiftUI
 
-struct ButtonStyleSrt: View {
+public struct ButtonStyleSrt: View {
     @Environment(\.colorScheme) var colorScheme
     var tileFillColor: Color { colorScheme == .light ? Color.black.opacity(0.8)  : Color.gray.opacity(0.6) }
     
-    var body: some View {
+    public var body: some View {
         
-        RoundedRectangle(cornerRadius: 40, style: .continuous)
+//        RoundedRectangle(cornerRadius: 40, style: .continuous)
+//            .fill(tileFillColor)
+//            .frame(width: 200, height: 100)
+        let QuoteLibButton =  RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .fill(tileFillColor)
+                    .frame(width: 200, height: 60)
+        
+                let HouseMenuButton = RoundedRectangle(cornerRadius: 40, style: .continuous)
+                    .fill(tileFillColor)
+                    .frame(width: 200, height: 100)
+        
+        let HouseMenuButtonBack = RoundedRectangle(cornerRadius: 40, style: .continuous)
             .fill(tileFillColor)
             .frame(width: 200, height: 100)
-        
     }
 }
-struct HouseMenu: View {
+struct HouseMenuStr: View {
     
     @State private var showingPersonalNotes = false
     @State private var showingMainSettings = false
@@ -315,7 +325,7 @@ struct GetFeedback: View {
 
 
 #Preview {
-    HouseMenu()
+    HouseMenuStr()
 }
 
 #Preview("Personal Notes - showing") {
