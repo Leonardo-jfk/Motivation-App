@@ -34,9 +34,36 @@
 		1D6E58322E919F1B00E6B841 /* MotivationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotivationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1D4803A72EFAE95A0063C486 /* Exceptions for "Motivation" folder in "Motivation" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"/Localized: Localizable.strings",
+				Info.plist,
+				Localizable.strings,
+			);
+			target = 1D6E581A2E919F1900E6B841 /* Motivation */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		1D4803A82EFAE95A0063C486 /* Exceptions for "Motivation" folder in "Compile Sources" phase from "Motivation" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 1D6E58172E919F1900E6B841 /* Sources */;
+			membershipExceptions = (
+				"/Localized: Localizable.strings",
+				Localizable.strings,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		1D6E581D2E919F1900E6B841 /* Motivation */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1D4803A72EFAE95A0063C486 /* Exceptions for "Motivation" folder in "Motivation" target */,
+				1D4803A82EFAE95A0063C486 /* Exceptions for "Motivation" folder in "Compile Sources" phase from "Motivation" target */,
+			);
 			path = Motivation;
 			sourceTree = "<group>";
 		};
@@ -409,6 +436,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Motivation/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -440,6 +469,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Motivation/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

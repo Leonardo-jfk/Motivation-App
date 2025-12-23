@@ -1,0 +1,50 @@
+//
+//  Untitled.swift
+//  Motivation
+//
+//  Created by Leonardo Aurelio on 23/12/2025.
+//
+
+
+
+
+
+
+"MENU" = "MENÚ";
+"Settings" = "Ajustes";
+"Appearance" = "Apariencia";
+"System" = "Sistema";
+"Light" = "Claro";
+"Dark" = "Oscuro";
+"Music" = "Música";
+"Background Music" = "Música de fondo";
+"Notifications" = "Notificaciones";
+"Enable Daily Notification" = "Activar notificación diaria";
+"Time" = "Hora";
+"Data" = "Datos";
+"Reset everything" = "Restablecer todo";
+"Reset everything?" = "¿Restablecer todo?";
+"Cancel" = "Cancelar";
+"Reset" = "Restablecer";
+"This will clear preferences, notifications, music settings, favorites and notes. This action cannot be undone." = "Esto borrará preferencias, notificaciones, ajustes de música, favoritos y notas. Esta acción no se puede deshacer.";
+"Other" = "Otros";
+"Language / Idioma" = "Idioma";
+"Get today's wisdom " = "Obtén la sabiduría de hoy ";
+"Today's wisdom dose:" = "La dosis de sabiduría de hoy:";
+"Quote Library" = "Biblioteca de citas";
+"Favorites" = "Favoritos";
+"Done" = "Hecho";
+"Your own ideas" = "Tus propias ideas";
+"Your Notes" = "Tus notas";
+"Write your note" = "Escribe tu nota";
+"Add" = "Añadir";
+"No favorites yet" = "Aún no hay favoritos";
+"No notes yet" = "Aún no hay notas";
+"Personal Notes " = "Notas personales ";
+"Best sources of wisdom " = "Mejores fuentes de sabiduría ";
+"Give us feedback " = "Danos tu opinión ";
+"How to give us feedback:" = "Cómo darnos tu opinión:";
+"Open the link to the Google Form and answer the questions" = "Abre el enlace al formulario de Google y responde las preguntas";
+"The link:" = "Enlace:";
+"Your wisdom" = "Tu sabiduría";
+"No quotes available." = "No hay citas disponibles.";

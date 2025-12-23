@@ -1,0 +1,47 @@
+//
+//  Untitled.swift
+//  Motivation
+//
+//  Created by Leonardo Aurelio on 23/12/2025.
+//
+
+
+"MENU" = "MENU";
+"Settings" = "Settings";
+"Appearance" = "Appearance";
+"System" = "System";
+"Light" = "Light";
+"Dark" = "Dark";
+"Music" = "Music";
+"Background Music" = "Background Music";
+"Notifications" = "Notifications";
+"Enable Daily Notification" = "Enable Daily Notification";
+"Time" = "Time";
+"Data" = "Data";
+"Reset everything" = "Reset everything";
+"Reset everything?" = "Reset everything?";
+"Cancel" = "Cancel";
+"Reset" = "Reset";
+"This will clear preferences, notifications, music settings, favorites and notes. This action cannot be undone." = "This will clear preferences, notifications, music settings, favorites and notes. This action cannot be undone.";
+"Other" = "Other";
+"Language / Idioma" = "Language / Idioma";
+"Get today's wisdom " = "Get today's wisdom ";
+"Today's wisdom dose:" = "Today's wisdom dose:";
+"Quote Library" = "Quote Library";
+"Favorites" = "Favorites";
+"Done" = "Done";
+"Your own ideas" = "Your own ideas";
+"Your Notes" = "Your Notes";
+"Write your note" = "Write your note";
+"Add" = "Add";
+"No favorites yet" = "No favorites yet";
+"No notes yet" = "No notes yet";
+"Personal Notes " = "Personal Notes ";
+"Best sources of wisdom " = "Best sources of wisdom ";
+"Give us feedback " = "Give us feedback ";
+"How to give us feedback:" = "How to give us feedback:";
+"Open the link to the Google Form and answer the questions" = "Open the link to the Google Form and answer the questions";
+"The link:" = "The link:";
+"Your wisdom" = "Your wisdom";
+"No quotes available." = "No quotes available.";
+
