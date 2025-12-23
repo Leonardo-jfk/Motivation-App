@@ -74,17 +74,3 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
-struct ResetEverything {
-    public var resetSwitch:Bool = false
-    let resetNotif = NotifManager.shared.stopNotif()
-    
-    let resetOther = Bundle.main.resetOther {
-        UserDefaults.standard.removePersistentDomain(forName: resetOther)
-    }
-}
-//UserDefaults.standard.set(true, forKey: "myKey")
-//print("Before clear:", UserDefaults.standard.bool(forKey: "myKey")) // Output: true
-//
-//resetEverything()
-//
-//print("After clear:", UserDefaults.standard.bool(forKey: "myKey"))

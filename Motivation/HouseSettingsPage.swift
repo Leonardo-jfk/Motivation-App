@@ -32,6 +32,9 @@ struct SettingsList: View {
         return Calendar.current.date(from: comps) ?? Date()
     }()
     
+    // Alert for destructive reset
+    @State private var showResetAlert = false
+    
     private var selectionBinding: Binding<AppColorScheme> {
         Binding(
             get: { AppColorScheme(rawValue: storedScheme) ?? .system },
@@ -92,9 +95,20 @@ struct SettingsList: View {
                     }
                 }
                 
-                Section ("Data"){
-                    Toggle("Reset everything", isOn: ResetEverything(resetSwitch: true))
-                        .foregroundStyle(.ultraThickMaterial)
+                Section("Data") {
+                    Button(role: .destructive) {
+                        showResetAlert = true
+                    } label: {
+                        Text("Reset everything")
+                    }
+                    .alert("Reset everything?", isPresented: $showResetAlert) {
+                        Button("Cancel", role: .cancel) {}
+                        Button("Reset", role: .destructive) {
+                            performFullReset()
+                        }
+                    } message: {
+                        Text("This will clear preferences, notifications, music settings, favorites and notes. This action cannot be undone.")
+                    }
                 }
                 
                 Section("Other") {
@@ -106,8 +120,39 @@ struct SettingsList: View {
             }
         }
     }
+    
+    private func performFullReset() {
+        // 1) Stop notifications and disable preference
+        NotifManager.shared.stopNotif()
+        UserDefaults.standard.set(false, forKey: "notifEnabled")
+        // Optionally reset time back to defaults (9:00)
+        UserDefaults.standard.set(9, forKey: "notifHour")
+        UserDefaults.standard.set(0, forKey: "notifMinute")
+        
+        // 2) Reset appearance to system
+        UserDefaults.standard.set(AppColorScheme.system.rawValue, forKey: "appColorScheme")
+        storedScheme = AppColorScheme.system.rawValue
+        
+        // 3) Reset music settings
+        UserDefaults.standard.set(false, forKey: "musicEnabled")
+        audioManager.setMusicEnabled(false)
+        UserDefaults.standard.set(0.5, forKey: "musicVolume")
+        audioManager.setMusicVolume(0.5)
+        
+        // 4) Clear favorites and notes
+        QuoteLibrary.FavoriteStorage.save([])
+        QuoteLibrary.NotesStorage.save([])
+        NotificationCenter.default.post(name: .didPerformFullReset, object: nil)
+    }
 }
+
+extension Notification.Name {
+    static let didPerformFullReset = Notification.Name("didPerformFullReset")
+}
+
+
 
 #Preview {
     SettingsList()
 }
+
