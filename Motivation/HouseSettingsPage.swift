@@ -13,7 +13,6 @@ import Foundation
 let sections: [String] = [
       
         "Language / Idioma",
-        "reset preferences",
 ]
 
 struct SettingsList: View {
