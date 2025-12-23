@@ -5,12 +5,12 @@
 //  Created by Leonardo Aurelio on 16/12/2025.
 //
 import SwiftUI
+import Combine
+import Foundation
 
 // Shared quotes array accessible from any file in the app target.
 // You can add more quotes here; keep them as comma-separated Swift string literals.
 let sections: [String] = [
-    
-        // Enero (1-31)
       
         "Notifications -- on / off",
         "Language / Idioma",
@@ -67,6 +67,34 @@ struct SettingsList: View {
                 }
             }
             
+        Section("Notification") {
+            Toggle("Choose the time", isOn:  $notifManager.notifEnabled)
+                .onChange(of: notifManager.notifEnabled)
+            { oldValue, newValue in
+                // oldValue: previous value
+                // newValue: current value
+                NotifManager.shared.setNotifEnabled(newValue)
+                
+            }
+            if musicEnabled == true{
+                HStack {
+                    TextField("Choose the time", text: $notetext, axis: .vertical)
+                        .textfieldstyle(.plain)
+                        .lineLimit(1)
+                    Button("Add") {
+                        let trimmed = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
+                        guard !trimmed.isEmpty else { return }
+                        savedUserTime.insert(trimmed)
+                        NotesStorage.save(savedUserTime) // persist immediately
+                        noteText = ""
+                    }
+                    .buttonStyle(.glassProminent)
+                }
+                .padding(.horizontal)
+            }
+            
+        }
+        
             Section("Other") {
                 ForEach(sections, id: \.self) { item in
                     Text(item)

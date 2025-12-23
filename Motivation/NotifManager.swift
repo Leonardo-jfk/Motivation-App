@@ -94,6 +94,25 @@ class NotificationManager {
       }
 
     }
+    
+    func chooseNotifTime(hour: Int) {
+        @Published var notifEnabled: Bool =  UserDefaults.standard.bool(forKey: "notifEnabled")
+         {
+             didSet {
+                 // Persist to UserDefaults so @AppStorage in SettingsList stays in sync
+                 UserDefaults.standard.set(nofitEnabled, forKey: "notifEnabled")
+
+                 // Apply immediately
+                 if notifEnabled {
+                     startBackgroundMusicIfNeeded()
+                 } else {
+                     stopBackgroundMusic()
+                 }
+             }
+         }
+    }
+    
+    
 }
     //USAGE:
 //sheduleDailyNotification(

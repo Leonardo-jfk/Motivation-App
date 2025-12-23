@@ -1,4 +1,4 @@
-import swiftUI
+import SwiftUI
 
 let quotes: [String] = [
     // Enero (1-31)
