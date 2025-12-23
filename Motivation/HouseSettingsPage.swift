@@ -12,9 +12,8 @@ import Foundation
 // You can add more quotes here; keep them as comma-separated Swift string literals.
 let sections: [String] = [
       
-        "Notifications -- on / off",
         "Language / Idioma",
-        "Delete the account",
+        "reset preferences",
 ]
 
 struct SettingsList: View {
@@ -91,6 +90,11 @@ struct SettingsList: View {
                             }
                         }
                     }
+                }
+                
+                Section ("Data"){
+                    Toggle("Reset everything", isOn: ResetEverything(resetSwitch: true))
+                        .foregroundStyle(.ultraThickMaterial)
                 }
                 
                 Section("Other") {
