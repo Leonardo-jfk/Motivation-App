@@ -1,0 +1,12 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "eng" : {
+      "extractionState" : "manual"
+    },
+    "es" : {
+      "extractionState" : "manual"
+    }
+  },
+  "version" : "1.1"
+}
