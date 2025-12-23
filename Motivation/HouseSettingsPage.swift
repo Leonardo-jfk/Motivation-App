@@ -22,9 +22,16 @@ struct SettingsList: View {
     @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
     @AppStorage("musicEnabled") private var musicEnabled: Bool = true
     
-    //    @AudioManager.shared.setMusicEnabled(true)
     @StateObject private var audioManager = AudioManager.shared
+    @StateObject private var notifManager = NotifManager.shared
     
+    // Local state for time picker
+    @State private var notifTime: Date = {
+        var comps = DateComponents()
+        comps.hour = UserDefaults.standard.object(forKey: "notifHour") as? Int ?? 9
+        comps.minute = UserDefaults.standard.object(forKey: "notifMinute") as? Int ?? 0
+        return Calendar.current.date(from: comps) ?? Date()
+    }()
     
     private var selectionBinding: Binding<AppColorScheme> {
         Binding(
@@ -51,58 +58,51 @@ struct SettingsList: View {
                 }
                 
                 Section("Music") {
-                    Toggle("Volume", isOn:  $audioManager.musicEnabled)
-                        .onChange(of: audioManager.musicEnabled)
-                    { oldValue, newValue in
-                        // oldValue: previous value
-                        // newValue: current value
-                        AudioManager.shared.setMusicEnabled(newValue)
-                    }
-                    if musicEnabled == true{
+                    Toggle("Background Music", isOn: $audioManager.musicEnabled)
+                    if musicEnabled {
                         Slider(value: $audioManager.musicVolume, in: 0...1, step: 0.1)
                             .tint(.blue)
                     }
-                    
                 }
-                }
-            }
-            
-        Section("Notification") {
-            Toggle("Choose the time", isOn:  $notifManager.notifEnabled)
-                .onChange(of: notifManager.notifEnabled)
-            { oldValue, newValue in
-                // oldValue: previous value
-                // newValue: current value
-                NotifManager.shared.setNotifEnabled(newValue)
                 
-            }
-            if musicEnabled == true{
-                HStack {
-                    TextField("Choose the time", text: $notetext, axis: .vertical)
-                        .textfieldstyle(.plain)
-                        .lineLimit(1)
-                    Button("Add") {
-                        let trimmed = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
-                        guard !trimmed.isEmpty else { return }
-                        savedUserTime.insert(trimmed)
-                        NotesStorage.save(savedUserTime) // persist immediately
-                        noteText = ""
+                Section("Notifications") {
+                    Toggle("Enable Daily Notification", isOn: $notifManager.notifEnabled)
+                    
+                    if notifManager.notifEnabled {
+                        DatePicker(
+                            "Time",
+                            selection: $notifTime,
+                            displayedComponents: .hourAndMinute
+                        )
+                        .datePickerStyle(.compact)
+                        .onChange(of: notifTime) { _, newValue in
+                            let comps = Calendar.current.dateComponents([.hour, .minute], from: newValue)
+                            let hour = comps.hour ?? 9
+                            let minute = comps.minute ?? 0
+                            notifManager.setDailyTime(hour: hour, minute: minute)
+                        }
+                        .onAppear {
+                            // Sync local picker with stored time when section appears
+                            var comps = DateComponents()
+                            comps.hour = notifManager.storedHour
+                            comps.minute = notifManager.storedMinute
+                            if let date = Calendar.current.date(from: comps) {
+                                notifTime = date
+                            }
+                        }
                     }
-                    .buttonStyle(.glassProminent)
                 }
-                .padding(.horizontal)
-            }
-            
-        }
-        
-            Section("Other") {
-                ForEach(sections, id: \.self) { item in
-                    Text(item)
-                        .padding(.vertical, 4)
+                
+                Section("Other") {
+                    ForEach(sections, id: \.self) { item in
+                        Text(item)
+                            .padding(.vertical, 4)
+                    }
                 }
             }
         }
     }
+}
 
 #Preview {
     SettingsList()

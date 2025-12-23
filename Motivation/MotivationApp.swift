@@ -52,9 +52,9 @@ struct MotivationApp: App {
             ContentView()
                 .preferredColorScheme(appScheme.preferredColorScheme)
                 .onAppear {
-                    NotificationManager.shared.requestPermission()
+                    NotifManager.shared.requestPermission()
                     
-                    NotificationManager.shared.sheduleDailyNotification(
+                    NotifManager.shared.sheduleDailyNotification(
                         hour:9,
                         minute: 0,
                         title: "Your wisdom",
@@ -68,7 +68,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
                      [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
     {
-        NotificationManager.shared.requestPermission()
+        NotifManager.shared.requestPermission()
         return true
     }
 }
