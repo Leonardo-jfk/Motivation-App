@@ -109,6 +109,16 @@ struct SettingsList: View {
                         Text("This will clear preferences, notifications, music settings, favorites and notes. This action cannot be undone.")
                     }
                 }
+                Sectionn("Language") {
+                    Picker("Language", selection: selectionBinding) {
+                        ForEach(AppLanguage.allCases) { option in
+                            Text(option.displayName).tag(option)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                }
+                }
+                
                 
                 Section("Other") {
                     ForEach(sections, id: \.self) { item in
@@ -149,6 +159,11 @@ extension Notification.Name {
     static let didPerformFullReset = Notification.Name("didPerformFullReset")
 }
 
+struct langChange {
+ let    EngSystem = UserDefaults.standard.accessibilityLanguage("English")
+    
+    AppLanguage = 
+}
 
 
 #Preview {
