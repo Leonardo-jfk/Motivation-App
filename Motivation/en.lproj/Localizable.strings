@@ -6,22 +6,22 @@
 //
 
 
-"MENU" = "MENU";
-"Settings" = "Settings";
-"Appearance" = "Appearance";
-"System" = "System";
-"Light" = "Light";
-"Dark" = "Dark";
-"Music" = "Music";
-"Background Music" = "Background Music";
-"Notifications" = "Notifications";
-"Enable Daily Notification" = "Enable Daily Notification";
-"Time" = "Time";
-"Data" = "Data";
-"Reset everything" = "Reset everything";
-"Reset everything?" = "Reset everything?";
-"Cancel" = "Cancel";
-"Reset" = "Reset";
+//"MENU" = "MENU";
+//"Settings" = "Settings";
+//"Appearance" = "Appearance";
+//"System" = "System";
+//"Light" = "Light";
+//"Dark" = "Dark";
+//"Music" = "Music";
+//"Background Music" = "Background Music";
+//"Notifications" = "Notifications";
+//"Enable Daily Notification" = "Enable Daily Notification";
+//"Time" = "Time";
+//"Data" = "Data";
+//"Reset everything" = "Reset everything";
+//"Reset everything?" = "Reset everything?";
+//"Cancel" = "Cancel";
+//"Reset" = "Reset";
 "This will clear preferences, notifications, music settings, favorites and notes. This action cannot be undone." = "This will clear preferences, notifications, music settings, favorites and notes. This action cannot be undone.";
 "Other" = "Other";
 "Language / Idioma" = "Language / Idioma";
@@ -45,3 +45,22 @@
 "Your wisdom" = "Your wisdom";
 "No quotes available." = "No quotes available.";
 
+"settings_title" = "Settings";
+"appearance_title" = "Appearance";
+"appearance_picker" = "Appearance";
+"music_title" = "Music";
+"music_toggle" = "Background Music";
+"notifications_title" = "Notifications";
+"notifications_toggle" = "Enable Daily Notification";
+"notifications_time" = "Time";
+"data_title" = "Data";
+"data_reset_button" = "Reset everything";
+"data_reset_alert_title" = "Reset everything?";
+"data_reset_alert_message" = "This will clear preferences, notifications, music settings, favorites and notes. This action cannot be undone.";
+"cancel" = "Cancel";
+"reset" = "Reset";
+"language_section" = "Language";
+"language_picker" = "Language";
+"other_title" = "Other";
+"English" = "English";
+"Español" = "Spanish";

@@ -28,14 +28,21 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 }
 // String extension for localization
 extension String {
-    var localized: String {
-        return NSLocalizedString(self, comment: "")
+//    var localized: String {
+//        return NSLocalizedString(self, comment: "")
+//    }
+        var localized: String {
+            LocalizationBundle.shared.localizedString(forKey: self)
+        }
+        
+        func localized(with arguments: CVarArg...) -> String {
+            String(format: self.localized, arguments: arguments)
+        }
     }
-    
-    func localized(with arguments: CVarArg...) -> String {
-        return String(format: self.localized, arguments: arguments)
-    }
-}
+//    func localized(with arguments: CVarArg...) -> String {
+//        return String(format: self.localized, arguments: arguments)
+//    }
+//}
 struct SettingsList: View {
     // Bind to the same key used in MotivationApp
     @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
@@ -75,14 +82,14 @@ struct SettingsList: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Settings")
+            Text("settings_title".localized)
                 .font(.largeTitle)
                 .bold()
                 .padding(20)
 
             List {
-                Section("Appearance") {
-                    Picker("Appearance", selection: selectionBinding) {
+                Section("appearance_title".localized) {
+                    Picker("appearance_picker".localized, selection: selectionBinding) {
                         ForEach(AppColorScheme.allCases) { option in
                             Text(option.displayName).tag(option)
                         }
@@ -90,20 +97,20 @@ struct SettingsList: View {
                     .pickerStyle(.segmented)
                 }
 
-                Section("Music") {
-                    Toggle("Background Music", isOn: $audioManager.musicEnabled)
+                Section("music_title".localized) {
+                    Toggle("music_toggle".localized, isOn: $audioManager.musicEnabled)
                     if musicEnabled {
                         Slider(value: $audioManager.musicVolume, in: 0...1, step: 0.1)
                             .tint(.blue)
                     }
                 }
 
-                Section("Notifications") {
-                    Toggle("Enable Daily Notification", isOn: $notifManager.notifEnabled)
+                Section("notifications_title".localized) {
+                    Toggle("notifications_toggle".localized, isOn: $notifManager.notifEnabled)
 
                     if notifManager.notifEnabled {
                         DatePicker(
-                            "Time",
+                            "notifications_time".localized,
                             selection: $notifTime,
                             displayedComponents: .hourAndMinute
                         )
@@ -126,49 +133,38 @@ struct SettingsList: View {
                     }
                 }
 
-                Section("Data") {
+                Section("data_title".localized) {
                     Button(role: .destructive) {
                         showResetAlert = true
                     } label: {
-                        Text("Reset everything")
+                        Text("data_reset_button".localized)
                     }
-                    .alert("Reset everything?", isPresented: $showResetAlert) {
-                        Button("Cancel", role: .cancel) {}
-                        Button("Reset", role: .destructive) {
+                    .alert("data_reset_alert_title".localized, isPresented: $showResetAlert) {
+                        Button("cancel".localized, role: .cancel) {}
+                        Button("reset".localized, role: .destructive) {
                             performFullReset()
                         }
                     } message: {
-                        Text("This will clear preferences, notifications, music settings, favorites and notes. This action cannot be undone.")
+                        Text("data_reset_alert_message".localized)
                     }
                 }
 
-                Section("Language") {
-                    //                    Picker("Language", selection: languageBinding) {
-                    //                        ForEach(AppLanguage.allCases) { option in
-                    //                            Text(option.displayName).tag(option)
-                    //                        }
-                    //                    }
-                    //                    .pickerStyle(.segmented)
-                    //                }
-                    // replace languageBinding usage with:
-                    Picker("Language", selection: Binding(
+                Section("language_section".localized) {
+                    Picker("language_picker".localized, selection: Binding(
                         get: { AppLanguage(rawValue: storedLanguage) ?? .english },
                         set: { newLang in
                             storedLanguage = newLang.rawValue
-                            LocalizationManager.shared.setLanguage(newLang)
+                            l10n.setLanguage(newLang)
                         }
-                    ))
-                    {
+                    )) {
                         ForEach(AppLanguage.allCases) { option in
                             Text(option.displayName).tag(option)
                         }
-                    }.pickerStyle(.segmented)
-//                    Text(l10n.currentLanguage == .english ? "Settings" : "Configuración")
+                    }
+                    .pickerStyle(.segmented)
                 }
-//                .pickerStyle(.segmented)
-//                Text(l10n.currentLanguage == .english ? "Settings" : "Configuración")
 
-                Section("Other") {
+                Section("other_title".localized) {
                     ForEach(sections, id: \.self) { item in
                         Text(item)
                             .padding(.vertical, 4)
@@ -176,7 +172,7 @@ struct SettingsList: View {
                 }
                 
             }
-        }
+        }.id(l10n.currentLanguage)
     }
 
     private func performFullReset() {
@@ -214,16 +210,49 @@ final class LocalizationManager: ObservableObject {
 
     @Published private(set) var currentLanguage: AppLanguage = .english
 
+//    private init() {
+//        currentLanguage = AppLanguage(rawValue: storedLanguage) ?? .english
+//    }
     private init() {
-        currentLanguage = AppLanguage(rawValue: storedLanguage) ?? .english
+        let lang = AppLanguage(rawValue: storedLanguage) ?? .english
+        LocalizationBundle.shared.update(for: lang)
+        currentLanguage = lang
     }
-
+//
+//    func setLanguage(_ lang: AppLanguage) {
+//        storedLanguage = lang.rawValue
+//        currentLanguage = lang
+//        objectWillChange.send()
+//        // Post a notification if needed to have other parts react
+//        NotificationCenter.default.post(name: .didChangeAppLanguage, object: lang)
+//    }
     func setLanguage(_ lang: AppLanguage) {
         storedLanguage = lang.rawValue
+        LocalizationBundle.shared.update(for: lang)
         currentLanguage = lang
         objectWillChange.send()
-        // Post a notification if needed to have other parts react
         NotificationCenter.default.post(name: .didChangeAppLanguage, object: lang)
+    }
+    
+}
+final class LocalizationBundle {
+    static let shared = LocalizationBundle()
+    private init() {}
+
+    private var bundle: Bundle = .main
+
+    func update(for language: AppLanguage) {
+        // Find the .lproj path for selected language
+        if let path = Bundle.main.path(forResource: language.rawValue, ofType: "lproj"),
+           let langBundle = Bundle(path: path) {
+            bundle = langBundle
+        } else {
+            bundle = .main
+        }
+    }
+
+    func localizedString(forKey key: String) -> String {
+        return NSLocalizedString(key, bundle: bundle, comment: "")
     }
 }
 
