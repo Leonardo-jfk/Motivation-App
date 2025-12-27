@@ -24,14 +24,14 @@ struct QuoteLibrary: View {
     @StateObject private var l10n = LocalizationManager.shared
     
     private var currentQuotes: [String] {
-            switch l10n.currentLanguage {
-            case .english:
-                return quotesEng
-            case .spanish:
-                return quotesES
-            }
-    
-}
+        switch l10n.currentLanguage {
+        case .english:
+            return quotesEng
+        case .spanish:
+            return quotesES
+        }
+        
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -59,11 +59,11 @@ struct QuoteLibrary: View {
                 .sheet(isPresented: $showFavorites) {
                     NavigationStack {
                         ChosenQuotesView(favoriteQuotes: favoriteQuotes)
-                            .navigationTitle("Favorites")
+                            .navigationTitle("Favorites".localized)
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbar {
                                 ToolbarItem(placement: .topBarTrailing) {
-                                    Button("Done") { showFavorites = false }
+                                    Button("Done".localized) { showFavorites = false }
                                 }
                             }
                     }
@@ -75,7 +75,7 @@ struct QuoteLibrary: View {
                 }, label: {
                     ZStack {
                         ButtonStyleSrt(.quoteLib)
-                        Text("Your own ideas")
+                        Text("Your own ideas".localized)
                             .font(.title3)
                             .bold()
                             .foregroundStyle(.white)
@@ -87,11 +87,11 @@ struct QuoteLibrary: View {
                 .sheet(isPresented: $showUserNotes) {
                     NavigationStack {
                         UserNotesView(savedUserNotes: $savedUserNotes)
-                            .navigationTitle("Your Notes")
+                            .navigationTitle("Your Notes".localized)
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbar {
                                 ToolbarItem(placement: .topBarTrailing) {
-                                    Button("Done") { showUserNotes = false }
+                                    Button("Done".localized) { showUserNotes = false }
                                 }
                             }
                     }
@@ -101,85 +101,99 @@ struct QuoteLibrary: View {
             .padding(.horizontal, 10)
             
             
-//            List {
-                // Determinar qué array de citas usar basado en el idioma
-//                let quotes: [String] = {
-//                    switch AppLanguage.houseSettingPage.l10n.currentLanguage {
-//                    case .english:
-//                        return quotesEng
-//                    case .spanish:
-//                        return quotesES
-//                    }
-//                }()
-                
-                List {
-                    //                let quotes = AppLanguage.english ? quotesEng : quotesES
-                    ForEach(currentQuotes, id: \.self) { quote in
-                        QuoteRow(quote: quote, isFavorite: favoriteQuotes.contains(quote)) {
-                            if favoriteQuotes.contains(quote) {
-                                favoriteQuotes.remove(quote)
-                            } else {
-                                favoriteQuotes.insert(quote)
-                            }
-                            FavoriteStorage.save(favoriteQuotes)
-                        }
-                    }
-                }
-            }.onAppear {
-                // Load notes when library opens so the sheet has the latest
-                savedUserNotes = NotesStorage.load()
-            }
-            .onChange(of: savedUserNotes) { _, newValue in
-                NotesStorage.save(newValue)
-            }
-            .onChange(of: favoriteQuotes) { _, newValue in FavoriteStorage.save(newValue)
-            }
-        }
-        
-        struct QuoteRow: View {
-            let quote: String
-            let isFavorite: Bool
-            let toggleFavorite: () -> Void
-            var body: some View {
-                HStack {
-                    Text(quote)
-                        .padding(.vertical, 7)
-                    Spacer()
-                    Button(action: toggleFavorite) {
-                        Image(systemName: isFavorite ? "heart.fill" : "heart")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20)
-                            .foregroundStyle(isFavorite ? .red : .secondary)
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-        }
-        
-        // MARK: - Favorites list
-        
-        struct ChosenQuotesView: View {
-            // Pass favorites in; you can use a binding if you need to mutate here too.
-            let favoriteQuotes: Set<String>
-            var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
+            //            List {
+            // Determinar qué array de citas usar basado en el idioma
+            //                let quotes: [String] = {
+            //                    switch AppLanguage.houseSettingPage.l10n.currentLanguage {
+            //                    case .english:
+            //                        return quotesEng
+            //                    case .spanish:
+            //                        return quotesES
+            //                    }
+            //                }()
             
-            var body: some View {
-                VStack {
-                    if favoriteQuotes.isEmpty {
-                        Text("No favorites yet".localized)
-                            .foregroundStyle(.secondary)
-                            .padding()
-                    } else {
-                        List {
-                            ForEach(Array(favoriteQuotes).sorted(), id: \.self) { quote in
+            List {
+                //                let quotes = AppLanguage.english ? quotesEng : quotesES
+                ForEach(currentQuotes, id: \.self) { quote in
+                    QuoteRow(quote: quote, isFavorite: favoriteQuotes.contains(quote)) {
+                        if favoriteQuotes.contains(quote) {
+                            favoriteQuotes.remove(quote)
+                        } else {
+                            favoriteQuotes.insert(quote)
+                        }
+                        FavoriteStorage.save(favoriteQuotes)
+                    }
+                }
+            }
+        }.onAppear {
+            // Load notes when library opens so the sheet has the latest
+            savedUserNotes = NotesStorage.load()
+        }
+        .onChange(of: savedUserNotes) { _, newValue in
+            NotesStorage.save(newValue)
+        }
+        .onChange(of: favoriteQuotes) { _, newValue in FavoriteStorage.save(newValue)
+        }
+    }
+    
+    struct QuoteRow: View {
+        let quote: String
+        let isFavorite: Bool
+        let toggleFavorite: () -> Void
+        @Binding var favoriteQuotes: Set<String>
+        
+        var body: some View {
+            HStack {
+                Text(quote)
+                    .padding(.vertical, 7)
+                Spacer()
+                Button(action: toggleFavorite) {
+                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20)
+                        .foregroundStyle(isFavorite ? .red : .secondary)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+    
+    // MARK: - Favorites list
+    
+    struct ChosenQuotesView: View {
+        // Pass favorites in; you can use a binding if you need to mutate here too.
+//        let favoriteQuotes: Set<String>
+        var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
+        @Binding var favoriteQuotes: Set<String>
+        
+        
+        var body: some View {
+            VStack {
+                if favoriteQuotes.isEmpty {
+                    Text("No favorites yet".localized)
+                        .foregroundStyle(.secondary)
+                        .padding()
+                } else {
+                    List {
+                        //                            will it save only in English ?
+                        ForEach(Array(favoriteQuotes).sorted(), id: \.self) { quote in
+                            HStack {
                                 Text(quote)
-                                    .padding(.vertical, 7)
+                                Spacer()
+                                Button(action: toggleFavorite) {
+                                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20)
+                                        .foregroundStyle(isFavorite ? .red : .secondary)
+                                        .padding(.vertical, 7)
+                                }
                             }
                         }
                     }
                 }
-                .padding(.top)
+                    .padding(.top)
             }
         }
         
@@ -195,7 +209,7 @@ struct QuoteLibrary: View {
                         TextField("Write your note".localized, text: $noteText, axis: .vertical)
                             .textFieldStyle(.plain)
                             .lineLimit(1...4)
-                        Button("Add") {
+                        Button("Add".localized) {
                             let trimmed = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
                             guard !trimmed.isEmpty else { return }
                             savedUserNotes.insert(trimmed)
@@ -215,7 +229,7 @@ struct QuoteLibrary: View {
                     } else {
                         List {
                             ForEach(Array(savedUserNotes).sorted(), id: \.self) { note in
-                                Text(note)
+                                Text(note.localized)
                                     .padding(.vertical, 7)
                             }
                             .onDelete { indexSet in
@@ -246,7 +260,7 @@ struct QuoteLibrary: View {
             var body: some View {
                 VStack(spacing: 16) {
                     if savedUserNotes.isEmpty {
-                        Text("No notes yet")
+                        Text("No notes yet".localized)
                             .foregroundStyle(.secondary)
                             .padding()
                     } else {
@@ -312,7 +326,7 @@ struct QuoteLibrary: View {
             }
         }
     }
-
+}
 #Preview {
     // Preview with a constant binding for design-time
     QuoteLibrary(favoriteQuotes: .constant(["gg"]))
