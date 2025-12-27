@@ -142,6 +142,7 @@ struct QuoteLibrary: View {
                     }
                 }
             }
+<<<<<<< Updated upstream
         }.onAppear {
             // Load notes when library opens so the sheet has the latest
             savedUserNotes = NotesStorage.load()
