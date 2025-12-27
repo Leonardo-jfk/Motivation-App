@@ -22,6 +22,18 @@ struct QuoteLibrary: View {
     @State private var showUserNotes: Bool = false
     @State private var savedUserNotes: Set<String> = []
     
+    List{
+        let quotes: [String] = {
+            switch AppLanguage.houseSettingPage.l10n.currentLanguage {
+            case .english:
+                return quotesEng
+            case .spanish:
+                return quotesES
+            }
+        }()
+    }
+}
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Quote Library".localized)
@@ -89,207 +101,219 @@ struct QuoteLibrary: View {
             }
             .padding(.horizontal, 10)
             
-            List {
-                let quotes = AppLanguage.english ? quotesEng : quotesES
-                ForEach(quotes, id: \.self) { quote in
-                    QuoteRow(quote: quote, isFavorite: favoriteQuotes.contains(quote)) {
-                        if favoriteQuotes.contains(quote) {
-                            favoriteQuotes.remove(quote)
-                        } else {
-                            favoriteQuotes.insert(quote)
-                        }
-                        FavoriteStorage.save(favoriteQuotes)
-                    }
-                }
-            }
-        }.onAppear {
-            // Load notes when library opens so the sheet has the latest
-            savedUserNotes = NotesStorage.load()
-        }
-        .onChange(of: savedUserNotes) { _, newValue in
-            NotesStorage.save(newValue)
-        }
-        .onChange(of: favoriteQuotes) { _, newValue in FavoriteStorage.save(newValue)
-        }
-    }
-    
-    struct QuoteRow: View {
-        let quote: String
-        let isFavorite: Bool
-        let toggleFavorite: () -> Void
-        var body: some View {
-            HStack {
-                Text(quote)
-                    .padding(.vertical, 7)
-                Spacer()
-                Button(action: toggleFavorite) {
-                    Image(systemName: isFavorite ? "heart.fill" : "heart")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 20)
-                        .foregroundStyle(isFavorite ? .red : .secondary)
-                }
-                .buttonStyle(.plain)
-            }
-        }
-    }
-    
-    // MARK: - Favorites list
-    
-    struct ChosenQuotesView: View {
-        // Pass favorites in; you can use a binding if you need to mutate here too.
-        let favoriteQuotes: Set<String>
-        var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
-        
-        var body: some View {
-            VStack {
-                if favoriteQuotes.isEmpty {
-                    Text("No favorites yet".localized)
-                        .foregroundStyle(.secondary)
-                        .padding()
-                } else {
-                    List {
-                        ForEach(Array(favoriteQuotes).sorted(), id: \.self) { quote in
-                            Text(quote)
-                                .padding(.vertical, 7)
+            
+//            List {
+                // Determinar qué array de citas usar basado en el idioma
+//                let quotes: [String] = {
+//                    switch AppLanguage.houseSettingPage.l10n.currentLanguage {
+//                    case .english:
+//                        return quotesEng
+//                    case .spanish:
+//                        return quotesES
+//                    }
+//                }()
+                
+                List {
+                    //                let quotes = AppLanguage.english ? quotesEng : quotesES
+                    ForEach(quotes, id: \.self) { quote in
+                        QuoteRow(quote: quote, isFavorite: favoriteQuotes.contains(quote)) {
+                            if favoriteQuotes.contains(quote) {
+                                favoriteQuotes.remove(quote)
+                            } else {
+                                favoriteQuotes.insert(quote)
+                            }
+                            FavoriteStorage.save(favoriteQuotes)
                         }
                     }
                 }
+            }.onAppear {
+                // Load notes when library opens so the sheet has the latest
+                savedUserNotes = NotesStorage.load()
             }
-            .padding(.top)
+            .onChange(of: savedUserNotes) { _, newValue in
+                NotesStorage.save(newValue)
+            }
+            .onChange(of: favoriteQuotes) { _, newValue in FavoriteStorage.save(newValue)
+            }
         }
-    }
-    
-    // MARK: - User notes
-    
-    struct UserNotesView: View {
-        @Binding var savedUserNotes: Set<String>
-        @State private var noteText: String = ""
         
-        var body: some View {
-            VStack(spacing: 16) {
+        struct QuoteRow: View {
+            let quote: String
+            let isFavorite: Bool
+            let toggleFavorite: () -> Void
+            var body: some View {
                 HStack {
-                    TextField("Write your note".localized, text: $noteText, axis: .vertical)
-                        .textFieldStyle(.plain)
-                        .lineLimit(1...4)
-                    Button("Add") {
-                        let trimmed = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
-                        guard !trimmed.isEmpty else { return }
-                        savedUserNotes.insert(trimmed)
-                        NotesStorage.save(savedUserNotes) // persist immediately
-                        noteText = ""
+                    Text(quote)
+                        .padding(.vertical, 7)
+                    Spacer()
+                    Button(action: toggleFavorite) {
+                        Image(systemName: isFavorite ? "heart.fill" : "heart")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20)
+                            .foregroundStyle(isFavorite ? .red : .secondary)
                     }
-                    .buttonStyle(.glassProminent)
+                    .buttonStyle(.plain)
                 }
-                .padding(.horizontal)
-                
-                Spacer()
-                
-                if savedUserNotes.isEmpty {
-                    Text("No notes yet".localized)
-                        .foregroundStyle(.secondary)
-                        .padding()
-                } else {
-                    List {
-                        ForEach(Array(savedUserNotes).sorted(), id: \.self) { note in
-                            Text(note)
-                                .padding(.vertical, 7)
-                        }
-                        .onDelete { indexSet in
-                            // Support swipe-to-delete
-                            let sorted = Array(savedUserNotes).sorted()
-                            for index in indexSet {
-                                let toRemove = sorted[index]
-                                savedUserNotes.remove(toRemove)
-                            }
-                            NotesStorage.save(savedUserNotes) // persist deletion
-                        }
-                    }
-                }
-                Spacer()
-            }
-            .padding(.top)
-            .onAppear {
-                // Ensure binding is populated when the sheet opens
-                savedUserNotes = NotesStorage.load()
             }
         }
-    }
-    
-    struct QuickNotesView: View {
-        @Binding var savedUserNotes: Set<String>
-        @State private var noteText: String = ""
         
-        var body: some View {
-            VStack(spacing: 16) {
-                if savedUserNotes.isEmpty {
-                    Text("No notes yet")
-                        .foregroundStyle(.secondary)
-                        .padding()
-                } else {
-                    List {
-                        ForEach(Array(savedUserNotes).sorted(), id: \.self) { note in
-                            Text(note)
-                                .padding(.vertical, 7)
-                        }
-                        .onDelete { indexSet in
-                            // Support swipe-to-delete
-                            let sorted = Array(savedUserNotes).sorted()
-                            for index in indexSet {
-                                let toRemove = sorted[index]
-                                savedUserNotes.remove(toRemove)
+        // MARK: - Favorites list
+        
+        struct ChosenQuotesView: View {
+            // Pass favorites in; you can use a binding if you need to mutate here too.
+            let favoriteQuotes: Set<String>
+            var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
+            
+            var body: some View {
+                VStack {
+                    if favoriteQuotes.isEmpty {
+                        Text("No favorites yet".localized)
+                            .foregroundStyle(.secondary)
+                            .padding()
+                    } else {
+                        List {
+                            ForEach(Array(favoriteQuotes).sorted(), id: \.self) { quote in
+                                Text(quote)
+                                    .padding(.vertical, 7)
                             }
-                            NotesStorage.save(savedUserNotes) // persist deletion
                         }
                     }
                 }
-                Spacer()
-            }
-            .padding(.top)
-            .onAppear {
-                // Ensure binding is populated when the sheet opens
-                savedUserNotes = NotesStorage.load()
+                .padding(.top)
             }
         }
-    }
-    // MARK: - Simple persistence for notes
-    
-    public enum NotesStorage {
-        private static let key = "userNotes"
-        static func load() -> Set<String> {
-            guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
-            if let decoded = try? JSONDecoder().decode([String].self, from: data) {
-                return Set(decoded)
+        
+        // MARK: - User notes
+        
+        struct UserNotesView: View {
+            @Binding var savedUserNotes: Set<String>
+            @State private var noteText: String = ""
+            
+            var body: some View {
+                VStack(spacing: 16) {
+                    HStack {
+                        TextField("Write your note".localized, text: $noteText, axis: .vertical)
+                            .textFieldStyle(.plain)
+                            .lineLimit(1...4)
+                        Button("Add") {
+                            let trimmed = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
+                            guard !trimmed.isEmpty else { return }
+                            savedUserNotes.insert(trimmed)
+                            NotesStorage.save(savedUserNotes) // persist immediately
+                            noteText = ""
+                        }
+                        .buttonStyle(.glassProminent)
+                    }
+                    .padding(.horizontal)
+                    
+                    Spacer()
+                    
+                    if savedUserNotes.isEmpty {
+                        Text("No notes yet".localized)
+                            .foregroundStyle(.secondary)
+                            .padding()
+                    } else {
+                        List {
+                            ForEach(Array(savedUserNotes).sorted(), id: \.self) { note in
+                                Text(note)
+                                    .padding(.vertical, 7)
+                            }
+                            .onDelete { indexSet in
+                                // Support swipe-to-delete
+                                let sorted = Array(savedUserNotes).sorted()
+                                for index in indexSet {
+                                    let toRemove = sorted[index]
+                                    savedUserNotes.remove(toRemove)
+                                }
+                                NotesStorage.save(savedUserNotes) // persist deletion
+                            }
+                        }
+                    }
+                    Spacer()
+                }
+                .padding(.top)
+                .onAppear {
+                    // Ensure binding is populated when the sheet opens
+                    savedUserNotes = NotesStorage.load()
+                }
             }
-            return []
         }
-        static func save(_ notes: Set<String>) {
-            let array = Array(notes)
-            if let data = try? JSONEncoder().encode(array) {
-                UserDefaults.standard.set(data, forKey: key)
+        
+        struct QuickNotesView: View {
+            @Binding var savedUserNotes: Set<String>
+            @State private var noteText: String = ""
+            
+            var body: some View {
+                VStack(spacing: 16) {
+                    if savedUserNotes.isEmpty {
+                        Text("No notes yet")
+                            .foregroundStyle(.secondary)
+                            .padding()
+                    } else {
+                        List {
+                            ForEach(Array(savedUserNotes).sorted(), id: \.self) { note in
+                                Text(note)
+                                    .padding(.vertical, 7)
+                            }
+                            .onDelete { indexSet in
+                                // Support swipe-to-delete
+                                let sorted = Array(savedUserNotes).sorted()
+                                for index in indexSet {
+                                    let toRemove = sorted[index]
+                                    savedUserNotes.remove(toRemove)
+                                }
+                                NotesStorage.save(savedUserNotes) // persist deletion
+                            }
+                        }
+                    }
+                    Spacer()
+                }
+                .padding(.top)
+                .onAppear {
+                    // Ensure binding is populated when the sheet opens
+                    savedUserNotes = NotesStorage.load()
+                }
             }
         }
-    }
-    
-    
-    public enum FavoriteStorage {
-        private static let key = "favoriteQuotes"
-        static func load() -> Set<String> {
-            guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
-            if let decoded = try? JSONDecoder().decode([String].self, from: data) {
-                return Set(decoded)
+        // MARK: - Simple persistence for notes
+        
+        public enum NotesStorage {
+            private static let key = "userNotes"
+            static func load() -> Set<String> {
+                guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
+                if let decoded = try? JSONDecoder().decode([String].self, from: data) {
+                    return Set(decoded)
+                }
+                return []
             }
-            return []
+            static func save(_ notes: Set<String>) {
+                let array = Array(notes)
+                if let data = try? JSONEncoder().encode(array) {
+                    UserDefaults.standard.set(data, forKey: key)
+                }
+            }
         }
-        static func save(_ quotes: Set<String>) {
-            let array = Array(quotes)
-            if let data = try? JSONEncoder().encode(array) {
-                UserDefaults.standard.set(data, forKey: key)
+        
+        
+        public enum FavoriteStorage {
+            private static let key = "favoriteQuotes"
+            static func load() -> Set<String> {
+                guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
+                if let decoded = try? JSONDecoder().decode([String].self, from: data) {
+                    return Set(decoded)
+                }
+                return []
+            }
+            static func save(_ quotes: Set<String>) {
+                let array = Array(quotes)
+                if let data = try? JSONEncoder().encode(array) {
+                    UserDefaults.standard.set(data, forKey: key)
+                }
             }
         }
     }
 }
-
 #Preview {
     // Preview with a constant binding for design-time
     QuoteLibrary(favoriteQuotes: .constant(["gg"]))

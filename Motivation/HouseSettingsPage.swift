@@ -51,7 +51,7 @@ struct SettingsList: View {
 
     @StateObject private var audioManager = AudioManager.shared
     @StateObject private var notifManager = NotifManager.shared
-    @StateObject private var l10n = LocalizationManager.shared
+    @StateObject public var l10n = LocalizationManager.shared
 
 //    Text(l10n.currentLanguage == .english ? "Settings" : "Configuración")
 
