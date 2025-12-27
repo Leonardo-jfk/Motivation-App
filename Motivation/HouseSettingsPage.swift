@@ -8,21 +8,34 @@ import SwiftUI
 import Combine
 import Foundation
 
-// Shared quotes array accessible from any file in the app target.
-// You can add more quotes here; keep them as comma-separated Swift string literals.
+// Shared sections array accessible from any file in the app target.
 let sections: [String] = [
-      
-        "Language / Idioma",
+    "change of background",
 ]
+
+enum AppLanguage: String, CaseIterable, Identifiable {
+    case english = "en"
+    case spanish = "es"
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .english: return "English"
+        case .spanish: return "Español"
+        }
+    }
+}
 
 struct SettingsList: View {
     // Bind to the same key used in MotivationApp
     @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
     @AppStorage("musicEnabled") private var musicEnabled: Bool = true
-    
+    @AppStorage("appLanguage") private var storedLanguage: String = AppLanguage.english.rawValue
+
     @StateObject private var audioManager = AudioManager.shared
     @StateObject private var notifManager = NotifManager.shared
-    
+
     // Local state for time picker
     @State private var notifTime: Date = {
         var comps = DateComponents()
@@ -30,24 +43,31 @@ struct SettingsList: View {
         comps.minute = UserDefaults.standard.object(forKey: "notifMinute") as? Int ?? 0
         return Calendar.current.date(from: comps) ?? Date()
     }()
-    
+
     // Alert for destructive reset
     @State private var showResetAlert = false
-    
+
     private var selectionBinding: Binding<AppColorScheme> {
         Binding(
             get: { AppColorScheme(rawValue: storedScheme) ?? .system },
             set: { storedScheme = $0.rawValue }
         )
     }
-    
+
+    private var languageBinding: Binding<AppLanguage> {
+        Binding(
+            get: { AppLanguage(rawValue: storedLanguage) ?? .english },
+            set: { storedLanguage = $0.rawValue }
+        )
+    }
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Settings")
                 .font(.largeTitle)
                 .bold()
                 .padding(20)
-            
+
             List {
                 Section("Appearance") {
                     Picker("Appearance", selection: selectionBinding) {
@@ -57,7 +77,7 @@ struct SettingsList: View {
                     }
                     .pickerStyle(.segmented)
                 }
-                
+
                 Section("Music") {
                     Toggle("Background Music", isOn: $audioManager.musicEnabled)
                     if musicEnabled {
@@ -65,10 +85,10 @@ struct SettingsList: View {
                             .tint(.blue)
                     }
                 }
-                
+
                 Section("Notifications") {
                     Toggle("Enable Daily Notification", isOn: $notifManager.notifEnabled)
-                    
+
                     if notifManager.notifEnabled {
                         DatePicker(
                             "Time",
@@ -93,7 +113,7 @@ struct SettingsList: View {
                         }
                     }
                 }
-                
+
                 Section("Data") {
                     Button(role: .destructive) {
                         showResetAlert = true
@@ -109,17 +129,16 @@ struct SettingsList: View {
                         Text("This will clear preferences, notifications, music settings, favorites and notes. This action cannot be undone.")
                     }
                 }
-                Sectionn("Language") {
-                    Picker("Language", selection: selectionBinding) {
+
+                Section("Language") {
+                    Picker("Language", selection: languageBinding) {
                         ForEach(AppLanguage.allCases) { option in
                             Text(option.displayName).tag(option)
                         }
                     }
                     .pickerStyle(.segmented)
                 }
-                }
-                
-                
+
                 Section("Other") {
                     ForEach(sections, id: \.self) { item in
                         Text(item)
@@ -129,7 +148,7 @@ struct SettingsList: View {
             }
         }
     }
-    
+
     private func performFullReset() {
         // 1) Stop notifications and disable preference
         NotifManager.shared.stopNotif()
@@ -137,17 +156,17 @@ struct SettingsList: View {
         // Optionally reset time back to defaults (9:00)
         UserDefaults.standard.set(9, forKey: "notifHour")
         UserDefaults.standard.set(0, forKey: "notifMinute")
-        
+
         // 2) Reset appearance to system
         UserDefaults.standard.set(AppColorScheme.system.rawValue, forKey: "appColorScheme")
         storedScheme = AppColorScheme.system.rawValue
-        
+
         // 3) Reset music settings
         UserDefaults.standard.set(false, forKey: "musicEnabled")
         audioManager.setMusicEnabled(false)
         UserDefaults.standard.set(0.5, forKey: "musicVolume")
         audioManager.setMusicVolume(0.5)
-        
+
         // 4) Clear favorites and notes
         QuoteLibrary.FavoriteStorage.save([])
         QuoteLibrary.NotesStorage.save([])
@@ -158,13 +177,6 @@ struct SettingsList: View {
 extension Notification.Name {
     static let didPerformFullReset = Notification.Name("didPerformFullReset")
 }
-
-struct langChange {
- let    EngSystem = UserDefaults.standard.accessibilityLanguage("English")
-    
-    AppLanguage = 
-}
-
 
 #Preview {
     SettingsList()
