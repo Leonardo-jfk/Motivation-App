@@ -1,6 +1,6 @@
 import SwiftUI
 
-let quotes: [String] = [
+let quotesES: [String] = [
     // Enero (1-31)
     "Tienes poder sobre tu mente, no sobre los acontecimientos externos. — Marco Aurelio",
     "No malgastes más tiempo discutiendo cómo debe ser un buen hombre. Sé uno. — Marco Aurelio",

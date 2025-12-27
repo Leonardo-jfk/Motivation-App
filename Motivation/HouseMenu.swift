@@ -130,7 +130,7 @@ struct PersonalNotes: View {
             ButtonStyleSrt()
             NavigationLink(destination: UserNotesViewWrapper(savedUserNotes: $savedUserNotes)){
                  // defaults to .houseMenu
-                Text("Personal Notes ")
+                Text("Personal Notes ".localized)
                     .font(.title2)
                     .bold()
                     .foregroundStyle(.white)
@@ -148,7 +148,7 @@ struct PersonalNotes: View {
             {
                 ZStack {
                     ButtonStyleSrt() // defaults to .houseMenu
-                    Text("Settings ")
+                    Text("Settings ".localized)
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.white)
@@ -166,7 +166,7 @@ struct PersonalNotes: View {
                 ZStack {
                     ButtonStyleSrt(.houseMenuBack)
                     VStack {
-                        Text("Today's wisdom dose:")
+                        Text("Today's wisdom dose:".localized)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
                             .background(.gray.opacity(0.4))
@@ -200,7 +200,7 @@ struct PersonalNotes: View {
                     ButtonStyleSrt(.houseMenuBack)
                     
                     VStack {
-                        Text("How to give us feedback:")
+                        Text("How to give us feedback:".localized)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
                             .background(.gray.opacity(0.4))
@@ -208,7 +208,7 @@ struct PersonalNotes: View {
                             .font(.title2)
                             .foregroundStyle(.white)
                         
-                        Text("Open the link to the Google Form and answer the questions")
+                        Text("Open the link to the Google Form and answer the questions".localized)
                             .foregroundStyle(.white)
                             .padding(.horizontal)
                             .padding(.vertical)
@@ -223,7 +223,7 @@ struct PersonalNotes: View {
             } else {
                 ZStack {
                     ButtonStyleSrt() // defaults to .houseMenu
-                    Text("Give us feedback ")
+                    Text("Give us feedback ".localized)
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.white)

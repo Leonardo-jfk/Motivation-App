@@ -24,7 +24,7 @@ struct QuoteLibrary: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Quote Library")
+            Text("Quote Library".localized)
                 .font(.largeTitle)
                 .bold()
                 .padding(20)
@@ -36,7 +36,7 @@ struct QuoteLibrary: View {
                 }, label: {
                     ZStack {
                         ButtonStyleSrt(.quoteLib)
-                        Text("Favorites")
+                        Text("Favorites".localized)
                             .font(.title3)
                             .bold()
                             .foregroundStyle(.white)
@@ -90,38 +90,46 @@ struct QuoteLibrary: View {
             .padding(.horizontal, 10)
             
             List {
-                ForEach(quotesEng, id: \.self) { quote in
-                    HStack {
-                        Text(quote)
-                            .padding(.vertical, 7)
-                        Spacer()
-                        let isFavorite = favoriteQuotes.contains(quote)
-                        Button {
-                            
-                            if isFavorite {
-                                favoriteQuotes.remove(quote)
-                            } else {
-                                favoriteQuotes.insert(quote)
-                            }
-                            FavoriteStorage.save(favoriteQuotes)
-                        } label: {
-                            Image(systemName: isFavorite ? "heart.fill" : "heart")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20)
-                                .foregroundStyle(isFavorite ? .red : .secondary)
+                let quotes = AppLanguage.english ? quotesEng : quotesES
+                ForEach(quotes, id: \.self) { quote in
+                    QuoteRow(quote: quote, isFavorite: favoriteQuotes.contains(quote)) {
+                        if favoriteQuotes.contains(quote) {
+                            favoriteQuotes.remove(quote)
+                        } else {
+                            favoriteQuotes.insert(quote)
                         }
-                        .buttonStyle(.plain)
+                        FavoriteStorage.save(favoriteQuotes)
                     }
                 }
-            }.onAppear {
-                // Load notes when library opens so the sheet has the latest
-                savedUserNotes = NotesStorage.load()
             }
-            .onChange(of: savedUserNotes) { _, newValue in
-                NotesStorage.save(newValue)
-            }
-            .onChange(of: favoriteQuotes) { _, newValue in FavoriteStorage.save(newValue)
+        }.onAppear {
+            // Load notes when library opens so the sheet has the latest
+            savedUserNotes = NotesStorage.load()
+        }
+        .onChange(of: savedUserNotes) { _, newValue in
+            NotesStorage.save(newValue)
+        }
+        .onChange(of: favoriteQuotes) { _, newValue in FavoriteStorage.save(newValue)
+        }
+    }
+    
+    struct QuoteRow: View {
+        let quote: String
+        let isFavorite: Bool
+        let toggleFavorite: () -> Void
+        var body: some View {
+            HStack {
+                Text(quote)
+                    .padding(.vertical, 7)
+                Spacer()
+                Button(action: toggleFavorite) {
+                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20)
+                        .foregroundStyle(isFavorite ? .red : .secondary)
+                }
+                .buttonStyle(.plain)
             }
         }
     }
@@ -136,7 +144,7 @@ struct QuoteLibrary: View {
         var body: some View {
             VStack {
                 if favoriteQuotes.isEmpty {
-                    Text("No favorites yet")
+                    Text("No favorites yet".localized)
                         .foregroundStyle(.secondary)
                         .padding()
                 } else {
@@ -161,7 +169,7 @@ struct QuoteLibrary: View {
         var body: some View {
             VStack(spacing: 16) {
                 HStack {
-                    TextField("Write your note", text: $noteText, axis: .vertical)
+                    TextField("Write your note".localized, text: $noteText, axis: .vertical)
                         .textFieldStyle(.plain)
                         .lineLimit(1...4)
                     Button("Add") {
@@ -178,7 +186,7 @@ struct QuoteLibrary: View {
                 Spacer()
                 
                 if savedUserNotes.isEmpty {
-                    Text("No notes yet")
+                    Text("No notes yet".localized)
                         .foregroundStyle(.secondary)
                         .padding()
                 } else {
