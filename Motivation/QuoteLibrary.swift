@@ -379,3 +379,5 @@ struct QuoteLibrary: View {
 }
 
 //fanally I got this shit working
+////fanally I got this shit working
+///IDK
