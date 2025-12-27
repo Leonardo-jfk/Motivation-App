@@ -121,9 +121,16 @@ struct ContentView: View {
                         NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
                             Image(systemName: "apple.books.pages")
                                 .resizable()
+<<<<<<< Updated upstream
                                 .frame(width: 35, height: 35)
                                 .foregroundStyle(.primary)
                                 .padding(15) // touch target
+=======
+                                .s
+                                .frame(width: 50, height: 50)
+                                .foregroundStyle(.primary)
+                                .padding(10)
+>>>>>>> Stashed changes
                         }
                     }
                     ToolbarItem(placement: .topBarTrailing) {
@@ -139,12 +146,12 @@ struct ContentView: View {
                 
                 .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
                     favoriteQuotes = []
-                }
+                }.id(l10n.currentLanguage)
             }
             //                .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
             //        favoriteQuotes = []
         
-        .id(l10n.currentLanguage)
+//        .id(l10n.currentLanguage)
     }
 //        .id(l10n.currentLanguage))
 }
