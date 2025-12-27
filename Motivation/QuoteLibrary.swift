@@ -21,17 +21,16 @@ struct QuoteLibrary: View {
     // Notes state owned here (in-memory). If you want persistence, we can switch later.
     @State private var showUserNotes: Bool = false
     @State private var savedUserNotes: Set<String> = []
+    @StateObject private var l10n = LocalizationManager.shared
     
-    List{
-        let quotes: [String] = {
-            switch AppLanguage.houseSettingPage.l10n.currentLanguage {
+    private var currentQuotes: [String] {
+            switch l10n.currentLanguage {
             case .english:
                 return quotesEng
             case .spanish:
                 return quotesES
             }
-        }()
-    }
+    
 }
     
     var body: some View {
@@ -115,7 +114,7 @@ struct QuoteLibrary: View {
                 
                 List {
                     //                let quotes = AppLanguage.english ? quotesEng : quotesES
-                    ForEach(quotes, id: \.self) { quote in
+                    ForEach(currentQuotes, id: \.self) { quote in
                         QuoteRow(quote: quote, isFavorite: favoriteQuotes.contains(quote)) {
                             if favoriteQuotes.contains(quote) {
                                 favoriteQuotes.remove(quote)
@@ -313,7 +312,7 @@ struct QuoteLibrary: View {
             }
         }
     }
-}
+
 #Preview {
     // Preview with a constant binding for design-time
     QuoteLibrary(favoriteQuotes: .constant(["gg"]))
