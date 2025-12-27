@@ -140,6 +140,9 @@ struct QuoteLibrary: View {
             let quote: String
             let isFavorite: Bool
             let toggleFavorite: () -> Void
+            
+            
+            
             var body: some View {
                 HStack {
                     Text(quote)
@@ -159,30 +162,87 @@ struct QuoteLibrary: View {
         
         // MARK: - Favorites list
         
-        struct ChosenQuotesView: View {
-            // Pass favorites in; you can use a binding if you need to mutate here too.
-            let favoriteQuotes: Set<String>
-            var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
+    struct ChosenQuotesView: View {
+        // Pass favorites in; you can use a binding if you need to mutate here too.
+        //            var favoriteQuotes: Set<String>
+        var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
+        
+        @State var favoriteQuotes: Set<String>
+        @State private var showFavorites: Bool = false
+        
+        // Notes state owned here (in-memory). If you want persistence, we can switch later.
+        @State private var showUserNotes: Bool = false
+        @State private var savedUserNotes: Set<String> = []
+        @StateObject private var l10n = LocalizationManager.shared
+        
+        var body: some View {
+            //                VStack {
+            //                    if favoriteQuotes.isEmpty {
+            //                        Text("No favorites yet".localized)
+            //                            .foregroundStyle(.secondary)
+            //                            .padding()
+            //                    } else {
+            //                        List {
+            //                            ForEach(Array(favoriteQuotes).sorted(), id: \.self) { quote in
+            //                                HStack{
+            //                                    Text(quote)
+            //                                        .padding(.vertical, 7)
+            //                                    Spacer()
+            //                                    Button(action: toggleFavorite) {
+            //                                        Image(systemName: isFavorite ? "heart.fill" : "heart")
+            //                                            .resizable()
+            //                                            .scaledToFit()
+            //                                            .frame(width: 20)
+            //                                            .foregroundStyle(isFavorite ? .red : .secondary)
+            //                                    }
+            //                                    .buttonStyle(.plain)
+            //
+            //                                }
+            //                            }
+            //                        }
+            //                    }
+            //                }
+            //                .padding(.top)
+            //            }
+            //        }
             
-            var body: some View {
-                VStack {
-                    if favoriteQuotes.isEmpty {
-                        Text("No favorites yet".localized)
-                            .foregroundStyle(.secondary)
-                            .padding()
-                    } else {
-                        List {
-                            ForEach(Array(favoriteQuotes).sorted(), id: \.self) { quote in
+            
+            VStack {
+                if favoriteQuotes.isEmpty {
+                    Text("No favorites yet".localized)
+                        .foregroundStyle(.secondary)
+                        .padding()
+                } else {
+                    List {
+                        ForEach(Array(favoriteQuotes).sorted(), id: \.self) { quote in
+                            HStack {
                                 Text(quote)
                                     .padding(.vertical, 7)
+                                Spacer()
+                                Button(action: {
+                                    // Toggle favorite for this specific quote
+                                    if favoriteQuotes.contains(quote) {
+                                        favoriteQuotes.remove(quote)
+                                    } else {
+                                        favoriteQuotes.insert(quote)
+                                    }
+                                    FavoriteStorage.save(favoriteQuotes)
+                                }) {
+                                    Image(systemName: favoriteQuotes.contains(quote) ? "heart.fill" : "heart")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20)
+                                        .foregroundStyle(favoriteQuotes.contains(quote) ? .red : .secondary)
+                                }
+                                .buttonStyle(.plain)
                             }
                         }
                     }
                 }
-                .padding(.top)
             }
         }
-        
+    }
+    
         // MARK: - User notes
         
         struct UserNotesView: View {
