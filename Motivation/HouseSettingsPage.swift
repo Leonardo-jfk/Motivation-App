@@ -21,12 +21,21 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .english: return "English"
-        case .spanish: return "Español"
+        case .english: return "English".localized
+        case .spanish: return "Español".localized
         }
     }
 }
-
+// String extension for localization
+extension String {
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+    
+    func localized(with arguments: CVarArg...) -> String {
+        return String(format: self.localized, arguments: arguments)
+    }
+}
 struct SettingsList: View {
     // Bind to the same key used in MotivationApp
     @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
@@ -212,6 +221,7 @@ final class LocalizationManager: ObservableObject {
     func setLanguage(_ lang: AppLanguage) {
         storedLanguage = lang.rawValue
         currentLanguage = lang
+        objectWillChange.send()
         // Post a notification if needed to have other parts react
         NotificationCenter.default.post(name: .didChangeAppLanguage, object: lang)
     }

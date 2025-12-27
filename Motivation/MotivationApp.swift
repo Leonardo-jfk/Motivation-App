@@ -47,7 +47,7 @@ struct MotivationApp: App {
     }
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
+    @StateObject private var l10n = LocalizationManager.shared
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -62,6 +62,8 @@ struct MotivationApp: App {
                         body: "Marco Aurelio"
                         )
                 }
+                .id(l10n.currentLanguage) // Force entire app to reload on language change
+                .environmentObject(l10n)
         }
     }
 }
