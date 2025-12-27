@@ -35,6 +35,9 @@ struct SettingsList: View {
 
     @StateObject private var audioManager = AudioManager.shared
     @StateObject private var notifManager = NotifManager.shared
+    @StateObject private var l10n = LocalizationManager.shared
+
+//    Text(l10n.currentLanguage == .english ? "Settings" : "Configuración")
 
     // Local state for time picker
     @State private var notifTime: Date = {
@@ -131,13 +134,30 @@ struct SettingsList: View {
                 }
 
                 Section("Language") {
-                    Picker("Language", selection: languageBinding) {
+                    //                    Picker("Language", selection: languageBinding) {
+                    //                        ForEach(AppLanguage.allCases) { option in
+                    //                            Text(option.displayName).tag(option)
+                    //                        }
+                    //                    }
+                    //                    .pickerStyle(.segmented)
+                    //                }
+                    // replace languageBinding usage with:
+                    Picker("Language", selection: Binding(
+                        get: { AppLanguage(rawValue: storedLanguage) ?? .english },
+                        set: { newLang in
+                            storedLanguage = newLang.rawValue
+                            LocalizationManager.shared.setLanguage(newLang)
+                        }
+                    ))
+                    {
                         ForEach(AppLanguage.allCases) { option in
                             Text(option.displayName).tag(option)
                         }
-                    }
-                    .pickerStyle(.segmented)
+                    }.pickerStyle(.segmented)
+//                    Text(l10n.currentLanguage == .english ? "Settings" : "Configuración")
                 }
+//                .pickerStyle(.segmented)
+//                Text(l10n.currentLanguage == .english ? "Settings" : "Configuración")
 
                 Section("Other") {
                     ForEach(sections, id: \.self) { item in
@@ -145,6 +165,7 @@ struct SettingsList: View {
                             .padding(.vertical, 4)
                     }
                 }
+                
             }
         }
     }
@@ -176,6 +197,28 @@ struct SettingsList: View {
 
 extension Notification.Name {
     static let didPerformFullReset = Notification.Name("didPerformFullReset")
+}
+
+final class LocalizationManager: ObservableObject {
+    static let shared = LocalizationManager()
+    @AppStorage("appLanguage") private var storedLanguage: String = AppLanguage.english.rawValue
+
+    @Published private(set) var currentLanguage: AppLanguage = .english
+
+    private init() {
+        currentLanguage = AppLanguage(rawValue: storedLanguage) ?? .english
+    }
+
+    func setLanguage(_ lang: AppLanguage) {
+        storedLanguage = lang.rawValue
+        currentLanguage = lang
+        // Post a notification if needed to have other parts react
+        NotificationCenter.default.post(name: .didChangeAppLanguage, object: lang)
+    }
+}
+
+extension Notification.Name {
+    static let didChangeAppLanguage = Notification.Name("didChangeAppLanguage")
 }
 
 #Preview {
