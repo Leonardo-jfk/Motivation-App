@@ -64,7 +64,7 @@ struct ContentView: View {
                                     .frame(width: 350, height: 350)
                                 
                                 VStack {
-                                    Text("Today's wisdom dose:")
+                                    Text("Today's wisdom dose:".localized)
                                         .padding(.horizontal, 8)
                                         .padding(.vertical, 4)
                                         .background(.gray.opacity(0.4))
@@ -85,7 +85,7 @@ struct ContentView: View {
                                     .fill(Color.black.opacity(0.8))
                                     .frame(width: 200, height: 100)
                                 
-                                Text("Get today's wisdom ")
+                                Text("Get today's wisdom ".localized)
                                     .font(.title3)
                                     .bold()
                                     .foregroundStyle(.white)
@@ -135,7 +135,7 @@ struct DayQuoteView: View {
     
     var body: some View {
         let text: String = {
-            guard !quotesEng.isEmpty else { return "No quotes available." }
+            guard !quotesEng.isEmpty else { return "No quotes available.".localized }
             let safeIndex = max(0, min(index, quotesEng.count - 1))
             return quotesEng[safeIndex]
         }()
