@@ -139,12 +139,12 @@ struct ContentView: View {
                 
                 .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
                     favoriteQuotes = []
-                }
+                }.id(l10n.currentLanguage)
             }
             //                .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
             //        favoriteQuotes = []
         
-        .id(l10n.currentLanguage)
+//        .id(l10n.currentLanguage)
     }
 //        .id(l10n.currentLanguage))
 }

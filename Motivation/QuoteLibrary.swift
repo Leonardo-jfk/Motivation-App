@@ -13,6 +13,23 @@ import SwiftUI
 // Shared quotes array accessible from any file in the app target.
 // You can add more quotes here; keep them as comma-separated Swift string literals.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 struct QuoteLibrary: View {
     // Binding source of truth is provided by a parent view.
     @Binding var favoriteQuotes: Set<String>
@@ -58,7 +75,7 @@ struct QuoteLibrary: View {
                 .buttonStyle(.plain)
                 .sheet(isPresented: $showFavorites) {
                     NavigationStack {
-                        ChosenQuotesView(favoriteQuotes: favoriteQuotes)
+                        ChosenQuotesView(favoriteQuotes: $favoriteQuotes, l10n: l10n)
                             .navigationTitle("Favorites".localized)
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbar {
@@ -135,6 +152,8 @@ struct QuoteLibrary: View {
         .onChange(of: favoriteQuotes) { _, newValue in FavoriteStorage.save(newValue)
         }
     }
+}
+    
     
     struct QuoteRow: View {
         let quote: String
@@ -158,14 +177,31 @@ struct QuoteLibrary: View {
             }
         }
     }
-    
+//struct QuoteRow(
+//    quote: quote,
+//    isFavorite: favoriteQuotes.contains(quote),
+//    favoriteQuotes: $favoriteQuotes,
+//    toggleFavorite: {
+//        if favoriteQuotes.contains(quote) {
+//            favoriteQuotes.remove(quote)
+//        } else {
+//            favoriteQuotes.insert(quote)
+//        }
+//        FavoriteStorage.save(favoriteQuotes)
+//    }
+//)
+
+
+
     // MARK: - Favorites list
     
     struct ChosenQuotesView: View {
         // Pass favorites in; you can use a binding if you need to mutate here too.
-//        let favoriteQuotes: Set<String>
-        var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
+        //        let favoriteQuotes: Set<String>
         @Binding var favoriteQuotes: Set<String>
+        @ObservedObject var l10n: LocalizationManager
+        var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
+        //        @Binding var favoriteQuotes: Set<String>
         
         
         var body: some View {
@@ -181,22 +217,38 @@ struct QuoteLibrary: View {
                             HStack {
                                 Text(quote)
                                 Spacer()
-                                Button(action: toggleFavorite) {
-                                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                                //                            Button(action: toggleFavorite) {
+                                //                                Image(systemName: isFavorite ? "heart.fill" : "heart")
+                                //                                    .resizable()
+                                //                                    .scaledToFit()
+                                //                                    .frame(width: 20)
+                                //                                    .foregroundStyle(isFavorite ? .red : .secondary)
+                                //                                    .padding(.vertical, 7)
+                                //                            }
+                                Button(action: {
+                                    if favoriteQuotes.contains(quote) {
+                                        favoriteQuotes.remove(quote)
+                                    } else {
+                                        favoriteQuotes.insert(quote)
+                                    }
+                                    FavoriteStorage.save(favoriteQuotes)
+                                }) {
+                                    Image(systemName: favoriteQuotes.contains(quote) ? "heart.fill" : "heart")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 20)
-                                        .foregroundStyle(isFavorite ? .red : .secondary)
+                                        .foregroundStyle(favoriteQuotes.contains(quote) ? .red : .secondary)
                                         .padding(.vertical, 7)
                                 }
                             }
                         }
-                    }
-                }
+                    }.id(l10n.currentLanguage)
                     .padding(.top)
+                    
+                }
             }
+            
         }
-        
         // MARK: - User notes
         
         struct UserNotesView: View {
@@ -326,7 +378,7 @@ struct QuoteLibrary: View {
             }
         }
     }
-}
+
 #Preview {
     // Preview with a constant binding for design-time
     QuoteLibrary(favoriteQuotes: .constant(["gg"]))
