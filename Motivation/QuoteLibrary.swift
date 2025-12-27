@@ -318,3 +318,4 @@ struct QuoteLibrary: View {
     QuoteLibrary(favoriteQuotes: .constant(["gg"]))
 }
 
+//fanally I got this shit working
