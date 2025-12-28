@@ -47,6 +47,21 @@ public struct ButtonStyleSrt: View {
     }
 }
 
+#if DEBUG
+// Preview-safe lightweight fallback to ensure canvas can render even if
+// runtime resources or future changes make the style heavy. This does not
+// change runtime behavior; it only provides a simple shape for previews
+// when compiled in DEBUG.
+extension ButtonStyleSrt {
+    @ViewBuilder
+    public var previewBody: some View {
+        RoundedRectangle(cornerRadius: 12, style: .continuous)
+            .fill(Color.blue.opacity(0.4))
+            .frame(width: 200, height: 60)
+    }
+}
+#endif
+
 struct HouseMenu: View {
     
     @State private var showingPersonalNotes = false

@@ -108,8 +108,10 @@ struct ContentView: View {
                                 }
                                 .padding()
                                 
-                                
-                                NavigationLink(destination: SettingsList()){}
+//                                NavigationLink(destination: SettingsList()){}
+                                NavigationLink(destination: SettingsList()){
+                                    Text("Settings")
+                                }
                             }
                         })
                         Spacer()
