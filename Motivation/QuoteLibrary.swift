@@ -16,7 +16,7 @@ import SwiftUI
 struct QuoteLibrary: View {
     // Binding source of truth is provided by a parent view.
     @Binding var favoriteQuotes: Set<String>
-    @State private var showFavorites: Bool = false
+    @State public var showFavorites: Bool = false
     
     // Notes state owned here (in-memory). If you want persistence, we can switch later.
     @State private var showUserNotes: Bool = false
