@@ -18,7 +18,6 @@
 		1D7CC6512F014CC400FAD66D /* NotifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6472F014CC300FAD66D /* NotifManager.swift */; };
 		1D7CC6522F014CC400FAD66D /* HouseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6402F014CC300FAD66D /* HouseMenu.swift */; };
 		1D7CC6532F014CC400FAD66D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D7CC63C2F014CC300FAD66D /* Assets.xcassets */; };
-		1D7CC6542F014CC400FAD66D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D7CC6422F014CC300FAD66D /* Info.plist */; };
 		1D7CC6552F014CC400FAD66D /* BackWitcher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1D7CC63E2F014CC300FAD66D /* BackWitcher.mp3 */; };
 		1D7CC6562F014CC400FAD66D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D7CC6452F014CC300FAD66D /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -102,7 +101,7 @@
 		1D6E58122E919F1900E6B841 = {
 			isa = PBXGroup;
 			children = (
-				1D7CC64A2F014CC300FAD66D /* MotivationBranch */,
+				1D7CC64A2F014CC300FAD66D /* Motivation */,
 				1D6E582B2E919F1B00E6B841 /* MotivationTests */,
 				1D6E58352E919F1B00E6B841 /* MotivationUITests */,
 				1D6E581C2E919F1900E6B841 /* Products */,
@@ -119,7 +118,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1D7CC64A2F014CC300FAD66D /* MotivationBranch */ = {
+		1D7CC64A2F014CC300FAD66D /* Motivation */ = {
 			isa = PBXGroup;
 			children = (
 				1D7CC63C2F014CC300FAD66D /* Assets.xcassets */,
@@ -135,7 +134,7 @@
 				1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */,
 				1D7CC6492F014CC300FAD66D /* Quotes365.swift */,
 			);
-			path = MotivationBranch;
+			path = Motivation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,7 +261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D7CC6532F014CC400FAD66D /* Assets.xcassets in Resources */,
-				1D7CC6542F014CC400FAD66D /* Info.plist in Resources */,
 				1D7CC6552F014CC400FAD66D /* BackWitcher.mp3 in Resources */,
 				1D7CC6562F014CC400FAD66D /* Localizable.strings in Resources */,
 			);
@@ -475,8 +473,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Motivation/Info.plist;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/Motivation/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -508,8 +506,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Motivation/Info.plist;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/Motivation/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -539,7 +537,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/MotivationTests/MotivationTests-info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Leonardo.MotivationTests;
@@ -560,7 +559,8 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/MotivationTests/MotivationTests-info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Leonardo.MotivationTests;
@@ -580,7 +580,8 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/MotivationUITests/MotivationUITests-info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Leonardo.MotivationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -599,7 +600,8 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/MotivationUITests/MotivationUITests-info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Leonardo.MotivationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
