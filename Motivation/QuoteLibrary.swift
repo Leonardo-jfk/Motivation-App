@@ -24,14 +24,13 @@ struct QuoteLibrary: View {
     @StateObject private var l10n = LocalizationManager.shared
     
     private var currentQuotes: [String] {
-            switch l10n.currentLanguage {
-            case .english:
-                return quotesEng
-            case .spanish:
-                return quotesES
-            }
-    
-}
+        switch l10n.currentLanguage {
+        case .english:
+            return quotesEng
+        case .spanish:
+            return quotesES
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -99,7 +98,7 @@ struct QuoteLibrary: View {
                 .padding(.horizontal, 4)
             }
             .padding(.horizontal, 10)
-            
+        
             
 //            List {
                 // Determinar qué array de citas usar basado en el idioma
@@ -344,11 +343,13 @@ struct QuoteLibrary: View {
         }
     }
 
+//#Preview {
+//    QuoteLibrary(favoriteQuotes: .constant(["gg"]))
+//        .environmentObject(LocalizationManager.preview) // if it were an EnvironmentObject
+//}
 #Preview {
-    // Preview with a constant binding for design-time
     QuoteLibrary(favoriteQuotes: .constant(["gg"]))
 }
-
 //fanally I got this shit working
 ////fanally I got this shit working
 ///IDK
