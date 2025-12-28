@@ -1,22 +1,36 @@
-<!-- <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>CFBundleLocalizations</key>
-	  <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<array>
-		<string>en</string>
-		<string>fr</string>
-	</array>
-</dict>
-</plist> -->
+
+
+
+
+
 
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <!-- Identifier resolved from Build Settings -->
     <key>CFBundleIdentifier</key>
     <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+
+    <!-- Human-readable app name -->
+    <key>CFBundleName</key>
+    <string>Motivation</string>
+
+    <!-- Target’s executable name (Xcode fills this in at build time) -->
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+
+    <!-- iOS app package type -->
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+
+    <!-- Versions -->
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+
+    <!-- Localization -->
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleLocalizations</key>
@@ -24,5 +38,34 @@
         <string>en</string>
         <string>fr</string>
     </array>
+
+    <!-- Minimum iOS version (optional but recommended) -->
+    <!-- <key>MinimumOSVersion</key>
+    <string>15.0</string> -->
+
+    <!-- App Category (optional) -->
+    <!-- <key>LSApplicationCategoryType</key>
+    <string>public.app-category.productivity</string> -->
+
+    <!-- Scene configuration if using scenes (SwiftUI lifecycle often manages this automatically) -->
+    <!--
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+        <key>UIApplicationSupportsMultipleScenes</key>
+        <false/>
+        <key>UISceneConfigurations</key>
+        <dict>
+            <key>UIWindowSceneSessionRoleApplication</key>
+            <array>
+                <dict>
+                    <key>UISceneConfigurationName</key>
+                    <string>Default Configuration</string>
+                    <key>UISceneDelegateClassName</key>
+                    <string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+                </dict>
+            </array>
+        </dict>
+    </dict>
+    -->
 </dict>
 </plist>
