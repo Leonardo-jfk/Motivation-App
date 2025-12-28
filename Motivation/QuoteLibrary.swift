@@ -58,7 +58,7 @@ struct QuoteLibrary: View {
                 .buttonStyle(.plain)
                 .sheet(isPresented: $showFavorites) {
                     NavigationStack {
-                        ChosenQuotesView(favoriteQuotes: favoriteQuotes)
+                        ChosenQuotesView(favoriteQuotes: $favoriteQuotes)
                             .navigationTitle("Favorites")
                             .navigationBarTitleDisplayMode(.inline)
                             .toolbar {
@@ -165,46 +165,17 @@ struct QuoteLibrary: View {
     struct ChosenQuotesView: View {
         // Pass favorites in; you can use a binding if you need to mutate here too.
         //            var favoriteQuotes: Set<String>
+        @Binding var favoriteQuotes: Set<String>
         var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
         
-        @State var favoriteQuotes: Set<String>
-        @State private var showFavorites: Bool = false
-        
-        // Notes state owned here (in-memory). If you want persistence, we can switch later.
-        @State private var showUserNotes: Bool = false
-        @State private var savedUserNotes: Set<String> = []
+//        @State private var showFavorites: Bool = false
+//        
+//        // Notes state owned here (in-memory). If you want persistence, we can switch later.
+//        @State private var showUserNotes: Bool = false
+//        @State private var savedUserNotes: Set<String> = []
         @StateObject private var l10n = LocalizationManager.shared
         
         var body: some View {
-            //                VStack {
-            //                    if favoriteQuotes.isEmpty {
-            //                        Text("No favorites yet".localized)
-            //                            .foregroundStyle(.secondary)
-            //                            .padding()
-            //                    } else {
-            //                        List {
-            //                            ForEach(Array(favoriteQuotes).sorted(), id: \.self) { quote in
-            //                                HStack{
-            //                                    Text(quote)
-            //                                        .padding(.vertical, 7)
-            //                                    Spacer()
-            //                                    Button(action: toggleFavorite) {
-            //                                        Image(systemName: isFavorite ? "heart.fill" : "heart")
-            //                                            .resizable()
-            //                                            .scaledToFit()
-            //                                            .frame(width: 20)
-            //                                            .foregroundStyle(isFavorite ? .red : .secondary)
-            //                                    }
-            //                                    .buttonStyle(.plain)
-            //
-            //                                }
-            //                            }
-            //                        }
-            //                    }
-            //                }
-            //                .padding(.top)
-            //            }
-            //        }
             
             
             VStack {
