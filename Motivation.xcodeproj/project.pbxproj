@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		1D4803692EFA14820063C486 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4803682EFA14820063C486 /* FirebaseAnalytics */; };
 		1D48036B2EFA14820063C486 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D48036A2EFA14820063C486 /* FirebaseCrashlytics */; };
+		1D7CC64B2F014CC400FAD66D /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */; };
+		1D7CC64C2F014CC400FAD66D /* Quotes365.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6492F014CC300FAD66D /* Quotes365.swift */; };
+		1D7CC64D2F014CC400FAD66D /* MotivationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6462F014CC300FAD66D /* MotivationApp.swift */; };
+		1D7CC64E2F014CC400FAD66D /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC63D2F014CC300FAD66D /* AudioManager.swift */; };
+		1D7CC64F2F014CC400FAD66D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC63F2F014CC300FAD66D /* ContentView.swift */; };
+		1D7CC6502F014CC400FAD66D /* HouseSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6412F014CC300FAD66D /* HouseSettingsPage.swift */; };
+		1D7CC6512F014CC400FAD66D /* NotifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6472F014CC300FAD66D /* NotifManager.swift */; };
+		1D7CC6522F014CC400FAD66D /* HouseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6402F014CC300FAD66D /* HouseMenu.swift */; };
+		1D7CC6532F014CC400FAD66D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D7CC63C2F014CC300FAD66D /* Assets.xcassets */; };
+		1D7CC6542F014CC400FAD66D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1D7CC6422F014CC300FAD66D /* Info.plist */; };
+		1D7CC6552F014CC400FAD66D /* BackWitcher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1D7CC63E2F014CC300FAD66D /* BackWitcher.mp3 */; };
+		1D7CC6562F014CC400FAD66D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D7CC6452F014CC300FAD66D /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,39 +44,22 @@
 		1D6E581B2E919F1900E6B841 /* Motivation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Motivation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D6E58282E919F1B00E6B841 /* MotivationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotivationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D6E58322E919F1B00E6B841 /* MotivationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotivationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D7CC63C2F014CC300FAD66D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1D7CC63D2F014CC300FAD66D /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		1D7CC63E2F014CC300FAD66D /* BackWitcher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BackWitcher.mp3; sourceTree = "<group>"; };
+		1D7CC63F2F014CC300FAD66D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1D7CC6402F014CC300FAD66D /* HouseMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMenu.swift; sourceTree = "<group>"; };
+		1D7CC6412F014CC300FAD66D /* HouseSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseSettingsPage.swift; sourceTree = "<group>"; };
+		1D7CC6422F014CC300FAD66D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1D7CC6432F014CC300FAD66D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1D7CC6442F014CC300FAD66D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1D7CC6462F014CC300FAD66D /* MotivationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationApp.swift; sourceTree = "<group>"; };
+		1D7CC6472F014CC300FAD66D /* NotifManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifManager.swift; sourceTree = "<group>"; };
+		1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
+		1D7CC6492F014CC300FAD66D /* Quotes365.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes365.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		1D4803A72EFAE95A0063C486 /* Exceptions for "Motivation" folder in "Motivation" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"/Localized: Localizable.strings",
-				Info.plist,
-			);
-			target = 1D6E581A2E919F1900E6B841 /* Motivation */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		1D4803A82EFAE95A0063C486 /* Exceptions for "Motivation" folder in "Compile Sources" phase from "Motivation" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = 1D6E58172E919F1900E6B841 /* Sources */;
-			membershipExceptions = (
-				"/Localized: Localizable.strings",
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		1D6E581D2E919F1900E6B841 /* Motivation */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				1D4803A72EFAE95A0063C486 /* Exceptions for "Motivation" folder in "Motivation" target */,
-				1D4803A82EFAE95A0063C486 /* Exceptions for "Motivation" folder in "Compile Sources" phase from "Motivation" target */,
-			);
-			path = Motivation;
-			sourceTree = "<group>";
-		};
 		1D6E582B2E919F1B00E6B841 /* MotivationTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MotivationTests;
@@ -107,7 +102,7 @@
 		1D6E58122E919F1900E6B841 = {
 			isa = PBXGroup;
 			children = (
-				1D6E581D2E919F1900E6B841 /* Motivation */,
+				1D7CC64A2F014CC300FAD66D /* MotivationBranch */,
 				1D6E582B2E919F1B00E6B841 /* MotivationTests */,
 				1D6E58352E919F1B00E6B841 /* MotivationUITests */,
 				1D6E581C2E919F1900E6B841 /* Products */,
@@ -124,6 +119,25 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		1D7CC64A2F014CC300FAD66D /* MotivationBranch */ = {
+			isa = PBXGroup;
+			children = (
+				1D7CC63C2F014CC300FAD66D /* Assets.xcassets */,
+				1D7CC63D2F014CC300FAD66D /* AudioManager.swift */,
+				1D7CC63E2F014CC300FAD66D /* BackWitcher.mp3 */,
+				1D7CC63F2F014CC300FAD66D /* ContentView.swift */,
+				1D7CC6402F014CC300FAD66D /* HouseMenu.swift */,
+				1D7CC6412F014CC300FAD66D /* HouseSettingsPage.swift */,
+				1D7CC6422F014CC300FAD66D /* Info.plist */,
+				1D7CC6452F014CC300FAD66D /* Localizable.strings */,
+				1D7CC6462F014CC300FAD66D /* MotivationApp.swift */,
+				1D7CC6472F014CC300FAD66D /* NotifManager.swift */,
+				1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */,
+				1D7CC6492F014CC300FAD66D /* Quotes365.swift */,
+			);
+			path = MotivationBranch;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,9 +152,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				1D6E581D2E919F1900E6B841 /* Motivation */,
 			);
 			name = Motivation;
 			packageProductDependencies = (
@@ -250,6 +261,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D7CC6532F014CC400FAD66D /* Assets.xcassets in Resources */,
+				1D7CC6542F014CC400FAD66D /* Info.plist in Resources */,
+				1D7CC6552F014CC400FAD66D /* BackWitcher.mp3 in Resources */,
+				1D7CC6562F014CC400FAD66D /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +289,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D7CC64B2F014CC400FAD66D /* QuoteLibrary.swift in Sources */,
+				1D7CC64C2F014CC400FAD66D /* Quotes365.swift in Sources */,
+				1D7CC64D2F014CC400FAD66D /* MotivationApp.swift in Sources */,
+				1D7CC64E2F014CC400FAD66D /* AudioManager.swift in Sources */,
+				1D7CC64F2F014CC400FAD66D /* ContentView.swift in Sources */,
+				1D7CC6502F014CC400FAD66D /* HouseSettingsPage.swift in Sources */,
+				1D7CC6512F014CC400FAD66D /* NotifManager.swift in Sources */,
+				1D7CC6522F014CC400FAD66D /* HouseMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +328,18 @@
 			targetProxy = 1D6E58332E919F1B00E6B841 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1D7CC6452F014CC300FAD66D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1D7CC6432F014CC300FAD66D /* en */,
+				1D7CC6442F014CC300FAD66D /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6E583A2E919F1B00E6B841 /* Debug */ = {
