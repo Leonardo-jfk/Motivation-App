@@ -100,6 +100,7 @@ struct ContentView: View {
                                     .padding()
                                 }
                                 .padding()
+//                                .preferredColorScheme(appScheme.preferredColorScheme)
                             } else {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 30, style: .continuous)
@@ -121,7 +122,8 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
-                
+//                .preferredColorScheme(appScheme.preferredColorScheme)
+
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
@@ -152,7 +154,7 @@ struct ContentView: View {
             //        favoriteQuotes = []
             
             .preferredColorScheme(appScheme.preferredColorScheme)
-        .id(l10n.currentLanguage)
+//        .id(l10n.currentLanguage)
     }
 //        .id(l10n.currentLanguage))
 }
