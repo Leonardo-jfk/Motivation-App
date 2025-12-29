@@ -56,18 +56,20 @@ struct ContentView: View {
                             .resizable()
                             .scaledToFill()
                             .ignoresSafeArea()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                     else{
                         Image(.backgroundLight)
                             .resizable()
                             .scaledToFill()
                             .ignoresSafeArea()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                     
                     
                     VStack {
                         // Spacer to push main content below the nav bar if needed
-                        Spacer(minLength: 0)
+                        Spacer()
                         // Botón que abre la descripción
                         Button(action: {
                             showingQuote.toggle()
@@ -108,10 +110,8 @@ struct ContentView: View {
                                 }
                                 .padding()
                                 
-//                                NavigationLink(destination: SettingsList()){}
-                                NavigationLink(destination: SettingsList()){
-                                    Text("Settings")
-                                }
+                                                                NavigationLink(destination: SettingsList()){}
+                                
                             }
                         })
                         Spacer()
@@ -142,6 +142,7 @@ struct ContentView: View {
                 .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
                     favoriteQuotes = []
                 }
+            
             }
             //                .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
             //        favoriteQuotes = []
