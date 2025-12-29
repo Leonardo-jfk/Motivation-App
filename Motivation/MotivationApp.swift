@@ -60,11 +60,12 @@ struct MotivationApp: App {
                         minute: 0,
                         title: "Your wisdom",
                         body: "Marco Aurelio"
-                        )
+                    )
                 }
                 .id(l10n.currentLanguage) // Force entire app to reload on language change
                 .environmentObject(l10n)
         }
+        .windowResizability(.contentSize)
     }
 }
 class AppDelegate: NSObject, UIApplicationDelegate {

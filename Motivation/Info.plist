@@ -1,36 +1,19 @@
-
-
-
-
-
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <!-- Identifier resolved from Build Settings -->
     <key>CFBundleIdentifier</key>
     <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-
-    <!-- Human-readable app name -->
     <key>CFBundleName</key>
     <string>Motivation</string>
-
-    <!-- Target’s executable name (Xcode fills this in at build time) -->
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
-
-    <!-- iOS app package type -->
     <key>CFBundlePackageType</key>
     <string>APPL</string>
-
-    <!-- Versions -->
     <key>CFBundleShortVersionString</key>
     <string>1.0</string>
     <key>CFBundleVersion</key>
     <string>1</string>
-
-    <!-- Localization -->
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleLocalizations</key>
@@ -39,33 +22,32 @@
         <string>fr</string>
     </array>
 
-    <!-- Minimum iOS version (optional but recommended) -->
-    <!-- <key>MinimumOSVersion</key>
-    <string>15.0</string> -->
+    <!-- ADD THESE: -->
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UIStatusBarHidden</key>
+    <false/>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <true/>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
 
-    <!-- App Category (optional) -->
-    <!-- <key>LSApplicationCategoryType</key>
-    <string>public.app-category.productivity</string> -->
-
-    <!-- Scene configuration if using scenes (SwiftUI lifecycle often manages this automatically) -->
-    <!--
-    <key>UIApplicationSceneManifest</key>
-    <dict>
-        <key>UIApplicationSupportsMultipleScenes</key>
-        <false/>
-        <key>UISceneConfigurations</key>
-        <dict>
-            <key>UIWindowSceneSessionRoleApplication</key>
-            <array>
-                <dict>
-                    <key>UISceneConfigurationName</key>
-                    <string>Default Configuration</string>
-                    <key>UISceneDelegateClassName</key>
-                    <string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-                </dict>
-            </array>
-        </dict>
-    </dict>
-    -->
+    <!-- Optional but recommended: -->
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>UIAppFonts</key>
+    <array>
+        <!-- Add custom fonts here if needed -->
+    </array>
 </dict>
 </plist>
