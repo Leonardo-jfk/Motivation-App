@@ -52,6 +52,7 @@ struct MotivationApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(appScheme.preferredColorScheme)
+                .id(storedScheme) 
                 .onAppear {
                     NotifManager.shared.requestPermission()
                     
@@ -76,4 +77,3 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 }
-

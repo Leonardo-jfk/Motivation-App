@@ -21,6 +21,10 @@ func dayOfYear(for date: Date = .now) -> Int {
 struct ContentView: View {
     @State private var showingQuote = false
     @Environment(\.colorScheme) var colorScheme
+    @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
+    private var appScheme: AppColorScheme {
+        AppColorScheme(rawValue: storedScheme) ?? .system
+    }
     // Source of truth for favorites - load from storage on init
     @State public var favoriteQuotes: Set<String> = {
         return QuoteLibrary.FavoriteStorage.load()
@@ -146,7 +150,8 @@ struct ContentView: View {
             }
             //                .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
             //        favoriteQuotes = []
-        
+            
+            .preferredColorScheme(appScheme.preferredColorScheme)
         .id(l10n.currentLanguage)
     }
 //        .id(l10n.currentLanguage))
@@ -174,3 +179,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
