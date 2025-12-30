@@ -16,6 +16,7 @@ let sections: [String] = [
 enum AppLanguage: String, CaseIterable, Identifiable {
     case english = "en"
     case spanish = "es"
+    case french = "fr"
 
     var id: String { rawValue }
 
@@ -23,6 +24,7 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         switch self {
         case .english: return "English".localized
         case .spanish: return "Español".localized
+        case .french: return "French".localized
         }
     }
 }

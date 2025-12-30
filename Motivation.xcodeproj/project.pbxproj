@@ -60,7 +60,6 @@
 		1D7CC6412F014CC300FAD66D /* HouseSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseSettingsPage.swift; sourceTree = "<group>"; };
 		1D7CC6422F014CC300FAD66D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D7CC6432F014CC300FAD66D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1D7CC6442F014CC300FAD66D /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1D7CC6462F014CC300FAD66D /* MotivationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationApp.swift; sourceTree = "<group>"; };
 		1D7CC6472F014CC300FAD66D /* NotifManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifManager.swift; sourceTree = "<group>"; };
 		1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
@@ -70,6 +69,7 @@
 		1DFA7C1E2F04193900A1D6E5 /* build_final.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build_final.sh; sourceTree = "<group>"; };
 		1DFA7C202F041F9600A1D6E5 /* Motivation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Motivation.entitlements; sourceTree = "<group>"; };
 		1DFA7C232F0425F700A1D6E5 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		1DFA7C2A2F0449D200A1D6E5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -371,7 +371,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1D7CC6432F014CC300FAD66D /* en */,
-				1D7CC6442F014CC300FAD66D /* es */,
+				1DFA7C2A2F0449D200A1D6E5 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

@@ -29,7 +29,10 @@ struct QuoteLibrary: View {
             return quotesEng
         case .spanish:
             return quotesES
+        case .french:
+            return quotesFR
         }
+        
     }
     
     var body: some View {
