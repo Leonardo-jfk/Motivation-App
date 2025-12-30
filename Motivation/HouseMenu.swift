@@ -47,6 +47,15 @@ public struct ButtonStyleSrt: View {
     }
 }
 
+//public var url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSfspdMNWKv3vDnIB2WAuPbTMwECwIgIDgom0Dp9KNcuXFF-GQ/viewform?usp=dialog")
+
+public let feedbackFormURL: URL = {
+    guard let url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSfspdMNWKv3vDnIB2WAuPbTMwECwIgIDgom0Dp9KNcuXFF-GQ/viewform?usp=dialog") else {
+        preconditionFailure("URL invalide: vérifiez la chaîne")
+    }
+    return url
+}()
+
 #if DEBUG
 // Preview-safe lightweight fallback to ensure canvas can render even if
 // runtime resources or future changes make the style heavy. This does not
@@ -227,10 +236,19 @@ struct PersonalNotes: View {
                             .foregroundStyle(.white)
                             .padding(.horizontal)
                             .padding(.vertical)
-                        Text("The link:https://docs.google.com/forms/d/e/1FAIpQLSfspdMNWKv3vDnIB2WAuPbTMwECwIgIDgom0Dp9KNcuXFF-GQ/viewform?usp=dialog")
-                            .foregroundStyle(.white)
-                            .padding(.horizontal)
-                            .padding(.vertical)
+//                        Text("The link:https://docs.google.com/forms/d/e/1FAIpQLSfspdMNWKv3vDnIB2WAuPbTMwECwIgIDgom0Dp9KNcuXFF-GQ/viewform?usp=dialog")
+//                            .foregroundStyle(.white)
+//                            .padding(.horizontal)
+//                            .padding(.vertical)
+                         
+                            Link("See the quetionary", destination: feedbackFormURL)
+                                .font(.headline)
+                                .foregroundStyle(.white)
+                                .padding(.horizontal)
+                                .padding(.vertical, 8)
+                                .background(.gray.opacity(0.5))
+                                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                        
                     }
                     .padding()
                 }

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import UserNotifications
+import Combine
 
 
 
@@ -18,7 +19,24 @@ func dayOfYear(for date: Date = .now) -> Int {
     return calendar.ordinality(of: .day, in: .year, for: date) ?? 1
 }
 
+
+
+class NavigationManager: ObservableObject {
+    @Published var path = NavigationPath()
+    
+    func reset() {
+        path = NavigationPath()
+    }
+}
+
+
+
+
 struct ContentView: View {
+    
+    @StateObject private var navManager = NavigationManager()
+    
+    
     @State private var showingQuote = false
     @Environment(\.colorScheme) var colorScheme
     @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
@@ -53,7 +71,7 @@ struct ContentView: View {
             
             
             // Wrap the whole interactive content in a single NavigationStack
-            NavigationStack {
+            NavigationStack(path: $navManager.path) {
                 ZStack{
                     if colorScheme == .dark {
                         Image(.backgroundDark)
@@ -122,7 +140,11 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
+//                .id(appScheme.rawValue + (showingQuote ? "quote" : "button"))
+//                // This prevents navigation reset when color scheme changes
+////                .preferredColorScheme(appScheme.preferredColorScheme)
 //                .preferredColorScheme(appScheme.preferredColorScheme)
+                
 
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
@@ -150,10 +172,17 @@ struct ContentView: View {
                 }
             
             }
+            
+            .environmentObject(navManager) 
+            
+            
             //                .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
             //        favoriteQuotes = []
-            
-            .preferredColorScheme(appScheme.preferredColorScheme)
+//            .id(appScheme.rawValue + (showingQuote ? "quote" : "button"))
+//            // This prevents navigation reset when color scheme changes
+////                .preferredColorScheme(appScheme.preferredColorScheme)
+//            .preferredColorScheme(appScheme.preferredColorScheme)
+//            .preferredColorScheme(appScheme.preferredColorScheme)
 //        .id(l10n.currentLanguage)
     }
 //        .id(l10n.currentLanguage))

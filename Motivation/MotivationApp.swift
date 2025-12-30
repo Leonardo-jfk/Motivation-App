@@ -52,7 +52,7 @@ struct MotivationApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(appScheme.preferredColorScheme)
-                .id(storedScheme) 
+//                .id(storedScheme) 
                 .onAppear {
                     NotifManager.shared.requestPermission()
                     
@@ -63,7 +63,7 @@ struct MotivationApp: App {
                         body: "Marco Aurelio"
                     )
                 }
-                .id(l10n.currentLanguage) // Force entire app to reload on language change
+//                .id(l10n.currentLanguage) // Force entire app to reload on language change
                 .environmentObject(l10n)
         }
         .windowResizability(.contentSize)
