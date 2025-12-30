@@ -1,0 +1,51 @@
+{
+  "name": "My Example Source",
+  "subtitle": "A source for all of my apps",
+  "description": "Welcome to my source! Here you'll find all of my apps.",
+  "iconURL": "https://i.imgur.com/pqIZoZo.jpeg",
+  "website": "https://altstudio.app",
+  "patreonURL": "https://patreon.com/altstudio",
+  "tintColor": "#6156e2",
+  "featuredApps": [
+    "Leonardo.Motivation"
+  ],
+  "apps": [
+    {
+      "name": "Motivation",
+      "bundleIdentifier": "Leonardo.Motivation",
+      "marketplaceID": "",
+      "developerName": "Example Developer",
+      "subtitle": "An awesome app.",
+      "localizedDescription": "This is an awesome app only available on AltStore.",
+      "iconURL": "https://i.imgur.com/MwTW2Ey.png",
+      "tintColor": "#6156e2",
+      "category": "lifestyle",
+      "screenshots": [
+        "https://i.imgur.com/KttD4ML.jpeg",
+        "https://i.imgur.com/cxO3DQ1.jpeg",
+        "https://i.imgur.com/edZiiYA.png"
+      ],
+      "versions": [
+        {
+          "downloadURL": "https://drive.google.com/file/d/1bbJzUrFZNzQKVRMX9q7xhVsPunIgAylT/view?usp=sharing",
+          "size": 58700000,
+          "version": "1.0",
+          "buildVersion": null,
+          "date": "2025-12-30T14:48:00-03:00",
+          "localizedDescription": null,
+          "minOSVersion": null
+        }
+      ],
+      "appPermissions": {
+        "entitlements": [
+          "https://drive.google.com/file/d/1_LPh2ZSyv2pzHO7Osducw3cy5icEEERb/view?usp=sharing"
+        ],
+        "privacy": {
+          "Privacy link": "https://drive.google.com/file/d/1izoZfBU0gjVKTpNNf3KxGBcZKEiIk-1E/view?usp=sharing"
+        }
+      },
+      "patreon": {}
+    }
+  ],
+  "news": []
+}

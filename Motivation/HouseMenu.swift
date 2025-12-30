@@ -5,6 +5,13 @@
 //  Created by Leonardo Aurelio on 16/12/2025.
 //
 
+
+
+//TASK: don't allow 2 ractengels to be open at the same time and break everything 
+
+
+
+
 import SwiftUI
 
 public enum ButtonShapeStyle {
