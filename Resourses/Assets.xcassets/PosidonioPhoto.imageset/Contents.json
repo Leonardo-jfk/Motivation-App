@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Posidonio,_replica_augustea_(23_ac.-14_dc_ca)_da_originale_del_100-50_ac._ca._6142.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
