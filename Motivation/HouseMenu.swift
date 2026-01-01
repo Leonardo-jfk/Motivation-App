@@ -11,6 +11,7 @@ public enum ButtonShapeStyle {
     case quoteLib
     case houseMenu
     case houseMenuBack
+    case stoicList
 }
 
 public struct ButtonStyleSrt: View {
@@ -43,8 +44,14 @@ public struct ButtonStyleSrt: View {
             RoundedRectangle(cornerRadius: 40, style: .continuous)
                 .fill(tileFillColor)
                 .frame(width: 350, height: 350)
+            
+        case .stoicList:
+            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                .fill(tileFillColor)
+                .frame(width: 100, height: 150)
         }
-    }
+        }
+    
 }
 
 //public var url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSfspdMNWKv3vDnIB2WAuPbTMwECwIgIDgom0Dp9KNcuXFF-GQ/viewform?usp=dialog")
@@ -230,6 +237,7 @@ struct PersonalNotes: View {
         
         var body: some View {
             if showing {
+                NavigationStack{
                 ZStack {
                     ButtonStyleSrt(.houseMenuBack)
                     VStack {
@@ -240,12 +248,31 @@ struct PersonalNotes: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                             .font(.title2)
                             .foregroundStyle(.white)
-                        NavigationLink("Authors", destination: StoicListView())
-                        NavigationLink("Books", destination: StoicBooksListView())
+                        HStack{
+                            Spacer()
+                            ZStack{
+                                ButtonStyleSrt(.stoicList)
+                                NavigationLink("Authors", destination: StoicListView())
+                                    .foregroundStyle(.white)
+                            }
+                            Spacer()
+//                            NavigationStack {
+                                ZStack{
+                                    ButtonStyleSrt(.stoicList)
+                                    
+                                    NavigationLink("Books", destination: StoicBooksListView())
+                                        .foregroundStyle(.white)
+                                }
+                                Spacer()
+//                            }
+                        }
+                        
                     }
                     .padding()
                 }
                 .padding()
+                
+            }
             } else {
                 ZStack {
                     ButtonStyleSrt() // defaults to .houseMenu
