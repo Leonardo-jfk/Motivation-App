@@ -5,13 +5,6 @@
 //  Created by Leonardo Aurelio on 16/12/2025.
 //
 
-
-
-//TASK: don't allow 2 ractengels to be open at the same time and break everything 
-
-
-
-
 import SwiftUI
 
 public enum ButtonShapeStyle {
@@ -79,17 +72,29 @@ extension ButtonStyleSrt {
 #endif
 
 
-public struct ShowingAuthors:View {
-    
+// 2. Add author & book list views
+struct StoicListView: View {
     var body: some View {
-        List {
-            ForEach(stoics, id: \.self) { quote in
-                quoterow(quote: quote, isfavorite: favoritequotes.contains(quote)) {
-                }
-            }
+        List(stoicPhilosophers, id: \.name) { author in
+            Link(author.name, destination: URL(string: author.url)!)
         }
+        .navigationTitle("Stoic Authors")
     }
 }
+
+struct StoicBooksListView: View {
+    var body: some View {
+        List(stoicBooks, id: \.title) { book in
+            VStack(alignment: .leading) {
+                Link(book.title, destination: URL(string: book.url)!)
+                Text(book.author).font(.subheadline).foregroundColor(.secondary)
+            }
+        }
+        .navigationTitle("Stoic Books")
+    }
+}
+
+
 
 struct HouseMenu: View {
     
@@ -116,6 +121,10 @@ struct HouseMenu: View {
             Spacer()
             Button(action: {
                 showingPersonalNotes.toggle()
+                // Close others
+                showingMainSettings = false
+                showingResourses = false
+                showingFeedbackMenu = false
             }) {
                 PersonalNotes(showing: showingPersonalNotes, savedUserNotes: $savedUserNotes)
             }
@@ -125,6 +134,10 @@ struct HouseMenu: View {
 
             Button(action: {
                 showingMainSettings.toggle()
+                // Close others
+                showingPersonalNotes = false
+                showingResourses = false
+                showingFeedbackMenu = false
             }) {
                 MainSettings(showing: showingMainSettings)
                 
@@ -136,6 +149,10 @@ struct HouseMenu: View {
 
             Button(action: {
                 showingResourses.toggle()
+                // Close others
+                showingPersonalNotes = false
+                showingMainSettings = false
+                showingFeedbackMenu = false
             }) {
                 Resourses(showing: showingResourses)
             }
@@ -144,6 +161,10 @@ struct HouseMenu: View {
            
             Button(action: {
                 showingFeedbackMenu.toggle()
+                // Close others
+                showingPersonalNotes = false
+                showingMainSettings = false
+                showingResourses = false
             }) {
                 GetFeedback(showing: showingFeedbackMenu)
             }
@@ -219,11 +240,8 @@ struct PersonalNotes: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                             .font(.title2)
                             .foregroundStyle(.white)
-                        Button(label: "Authors", action:
-                                {
-                            ShowingAuthors.toggle
-                        })
-                        Button(label: "Books")
+                        NavigationLink("Authors", destination: StoicListView())
+                        NavigationLink("Books", destination: StoicBooksListView())
                     }
                     .padding()
                 }
@@ -293,7 +311,6 @@ struct PersonalNotes: View {
             }
         }
     }
-
 
 
 
