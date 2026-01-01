@@ -237,9 +237,11 @@ struct PersonalNotes: View {
         
         var body: some View {
             if showing {
-                NavigationStack{
+                
+//                NavigationStack{
                 ZStack {
                     ButtonStyleSrt(.houseMenuBack)
+                    NavigationStack {
                     VStack {
                         Text("Today's wisdom dose:".localized)
                             .padding(.horizontal, 8)
@@ -268,9 +270,9 @@ struct PersonalNotes: View {
                         }
                         
                     }
-                    .padding()
-                }
-                .padding()
+//                    .padding()
+                    }
+//                .padding()
                 
             }
             } else {
@@ -360,4 +362,5 @@ struct PersonalNotes: View {
 #Preview {
     GetFeedback(showing: true)
 }
+
 
