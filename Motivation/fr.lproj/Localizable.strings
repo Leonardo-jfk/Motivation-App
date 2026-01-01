@@ -1,0 +1,52 @@
+//
+//  Untitled.swift
+//  Motivation
+//
+//  Created by Leonardo Aurelio on 23/12/2025.
+//
+
+
+"This will clear preferences, notifications, music settings, favorites and notes. This action cannot be undone." = "Cela effacera les préférences, notifications, paramètres de musique, favoris et notes. Cette action est irréversible.";
+"Other" = "Autre";
+"Language / Idioma" = "Langue / Idioma";
+"Get today's wisdom " = "Obtenir la sagesse du jour ";
+"Today's wisdom dose:" = "Dose de sagesse du jour :";
+"Quote Library" = "Bibliothèque de citations";
+"Favorites" = "Favoris";
+"Done" = "Terminé";
+"Your own ideas" = "Vos propres idées";
+"Your Notes" = "Vos notes";
+"Write your note" = "Écrivez votre note";
+"Add" = "Ajouter";
+"No favorites yet" = "Pas encore de favoris";
+"No notes yet" = "Pas encore de notes";
+"Personal Notes " = "Notes personnelles ";
+"Best sources of wisdom " = "Meilleures sources de sagesse ";
+"Give us feedback " = "Donnez-nous votre avis ";
+"How to give us feedback:" = "Comment nous donner votre avis :";
+"Open the link to the Google Form and answer the questions" = "Ouvrez le lien du Google Form et répondez aux questions";
+"The link:" = "Le lien :";
+"Your wisdom" = "Votre sagesse";
+"No quotes available." = "Aucune citation disponible.";
+
+"settings_title" = "Paramètres";
+"appearance_title" = "Apparence";
+"appearance_picker" = "Apparence";
+"music_title" = "Musique";
+"music_toggle" = "Musique de fond";
+"notifications_title" = "Notifications";
+"notifications_toggle" = "Activer la notification quotidienne";
+"notifications_time" = "Heure";
+"data_title" = "Données";
+"data_reset_button" = "Tout réinitialiser";
+"data_reset_alert_title" = "Tout réinitialiser ?";
+"data_reset_alert_message" = "Cela effacera les préférences, notifications, paramètres de musique, favoris et notes. Cette action est irréversible.";
+"cancel" = "Annuler";
+"reset" = "Réinitialiser";
+"language_section" = "Langue";
+"language_picker" = "Langue";
+"other_title" = "Autre";
+"English" = "Anglais";
+"Español" = "Espagnol";
+"Open the link to the Google Form and answer the questions" = "Ouvrez le lien du Google Form et répondez aux questions";
+"See the quetionary" = "Voir le questionnaire";

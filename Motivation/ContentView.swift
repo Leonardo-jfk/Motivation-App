@@ -56,6 +56,8 @@ struct ContentView: View {
             return quotesEng
         case .spanish:
             return quotesES
+        case .french:
+            return quotesFR
         }
     }
         private var todayIndex: Int {
