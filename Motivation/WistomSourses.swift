@@ -107,36 +107,46 @@ public struct ResourcesBookView: View {
                     .bold()
                     .padding()
                 
-                ForEach(books, id: \.name) { book in
+                ForEach(books, id: \.title) { book in
                     HStack(spacing: 15) {
                         // Try using Asset catalog image
-                        if let uiImage = UIImage(named: books.photo) {
-                            Image(uiImage: uiImage)
+//                        if let uiImage = UIImage(named: books.photo) {
+//                            Image(uiImage: uiImage)
+                        Image(book.photo)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 80, height: 80)
                                 .clipShape(Circle())
-                        } else {
-                            // Fallback if image doesn't exist
-                            Circle()
-                                .fill(Color.gray.opacity(0.3))
-                                .frame(width: 80, height: 80)
-                                .overlay(
-                                    Text(String(books.name.prefix(1)))
-                                        .font(.title)
-                                        .bold()
-                                )
-                        }
+//                        }
+//                            else {
+//                            // Fallback if image doesn't exist
+//                            Circle()
+//                                .fill(Color.gray.opacity(0.3))
+//                                .frame(width: 80, height: 80)
+//                                .overlay(
+//                                    Text(String(books.name.prefix(1)))
+//                                        .font(.title)
+//                                        .bold()
+//                                )
+//                        }
                         
                         VStack(alignment: .leading, spacing: 5) {
-                            Text(books.name)
+                            Text(book.title)
                                 .font(.headline)
                             
-                            Text(books.role)
+                            Text(book.author)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                             
-                            Link("Learn more", destination: URL(string: books.url)!)
+//                            Text(book.role)
+//                                .font(.caption)
+//                                .foregroundColor(.secondary)
+                            Text(book.type)
+                                                           .font(.caption)
+                                                           .foregroundColor(.secondary)
+                                                           .italic()
+                            
+                            Link("Learn more", destination: URL(string: book.url)!)
                                 .font(.caption)
                                 .foregroundColor(.blue)
                         }
