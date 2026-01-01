@@ -18,8 +18,6 @@
 		1D7CC6502F014CC400FAD66D /* HouseSettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6412F014CC300FAD66D /* HouseSettingsPage.swift */; };
 		1D7CC6512F014CC400FAD66D /* NotifManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6472F014CC300FAD66D /* NotifManager.swift */; };
 		1D7CC6522F014CC400FAD66D /* HouseMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6402F014CC300FAD66D /* HouseMenu.swift */; };
-		1D7CC6532F014CC400FAD66D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D7CC63C2F014CC300FAD66D /* Assets.xcassets */; };
-		1D7CC6552F014CC400FAD66D /* BackWitcher.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1D7CC63E2F014CC300FAD66D /* BackWitcher.mp3 */; };
 		1D7CC6562F014CC400FAD66D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D7CC6452F014CC300FAD66D /* Localizable.strings */; };
 		1D9FEFBC2F01A442009C6612 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D9FEFBB2F01A442009C6612 /* FirebaseCore */; };
 		1D9FEFBE2F01A4BE009C6612 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1D9FEFBD2F01A4BE009C6612 /* FirebaseMessaging */; };
@@ -54,9 +52,7 @@
 		1D6E58322E919F1B00E6B841 /* MotivationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotivationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D7971BB2F06905B00912FFA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1D7971BC2F06AF0300912FFA /* WistomSourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WistomSourses.swift; sourceTree = "<group>"; };
-		1D7CC63C2F014CC300FAD66D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D7CC63D2F014CC300FAD66D /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
-		1D7CC63E2F014CC300FAD66D /* BackWitcher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BackWitcher.mp3; sourceTree = "<group>"; };
 		1D7CC63F2F014CC300FAD66D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1D7CC6402F014CC300FAD66D /* HouseMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseMenu.swift; sourceTree = "<group>"; };
 		1D7CC6412F014CC300FAD66D /* HouseSettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseSettingsPage.swift; sourceTree = "<group>"; };
@@ -74,7 +70,35 @@
 		1DFA7C2A2F0449D200A1D6E5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1D5820662F0709DB005CB6CF /* Exceptions for "Resourses" folder in "Motivation" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				BackWitcher.mp3,
+			);
+			target = 1D6E581A2E919F1900E6B841 /* Motivation */;
+		};
+		1D5820672F0709DB005CB6CF /* Exceptions for "Resourses" folder in "MotivationTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				BackWitcher.mp3,
+			);
+			target = 1D6E58272E919F1B00E6B841 /* MotivationTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		1D5820652F0709D2005CB6CF /* Resourses */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1D5820662F0709DB005CB6CF /* Exceptions for "Resourses" folder in "Motivation" target */,
+				1D5820672F0709DB005CB6CF /* Exceptions for "Resourses" folder in "MotivationTests" target */,
+			);
+			path = Resourses;
+			sourceTree = "<group>";
+		};
 		1D6E582B2E919F1B00E6B841 /* MotivationTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MotivationTests;
@@ -120,6 +144,7 @@
 		1D6E58122E919F1900E6B841 = {
 			isa = PBXGroup;
 			children = (
+				1D5820652F0709D2005CB6CF /* Resourses */,
 				1D7CC64A2F014CC300FAD66D /* Motivation */,
 				1D6E582B2E919F1B00E6B841 /* MotivationTests */,
 				1D6E58352E919F1B00E6B841 /* MotivationUITests */,
@@ -144,9 +169,7 @@
 				1D7971BC2F06AF0300912FFA /* WistomSourses.swift */,
 				1DFA7C202F041F9600A1D6E5 /* Motivation.entitlements */,
 				1DFA7C1E2F04193900A1D6E5 /* build_final.sh */,
-				1D7CC63C2F014CC300FAD66D /* Assets.xcassets */,
 				1D7CC63D2F014CC300FAD66D /* AudioManager.swift */,
-				1D7CC63E2F014CC300FAD66D /* BackWitcher.mp3 */,
 				1D7CC63F2F014CC300FAD66D /* ContentView.swift */,
 				1D7CC6402F014CC300FAD66D /* HouseMenu.swift */,
 				1D7CC6412F014CC300FAD66D /* HouseSettingsPage.swift */,
@@ -211,6 +234,7 @@
 				1D6E582A2E919F1B00E6B841 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
+				1D5820652F0709D2005CB6CF /* Resourses */,
 				1D6E582B2E919F1B00E6B841 /* MotivationTests */,
 			);
 			name = MotivationTests;
@@ -298,9 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DFA7C242F0425F800A1D6E5 /* PrivacyInfo.xcprivacy in Resources */,
-				1D7CC6532F014CC400FAD66D /* Assets.xcassets in Resources */,
 				1DFA7C1D2F0415BE00A1D6E5 /* ExportOptions.plist in Resources */,
-				1D7CC6552F014CC400FAD66D /* BackWitcher.mp3 in Resources */,
 				1D7CC6562F014CC400FAD66D /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

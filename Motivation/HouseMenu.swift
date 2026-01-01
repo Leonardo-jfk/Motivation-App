@@ -254,7 +254,7 @@ struct PersonalNotes: View {
                             Spacer()
                             ZStack{
                                 ButtonStyleSrt(.stoicList)
-                                NavigationLink("Authors", destination: StoicListView())
+                                NavigationLink("Authors", destination: ResourcesWisdomView())
                                     .foregroundStyle(.white)
                             }
                             Spacer()

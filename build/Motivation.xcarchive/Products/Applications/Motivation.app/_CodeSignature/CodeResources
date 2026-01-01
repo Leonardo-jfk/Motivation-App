@@ -82,7 +82,7 @@
 		</data>
 		<key>Frameworks/FirebaseAnalytics.framework/FirebaseAnalytics</key>
 		<data>
-		XoYIoIRok+dGAFqfqw8+MfFsqSA=
+		6SRFtz4e0oFP2YWxhNNnusWSfFA=
 		</data>
 		<key>Frameworks/FirebaseAnalytics.framework/Info.plist</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>Frameworks/GoogleAdsOnDeviceConversion.framework/GoogleAdsOnDeviceConversion</key>
 		<data>
-		xMfCcdyoj6WmF+nvB3C2Nd97Eb0=
+		Gu1/mHaMel4NtjvktnPhKg1qsqo=
 		</data>
 		<key>Frameworks/GoogleAdsOnDeviceConversion.framework/Info.plist</key>
 		<data>
@@ -106,7 +106,7 @@
 		</data>
 		<key>Frameworks/GoogleAppMeasurement.framework/GoogleAppMeasurement</key>
 		<data>
-		q3/UsWWzocnuIVwMd1TubKM9U+c=
+		shXHmJlk9SDnXhHWJ7B0/b1QaB0=
 		</data>
 		<key>Frameworks/GoogleAppMeasurement.framework/Info.plist</key>
 		<data>
@@ -118,7 +118,7 @@
 		</data>
 		<key>Frameworks/GoogleAppMeasurementIdentitySupport.framework/GoogleAppMeasurementIdentitySupport</key>
 		<data>
-		t0UQqHooX6Ygm+v5djiRTbT7ErU=
+		igfYzjaU58KysLqFgHYKQDfUg9s=
 		</data>
 		<key>Frameworks/GoogleAppMeasurementIdentitySupport.framework/Info.plist</key>
 		<data>
@@ -202,11 +202,19 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		L/8SsEEiEGbERfPxOAv1V3R6uWo=
+		ssq19Y0/dXpPSl5oYS82Qft4Zn8=
+		</data>
+		<key>Motivation.entitlements</key>
+		<data>
+		6WG5XalRMcKwcQCMaVqdf7K5lJ8=
 		</data>
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
+		</data>
+		<key>PrivacyInfo.xcprivacy</key>
+		<data>
+		xKzjEV2SU4i3F6QD1zjQuThSpbs=
 		</data>
 		<key>Promises_FBLPromises.bundle/Info.plist</key>
 		<data>
@@ -223,10 +231,6 @@
 		<key>Promises_Promises.bundle/PrivacyInfo.xcprivacy</key>
 		<data>
 		ZajnvEs/MYRS3X4TPLAhBWi8mc4=
-		</data>
-		<key>build_ipa.sh</key>
-		<data>
-		DMtvAKz9teVU+YTsRlZGFM+zo9E=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
@@ -246,6 +250,15 @@
 			<key>hash</key>
 			<data>
 			iHLWUk+l/HX7mNVmnPO7l9OpoeM=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>fr.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			aI2uVMpRyWv/D00wzs+AHgr8lnQ=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -398,7 +411,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			R/fvmUVKwIEg6LiZ7KVJn+EYGCHBfomdQKRKHCSZl1o=
+			9xsxgBnrWi1CTcoi8CZ4IgWyKjCU3DQTigaNx3y9V48=
 			</data>
 		</dict>
 		<key>Frameworks/FirebaseAnalytics.framework/Info.plist</key>
@@ -419,7 +432,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			T3VH82kNbv8zMPTUaHxM/ciRwBUeGq/5Tl2Sd/3Xh/s=
+			rlMN2jJItQG13jwkmfSTNmDdrexw+Sb70XgAbiiky5g=
 			</data>
 		</dict>
 		<key>Frameworks/GoogleAdsOnDeviceConversion.framework/Info.plist</key>
@@ -440,7 +453,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			BQwFzL6E1xISGy8VGFkoF87HcjTJOrm+im5KZ+3gDN4=
+			Rtj/I/n4l5Fv+s14g+DufmD3K64OUx/iWbdPHNmZInk=
 			</data>
 		</dict>
 		<key>Frameworks/GoogleAppMeasurement.framework/Info.plist</key>
@@ -461,7 +474,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			watE+n6H2dndg5XkCpbaVZNK9NaBpFKZlBx1dhK49Fg=
+			+CKd5NTFyy6G3HxhqLUjOPp2pKkyA/K4+SlJ/sTKyh0=
 			</data>
 		</dict>
 		<key>Frameworks/GoogleAppMeasurementIdentitySupport.framework/Info.plist</key>
@@ -604,6 +617,20 @@
 			+sUHxRCrp4hOgF+1/v8aio0Mf0LAHRdPknor36pxMLQ=
 			</data>
 		</dict>
+		<key>Motivation.entitlements</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			YKhusICj8nKWRRLa3SE/fAyAJqgjfUN1TyVNzCGGfUw=
+			</data>
+		</dict>
+		<key>PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			MZXTvNy89nVfhHZDx623PQ/0WChciwSaZql14Sd5e70=
+			</data>
+		</dict>
 		<key>Promises_FBLPromises.bundle/Info.plist</key>
 		<dict>
 			<key>hash2</key>
@@ -632,13 +659,6 @@
 			dLDNcvwjwe8wLyLuJ1P2GBfNxa8P96fy0GMrUk+4rOo=
 			</data>
 		</dict>
-		<key>build_ipa.sh</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			wfOGVoeStS+RENaJqiXxZTvWE/3NVvotzx0+tHgOHeQ=
-			</data>
-		</dict>
 		<key>embedded.mobileprovision</key>
 		<dict>
 			<key>hash2</key>
@@ -660,6 +680,15 @@
 			<key>hash2</key>
 			<data>
 			pmdYUKC/1dtMEeOxSKkqybYP1W4PsbbQh/hXzf4YEhg=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>fr.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DnHaqTtipnvIvuY+6rAhTbkfuIwlBKbSFo8lzbJvuYo=
 			</data>
 			<key>optional</key>
 			<true/>
