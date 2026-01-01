@@ -25,20 +25,20 @@ let stoicPhilosophers: [(photo: String ,name: String, role: String, url: String)
 
 
 
-let stoicBooks: [(title: String, author: String, type: String, url: String)] = [
-    ("Meditations", "Marcus Aurelius", "Philosophical journal", "https://en.wikipedia.org/wiki/Meditations"),
-    ("Letters from a Stoic", "Seneca", "Philosophical letters", "https://en.wikipedia.org/wiki/Epistulae_Morales_ad_Lucilium"),
-    ("Enchiridion", "Epictetus", "Handbook", "https://en.wikipedia.org/wiki/Enchiridion_of_Epictetus"),
-    ("Discourses", "Epictetus", "Lectures and dialogues", "https://en.wikipedia.org/wiki/Discourses_of_Epictetus"),
-    ("On the Shortness of Life", "Seneca", "Essay", "https://en.wikipedia.org/wiki/De_Brevitate_Vitae_(Seneca)"),
-    ("On Anger", "Seneca", "Treatise on emotions", "https://en.wikipedia.org/wiki/De_Ira"),
-    ("On the Happy Life", "Seneca", "Ethical essay", "https://en.wikipedia.org/wiki/De_Vita_Beata"),
-    ("Hymn to Zeus", "Cleanthes", "Philosophical poem", "https://en.wikipedia.org/wiki/Hymn_to_Zeus"),
-    ("A Guide to the Good Life", "William B. Irvine", "Modern introduction", "https://en.wikipedia.org/wiki/William_B._Irvine"),
-    ("The Obstacle Is the Way", "Ryan Holiday", "Applied stoicism", "https://en.wikipedia.org/wiki/Ryan_Holiday")
+let stoicBooks: [(photo: String, title: String, author: String, type: String, url: String)] = [
+    ("MeditationesPhoto", "Meditations", "Marcus Aurelius", "Philosophical journal", "https://en.wikipedia.org/wiki/Meditations"),
+    ("LettersPhoto","Letters from a Stoic", "Seneca", "Philosophical letters", "https://en.wikipedia.org/wiki/Epistulae_Morales_ad_Lucilium"),
+    ("EpictetusPhoto","Enchiridion", "Epictetus", "Handbook", "https://en.wikipedia.org/wiki/Enchiridion_of_Epictetus"),
+    ("DiscoursesPhoto","Discourses", "Epictetus", "Lectures and dialogues", "https://en.wikipedia.org/wiki/Discourses_of_Epictetus"),
+    ("ShortnessPhoto","On the Shortness of Life", "Seneca", "Essay", "https://en.wikipedia.org/wiki/De_Brevitate_Vitae_(Seneca)"),
+    ("AngerPhoto","On Anger", "Seneca", "Treatise on emotions", "https://en.wikipedia.org/wiki/De_Ira"),
+    ("HappyLifePhoto","On the Happy Life", "Seneca", "Ethical essay", "https://en.wikipedia.org/wiki/De_Vita_Beata"),
+    ("ZeusPhoto","Hymn to Zeus", "Cleanthes", "Philosophical poem", "https://en.wikipedia.org/wiki/Hymn_to_Zeus"),
+    ("GoodLifePhoto","A Guide to the Good Life", "William B. Irvine", "Modern introduction", "https://en.wikipedia.org/wiki/William_B._Irvine"),
+    ("ObstaclePhoto","The Obstacle Is the Way", "Ryan Holiday", "Applied stoicism", "https://en.wikipedia.org/wiki/Ryan_Holiday")
 ]
 
-public struct ResourcesWisdomView: View {
+public struct ResourcesIconsView: View {
     let philosophers = stoicPhilosophers
     
     public var body: some View {
@@ -79,6 +79,64 @@ public struct ResourcesWisdomView: View {
                                 .foregroundColor(.secondary)
                             
                             Link("Learn more", destination: URL(string: philosopher.url)!)
+                                .font(.caption)
+                                .foregroundColor(.blue)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding()
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
+                }
+            }
+            .padding()
+        }
+    }
+}
+
+
+public struct ResourcesBookView: View {
+    let books = stoicBooks
+    
+    public var body: some View {
+        ScrollView {
+            VStack(spacing: 20) {
+                Text("Stoic Books")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding()
+                
+                ForEach(books, id: \.name) { book in
+                    HStack(spacing: 15) {
+                        // Try using Asset catalog image
+                        if let uiImage = UIImage(named: books.photo) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 80, height: 80)
+                                .clipShape(Circle())
+                        } else {
+                            // Fallback if image doesn't exist
+                            Circle()
+                                .fill(Color.gray.opacity(0.3))
+                                .frame(width: 80, height: 80)
+                                .overlay(
+                                    Text(String(books.name.prefix(1)))
+                                        .font(.title)
+                                        .bold()
+                                )
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text(books.name)
+                                .font(.headline)
+                            
+                            Text(books.role)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            Link("Learn more", destination: URL(string: books.url)!)
                                 .font(.caption)
                                 .foregroundColor(.blue)
                         }

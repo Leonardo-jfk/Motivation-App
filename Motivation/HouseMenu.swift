@@ -243,7 +243,7 @@ struct PersonalNotes: View {
                     ButtonStyleSrt(.houseMenuBack)
                     NavigationStack {
                     VStack {
-                        Text("Today's wisdom dose:".localized)
+                        Text("The Sourse")
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
                             .background(.gray.opacity(0.4))
@@ -254,7 +254,7 @@ struct PersonalNotes: View {
                             Spacer()
                             ZStack{
                                 ButtonStyleSrt(.stoicList)
-                                NavigationLink("Authors", destination: ResourcesWisdomView())
+                                NavigationLink("Authors", destination: ResourcesIconsView())
                                     .foregroundStyle(.white)
                             }
                             Spacer()
