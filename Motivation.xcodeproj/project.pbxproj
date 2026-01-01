@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D4803692EFA14820063C486 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4803682EFA14820063C486 /* FirebaseAnalytics */; };
 		1D48036B2EFA14820063C486 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D48036A2EFA14820063C486 /* FirebaseCrashlytics */; };
+		1D7971BD2F06AF1500912FFA /* WistomSourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7971BC2F06AF0300912FFA /* WistomSourses.swift */; };
 		1D7CC64B2F014CC400FAD66D /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */; };
 		1D7CC64C2F014CC400FAD66D /* Quotes365.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6492F014CC300FAD66D /* Quotes365.swift */; };
 		1D7CC64D2F014CC400FAD66D /* MotivationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6462F014CC300FAD66D /* MotivationApp.swift */; };
@@ -52,6 +53,7 @@
 		1D6E58282E919F1B00E6B841 /* MotivationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotivationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D6E58322E919F1B00E6B841 /* MotivationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotivationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D7971BB2F06905B00912FFA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1D7971BC2F06AF0300912FFA /* WistomSourses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WistomSourses.swift; sourceTree = "<group>"; };
 		1D7CC63C2F014CC300FAD66D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D7CC63D2F014CC300FAD66D /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		1D7CC63E2F014CC300FAD66D /* BackWitcher.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BackWitcher.mp3; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		1D7CC64A2F014CC300FAD66D /* Motivation */ = {
 			isa = PBXGroup;
 			children = (
+				1D7971BC2F06AF0300912FFA /* WistomSourses.swift */,
 				1DFA7C202F041F9600A1D6E5 /* Motivation.entitlements */,
 				1DFA7C1E2F04193900A1D6E5 /* build_final.sh */,
 				1D7CC63C2F014CC300FAD66D /* Assets.xcassets */,
@@ -328,6 +331,7 @@
 				1D7CC64C2F014CC400FAD66D /* Quotes365.swift in Sources */,
 				1D7CC64D2F014CC400FAD66D /* MotivationApp.swift in Sources */,
 				1D7CC64E2F014CC400FAD66D /* AudioManager.swift in Sources */,
+				1D7971BD2F06AF1500912FFA /* WistomSourses.swift in Sources */,
 				1DFA7C222F041F9600A1D6E5 /* Motivation.entitlements in Sources */,
 				1D7CC64F2F014CC400FAD66D /* ContentView.swift in Sources */,
 				1D7CC6502F014CC400FAD66D /* HouseSettingsPage.swift in Sources */,

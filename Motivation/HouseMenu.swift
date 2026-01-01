@@ -78,6 +78,19 @@ extension ButtonStyleSrt {
 }
 #endif
 
+
+public struct ShowingAuthors:View {
+    
+    var body: some View {
+        List {
+            ForEach(stoics, id: \.self) { quote in
+                quoterow(quote: quote, isfavorite: favoritequotes.contains(quote)) {
+                }
+            }
+        }
+    }
+}
+
 struct HouseMenu: View {
     
     @State private var showingPersonalNotes = false
@@ -206,6 +219,11 @@ struct PersonalNotes: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                             .font(.title2)
                             .foregroundStyle(.white)
+                        Button(label: "Authors", action:
+                                {
+                            ShowingAuthors.toggle
+                        })
+                        Button(label: "Books")
                     }
                     .padding()
                 }

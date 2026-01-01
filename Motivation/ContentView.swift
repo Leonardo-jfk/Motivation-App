@@ -146,7 +146,7 @@ struct ContentView: View {
 //                .id(appScheme.rawValue + (showingQuote ? "quote" : "button"))
 //                // This prevents navigation reset when color scheme changes
 ////                .preferredColorScheme(appScheme.preferredColorScheme)
-//                .preferredColorScheme(appScheme.preferredColorScheme)
+                .preferredColorScheme(appScheme.preferredColorScheme)
                 
 
                 .toolbar {
