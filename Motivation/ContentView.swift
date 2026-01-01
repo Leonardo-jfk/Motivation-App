@@ -116,6 +116,7 @@ struct ContentView: View {
                                         DayQuoteView(index: todayIndex, currentQuotes: currentQuotes)
                                             .padding(.horizontal)
                                             .frame(maxWidth: 350, maxHeight: 300)
+                                            .font(.custom("CormorantGaramond-Italic", size: 24))
                                     }
                                     .padding()
                                 }
@@ -202,7 +203,7 @@ struct ContentView: View {
             }()
             
             return Text(text)
-                .font(.body)
+                .font(.custom("CormorantGaramond-Italic", size: 28))
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.white)
                 .padding(.vertical, 60)

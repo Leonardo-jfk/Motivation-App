@@ -99,8 +99,8 @@ struct HouseMenu: View {
                     Color.gray
                         .clipShape(RoundedRectangle(cornerRadius: 30))
                         .opacity(0.6))
+//            Color.clear.frame(height: 10)
             Spacer()
-            
             Button(action: {
                 showingPersonalNotes.toggle()
             }) {
@@ -108,7 +108,8 @@ struct HouseMenu: View {
             }
             .buttonStyle(.plain)
             
-            
+            Color.clear.frame(height: 10)
+
             Button(action: {
                 showingMainSettings.toggle()
             }) {
@@ -118,15 +119,16 @@ struct HouseMenu: View {
             .buttonStyle(.plain)
             
             
-            
+            Color.clear.frame(height: 10)
+
             Button(action: {
                 showingResourses.toggle()
             }) {
                 Resourses(showing: showingResourses)
             }
             .buttonStyle(.plain)
-            
-            
+                Color.clear.frame(height: 10)
+           
             Button(action: {
                 showingFeedbackMenu.toggle()
             }) {
@@ -134,7 +136,7 @@ struct HouseMenu: View {
             }
             .buttonStyle(.plain)
             
-            Spacer()
+            Color.clear.frame(height: 10)
         }
         .padding(.horizontal)
         .onAppear{

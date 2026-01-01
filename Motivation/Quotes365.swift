@@ -404,7 +404,6 @@ let quotesEng: [String] = [
 
 
 
-
 let quotesES: [String] = [
     // Enero (1-31)
     "Tienes poder sobre tu mente, no sobre los acontecimientos externos. — Marco Aurelio",
