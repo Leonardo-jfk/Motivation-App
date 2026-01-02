@@ -23,6 +23,7 @@
 		1D9FEFBC2F01A442009C6612 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D9FEFBB2F01A442009C6612 /* FirebaseCore */; };
 		1D9FEFBE2F01A4BE009C6612 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1D9FEFBD2F01A4BE009C6612 /* FirebaseMessaging */; };
 		1D9FEFC02F01A4CE009C6612 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 1D9FEFBF2F01A4CE009C6612 /* FirebaseAppCheck */; };
+		1DC0AEC32F0842DF00790DED /* TestScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC0AEC22F0842DF00790DED /* TestScreen.swift */; };
 		1DFA7C1D2F0415BE00A1D6E5 /* ExportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1DFA7C1C2F0415BE00A1D6E5 /* ExportOptions.plist */; };
 		1DFA7C1F2F04194C00A1D6E5 /* build_final.sh in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA7C1E2F04193900A1D6E5 /* build_final.sh */; };
 		1DFA7C212F041F9600A1D6E5 /* Motivation.entitlements in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA7C202F041F9600A1D6E5 /* Motivation.entitlements */; };
@@ -63,6 +64,7 @@
 		1D7CC6472F014CC300FAD66D /* NotifManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifManager.swift; sourceTree = "<group>"; };
 		1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
 		1D7CC6492F014CC300FAD66D /* Quotes365.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes365.swift; sourceTree = "<group>"; };
+		1DC0AEC22F0842DF00790DED /* TestScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestScreen.swift; sourceTree = "<group>"; };
 		1DFA7C1A2F0410F000A1D6E5 /* build_ipa.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build_ipa.sh; sourceTree = "<group>"; };
 		1DFA7C1C2F0415BE00A1D6E5 /* ExportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ExportOptions.plist; sourceTree = "<group>"; };
 		1DFA7C1E2F04193900A1D6E5 /* build_final.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build_final.sh; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				1DFA7C1A2F0410F000A1D6E5 /* build_ipa.sh */,
 				1DFA7C1C2F0415BE00A1D6E5 /* ExportOptions.plist */,
 				1DFA7C232F0425F700A1D6E5 /* PrivacyInfo.xcprivacy */,
+				1DC0AEC22F0842DF00790DED /* TestScreen.swift */,
 			);
 			path = Motivation;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				1D7CC64B2F014CC400FAD66D /* QuoteLibrary.swift in Sources */,
 				1DFA7C1F2F04194C00A1D6E5 /* build_final.sh in Sources */,
 				1D7CC64C2F014CC400FAD66D /* Quotes365.swift in Sources */,
+				1DC0AEC32F0842DF00790DED /* TestScreen.swift in Sources */,
 				1D7CC64D2F014CC400FAD66D /* MotivationApp.swift in Sources */,
 				1D7CC64E2F014CC400FAD66D /* AudioManager.swift in Sources */,
 				1D7971BD2F06AF1500912FFA /* WistomSourses.swift in Sources */,

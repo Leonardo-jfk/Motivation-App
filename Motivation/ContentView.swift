@@ -31,10 +31,12 @@ class NavigationManager: ObservableObject {
     }
 }
 
-struct AnimationView: View {
-    var body: some View {
+public struct AnimationView: View {
+    
+    public var body: some View {
 //        LottieAnimation(fileName: "books", config: AnimationConfig(autoplay: true, loop: true)).view()
         LottieView(animation: .named("books"))
+        Text("here")
     }
     
 
@@ -149,7 +151,7 @@ struct ContentView: View {
                                 
                             }
                         })
-                        Spacer()
+//                        Spacer()
                         AnimationView()
                     }
                 }
