@@ -5,6 +5,7 @@
 //  Created by Leonardo Aurelio on 04/10/2025.
 //
 
+import DotLottie
 import Foundation
 import SwiftUI
 import UserNotifications
@@ -16,7 +17,7 @@ import Combine
 // Helper: día del año (1...365/366)
 func dayOfYear(for date: Date = .now) -> Int {
     let calendar = Calendar.current
-    return calendar.ordinality(of: .day, in: .year, for: date) ?? 1
+    return calendar.ordinality(of: .day, in: .year, for: date) ?? 1w
 }
 
 
@@ -29,6 +30,11 @@ class NavigationManager: ObservableObject {
     }
 }
 
+struct AnimationView: View {
+    var body: some View {
+        DotLottieAnimation(fileName: "books", config: AnimationConfig(autoplay: true, loop: true)).view()
+    }
+}
 
 
 
@@ -141,6 +147,7 @@ struct ContentView: View {
                             }
                         })
                         Spacer()
+                        AnimationView()
                     }
                 }
 //                .id(appScheme.rawValue + (showingQuote ? "quote" : "button"))

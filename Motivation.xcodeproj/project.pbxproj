@@ -303,6 +303,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				1D4803672EFA14820063C486 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				1D5820782F07EE0E005CB6CF /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				1D5820792F07EF8F005CB6CF /* XCRemoteSwiftPackageReference "dotlottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1D6E581C2E919F1900E6B841 /* Products */;
@@ -731,6 +733,22 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 12.7.0;
+			};
+		};
+		1D5820782F07EE0E005CB6CF /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.2;
+			};
+		};
+		1D5820792F07EF8F005CB6CF /* XCRemoteSwiftPackageReference "dotlottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/LottieFiles/dotlottie-ios.git";
+			requirement = {
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
