@@ -10,7 +10,6 @@
 		1D4803692EFA14820063C486 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4803682EFA14820063C486 /* FirebaseAnalytics */; };
 		1D48036B2EFA14820063C486 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D48036A2EFA14820063C486 /* FirebaseCrashlytics */; };
 		1D4BD70E2F08294C00F44D07 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4BD70D2F08294C00F44D07 /* Lottie */; };
-		1D4BD7102F08294C00F44D07 /* Lottie-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4BD70F2F08294C00F44D07 /* Lottie-Dynamic */; };
 		1D7971BD2F06AF1500912FFA /* WistomSourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7971BC2F06AF0300912FFA /* WistomSourses.swift */; };
 		1D7CC64B2F014CC400FAD66D /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */; };
 		1D7CC64C2F014CC400FAD66D /* Quotes365.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6492F014CC300FAD66D /* Quotes365.swift */; };
@@ -122,7 +121,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D4BD7102F08294C00F44D07 /* Lottie-Dynamic in Frameworks */,
 				1D9FEFBE2F01A4BE009C6612 /* FirebaseMessaging in Frameworks */,
 				1D4803692EFA14820063C486 /* FirebaseAnalytics in Frameworks */,
 				1D9FEFBC2F01A442009C6612 /* FirebaseCore in Frameworks */,
@@ -224,7 +222,6 @@
 				1D9FEFBD2F01A4BE009C6612 /* FirebaseMessaging */,
 				1D9FEFBF2F01A4CE009C6612 /* FirebaseAppCheck */,
 				1D4BD70D2F08294C00F44D07 /* Lottie */,
-				1D4BD70F2F08294C00F44D07 /* Lottie-Dynamic */,
 			);
 			productName = Motivation;
 			productReference = 1D6E581B2E919F1900E6B841 /* Motivation.app */;
@@ -769,11 +766,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1D4BD70C2F08294C00F44D07 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		1D4BD70F2F08294C00F44D07 /* Lottie-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1D4BD70C2F08294C00F44D07 /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = "Lottie-Dynamic";
 		};
 		1D9FEFBB2F01A442009C6612 /* FirebaseCore */ = {
 			isa = XCSwiftPackageProductDependency;
