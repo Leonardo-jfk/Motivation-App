@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1D4803692EFA14820063C486 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4803682EFA14820063C486 /* FirebaseAnalytics */; };
 		1D48036B2EFA14820063C486 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D48036A2EFA14820063C486 /* FirebaseCrashlytics */; };
+		1D4BD70E2F08294C00F44D07 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4BD70D2F08294C00F44D07 /* Lottie */; };
+		1D4BD7102F08294C00F44D07 /* Lottie-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4BD70F2F08294C00F44D07 /* Lottie-Dynamic */; };
 		1D7971BD2F06AF1500912FFA /* WistomSourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7971BC2F06AF0300912FFA /* WistomSourses.swift */; };
 		1D7CC64B2F014CC400FAD66D /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */; };
 		1D7CC64C2F014CC400FAD66D /* Quotes365.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6492F014CC300FAD66D /* Quotes365.swift */; };
@@ -76,6 +78,8 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				BackWitcher.mp3,
+				Books.json,
+				"Girl with books.json",
 			);
 			target = 1D6E581A2E919F1900E6B841 /* Motivation */;
 		};
@@ -84,6 +88,8 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				BackWitcher.mp3,
+				Books.json,
+				"Girl with books.json",
 			);
 			target = 1D6E58272E919F1B00E6B841 /* MotivationTests */;
 		};
@@ -116,11 +122,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D4BD7102F08294C00F44D07 /* Lottie-Dynamic in Frameworks */,
 				1D9FEFBE2F01A4BE009C6612 /* FirebaseMessaging in Frameworks */,
 				1D4803692EFA14820063C486 /* FirebaseAnalytics in Frameworks */,
 				1D9FEFBC2F01A442009C6612 /* FirebaseCore in Frameworks */,
 				1D9FEFC02F01A4CE009C6612 /* FirebaseAppCheck in Frameworks */,
 				1D48036B2EFA14820063C486 /* FirebaseCrashlytics in Frameworks */,
+				1D4BD70E2F08294C00F44D07 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +223,8 @@
 				1D9FEFBB2F01A442009C6612 /* FirebaseCore */,
 				1D9FEFBD2F01A4BE009C6612 /* FirebaseMessaging */,
 				1D9FEFBF2F01A4CE009C6612 /* FirebaseAppCheck */,
+				1D4BD70D2F08294C00F44D07 /* Lottie */,
+				1D4BD70F2F08294C00F44D07 /* Lottie-Dynamic */,
 			);
 			productName = Motivation;
 			productReference = 1D6E581B2E919F1900E6B841 /* Motivation.app */;
@@ -303,8 +313,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				1D4803672EFA14820063C486 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				1D5820782F07EE0E005CB6CF /* XCRemoteSwiftPackageReference "lottie-spm" */,
-				1D5820792F07EF8F005CB6CF /* XCRemoteSwiftPackageReference "dotlottie-ios" */,
+				1D4BD70C2F08294C00F44D07 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1D6E581C2E919F1900E6B841 /* Products */;
@@ -735,20 +744,12 @@
 				minimumVersion = 12.7.0;
 			};
 		};
-		1D5820782F07EE0E005CB6CF /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+		1D4BD70C2F08294C00F44D07 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-spm";
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.5.2;
-			};
-		};
-		1D5820792F07EF8F005CB6CF /* XCRemoteSwiftPackageReference "dotlottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/LottieFiles/dotlottie-ios.git";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -763,6 +764,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1D4803672EFA14820063C486 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		1D4BD70D2F08294C00F44D07 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D4BD70C2F08294C00F44D07 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		1D4BD70F2F08294C00F44D07 /* Lottie-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1D4BD70C2F08294C00F44D07 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = "Lottie-Dynamic";
 		};
 		1D9FEFBB2F01A442009C6612 /* FirebaseCore */ = {
 			isa = XCSwiftPackageProductDependency;

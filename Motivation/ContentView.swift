@@ -5,11 +5,12 @@
 //  Created by Leonardo Aurelio on 04/10/2025.
 //
 
-import DotLottie
 import Foundation
 import SwiftUI
 import UserNotifications
 import Combine
+//import DotLottie
+import Lottie
 
 
 
@@ -17,7 +18,7 @@ import Combine
 // Helper: día del año (1...365/366)
 func dayOfYear(for date: Date = .now) -> Int {
     let calendar = Calendar.current
-    return calendar.ordinality(of: .day, in: .year, for: date) ?? 1w
+    return calendar.ordinality(of: .day, in: .year, for: date) ?? 1
 }
 
 
@@ -32,10 +33,12 @@ class NavigationManager: ObservableObject {
 
 struct AnimationView: View {
     var body: some View {
-        DotLottieAnimation(fileName: "books", config: AnimationConfig(autoplay: true, loop: true)).view()
+//        LottieAnimation(fileName: "books", config: AnimationConfig(autoplay: true, loop: true)).view()
+        LottieView(animation: .named("books"))
     }
-}
+    
 
+}
 
 
 struct ContentView: View {
