@@ -65,7 +65,7 @@ struct ContentView: View {
     }
     // Source of truth for favorites - load from storage on init
     @State public var favoriteQuotes: Set<String> = {
-        return QuoteLibrary.FavoriteStorage.load()
+        return FavoriteStorage.load()
     }()
     
     @StateObject public var l10n = LocalizationManager.shared

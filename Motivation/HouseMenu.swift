@@ -180,7 +180,7 @@ struct HouseMenu: View {
         }
         .padding(.horizontal)
         .onAppear{
-            savedUserNotes = QuoteLibrary.NotesStorage.load()
+            savedUserNotes = NotesStorage.load()
         }
     }
 }
@@ -212,7 +212,7 @@ struct PersonalNotes: View {
 //            .padding()
 //        }
         
-        NavigationLink(destination: QuoteLibrary.UserNotesView(savedUserNotes: $savedUserNotes)){
+        NavigationLink(destination: UserNotesView(savedUserNotes: $savedUserNotes)){
         ZStack {
                  // defaults to .houseMenu
                 ButtonStyleSrt()

@@ -196,8 +196,8 @@ struct SettingsList: View {
         audioManager.setMusicVolume(0.5)
 
         // 4) Clear favorites and notes
-        QuoteLibrary.FavoriteStorage.save([])
-        QuoteLibrary.NotesStorage.save([])
+        FavoriteStorage.save([])
+        NotesStorage.save([])
         NotificationCenter.default.post(name: .didPerformFullReset, object: nil)
     }
 }
