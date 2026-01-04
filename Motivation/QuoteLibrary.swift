@@ -65,7 +65,70 @@ public struct QuoteLibrary: View {
                     .lineLimit(1)
                 
                 HStack {
-                    // ... buttons code ...
+                        Button(action: {
+                            showFavorites.toggle()
+                        }, label: {
+                            ZStack {
+                                ButtonStyleSrt(.quoteLib)
+                                    .frame(maxWidth: .infinity)
+                                Text("Favorites".localized)
+                                    .font(.title3)
+                                    .bold()
+                                    .foregroundStyle(.white)
+                                    .background(.gray.opacity(0.5))
+                                    .minimumScaleFactor(0.5)  // Allow text to shrink
+                                    .lineLimit(1)
+                            }
+                            .padding(.horizontal, 4)
+                        })
+                        .buttonStyle(.plain)
+                        .sheet(isPresented: $showFavorites) {
+                            NavigationStack {
+                                ChosenQuotesView(favoriteQuotes: $favoriteQuotes)
+                                    .navigationTitle("Favorites")
+                                    .navigationBarTitleDisplayMode(.inline)
+                                    .toolbar {
+                                        ToolbarItem(placement: .topBarTrailing) {
+                                            Button("Done") { showFavorites = false }
+                                        }
+                                    }
+                            }
+                        }
+        
+                        // Your own ideas button
+                        Button(action: {
+                            showUserNotes.toggle()
+                        }, label: {
+                            ZStack {
+                                ButtonStyleSrt(.quoteLib)
+                                Text("Your own ideas")
+                                    .font(.title3)
+                                    .bold()
+                                    .foregroundStyle(.white)
+                                    .background(.gray.opacity(0.5))
+                                    .minimumScaleFactor(0.5)  // Allow text to shrink
+                                    .lineLimit(1)
+                            }
+                            .padding(.horizontal, 4)
+                        })
+                        .buttonStyle(.plain)
+                        .sheet(isPresented: $showUserNotes) {
+                            NavigationStack {
+                                UserNotesView(savedUserNotes: $savedUserNotes)
+                                    .navigationTitle("Your Notes")
+                                    .navigationBarTitleDisplayMode(.inline)
+                                    .toolbar {
+                                        ToolbarItem(placement: .topBarTrailing) {
+                                            Button("Done") { showUserNotes = false }
+                                        }
+                                    }
+                            }
+                        }
+                        .padding(.horizontal, 4)
+
+                    
+                    
+                    
                 }
                 .padding(.horizontal, 10)
                 
@@ -100,21 +163,56 @@ public struct QuoteLibrary: View {
         let isFavorite: Bool
         let toggleFavorite: () -> Void
         
+        @State private var lottieAnimationButton = false
+        var fileName3: String = "MessageSent"
+        var contentMode: UIView.ContentMode = .scaleAspectFill
+        var playLoopMode: LottieLoopMode = .playOnce
+        var onAnimationDidFinish: (() -> Void)? = nil
+        
         var body: some View {
-            HStack {
-                Text(quote)
-                    .padding(.vertical, 7)
-                Spacer()
-                Button(action: toggleFavorite) {
-                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+            ZStack{
+                HStack {
+                    Text(quote)
+                        .padding(.vertical, 7)
+                    Spacer()
+                    Button(action: {
+                        triggerAnimation()
+                        toggleFavorite() })
+                    {
+                       
+                    
+                        Image(systemName: isFavorite ? "heart.fill" : "heart")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20)
+                            .foregroundStyle(isFavorite ? .red : .secondary)
+                    }
+                    .buttonStyle(.plain)
+                }
+                if lottieAnimationButton {
+                    LottieView(animation: .named(fileName3))
+                        .configure { lottieAnimationView in lottieAnimationView.contentMode = contentMode }
+                        .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
+                        .animationDidFinish { completed in onAnimationDidFinish?() }
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 20)
-                        .foregroundStyle(isFavorite ? .red : .secondary)
+                        .frame(width: 150, height: 150)
+                        .transition(.scale.combined(with: .opacity))
+                        .zIndex(1)
                 }
-                .buttonStyle(.plain)
+                
             }
         }
+        
+        // Helper to keep the button actions clean
+            private func triggerAnimation() {
+                withAnimation(.spring()) {
+                    lottieAnimationButton = true
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { // Reduced to 2s for better UX
+                    lottieAnimationButton = false
+                }
+            }
     }
 
     // Move ChosenQuotesView outside of QuoteLibrary struct
@@ -142,7 +240,11 @@ public struct QuoteLibrary: View {
                                     } else {
                                         favoriteQuotes.insert(quote)
                                     }
+                                    
                                     FavoriteStorage.save(favoriteQuotes)
+                                
+                                    
+                                    
                                 }) {
                                     Image(systemName: favoriteQuotes.contains(quote) ? "heart.fill" : "heart")
                                         .resizable()
@@ -221,17 +323,7 @@ public struct QuoteLibrary: View {
                 }
                 .padding(.top)
                 
-                if lottieAnimationButton {
-                    LottieView(animation: .named(fileName5))
-                        .configure { lottieAnimationView in lottieAnimationView.contentMode = contentMode }
-                        .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
-                        .animationDidFinish { completed in onAnimationDidFinish?() }
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                        .transition(.scale.combined(with: .opacity))
-                        .zIndex(1)
-                }
+                
             }
             .onAppear {
                 savedUserNotes = NotesStorage.load()
