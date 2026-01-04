@@ -246,42 +246,43 @@ public struct QuoteLibrary: View {
         
         
         public var body: some View {
-            VStack(spacing: 16) {
-                HStack {
-                    TextField("Write your note".localized, text: $noteText, axis: .vertical)
-                        .textFieldStyle(.plain)
-                        .lineLimit(1...4)
-                    Button("Add") {
-                        let trimmed = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
-                        guard !trimmed.isEmpty else { return }
-                        
-                        withAnimation(.spring()) {
-                            savedUserNotes.insert(trimmed)
-                            lottieAnimationButton = true // Trigger your Lottie view here
-                        }
-                        //                            savedUserNotes.insert(trimmed)
-                        NotesStorage.save(savedUserNotes) // persist immediately
-                        noteText = ""
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                            lottieAnimationButton = false
-                        }
-                    }
-                    .buttonStyle(.glassProminent)
-                    .overlay(
-                        Group {
-                            if lottieAnimationButton {
-                                LottieView(animation: .named(fileName5))
-                                    .configure { lottieAnimationView in lottieAnimationView.contentMode = contentMode }
-                                    .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode )))
-                                    .animationDidFinish { completed in onAnimationDidFinish?() }
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 200, height: 200)
+            ZStack{
+                VStack(spacing: 16) {
+                    HStack {
+                        TextField("Write your note".localized, text: $noteText, axis: .vertical)
+                            .textFieldStyle(.plain)
+                            .lineLimit(1...4)
+                        Button("Add") {
+                            let trimmed = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
+                            guard !trimmed.isEmpty else { return }
+                            
+                            withAnimation(.spring()) {
+                                savedUserNotes.insert(trimmed)
+                                lottieAnimationButton = true // Trigger your Lottie view here
+                            }
+                            //                            savedUserNotes.insert(trimmed)
+                            NotesStorage.save(savedUserNotes) // persist immediately
+                            noteText = ""
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                                lottieAnimationButton = false
                             }
                         }
-                    )
-                    
+                        .buttonStyle(.glassProminent)
+                        //                    .overlay(
+                        //                        Group {
+                        //                            if lottieAnimationButton {
+                        //                                LottieView(animation: .named(fileName5))
+                        //                                    .configure { lottieAnimationView in lottieAnimationView.contentMode = contentMode }
+                        //                                    .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode )))
+                        //                                    .animationDidFinish { completed in onAnimationDidFinish?() }
+                        //                                    .resizable()
+                        //                                    .scaledToFit()
+                        //                                    .frame(width: 200, height: 200)
+                        //                            }
+                        //                        }
+                        //                    )
+                    }
                     
                     Spacer()
                     
@@ -309,10 +310,25 @@ public struct QuoteLibrary: View {
                     Spacer()
                 }
                 .padding(.top)
-                .onAppear {
-                    // Ensure binding is populated when the sheet opens
-                    savedUserNotes = NotesStorage.load()
+//                .onAppear {
+//                    // Ensure binding is populated when the sheet opens
+//                    savedUserNotes = NotesStorage.load()
+//                }
+                if lottieAnimationButton {
+                    LottieView(animation: .named(fileName5))
+                        .configure { lottieAnimationView in lottieAnimationView.contentMode = contentMode }
+                        .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode )))
+                        .animationDidFinish { completed in onAnimationDidFinish?() }
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .transition(.scale.combined(with: .opacity)) // Pop-in effect
+                        .zIndex(1)
                 }
+                    
+            }.onAppear {
+                // Ensure binding is populated when the sheet opens
+                savedUserNotes = NotesStorage.load()
             }
         }
         
@@ -354,8 +370,8 @@ public struct QuoteLibrary: View {
         }
         
     }
-        // MARK: - Simple persistence for notes
-        
+    // MARK: - Simple persistence for notes
+}
         public enum NotesStorage {
             private static let key = "userNotes"
             static func load() -> Set<String> {
@@ -371,8 +387,7 @@ public struct QuoteLibrary: View {
                     UserDefaults.standard.set(data, forKey: key)
                 }
             }
-        }
-        
+       }
         
         public enum FavoriteStorage {
             private static let key = "favoriteQuotes"
@@ -390,8 +405,8 @@ public struct QuoteLibrary: View {
                 }
             }
         }
-    }
     
+
 
 
 //struct ShowLottieAnimation {
@@ -418,7 +433,3 @@ public struct QuoteLibrary: View {
 #Preview {
     QuoteLibrary(favoriteQuotes: .constant(["gg"]))
 }
-//fanally I got this shit working
-////fanally I got this shit working
-///IDK
-
