@@ -19,12 +19,11 @@ public struct QuoteLibrary: View {
     @Binding var favoriteQuotes: Set<String>
     @State public var showFavorites: Bool = false
     
-//    //lottie view
-    @State private var showLottieAnimation = false
-//    var fileName5: String = "Menorah"
-//    var contentMode: UIView.ContentMode = .scaleAspectFill
-//    var playLoopMode: LottieLoopMode = .autoReverse
-//    var onAnimationDidFinish: (() -> Void)? = nil
+    //    //lottie view
+    //    var fileName5: String = "Menorah"
+    //    var contentMode: UIView.ContentMode = .scaleAspectFill
+    //    var playLoopMode: LottieLoopMode = .autoReverse
+    //    var onAnimationDidFinish: (() -> Void)? = nil
     
     // Notes state owned here (in-memory). If you want persistence, we can switch later.
     @State private var showUserNotes: Bool = false
@@ -43,7 +42,7 @@ public struct QuoteLibrary: View {
         
     }
     
-   public var body: some View {
+    public var body: some View {
         VStack(alignment: .leading) {
             Text("Quote Library".localized)
                 .font(.largeTitle)
@@ -116,80 +115,81 @@ public struct QuoteLibrary: View {
                 .padding(.horizontal, 4)
             }
             .padding(.horizontal, 10)
-        
             
-//            List {
-                // Determinar qué array de citas usar basado en el idioma
-//                let quotes: [String] = {
-//                    switch AppLanguage.houseSettingPage.l10n.currentLanguage {
-//                    case .english:
-//                        return quotesEng
-//                    case .spanish:
-//                        return quotesES
-//                    }
-//                }()
-                
-                List {
-                    //                let quotes = AppLanguage.english ? quotesEng : quotesES
-                    ForEach(currentQuotes, id: \.self) { quote in
-                        QuoteRow(quote: quote, isFavorite: favoriteQuotes.contains(quote)) {
-                            if favoriteQuotes.contains(quote) {
-                                favoriteQuotes.remove(quote)
-                            } else {
-                                favoriteQuotes.insert(quote)
-                            }
-                            FavoriteStorage.save(favoriteQuotes)
+            
+            //            List {
+            // Determinar qué array de citas usar basado en el idioma
+            //                let quotes: [String] = {
+            //                    switch AppLanguage.houseSettingPage.l10n.currentLanguage {
+            //                    case .english:
+            //                        return quotesEng
+            //                    case .spanish:
+            //                        return quotesES
+            //                    }
+            //                }()
+            
+            List {
+                //                let quotes = AppLanguage.english ? quotesEng : quotesES
+                ForEach(currentQuotes, id: \.self) { quote in
+                    QuoteRow(quote: quote, isFavorite: favoriteQuotes.contains(quote)) {
+                        if favoriteQuotes.contains(quote) {
+                            favoriteQuotes.remove(quote)
+                        } else {
+                            favoriteQuotes.insert(quote)
                         }
+                        FavoriteStorage.save(favoriteQuotes)
                     }
                 }
-            }.onAppear {
-                // Load notes when library opens so the sheet has the latest
-                savedUserNotes = NotesStorage.load()
             }
-            .onChange(of: savedUserNotes) { _, newValue in
-                NotesStorage.save(newValue)
-            }
-            .onChange(of: favoriteQuotes) { _, newValue in FavoriteStorage.save(newValue)
-            }
+        }.onAppear {
+            // Load notes when library opens so the sheet has the latest
+            savedUserNotes = NotesStorage.load()
         }
+        .onChange(of: savedUserNotes) { _, newValue in
+            NotesStorage.save(newValue)
+        }
+        .onChange(of: favoriteQuotes) { _, newValue in FavoriteStorage.save(newValue)
+        }
+    }
+    
+    struct QuoteRow: View {
+        let quote: String
+        let isFavorite: Bool
+        let toggleFavorite: () -> Void
         
-        struct QuoteRow: View {
-            let quote: String
-            let isFavorite: Bool
-            let toggleFavorite: () -> Void
-            
-            
-            
-            var body: some View {
-                HStack {
-                    Text(quote)
-                        .padding(.vertical, 7)
-                    Spacer()
-                    Button(action: toggleFavorite) {
-                        Image(systemName: isFavorite ? "heart.fill" : "heart")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 20)
-                            .foregroundStyle(isFavorite ? .red : .secondary)
-                    }
-                    .buttonStyle(.plain)
+        
+        
+        var body: some View {
+            HStack {
+                Text(quote)
+                    .padding(.vertical, 7)
+                Spacer()
+                Button(action: toggleFavorite) {
+                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20)
+                        .foregroundStyle(isFavorite ? .red : .secondary)
                 }
+                .buttonStyle(.plain)
             }
         }
-        
-        // MARK: - Favorites list
-        
+    }
+    
+    // MARK: - Favorites list
+    
     struct ChosenQuotesView: View {
         // Pass favorites in; you can use a binding if you need to mutate here too.
         //            var favoriteQuotes: Set<String>
         @Binding var favoriteQuotes: Set<String>
         var favoriteQuoteEnabled: Bool = UserDefaults.standard.bool(forKey: "favoriteQuoteEnabled")
         
-//        @State private var showFavorites: Bool = false
-//        
-//        // Notes state owned here (in-memory). If you want persistence, we can switch later.
-//        @State private var showUserNotes: Bool = false
-//        @State private var savedUserNotes: Set<String> = []
+        @State private var lottieAnitationButton = false
+        //        @State private var showFavorites: Bool = false
+        //
+        //        // Notes state owned here (in-memory). If you want persistence, we can switch later.
+        //        @State private var showUserNotes: Bool = false
+        //        @State private var savedUserNotes: Set<String> = []
         @StateObject private var l10n = LocalizationManager.shared
         
         var body: some View {
@@ -231,61 +231,56 @@ public struct QuoteLibrary: View {
         }
     }
     
-        // MARK: - User notes
+    // MARK: - User notes
+    
+    public struct UserNotesView: View {
+        @Binding var savedUserNotes: Set<String>
+        @State private var noteText: String = ""
+        @State private var lottieAnimationButton = false
         
-        public struct UserNotesView: View {
-            @Binding var savedUserNotes: Set<String>
-            @State private var noteText: String = ""
-            
-            //lottie view
-            var fileName5: String = "Menorah"
-            var contentMode: UIView.ContentMode = .scaleAspectFill
-            var playLoopMode: LottieLoopMode = .playOnce
-            var onAnimationDidFinish: (() -> Void)? = nil
-            
-            
-           public var body: some View {
-                VStack(spacing: 16) {
-                    HStack {
-                        TextField("Write your note".localized, text: $noteText, axis: .vertical)
-                            .textFieldStyle(.plain)
-                            .lineLimit(1...4)
-                        Button("Add") {
-                            let trimmed = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
-                            guard !trimmed.isEmpty else { return }
+        //lottie view
+        var fileName5: String = "Menorah"
+        var contentMode: UIView.ContentMode = .scaleAspectFill
+        var playLoopMode: LottieLoopMode = .playOnce
+        var onAnimationDidFinish: (() -> Void)? = nil
+        
+        
+        public var body: some View {
+            VStack(spacing: 16) {
+                HStack {
+                    TextField("Write your note".localized, text: $noteText, axis: .vertical)
+                        .textFieldStyle(.plain)
+                        .lineLimit(1...4)
+                    Button("Add") {
+                        let trimmed = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
+                        guard !trimmed.isEmpty else { return }
+                        
+                        withAnimation(.spring()) {
                             savedUserNotes.insert(trimmed)
-                            NotesStorage.save(savedUserNotes) // persist immediately
-                            noteText = ""
+                            lottieAnimationButton = true // Trigger your Lottie view here
                         }
-                        .buttonStyle(.glassProminent)
-                        .onTapGesture(perform: {
-                            
-                            showLottieAnimation.toggle()
-                            
-//                            LottieView(animation: .named(fileName5))
-//                                .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
-//                                })
-//                                .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode )))
-//                                .animationDidFinish { completed in onAnimationDidFinish?()
-//                                }
-//                                .resizable()
-//                                .scaledToFit()
-//                                .frame(width: 200, height: 200)
-                            
-                        })
+                        //                            savedUserNotes.insert(trimmed)
+                        NotesStorage.save(savedUserNotes) // persist immediately
+                        noteText = ""
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                            lottieAnimationButton = false
+                        }
                     }
-                    .padding(.horizontal)
-                    
-//                    LottieView(animation: .named(fileName5))
-//                        .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
-//                        })
-//                        .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode )))
-//                        .animationDidFinish { completed in onAnimationDidFinish?()
-//                        }
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 200, height: 200)
-                    
+                    .buttonStyle(.glassProminent)
+                    .overlay(
+                        Group {
+                            if lottieAnimationButton {
+                                LottieView(animation: .named(fileName5))
+                                    .configure { lottieAnimationView in lottieAnimationView.contentMode = contentMode }
+                                    .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode )))
+                                    .animationDidFinish { completed in onAnimationDidFinish?() }
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 200, height: 200)
+                            }
+                        }
+                    )
                     
                     
                     Spacer()
@@ -357,6 +352,8 @@ public struct QuoteLibrary: View {
                 }
             }
         }
+        
+    }
         // MARK: - Simple persistence for notes
         
         public enum NotesStorage {
@@ -394,24 +391,25 @@ public struct QuoteLibrary: View {
             }
         }
     }
-
-
-
-stuct showLottieAnimation {
-    if showLottieAnimation = true {
-        LottieView(animation: .named(fileName5))
-            .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
-            })
-            .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode )))
-            .animationDidFinish { completed in onAnimationDidFinish?()
-            }
-            .resizable()
-            .scaledToFit()
-            .frame(width: 200, height: 200)
-        
-    }
     
-}
+
+
+//struct ShowLottieAnimation {
+//    var LottieAnimationButton = false
+//    if LottieAnimationButton = true {
+//        LottieView(animation: .named(fileName5))
+//            .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
+//            })
+//            .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode )))
+//            .animationDidFinish { completed in onAnimationDidFinish?()
+//            }
+//            .resizable()
+//            .scaledToFit()
+//            .frame(width: 200, height: 200)
+//        
+//    }
+//    
+//}
 
 //#Preview {
 //    QuoteLibrary(favoriteQuotes: .constant(["gg"]))
@@ -423,3 +421,4 @@ stuct showLottieAnimation {
 //fanally I got this shit working
 ////fanally I got this shit working
 ///IDK
+
