@@ -307,9 +307,10 @@ public struct QuoteLibrary: View {
                             }
                         }
                     }
+                    
                     Spacer()
-                }
-                .padding(.top)
+                }.padding(.top)
+//                .padding(.top)
 //                .onAppear {
 //                    // Ensure binding is populated when the sheet opens
 //                    savedUserNotes = NotesStorage.load()
@@ -326,7 +327,8 @@ public struct QuoteLibrary: View {
                         .zIndex(1)
                 }
                     
-            }.onAppear {
+            }
+            .onAppear {
                 // Ensure binding is populated when the sheet opens
                 savedUserNotes = NotesStorage.load()
             }
@@ -372,40 +374,40 @@ public struct QuoteLibrary: View {
     }
     // MARK: - Simple persistence for notes
 }
-        public enum NotesStorage {
-            private static let key = "userNotes"
-            static func load() -> Set<String> {
-                guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
-                if let decoded = try? JSONDecoder().decode([String].self, from: data) {
-                    return Set(decoded)
-                }
-                return []
-            }
-            static func save(_ notes: Set<String>) {
-                let array = Array(notes)
-                if let data = try? JSONEncoder().encode(array) {
-                    UserDefaults.standard.set(data, forKey: key)
-                }
-            }
-       }
-        
-        public enum FavoriteStorage {
-            private static let key = "favoriteQuotes"
-            static func load() -> Set<String> {
-                guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
-                if let decoded = try? JSONDecoder().decode([String].self, from: data) {
-                    return Set(decoded)
-                }
-                return []
-            }
-            static func save(_ quotes: Set<String>) {
-                let array = Array(quotes)
-                if let data = try? JSONEncoder().encode(array) {
-                    UserDefaults.standard.set(data, forKey: key)
-                }
-            }
+public enum NotesStorage {
+    private static let key = "userNotes"
+    static func load() -> Set<String> {
+        guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
+        if let decoded = try? JSONDecoder().decode([String].self, from: data) {
+            return Set(decoded)
         }
-    
+        return []
+    }
+    static func save(_ notes: Set<String>) {
+        let array = Array(notes)
+        if let data = try? JSONEncoder().encode(array) {
+            UserDefaults.standard.set(data, forKey: key)
+        }
+    }
+}
+
+public enum FavoriteStorage {
+    private static let key = "favoriteQuotes"
+    static func load() -> Set<String> {
+        guard let data = UserDefaults.standard.data(forKey: key) else { return [] }
+        if let decoded = try? JSONDecoder().decode([String].self, from: data) {
+            return Set(decoded)
+        }
+        return []
+    }
+    static func save(_ quotes: Set<String>) {
+        let array = Array(quotes)
+        if let data = try? JSONEncoder().encode(array) {
+            UserDefaults.standard.set(data, forKey: key)
+        }
+    }
+}
+
 
 
 
