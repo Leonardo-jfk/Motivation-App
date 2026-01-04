@@ -118,14 +118,13 @@ struct HouseMenu: View {
                 .font(.largeTitle)
                 .bold()
                 .padding(20)
-            
                 .frame(maxWidth: 150)
                 .background(
                     Color.gray
                         .clipShape(RoundedRectangle(cornerRadius: 30))
                         .opacity(0.6))
-//            Color.clear.frame(height: 10)
             Spacer()
+            
             Button(action: {
                 showingPersonalNotes.toggle()
                 // Close others
@@ -186,13 +185,13 @@ struct HouseMenu: View {
     }
 }
 
-struct UserNotesViewWrapper: View {
-    @Binding var savedUserNotes: Set<String>
-    
-    var body: some View {
-        QuoteLibrary.UserNotesView(savedUserNotes: $savedUserNotes)
-    }
-}
+//struct UserNotesViewWrapper: View {
+//    @Binding var savedUserNotes: Set<String>
+//    
+//    var body: some View {
+//        QuoteLibrary.UserNotesView(savedUserNotes: $savedUserNotes)
+//    }
+//}
 
 struct PersonalNotes: View {
     let showing: Bool
@@ -200,9 +199,22 @@ struct PersonalNotes: View {
     
     var body: some View {
         
+//        ZStack {
+//            ButtonStyleSrt()
+//            NavigationLink(destination: UserNotesViewWrapper(savedUserNotes: $savedUserNotes)){
+//                 // defaults to .houseMenu
+//                Text("Personal Notes ".localized)
+//                    .font(.title2)
+//                    .bold()
+//                    .foregroundStyle(.white)
+//                    .background(.gray.opacity(0.5))
+//            }
+//            .padding()
+//        }
+        
         ZStack {
             ButtonStyleSrt()
-            NavigationLink(destination: UserNotesViewWrapper(savedUserNotes: $savedUserNotes)){
+            NavigationLink(destination: QuoteLibrary.UserNotesView(savedUserNotes: $savedUserNotes)){
                  // defaults to .houseMenu
                 Text("Personal Notes ".localized)
                     .font(.title2)

@@ -13,7 +13,7 @@ import SwiftUI
 // Shared quotes array accessible from any file in the app target.
 // You can add more quotes here; keep them as comma-separated Swift string literals.
 
-struct QuoteLibrary: View {
+public struct QuoteLibrary: View {
     // Binding source of truth is provided by a parent view.
     @Binding var favoriteQuotes: Set<String>
     @State public var showFavorites: Bool = false
@@ -35,7 +35,7 @@ struct QuoteLibrary: View {
         
     }
     
-    var body: some View {
+   public var body: some View {
         VStack(alignment: .leading) {
             Text("Quote Library".localized)
                 .font(.largeTitle)
@@ -51,11 +51,14 @@ struct QuoteLibrary: View {
                 }, label: {
                     ZStack {
                         ButtonStyleSrt(.quoteLib)
+                            .frame(maxWidth: .infinity)
                         Text("Favorites".localized)
                             .font(.title3)
                             .bold()
                             .foregroundStyle(.white)
                             .background(.gray.opacity(0.5))
+                            .minimumScaleFactor(0.5)  // Allow text to shrink
+                            .lineLimit(1)
                     }
                     .padding(.horizontal, 4)
                 })
@@ -84,6 +87,8 @@ struct QuoteLibrary: View {
                             .bold()
                             .foregroundStyle(.white)
                             .background(.gray.opacity(0.5))
+                            .minimumScaleFactor(0.5)  // Allow text to shrink
+                            .lineLimit(1)
                     }
                     .padding(.horizontal, 4)
                 })
@@ -220,11 +225,11 @@ struct QuoteLibrary: View {
     
         // MARK: - User notes
         
-        struct UserNotesView: View {
+        public struct UserNotesView: View {
             @Binding var savedUserNotes: Set<String>
             @State private var noteText: String = ""
             
-            var body: some View {
+           public var body: some View {
                 VStack(spacing: 16) {
                     HStack {
                         TextField("Write your note".localized, text: $noteText, axis: .vertical)
