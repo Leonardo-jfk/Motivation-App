@@ -81,9 +81,11 @@
 				BackWitcher.mp3,
 				Books.json,
 				"Girl with books.json",
+				GymBro.json,
 				Loading.json,
-				"Message Sent Successfully | Plane.json",
-				"Untitled file.json",
+				"Meditation Skull.json",
+				Menorah.json,
+				MessageSent.json,
 			);
 			target = 1D6E581A2E919F1900E6B841 /* Motivation */;
 		};
@@ -94,9 +96,11 @@
 				BackWitcher.mp3,
 				Books.json,
 				"Girl with books.json",
+				GymBro.json,
 				Loading.json,
-				"Message Sent Successfully | Plane.json",
-				"Untitled file.json",
+				"Meditation Skull.json",
+				Menorah.json,
+				MessageSent.json,
 			);
 			target = 1D6E58272E919F1B00E6B841 /* MotivationTests */;
 		};

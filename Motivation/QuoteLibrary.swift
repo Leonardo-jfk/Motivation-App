@@ -40,7 +40,9 @@ struct QuoteLibrary: View {
             Text("Quote Library".localized)
                 .font(.largeTitle)
                 .bold()
-                .padding(20)
+                .padding(30)
+                .minimumScaleFactor(0.5)  // Allow text to shrink
+                .lineLimit(1)
             
             HStack {
                 // Favorites button
