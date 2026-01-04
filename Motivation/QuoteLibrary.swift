@@ -9,6 +9,7 @@
 //feature: make a star with every quote and the list of underlined quotes
 
 import SwiftUI
+import Lottie
 
 // Shared quotes array accessible from any file in the app target.
 // You can add more quotes here; keep them as comma-separated Swift string literals.
@@ -17,6 +18,13 @@ public struct QuoteLibrary: View {
     // Binding source of truth is provided by a parent view.
     @Binding var favoriteQuotes: Set<String>
     @State public var showFavorites: Bool = false
+    
+//    //lottie view
+    @State private var showLottieAnimation = false
+//    var fileName5: String = "Menorah"
+//    var contentMode: UIView.ContentMode = .scaleAspectFill
+//    var playLoopMode: LottieLoopMode = .autoReverse
+//    var onAnimationDidFinish: (() -> Void)? = nil
     
     // Notes state owned here (in-memory). If you want persistence, we can switch later.
     @State private var showUserNotes: Bool = false
@@ -229,6 +237,13 @@ public struct QuoteLibrary: View {
             @Binding var savedUserNotes: Set<String>
             @State private var noteText: String = ""
             
+            //lottie view
+            var fileName5: String = "Menorah"
+            var contentMode: UIView.ContentMode = .scaleAspectFill
+            var playLoopMode: LottieLoopMode = .playOnce
+            var onAnimationDidFinish: (() -> Void)? = nil
+            
+            
            public var body: some View {
                 VStack(spacing: 16) {
                     HStack {
@@ -243,8 +258,35 @@ public struct QuoteLibrary: View {
                             noteText = ""
                         }
                         .buttonStyle(.glassProminent)
+                        .onTapGesture(perform: {
+                            
+                            showLottieAnimation.toggle()
+                            
+//                            LottieView(animation: .named(fileName5))
+//                                .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
+//                                })
+//                                .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode )))
+//                                .animationDidFinish { completed in onAnimationDidFinish?()
+//                                }
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 200, height: 200)
+                            
+                        })
                     }
                     .padding(.horizontal)
+                    
+//                    LottieView(animation: .named(fileName5))
+//                        .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
+//                        })
+//                        .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode )))
+//                        .animationDidFinish { completed in onAnimationDidFinish?()
+//                        }
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 200, height: 200)
+                    
+                    
                     
                     Spacer()
                     
@@ -352,6 +394,24 @@ public struct QuoteLibrary: View {
             }
         }
     }
+
+
+
+stuct showLottieAnimation {
+    if showLottieAnimation = true {
+        LottieView(animation: .named(fileName5))
+            .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
+            })
+            .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode )))
+            .animationDidFinish { completed in onAnimationDidFinish?()
+            }
+            .resizable()
+            .scaledToFit()
+            .frame(width: 200, height: 200)
+        
+    }
+    
+}
 
 //#Preview {
 //    QuoteLibrary(favoriteQuotes: .constant(["gg"]))

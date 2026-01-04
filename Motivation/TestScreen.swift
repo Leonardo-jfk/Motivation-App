@@ -16,7 +16,7 @@ struct TestScreenView: View {
     var fileName4: String = "Meditation Skull"
     var fileName5: String = "Menorah"
     var contentMode: UIView.ContentMode = .scaleAspectFill
-    var playLoopMode: LottieLoopMode = .autoReverse
+    var playLoopMode: LottieLoopMode = .playOnce
     
     var onAnimationDidFinish: (() -> Void)? = nil
     

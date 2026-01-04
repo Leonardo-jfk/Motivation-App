@@ -212,10 +212,10 @@ struct PersonalNotes: View {
 //            .padding()
 //        }
         
+        NavigationLink(destination: QuoteLibrary.UserNotesView(savedUserNotes: $savedUserNotes)){
         ZStack {
-            ButtonStyleSrt()
-            NavigationLink(destination: QuoteLibrary.UserNotesView(savedUserNotes: $savedUserNotes)){
                  // defaults to .houseMenu
+                ButtonStyleSrt()
                 Text("Personal Notes ".localized)
                     .font(.title2)
                     .bold()
