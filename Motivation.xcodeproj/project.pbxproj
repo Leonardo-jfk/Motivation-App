@@ -23,6 +23,8 @@
 		1D9FEFBC2F01A442009C6612 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1D9FEFBB2F01A442009C6612 /* FirebaseCore */; };
 		1D9FEFBE2F01A4BE009C6612 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 1D9FEFBD2F01A4BE009C6612 /* FirebaseMessaging */; };
 		1D9FEFC02F01A4CE009C6612 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 1D9FEFBF2F01A4CE009C6612 /* FirebaseAppCheck */; };
+		1DC0AEB62F0835DD00790DED /* Books.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DC0AEAE2F0835DD00790DED /* Books.json */; };
+		1DC0AEB72F0835DD00790DED /* Girl with books.json in Resources */ = {isa = PBXBuildFile; fileRef = 1DC0AEAF2F0835DD00790DED /* Girl with books.json */; };
 		1DC0AEC32F0842DF00790DED /* TestScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC0AEC22F0842DF00790DED /* TestScreen.swift */; };
 		1DFA7C1D2F0415BE00A1D6E5 /* ExportOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1DFA7C1C2F0415BE00A1D6E5 /* ExportOptions.plist */; };
 		1DFA7C1F2F04194C00A1D6E5 /* build_final.sh in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA7C1E2F04193900A1D6E5 /* build_final.sh */; };
@@ -64,6 +66,8 @@
 		1D7CC6472F014CC300FAD66D /* NotifManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifManager.swift; sourceTree = "<group>"; };
 		1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteLibrary.swift; sourceTree = "<group>"; };
 		1D7CC6492F014CC300FAD66D /* Quotes365.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quotes365.swift; sourceTree = "<group>"; };
+		1DC0AEAE2F0835DD00790DED /* Books.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Books.json; sourceTree = "<group>"; };
+		1DC0AEAF2F0835DD00790DED /* Girl with books.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Girl with books.json"; sourceTree = "<group>"; };
 		1DC0AEC22F0842DF00790DED /* TestScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestScreen.swift; sourceTree = "<group>"; };
 		1DFA7C1A2F0410F000A1D6E5 /* build_ipa.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build_ipa.sh; sourceTree = "<group>"; };
 		1DFA7C1C2F0415BE00A1D6E5 /* ExportOptions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ExportOptions.plist; sourceTree = "<group>"; };
@@ -79,8 +83,6 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				BackWitcher.mp3,
-				Books.json,
-				"Girl with books.json",
 			);
 			target = 1D6E581A2E919F1900E6B841 /* Motivation */;
 		};
@@ -89,8 +91,6 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				BackWitcher.mp3,
-				Books.json,
-				"Girl with books.json",
 			);
 			target = 1D6E58272E919F1B00E6B841 /* MotivationTests */;
 		};
@@ -174,6 +174,8 @@
 		1D7CC64A2F014CC300FAD66D /* Motivation */ = {
 			isa = PBXGroup;
 			children = (
+				1DC0AEAE2F0835DD00790DED /* Books.json */,
+				1DC0AEAF2F0835DD00790DED /* Girl with books.json */,
 				1D7971BC2F06AF0300912FFA /* WistomSourses.swift */,
 				1DFA7C202F041F9600A1D6E5 /* Motivation.entitlements */,
 				1DFA7C1E2F04193900A1D6E5 /* build_final.sh */,
@@ -334,6 +336,8 @@
 			files = (
 				1DFA7C242F0425F800A1D6E5 /* PrivacyInfo.xcprivacy in Resources */,
 				1DFA7C1D2F0415BE00A1D6E5 /* ExportOptions.plist in Resources */,
+				1DC0AEB62F0835DD00790DED /* Books.json in Resources */,
+				1DC0AEB72F0835DD00790DED /* Girl with books.json in Resources */,
 				1D7CC6562F014CC400FAD66D /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,6 +14,9 @@ struct TestScreenView: View {
     var body: some View {
         AnimationView()
         Text("books should be here")
+        LottieView(animation: .named("Girl with books.json"))
+            .playbackMode(.toProgress(1, loopMode: .autoReverse))
+            .frame(width: 100, height: 100)
     }
 }
 

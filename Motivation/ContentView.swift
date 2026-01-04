@@ -35,8 +35,10 @@ public struct AnimationView: View {
     
     public var body: some View {
 //        LottieAnimation(fileName: "books", config: AnimationConfig(autoplay: true, loop: true)).view()
-        LottieView(animation: .named("books"))
-        Text("here")
+        LottieView(animation: .named("Girl with books.json"))
+            .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+            .frame(width: 50, height: 40)
+        Text("here").font(.title2)
     }
     
 
