@@ -31,19 +31,26 @@ class NavigationManager: ObservableObject {
     }
 }
 
+
 public struct AnimationView: View {
+    var fileName: String = "Girl with books"
+    var contentMode: UIView.ContentMode = .scaleAspectFill
+    var playLoopMode: LottieLoopMode = .playOnce
+    var onAnimationDidFinish: (() -> Void)? = nil
     
     public var body: some View {
-//        LottieAnimation(fileName: "books", config: AnimationConfig(autoplay: true, loop: true)).view()
-        LottieView(animation: .named("Girl with books.json"))
-            .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
-            .frame(width: 50, height: 40)
-        Text("here").font(.title2)
-    }
-    
-
+        //        Text("books should be here")
+//        VStack(spacing: 0){
+            LottieView(animation: .named(fileName))
+                .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
+                })
+                .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
+                .animationDidFinish { completed in onAnimationDidFinish?()
+                }
+                .frame(width: 150, height: 150)
+        }
+//    }
 }
-
 
 struct ContentView: View {
     
@@ -104,7 +111,7 @@ struct ContentView: View {
                     }
                     
                     
-                    VStack {
+                    VStack(spacing: 0){
                         // Spacer to push main content below the nav bar if needed
                         Spacer()
                         // Botón que abre la descripción
@@ -112,6 +119,9 @@ struct ContentView: View {
                             showingQuote.toggle()
                         }, label: {
                             if showingQuote {
+                                VStack(spacing: 0){
+                                
+                                AnimationView()
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 40, style: .continuous)
                                         .fill(Color.black.opacity(0.8))
@@ -131,9 +141,10 @@ struct ContentView: View {
                                             .frame(maxWidth: 350, maxHeight: 300)
                                             .font(.custom("CormorantGaramond-Italic", size: 24))
                                     }
-                                    .padding()
+                                    .padding(.top, 0)
                                 }
-                                .padding()
+                                .padding(.top, 0)
+                            }
 //                                .preferredColorScheme(appScheme.preferredColorScheme)
                             } else {
                                 ZStack {
@@ -149,17 +160,14 @@ struct ContentView: View {
                                 }
                                 .padding()
                                 
-                                                                NavigationLink(destination: SettingsList()){}
-                                
+                                NavigationLink(destination: SettingsList()){}
+//                                Spacer()
                             }
+                            
                         })
-//                        Spacer()
-                        AnimationView()
+                        Spacer()
                     }
                 }
-//                .id(appScheme.rawValue + (showingQuote ? "quote" : "button"))
-//                // This prevents navigation reset when color scheme changes
-////                .preferredColorScheme(appScheme.preferredColorScheme)
                 .preferredColorScheme(appScheme.preferredColorScheme)
                 
 
@@ -192,17 +200,7 @@ struct ContentView: View {
             
             .environmentObject(navManager) 
             
-            
-            //                .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
-            //        favoriteQuotes = []
-//            .id(appScheme.rawValue + (showingQuote ? "quote" : "button"))
-//            // This prevents navigation reset when color scheme changes
-////                .preferredColorScheme(appScheme.preferredColorScheme)
-//            .preferredColorScheme(appScheme.preferredColorScheme)
-//            .preferredColorScheme(appScheme.preferredColorScheme)
-//        .id(l10n.currentLanguage)
     }
-//        .id(l10n.currentLanguage))
 }
     // A small view that safely shows the quote for a given index.
     struct DayQuoteView: View {

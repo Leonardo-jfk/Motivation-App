@@ -10,34 +10,24 @@ import SwiftUI
 import Lottie
 
 struct TestScreenView: View {
-    var fileName: String = "Girl with books.json"
+    var fileName: String = "Girl with books"
     var contentMode: UIView.ContentMode = .scaleAspectFill
-    var playLoopMode: LottieLoopMode = .playOnce
+    var playLoopMode: LottieLoopMode = .autoReverse
+    
     var onAnimationDidFinish: (() -> Void)? = nil
     
-//    var body: some View {
-//        AnimationView()
-//        Text("books should be here")
-//        LottieView(animation: .named("fileName"))
-//            .playbackMode(.toProgress(1, loopMode: .autoReverse))
-//            .frame(width: 100, height: 100)
-//    }
-    
     var body: some View {
+        AnimationView()
         Text("books should be here")
         LottieView(animation: .named(fileName))
-            .configure { animationView in
-                animationView.contentMode = contentMode
+            .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
+            })
+            .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
+            .animationDidFinish { completed in onAnimationDidFinish?()
             }
-            .playbackMode(.playing(range: 0.0...1.0, loopMode: playLoopMode))
-            .animationDidFinish{complited in
-                onAnimationDidFinish?()
-                
-            }
+            .frame(width: 100, height: 100)
     }
 }
-
-
 #Preview {
     TestScreenView()
 }
