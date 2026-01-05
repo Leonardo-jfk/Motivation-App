@@ -133,26 +133,19 @@ struct HouseMenu: View {
     var onAnimationDidFinish: (() -> Void)? = nil
     
     var body: some View {
-        
-        
-        var LottieBackColor:String = " "
-        if colorScheme == .dark {
-            LottieBackColor = "LightBackground"
-        }
-        else {
-            LottieBackColor = "DarkBackground"
-
-        }
+        let lottieBackColor = (colorScheme == .dark) ? "DarkBackground" : "LightBackground"
         ZStack{
             
-            LottieView(animation: .named(LottieBackColor))
+            LottieView(animation: .named(lottieBackColor))
                 .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
+                    lottieAnimationView.animationSpeed = 0.4
                 })
                 .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
                 .animationDidFinish { completed in onAnimationDidFinish?()
+                    
                 }
                 .ignoresSafeArea()
-                .frame(width: .infinity, height: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             VStack{
                 Text("MENU")
                     .font(.largeTitle)
