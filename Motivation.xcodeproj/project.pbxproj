@@ -10,6 +10,7 @@
 		1D4803692EFA14820063C486 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4803682EFA14820063C486 /* FirebaseAnalytics */; };
 		1D48036B2EFA14820063C486 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D48036A2EFA14820063C486 /* FirebaseCrashlytics */; };
 		1D4BD70E2F08294C00F44D07 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4BD70D2F08294C00F44D07 /* Lottie */; };
+		1D514E222F0C4A9D008A7B78 /* ChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D514E212F0C4A9D008A7B78 /* ChallengesView.swift */; };
 		1D7971BD2F06AF1500912FFA /* WistomSourses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7971BC2F06AF0300912FFA /* WistomSourses.swift */; };
 		1D7CC64B2F014CC400FAD66D /* QuoteLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */; };
 		1D7CC64C2F014CC400FAD66D /* Quotes365.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7CC6492F014CC300FAD66D /* Quotes365.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D514E212F0C4A9D008A7B78 /* ChallengesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesView.swift; sourceTree = "<group>"; };
 		1D6E581B2E919F1900E6B841 /* Motivation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Motivation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D6E58282E919F1B00E6B841 /* MotivationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotivationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D6E58322E919F1B00E6B841 /* MotivationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotivationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +219,7 @@
 				1DFA7C1C2F0415BE00A1D6E5 /* ExportOptions.plist */,
 				1DFA7C232F0425F700A1D6E5 /* PrivacyInfo.xcprivacy */,
 				1DC0AEC22F0842DF00790DED /* TestScreen.swift */,
+				1D514E212F0C4A9D008A7B78 /* ChallengesView.swift */,
 			);
 			path = Motivation;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				1D7CC6502F014CC400FAD66D /* HouseSettingsPage.swift in Sources */,
 				1D7CC6512F014CC400FAD66D /* NotifManager.swift in Sources */,
 				1D7CC6522F014CC400FAD66D /* HouseMenu.swift in Sources */,
+				1D514E222F0C4A9D008A7B78 /* ChallengesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

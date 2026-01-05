@@ -261,16 +261,16 @@ struct ContentView: View {
 
 
 struct CustomTabBar: View {
-    @Binding var selectedTab: Int
+    @Binding var selectedTab: Tab
     
     // Define your tabs
-    let tabs = [
-        ("Today", "sun.max"),
-        ("Practice", "figure.mindful.relaxing"),
-        ("Challenges", "list.bullet.indent"),
-        ("Quotes", "book"),
-        ("Settings", "gearshape")
-    ]
+    let tabs: [(name: String, icon: String, type: Tab)] = [
+            ("Today", "sun.max", .today),
+            ("Practice", "figure.mindful.relaxing", .practice),
+            ("Challenges", "list.bullet.indent", .challenges),
+            ("Quotes", "book", .quotes),
+            ("Settings", "gearshape", .settings)
+        ]
     
 //    enum Tab: Int {
 //        case today = 0
@@ -282,25 +282,25 @@ struct CustomTabBar: View {
     
     var body: some View {
         HStack {
-            ForEach(0..<tabs.count, id: \.self) { index in
+            ForEach(tabs, id: \.name) { tab in
                 Spacer()
                 
-                Button(action: { selectedTab = index }) {
+                Button(action: { selectedTab = tab.type }) {
                     VStack(spacing: 4) {
-                        Image(systemName: tabs[index].1)
+                        Image(systemName: tab.icon)
                             .font(.system(size: 22))
                         
-                        Text(tabs[index].0)
+                        Text(tab.name)
                             .font(.caption2)
                             .fontWeight(.medium)
                     }
-                    .foregroundColor(selectedTab == index ? .black : .secondary)
+                    .foregroundColor(selectedTab == tab.type ? .black : .secondary)
                     .padding(.vertical, 8)
                     .padding(.horizontal, 16)
                     // The "Pill" effect for the active tab
                     .background(
                         Capsule()
-                            .fill(selectedTab == index ? Color.gray.opacity(0.15) : Color.clear)
+                            .fill(selectedTab == tab.type ? Color.gray.opacity(0.15) : Color.clear)
                     )
                 }
                 
