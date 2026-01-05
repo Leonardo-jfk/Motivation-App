@@ -52,6 +52,15 @@ public struct AnimationView: View {
 //    }
 }
 
+//for CustomTabBar
+enum Tab: Int {
+    case today = 0
+    case practice = 1
+    case challenges = 2
+    case quotes = 3
+    case settings = 4
+}
+
 struct ContentView: View {
     
     @StateObject private var navManager = NavigationManager()
@@ -86,8 +95,8 @@ struct ContentView: View {
             return (day - 1) % currentQuotes.count
         }
         
-        
-        
+    @State private var selectedTab: Tab = .challenges
+    
         
         var body: some View {
             
@@ -167,6 +176,23 @@ struct ContentView: View {
                         })
                         Spacer()
                     }
+                    ZStack(alignment: .bottom) {
+                                // Your Main Content
+                        Group {
+                                                switch selectedTab {
+                                                case .challenges:
+                                                    ChallengesView()
+                                                case .today:
+                                                    Text("Today Screen") // Replace with your TodayView
+                                                default:
+                                                    Text("Other Screen")
+                                                }
+                                            }
+                                
+                                // The Toolbar
+                                CustomTabBar(selectedTab: $selectedTab)
+                            }
+                            .ignoresSafeArea(edges: .bottom)
                 }
                 .preferredColorScheme(appScheme.preferredColorScheme)
                 
@@ -190,6 +216,16 @@ struct ContentView: View {
                                 .padding(15) // touch target
                         }
                     }
+                    
+//                    ToolbarItem(placement: .bottomBar) {
+//                        NavigationLink(destination: HouseMenu()) {
+//                            Image(systemName: "house")
+//                                .resizable()
+//                                .frame(width: 35, height: 35)
+//                                .foregroundStyle(.primary)
+//                                .padding(15) // touch target
+//                        }
+//                    }
                 }
                 
                 .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
@@ -221,6 +257,64 @@ struct ContentView: View {
                 .padding(.vertical, 60)
         }
     }
+
+
+
+struct CustomTabBar: View {
+    @Binding var selectedTab: Int
+    
+    // Define your tabs
+    let tabs = [
+        ("Today", "sun.max"),
+        ("Practice", "figure.mindful.relaxing"),
+        ("Challenges", "list.bullet.indent"),
+        ("Quotes", "book"),
+        ("Settings", "gearshape")
+    ]
+    
+//    enum Tab: Int {
+//        case today = 0
+//        case practice = 1
+//        case challenges = 2
+//        case quotes = 3
+//        case settings = 4
+//    }
+    
+    var body: some View {
+        HStack {
+            ForEach(0..<tabs.count, id: \.self) { index in
+                Spacer()
+                
+                Button(action: { selectedTab = index }) {
+                    VStack(spacing: 4) {
+                        Image(systemName: tabs[index].1)
+                            .font(.system(size: 22))
+                        
+                        Text(tabs[index].0)
+                            .font(.caption2)
+                            .fontWeight(.medium)
+                    }
+                    .foregroundColor(selectedTab == index ? .black : .secondary)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 16)
+                    // The "Pill" effect for the active tab
+                    .background(
+                        Capsule()
+                            .fill(selectedTab == index ? Color.gray.opacity(0.15) : Color.clear)
+                    )
+                }
+                
+                Spacer()
+            }
+        }
+        .padding(.top, 10)
+        .padding(.bottom, 34) // Padding for iPhone "Home Bar" area
+        .background(.ultraThinMaterial) // Translucent glass effect
+        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+    }
+}
+
+
 
 #Preview {
     ContentView()
