@@ -24,6 +24,14 @@ public struct QuoteLibrary: View {
     @State private var savedUserNotes: Set<String> = []
     @StateObject private var l10n = LocalizationManager.shared
     
+    
+    var fileName1: String = "Time Management"
+    var fileName2: String = "DarkBackground"
+    var contentMode: UIView.ContentMode = .scaleAspectFill
+    var playLoopMode: LottieLoopMode = .loop
+    
+    var onAnimationDidFinish: (() -> Void)? = nil
+    
     private var currentQuotes: [String] {
         switch l10n.currentLanguage {
         case .english:
@@ -37,7 +45,18 @@ public struct QuoteLibrary: View {
     }
     
         public var body: some View {
-            VStack(alignment: .leading) {
+            VStack(alignment: .center) {
+                
+                LottieView(animation: .named(fileName1))
+                    .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
+                        lottieAnimationView.animationSpeed = 0.5
+                    })
+                        .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
+                        .animationDidFinish { completed in onAnimationDidFinish?()
+                            
+                        }.resizable().scaledToFill()
+                    .frame(width: 50, height: 50, alignment: .center)
+            
                 Text("Quote Library".localized)
                     .font(.largeTitle)
                     .bold()

@@ -138,7 +138,7 @@ struct HouseMenu: View {
             
             LottieView(animation: .named(lottieBackColor))
                 .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
-                    lottieAnimationView.animationSpeed = 0.4
+                    lottieAnimationView.animationSpeed = 0.2
                 })
                 .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
                 .animationDidFinish { completed in onAnimationDidFinish?()
