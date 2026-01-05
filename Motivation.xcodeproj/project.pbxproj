@@ -79,13 +79,21 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				BackWitcher.mp3,
+				batman.json,
+				batman2.json,
 				Books.json,
+				DarkBackground.json,
+				"Filling container-2.json",
+				"Filling container.json",
 				"Girl with books.json",
 				GymBro.json,
+				LightBack2.json,
+				LightBackground.json,
 				Loading.json,
 				"Meditation Skull.json",
 				Menorah.json,
 				MessageSent.json,
+				"Time Management.json",
 			);
 			target = 1D6E581A2E919F1900E6B841 /* Motivation */;
 		};
@@ -94,13 +102,21 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				BackWitcher.mp3,
+				batman.json,
+				batman2.json,
 				Books.json,
+				DarkBackground.json,
+				"Filling container-2.json",
+				"Filling container.json",
 				"Girl with books.json",
 				GymBro.json,
+				LightBack2.json,
+				LightBackground.json,
 				Loading.json,
 				"Meditation Skull.json",
 				Menorah.json,
 				MessageSent.json,
+				"Time Management.json",
 			);
 			target = 1D6E58272E919F1B00E6B841 /* MotivationTests */;
 		};

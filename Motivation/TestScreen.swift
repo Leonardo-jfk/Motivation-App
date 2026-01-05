@@ -13,16 +13,16 @@ struct TestScreenView: View {
     var fileName1: String = "GymBro"
     var fileName2: String = "Loading"
     var fileName3: String = "MessageSent"
-    var fileName4: String = "Meditation Skull"
-    var fileName5: String = "Menorah"
+    var fileName4: String = "batman2"
+    var fileName5: String = "batman"
     var contentMode: UIView.ContentMode = .scaleAspectFill
-    var playLoopMode: LottieLoopMode = .playOnce
+    var playLoopMode: LottieLoopMode = .loop
     
     var onAnimationDidFinish: (() -> Void)? = nil
     
     var body: some View {
-        AnimationView()
-        Text("books should be here")
+//        AnimationView()
+//        Text("books should be here")
         LottieView(animation: .named(fileName1))
             .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
             })

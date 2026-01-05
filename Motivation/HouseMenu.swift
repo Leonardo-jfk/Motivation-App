@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Lottie
+
 
 public enum ButtonShapeStyle {
     case quoteLib
@@ -29,30 +31,32 @@ public struct ButtonStyleSrt: View {
     public init(_ style: ButtonShapeStyle) {
         self.style = style
     }
-    
+   
     public var body: some View {
-        switch style {
-        case .quoteLib:
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .fill(tileFillColor)
-                .frame(width: 200, height: 60)
-        case .houseMenu:
-            RoundedRectangle(cornerRadius: 40, style: .continuous)
-                .fill(tileFillColor)
-                .frame(width: 200, height: 100)
-        case .houseMenuBack:
-            RoundedRectangle(cornerRadius: 40, style: .continuous)
-                .fill(tileFillColor)
-                .frame(width: 350, height: 350)
+       
             
-        case .stoicList:
-            RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .fill(tileFillColor)
-                .frame(width: 100, height: 150)
+            
+            switch style {
+            case .quoteLib:
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .fill(tileFillColor)
+                    .frame(width: 200, height: 60)
+            case .houseMenu:
+                RoundedRectangle(cornerRadius: 40, style: .continuous)
+                    .fill(tileFillColor)
+                    .frame(width: 200, height: 100)
+            case .houseMenuBack:
+                RoundedRectangle(cornerRadius: 40, style: .continuous)
+                    .fill(tileFillColor)
+                    .frame(width: 350, height: 350)
+                
+            case .stoicList:
+                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                    .fill(tileFillColor)
+                    .frame(width: 100, height: 150)
+            }
         }
-        }
-    
-}
+    }
 
 //public var url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSfspdMNWKv3vDnIB2WAuPbTMwECwIgIDgom0Dp9KNcuXFF-GQ/viewform?usp=dialog")
 
@@ -112,79 +116,115 @@ struct HouseMenu: View {
     
     @State private var savedUserNotes: Set<String> = []
     
+    @Environment(\.colorScheme) var colorScheme
+    @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
+    private var appScheme: AppColorScheme {
+        AppColorScheme(rawValue: storedScheme) ?? .system
+    }
+    
+    var fileName1: String = "LightBackground"
+    var fileName2: String = "DarkBackground"
+    var fileName3: String = "MessageSent"
+    var fileName4: String = "batman2"
+    var fileName5: String = "batman"
+    var contentMode: UIView.ContentMode = .scaleAspectFill
+    var playLoopMode: LottieLoopMode = .loop
+    
+    var onAnimationDidFinish: (() -> Void)? = nil
+    
     var body: some View {
-        VStack{
-            Text("MENU")
-                .font(.largeTitle)
-                .bold()
-                .padding(20)
-                .frame(maxWidth: 150)
-                .background(
-                    Color.gray
-                        .clipShape(RoundedRectangle(cornerRadius: 30))
-                        .opacity(0.6))
-            Spacer()
-            
-            Button(action: {
-                showingPersonalNotes.toggle()
-                // Close others
-                showingMainSettings = false
-                showingResourses = false
-                showingFeedbackMenu = false
-            }) {
-                PersonalNotes(showing: showingPersonalNotes, savedUserNotes: $savedUserNotes)
-            }
-            .buttonStyle(.plain)
-            
-            Color.clear.frame(height: 10)
-
-            Button(action: {
-                showingMainSettings.toggle()
-                // Close others
-                showingPersonalNotes = false
-                showingResourses = false
-                showingFeedbackMenu = false
-            }) {
-                MainSettings(showing: showingMainSettings)
-                
-            }
-            .buttonStyle(.plain)
-            
-            
-            Color.clear.frame(height: 10)
-
-            Button(action: {
-                showingResourses.toggle()
-                // Close others
-                showingPersonalNotes = false
-                showingMainSettings = false
-                showingFeedbackMenu = false
-            }) {
-                Resourses(showing: showingResourses)
-            }
-            .buttonStyle(.plain)
-                Color.clear.frame(height: 10)
-           
-            Button(action: {
-                showingFeedbackMenu.toggle()
-                // Close others
-                showingPersonalNotes = false
-                showingMainSettings = false
-                showingResourses = false
-            }) {
-                GetFeedback(showing: showingFeedbackMenu)
-            }
-            .buttonStyle(.plain)
-            
-            Color.clear.frame(height: 10)
+        
+        
+        var LottieBackColor:String = " "
+        if colorScheme == .dark {
+            LottieBackColor = "LightBackground"
         }
-        .padding(.horizontal)
-        .onAppear{
-            savedUserNotes = NotesStorage.load()
+        else {
+            LottieBackColor = "DarkBackground"
+
+        }
+        ZStack{
+            
+            LottieView(animation: .named(LottieBackColor))
+                .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
+                })
+                .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
+                .animationDidFinish { completed in onAnimationDidFinish?()
+                }
+                .ignoresSafeArea()
+                .frame(width: .infinity, height: .infinity)
+            VStack{
+                Text("MENU")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(20)
+                    .frame(maxWidth: 150)
+                    .background(
+                        Color.gray
+                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                            .opacity(0.6))
+                Spacer()
+                
+                Button(action: {
+                    showingPersonalNotes.toggle()
+                    // Close others
+                    showingMainSettings = false
+                    showingResourses = false
+                    showingFeedbackMenu = false
+                }) {
+                    PersonalNotes(showing: showingPersonalNotes, savedUserNotes: $savedUserNotes)
+                }
+                .buttonStyle(.plain)
+                
+                Color.clear.frame(height: 10)
+                
+                Button(action: {
+                    showingMainSettings.toggle()
+                    // Close others
+                    showingPersonalNotes = false
+                    showingResourses = false
+                    showingFeedbackMenu = false
+                }) {
+                    MainSettings(showing: showingMainSettings)
+                    
+                }
+                .buttonStyle(.plain)
+                
+                
+                Color.clear.frame(height: 10)
+                
+                Button(action: {
+                    showingResourses.toggle()
+                    // Close others
+                    showingPersonalNotes = false
+                    showingMainSettings = false
+                    showingFeedbackMenu = false
+                }) {
+                    Resourses(showing: showingResourses)
+                }
+                .buttonStyle(.plain)
+                Color.clear.frame(height: 10)
+                
+                Button(action: {
+                    showingFeedbackMenu.toggle()
+                    // Close others
+                    showingPersonalNotes = false
+                    showingMainSettings = false
+                    showingResourses = false
+                }) {
+                    GetFeedback(showing: showingFeedbackMenu)
+                }
+                .buttonStyle(.plain)
+                
+                Color.clear.frame(height: 10)
+            }
+            .padding(.horizontal)
+            .onAppear{
+                savedUserNotes = NotesStorage.load()
+            }
         }
     }
 }
-
 //struct UserNotesViewWrapper: View {
 //    @Binding var savedUserNotes: Set<String>
 //    
