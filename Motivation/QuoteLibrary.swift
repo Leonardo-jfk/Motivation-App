@@ -55,7 +55,8 @@ public struct QuoteLibrary: View {
                         .animationDidFinish { completed in onAnimationDidFinish?()
                             
                         }.resizable().scaledToFill()
-                    .frame(width: 50, height: 50, alignment: .center)
+                    .frame(width: 50, height: 50)
+                
             
                 Text("Quote Library".localized)
                     .font(.largeTitle)

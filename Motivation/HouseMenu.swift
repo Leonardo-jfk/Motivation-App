@@ -132,6 +132,17 @@ struct HouseMenu: View {
     
     var onAnimationDidFinish: (() -> Void)? = nil
     
+    
+    @State private var selectedMenu: MenuOption = .none
+    enum MenuOption {
+        case none
+        case personalNotes
+        case mainSettings
+        case resources
+        case feedback
+    }
+    
+    
     var body: some View {
         let lottieBackColor = (colorScheme == .dark) ? "DarkBackground" : "LightBackground"
         ZStack{
@@ -157,74 +168,116 @@ struct HouseMenu: View {
                             .clipShape(RoundedRectangle(cornerRadius: 30))
                             .opacity(0.6))
                 Spacer()
-                
                 Button(action: {
-                    showingPersonalNotes.toggle()
-                    // Close others
-                    showingMainSettings = false
-                    showingResourses = false
-                    showingFeedbackMenu = false
-                }) {
-                    PersonalNotes(showing: showingPersonalNotes, savedUserNotes: $savedUserNotes)
+                                    selectedMenu = (selectedMenu == .personalNotes) ? .none : .personalNotes
+                                }) {
+                                    PersonalNotes(showing: selectedMenu == .personalNotes, savedUserNotes: $savedUserNotes)
+                                }
+                                .buttonStyle(.plain)
+                                .simultaneousGesture(TapGesture().onEnded {
+                                                    selectedMenu = .mainSettings
+                                                })
+                                
+                                Color.clear.frame(height: 10)
+                                
+                                Button(action: {
+                                    selectedMenu = (selectedMenu == .mainSettings) ? .none : .mainSettings
+                                }) {
+                                    MainSettings(showing: selectedMenu == .mainSettings)
+                                }
+                                .buttonStyle(.plain)
+                                .simultaneousGesture(TapGesture().onEnded {
+                                                    selectedMenu = .mainSettings
+                                                })
+                                Color.clear.frame(height: 10)
+                                
+                                Button(action: {
+                                    selectedMenu = (selectedMenu == .resources) ? .none : .resources
+                                }) {
+                                    Resourses(showing: selectedMenu == .resources)
+                                }
+                                .buttonStyle(.plain)
+                                
+                                Color.clear.frame(height: 10)
+                                
+                                Button(action: {
+                                    selectedMenu = (selectedMenu == .feedback) ? .none : .feedback
+                                }) {
+                                    GetFeedback(showing: selectedMenu == .feedback)
+                                }
+                                .buttonStyle(.plain)
+                                
+                                Color.clear.frame(height: 10)
+                            }
+                            .padding(.horizontal)
+                            .onAppear {
+                                savedUserNotes = NotesStorage.load()
+                            }
+                        }
+                    }
                 }
-                .buttonStyle(.plain)
                 
-                Color.clear.frame(height: 10)
-                
-                Button(action: {
-                    showingMainSettings.toggle()
-                    // Close others
-                    showingPersonalNotes = false
-                    showingResourses = false
-                    showingFeedbackMenu = false
-                }) {
-                    MainSettings(showing: showingMainSettings)
-                    
-                }
-                .buttonStyle(.plain)
-                
-                
-                Color.clear.frame(height: 10)
-                
-                Button(action: {
-                    showingResourses.toggle()
-                    // Close others
-                    showingPersonalNotes = false
-                    showingMainSettings = false
-                    showingFeedbackMenu = false
-                }) {
-                    Resourses(showing: showingResourses)
-                }
-                .buttonStyle(.plain)
-                Color.clear.frame(height: 10)
-                
-                Button(action: {
-                    showingFeedbackMenu.toggle()
-                    // Close others
-                    showingPersonalNotes = false
-                    showingMainSettings = false
-                    showingResourses = false
-                }) {
-                    GetFeedback(showing: showingFeedbackMenu)
-                }
-                .buttonStyle(.plain)
-                
-                Color.clear.frame(height: 10)
-            }
-            .padding(.horizontal)
-            .onAppear{
-                savedUserNotes = NotesStorage.load()
-            }
-        }
-    }
-}
-//struct UserNotesViewWrapper: View {
-//    @Binding var savedUserNotes: Set<String>
-//    
-//    var body: some View {
-//        QuoteLibrary.UserNotesView(savedUserNotes: $savedUserNotes)
+//                Button(action: {
+//                    showingPersonalNotes.toggle()
+//                    // Close others
+//                    showingMainSettings = false
+//                    showingResourses = false
+//                    showingFeedbackMenu = false
+//                }) {
+//                    PersonalNotes(showing: showingPersonalNotes, savedUserNotes: $savedUserNotes)
+//                }
+//                .buttonStyle(.plain)
+//                
+//                Color.clear.frame(height: 10)
+//                
+//                Button(action: {
+//                    showingMainSettings.toggle()
+//                    // Close others
+//                    showingPersonalNotes = false
+//                    showingResourses = false
+//                    showingFeedbackMenu = false
+//                }) {
+//                    MainSettings(showing: showingMainSettings)
+//                    
+//                }
+//                .buttonStyle(.plain)
+//                
+//                
+//                Color.clear.frame(height: 10)
+//                
+//                Button(action: {
+//                    showingResourses.toggle()
+//                    // Close others
+//                    showingPersonalNotes = false
+//                    showingMainSettings = false
+//                    showingFeedbackMenu = false
+//                }) {
+//                    Resourses(showing: showingResourses)
+//                }
+//                .buttonStyle(.plain)
+//                Color.clear.frame(height: 10)
+//                
+//                Button(action: {
+//                    showingFeedbackMenu.toggle()
+//                    // Close others
+//                    showingPersonalNotes = false
+//                    showingMainSettings = false
+//                    showingResourses = false
+//                }) {
+//                    GetFeedback(showing: showingFeedbackMenu)
+//                }
+//                .buttonStyle(.plain)
+//                
+//                Color.clear.frame(height: 10)
+//            }
+//            .padding(.horizontal)
+//            .onAppear{
+//                savedUserNotes = NotesStorage.load()
+//            }
+//        }
 //    }
 //}
+
 
 struct PersonalNotes: View {
     let showing: Bool
