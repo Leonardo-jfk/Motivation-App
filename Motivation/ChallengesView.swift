@@ -15,6 +15,9 @@ struct ChallengesView: View {
         VStack {
             Text("Challenges List")
                 .font(.largeTitle)
+            Image(systemName: "book").resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
             // Your future challenges logic here
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -175,28 +175,14 @@ struct ContentView: View {
                             
                         })
                         Spacer()
+                        CustomTabBar(selectedTab: $selectedTab).ignoresSafeArea()
+
                     }
-                    ZStack(alignment: .bottom) {
-                                // Your Main Content
-                        Group {
-                                                switch selectedTab {
-                                                case .challenges:
-                                                    ChallengesView()
-                                                case .today:
-                                                    Text("Today Screen") // Replace with your TodayView
-                                                default:
-                                                    Text("Other Screen")
-                                                }
-                                            }
-                                
-                                // The Toolbar
-                                CustomTabBar(selectedTab: $selectedTab)
-                            }
-                            .ignoresSafeArea(edges: .bottom)
+                    
                 }
                 .preferredColorScheme(appScheme.preferredColorScheme)
                 
-
+//                CustomTabBar(selectedTab: $selectedTab)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
@@ -217,15 +203,6 @@ struct ContentView: View {
                         }
                     }
                     
-//                    ToolbarItem(placement: .bottomBar) {
-//                        NavigationLink(destination: HouseMenu()) {
-//                            Image(systemName: "house")
-//                                .resizable()
-//                                .frame(width: 35, height: 35)
-//                                .foregroundStyle(.primary)
-//                                .padding(15) // touch target
-//                        }
-//                    }
                 }
                 
                 .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
@@ -265,20 +242,12 @@ struct CustomTabBar: View {
     
     // Define your tabs
     let tabs: [(name: String, icon: String, type: Tab)] = [
-            ("Today", "sun.max", .today),
             ("Practice", "figure.mindful.relaxing", .practice),
+            ("Today", "sun.max", .today),
             ("Challenges", "list.bullet.indent", .challenges),
             ("Quotes", "book", .quotes),
-            ("Settings", "gearshape", .settings)
         ]
     
-//    enum Tab: Int {
-//        case today = 0
-//        case practice = 1
-//        case challenges = 2
-//        case quotes = 3
-//        case settings = 4
-//    }
     
     var body: some View {
         HStack {
@@ -295,22 +264,20 @@ struct CustomTabBar: View {
                             .fontWeight(.medium)
                     }
                     .foregroundColor(selectedTab == tab.type ? .black : .secondary)
-                    .padding(.vertical, 8)
+                    .padding(.vertical, 16)
                     .padding(.horizontal, 16)
                     // The "Pill" effect for the active tab
                     .background(
                         Capsule()
-                            .fill(selectedTab == tab.type ? Color.gray.opacity(0.15) : Color.clear)
+                            .fill(selectedTab == tab.type ? Color.gray.opacity(0.25) : Color.clear)
                     )
                 }
                 
                 Spacer()
             }
         }
-        .padding(.top, 10)
-        .padding(.bottom, 34) // Padding for iPhone "Home Bar" area
         .background(.ultraThinMaterial) // Translucent glass effect
-        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 50, style: .continuous))
     }
 }
 
