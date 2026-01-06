@@ -64,7 +64,7 @@ enum Tab: Int {
     case track = 1
     case challenges = 2
     case goals = 3
-    case settings = 4
+//    case settings = 4
 }
 
 struct ContentView: View {
@@ -93,45 +93,45 @@ struct ContentView: View {
     }
 
     var body: some View {
-//        NavigationStack(path: $navManager.path) {
-//            ZStack {
-//                // Background
-//                backgroundLayer
-//                
-//                VStack(spacing: 0) {
-//                    // PAGE ROUTER
-//                    Group {
-//                        switch selectedTab {
-//                        case .today:
-//                            TodayView(showingQuote: $showingQuote,
-//                                      todayIndex: todayIndex,
-//                                      currentQuotes: currentQuotes,
-//                                      favoriteQuotes: $favoriteQuotes)
-//                        case .challenges:
-//                            ChallengesView()
-//                        case .track:
-//                            Text("Track / Practice View")
-//                        case .goals:
-//                            Text("Goals View")
-//                        case .settings:
-//                            SettingsList()
-//                        }
-//                    }
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                    .transition(.opacity) // Smooth fade between tabs
-//                    
-//                    // TAB BAR
-//                    CustomTabBar(selectedTab: $selectedTab, onPracticeTap: {
-//                        navManager.path.append(MainNavigation.track)
-//                        navManager.path.append(MainNavigation.challenges)
-//                        navManager.path.append(MainNavigation.goals)
-//                    })
-//                    .padding(.horizontal)
-//                    .padding(.bottom, 10)
-//                }
-//            }
-//            
-//        }
+        //        NavigationStack(path: $navManager.path) {
+        //            ZStack {
+        //                // Background
+        //                backgroundLayer
+        //
+        //                VStack(spacing: 0) {
+        //                    // PAGE ROUTER
+        //                    Group {
+        //                        switch selectedTab {
+        //                        case .today:
+        //                            TodayView(showingQuote: $showingQuote,
+        //                                      todayIndex: todayIndex,
+        //                                      currentQuotes: currentQuotes,
+        //                                      favoriteQuotes: $favoriteQuotes)
+        //                        case .challenges:
+        //                            ChallengesView()
+        //                        case .track:
+        //                            Text("Track / Practice View")
+        //                        case .goals:
+        //                            Text("Goals View")
+        //                        case .settings:
+        //                            SettingsList()
+        //                        }
+        //                    }
+        //                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+        //                    .transition(.opacity) // Smooth fade between tabs
+        //
+        //                    // TAB BAR
+        //                    CustomTabBar(selectedTab: $selectedTab, onPracticeTap: {
+        //                        navManager.path.append(MainNavigation.track)
+        //                        navManager.path.append(MainNavigation.challenges)
+        //                        navManager.path.append(MainNavigation.goals)
+        //                    })
+        //                    .padding(.horizontal)
+        //                    .padding(.bottom, 10)
+        //                }
+        //            }
+        //
+        //        }
         
         
         NavigationStack(path: $navManager.path) {
@@ -148,52 +148,50 @@ struct ContentView: View {
                         case .track:
                             Text("Track Viffffffdfffdfdfdfew")
                         case .goals:
-                            Text("Goals View")
-                        case .settings:
-                            SettingsList()
+                            GoalsView()
+                            //                        case .settings:
+                            //                            GoalsView()
+                                                    }
                         }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        
+                        CustomTabBar(selectedTab: $selectedTab) {
+                            // If you want the button to "Push" a screen:
+                            navManager.path.append(MainNavigation.track)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 10)
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    
-                    CustomTabBar(selectedTab: $selectedTab) {
-                        // If you want the button to "Push" a screen:
-                        navManager.path.append(MainNavigation.track)
+                }
+                // FIX: Attach destination here, at the root level of the Stack content
+                .navigationDestination(for: MainNavigation.self) { destination in
+                    switch destination {
+                    case .track:
+                        TrackView()
+                    case .challenges:
+                        ChallengesView()
+                    case .goals:
+                        GoalsView()
                     }
-                    .padding(.horizontal)
-                    .padding(.bottom, 10)
                 }
             }
-            // FIX: Attach destination here, at the root level of the Stack content
-            .navigationDestination(for: MainNavigation.self) { destination in
-                switch destination {
-                case .track:
-//                    Text("Detailed Track View")
-                    // Or your actual TrackView()
-                    TrackView()
-                case .challenges:
-                    ChallengesView()
-                case .goals:
-                    Text("Detailed Goals View")
-                }
-            }
+            
+            
+            
+            
+            
+            
+            
         }
         
-        
-        
-        
-        
-        
-        
-        }
-    
-    // Background Helper
-    var backgroundLayer: some View {
-        Image(colorScheme == .dark ? .backgroundDark : .backgroundLight)
-            .resizable()
-            .scaledToFill()
-            .ignoresSafeArea()
-    
-
+        // Background Helper
+        var backgroundLayer: some View {
+            Image(colorScheme == .dark ? .backgroundDark : .backgroundLight)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+            
+            
         }
     
 }
