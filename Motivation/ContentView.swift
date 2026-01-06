@@ -61,179 +61,321 @@ enum Tab: Int {
     case settings = 4
 }
 
+//struct ContentView: View {
+//    
+//    @StateObject private var navManager = NavigationManager()
+//    
+//    
+//    @State private var showingQuote = false
+//    @Environment(\.colorScheme) var colorScheme
+//    @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
+//    private var appScheme: AppColorScheme {
+//        AppColorScheme(rawValue: storedScheme) ?? .system
+//    }
+//    // Source of truth for favorites - load from storage on init
+//    @State public var favoriteQuotes: Set<String> = {
+//        return FavoriteStorage.load()
+//    }()
+//    
+//    @StateObject public var l10n = LocalizationManager.shared
+//    
+//    public var currentQuotes: [String] {
+//        switch l10n.currentLanguage {
+//        case .english:
+//            return quotesEng
+//        case .spanish:
+//            return quotesES
+//        case .french:
+//            return quotesFR
+//        }
+//    }
+//        private var todayIndex: Int {
+//            let day = dayOfYear() // 1-based
+//            guard !currentQuotes.isEmpty else { return 0 }
+//            return (day - 1) % currentQuotes.count
+//        }
+//        
+//    @State private var selectedTab: Tab = .challenges
+//    
+//        
+//        var body: some View {
+//            
+//            
+//            // Wrap the whole interactive content in a single NavigationStack
+//            NavigationStack(path: $navManager.path) {
+//                ZStack{
+//                    if colorScheme == .dark {
+//                        Image(.backgroundDark)
+//                            .resizable()
+//                            .scaledToFill()
+//                            .ignoresSafeArea()
+//                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                    }
+//                    else{
+//                        Image(.backgroundLight)
+//                            .resizable()
+//                            .scaledToFill()
+//                            .ignoresSafeArea()
+//                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                    }
+////                    VStack(spacing: 0) {
+////                                       // Main content based on selected tab
+////                                       ZStack {
+////                                           switch selectedTab {
+////                                           case .today:
+////                                               TodayView()
+////                                                   .transition(.opacity)
+////                                           case .practice:
+////                                               PracticeView()
+////                                                   .transition(.opacity)
+////                                           case .challenges:
+////                                               ChallengeView()
+////                                                   .transition(.opacity)
+////                                           case .quotes:
+////                                               QuotesView()
+////                                                   .transition(.opacity)
+////                                           case .settings:
+////                                               SettingsView()
+////                                                   .transition(.opacity)
+////                                           }
+////                                       }
+////                                       .frame(maxWidth: .infinity, maxHeight: .infinity)
+////                                       
+////                                       // Tab bar at the bottom
+////                                       CustomTabBar(selectedTab: $selectedTab)
+////                                   }
+////                    
+//                    VStack(spacing: 0){
+//                        // Spacer to push main content below the nav bar if needed
+//                        Spacer()
+//                        // Botón que abre la descripción
+//                        Button(action: {
+//                            showingQuote.toggle()
+//                        }, label: {
+//                            if showingQuote {
+//                                VStack(spacing: 0){
+//                                
+//                                AnimationView()
+//                                ZStack {
+//                                    RoundedRectangle(cornerRadius: 40, style: .continuous)
+//                                        .fill(Color.black.opacity(0.8))
+//                                        .frame(width: 350, height: 350)
+//                                    
+//                                    VStack {
+//                                        Text("Today's wisdom dose:".localized)
+//                                            .padding(.horizontal, 8)
+//                                            .padding(.vertical, 4)
+//                                            .background(.gray.opacity(0.4))
+//                                            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+//                                            .font(.title2)
+//                                            .foregroundStyle(.white)
+//                                        
+//                                        DayQuoteView(index: todayIndex, currentQuotes: currentQuotes)
+//                                            .padding(.horizontal)
+//                                            .frame(maxWidth: 350, maxHeight: 300)
+//                                            .font(.custom("CormorantGaramond-Italic", size: 24))
+//                                    }
+//                                    .padding(.top, 0)
+//                                }
+//                                .padding(.top, 0)
+//                            }
+////                                .preferredColorScheme(appScheme.preferredColorScheme)
+//                            } else {
+//                                ZStack {
+//                                    RoundedRectangle(cornerRadius: 30, style: .continuous)
+//                                        .fill(Color.black.opacity(0.8))
+//                                        .frame(width: 200, height: 100)
+//                                    
+//                                    Text("Get today's wisdom ".localized)
+//                                        .font(.title3)
+//                                        .bold()
+//                                        .foregroundStyle(.white)
+//                                        .background(.gray.opacity(0.5))
+//                                }
+//                                .padding()
+//                                
+//                                NavigationLink(destination: SettingsList()){}
+////                                Spacer()
+//                            }
+//                            
+//                        })
+//                        Spacer()
+//                        CustomTabBar(selectedTab: $selectedTab).ignoresSafeArea()
+//
+//                    }
+//                    
+//                }
+//                .preferredColorScheme(appScheme.preferredColorScheme)
+//                
+////                CustomTabBar(selectedTab: $selectedTab)
+//                .toolbar {
+//                    ToolbarItem(placement: .topBarLeading) {
+//                        NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
+//                            Image(systemName: "apple.books.pages")
+//                                .resizable()
+//                                .frame(width: 35, height: 35)
+//                                .foregroundStyle(.primary)
+//                                .padding(15) // touch target
+//                        }
+//                    }
+//                    ToolbarItem(placement: .topBarTrailing) {
+//                        NavigationLink(destination: HouseMenu()) {
+//                            Image(systemName: "house")
+//                                .resizable()
+//                                .frame(width: 35, height: 35)
+//                                .foregroundStyle(.primary)
+//                                .padding(15) // touch target
+//                        }
+//                    }
+//                    
+//                }
+//                
+//                .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
+//                    favoriteQuotes = []
+//                }
+//            
+//            }
+//            
+//            .environmentObject(navManager) 
+//            
+//    }
+//}
+    // A small view that safely shows the quote for a given index.
+
+
+
+
+
+
+
+
+
+
+
 struct ContentView: View {
-    
     @StateObject private var navManager = NavigationManager()
-    
-    
+    @State private var selectedTab: Tab = .today // Default to Today
     @State private var showingQuote = false
+    
     @Environment(\.colorScheme) var colorScheme
     @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
-    private var appScheme: AppColorScheme {
-        AppColorScheme(rawValue: storedScheme) ?? .system
-    }
-    // Source of truth for favorites - load from storage on init
-    @State public var favoriteQuotes: Set<String> = {
-        return FavoriteStorage.load()
-    }()
     
+    // Quotes logic stays here or in a ViewModel
+    @State public var favoriteQuotes: Set<String> = FavoriteStorage.load()
     @StateObject public var l10n = LocalizationManager.shared
-    
-    public var currentQuotes: [String] {
+
+    var currentQuotes: [String] {
         switch l10n.currentLanguage {
-        case .english:
-            return quotesEng
-        case .spanish:
-            return quotesES
-        case .french:
-            return quotesFR
+        case .english: return quotesEng
+        case .spanish: return quotesES
+        case .french: return quotesFR
         }
     }
-        private var todayIndex: Int {
-            let day = dayOfYear() // 1-based
-            guard !currentQuotes.isEmpty else { return 0 }
-            return (day - 1) % currentQuotes.count
-        }
-        
-    @State private var selectedTab: Tab = .challenges
     
-        
-        var body: some View {
-            
-            
-            // Wrap the whole interactive content in a single NavigationStack
-            NavigationStack(path: $navManager.path) {
-                ZStack{
-                    if colorScheme == .dark {
-                        Image(.backgroundDark)
-                            .resizable()
-                            .scaledToFill()
-                            .ignoresSafeArea()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
-                    else{
-                        Image(.backgroundLight)
-                            .resizable()
-                            .scaledToFill()
-                            .ignoresSafeArea()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
-                    
-                    
-                    VStack(spacing: 0){
-                        // Spacer to push main content below the nav bar if needed
-                        Spacer()
-                        // Botón que abre la descripción
-                        Button(action: {
-                            showingQuote.toggle()
-                        }, label: {
-                            if showingQuote {
-                                VStack(spacing: 0){
-                                
-                                AnimationView()
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 40, style: .continuous)
-                                        .fill(Color.black.opacity(0.8))
-                                        .frame(width: 350, height: 350)
-                                    
-                                    VStack {
-                                        Text("Today's wisdom dose:".localized)
-                                            .padding(.horizontal, 8)
-                                            .padding(.vertical, 4)
-                                            .background(.gray.opacity(0.4))
-                                            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                                            .font(.title2)
-                                            .foregroundStyle(.white)
-                                        
-                                        DayQuoteView(index: todayIndex, currentQuotes: currentQuotes)
-                                            .padding(.horizontal)
-                                            .frame(maxWidth: 350, maxHeight: 300)
-                                            .font(.custom("CormorantGaramond-Italic", size: 24))
-                                    }
-                                    .padding(.top, 0)
-                                }
-                                .padding(.top, 0)
-                            }
-//                                .preferredColorScheme(appScheme.preferredColorScheme)
-                            } else {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 30, style: .continuous)
-                                        .fill(Color.black.opacity(0.8))
-                                        .frame(width: 200, height: 100)
-                                    
-                                    Text("Get today's wisdom ".localized)
-                                        .font(.title3)
-                                        .bold()
-                                        .foregroundStyle(.white)
-                                        .background(.gray.opacity(0.5))
-                                }
-                                .padding()
-                                
-                                NavigationLink(destination: SettingsList()){}
-//                                Spacer()
-                            }
-                            
-                        })
-                        Spacer()
-                        CustomTabBar(selectedTab: $selectedTab).ignoresSafeArea()
+    private var todayIndex: Int {
+        let day = dayOfYear()
+        return currentQuotes.isEmpty ? 0 : (day - 1) % currentQuotes.count
+    }
 
-                    }
-                    
-                }
-                .preferredColorScheme(appScheme.preferredColorScheme)
+    var body: some View {
+        NavigationStack(path: $navManager.path) {
+            ZStack {
+                // Background
+                backgroundLayer
                 
-//                CustomTabBar(selectedTab: $selectedTab)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
-                            Image(systemName: "apple.books.pages")
-                                .resizable()
-                                .frame(width: 35, height: 35)
-                                .foregroundStyle(.primary)
-                                .padding(15) // touch target
+                VStack(spacing: 0) {
+                    // PAGE ROUTER
+                    Group {
+                        switch selectedTab {
+                        case .today:
+                            TodayView(showingQuote: $showingQuote,
+                                      todayIndex: todayIndex,
+                                      currentQuotes: currentQuotes)
+                        case .challenges:
+                            ChallengesView() // Transition happens here
+                        case .practice:
+                            Text("Track / Practice View")
+                        case .quotes:
+                            Text("Goals View")
+                        case .settings:
+                            SettingsList()
                         }
                     }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: HouseMenu()) {
-                            Image(systemName: "house")
-                                .resizable()
-                                .frame(width: 35, height: 35)
-                                .foregroundStyle(.primary)
-                                .padding(15) // touch target
-                        }
-                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .transition(.opacity) // Smooth fade between tabs
                     
+                    // TAB BAR
+                    CustomTabBar(selectedTab: $selectedTab)
+                        .padding(.horizontal)
+                        .padding(.bottom, 10)
                 }
-                
-                .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
-                    favoriteQuotes = []
-                }
-            
             }
             
-            .environmentObject(navManager) 
+                            .toolbar {
+                                ToolbarItem(placement: .topBarLeading) {
+                                    NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
+                                        Image(systemName: "apple.books.pages")
+                                            .resizable()
+                                            .frame(width: 35, height: 35)
+                                            .foregroundStyle(.primary)
+                                            .padding(15) // touch target
+                                    }
+                                }
+                                ToolbarItem(placement: .topBarTrailing) {
+                                    NavigationLink(destination: HouseMenu()) {
+                                        Image(systemName: "house")
+                                            .resizable()
+                                            .frame(width: 35, height: 35)
+                                            .foregroundStyle(.primary)
+                                            .padding(15) // touch target
+                                    }
+                                }
             
+                            }
+            
+                            .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
+                                favoriteQuotes = []
+                            }
+            
+                        }
+                        .environmentObject(navManager)
+            }
+    
+    // Background Helper
+    var backgroundLayer: some View {
+        Image(colorScheme == .dark ? .backgroundDark : .backgroundLight)
+            .resizable()
+            .scaledToFill()
+            .ignoresSafeArea()
     }
 }
-    // A small view that safely shows the quote for a given index.
-    struct DayQuoteView: View {
-        let index: Int
-        let currentQuotes: [String]
+
+
+
+
+
+
+
+
+
+struct DayQuoteView: View {
+    let index: Int
+    let currentQuotes: [String]
+    
+    var body: some View {
+        let text: String = {
+            guard !currentQuotes.isEmpty else { return "No quotes available.".localized }
+            let safeIndex = max(0, min(index, currentQuotes.count - 1))
+            return currentQuotes[safeIndex]
+        }()
         
-        var body: some View {
-            let text: String = {
-                guard !currentQuotes.isEmpty else { return "No quotes available.".localized }
-                let safeIndex = max(0, min(index, currentQuotes.count - 1))
-                return currentQuotes[safeIndex]
-            }()
-            
-            return Text(text)
-                .font(.custom("CormorantGaramond-Italic", size: 28))
-                .multilineTextAlignment(.center)
-                .foregroundStyle(.white)
-                .padding(.vertical, 60)
-        }
+        return Text(text)
+            .font(.custom("CormorantGaramond-Italic", size: 28))
+            .multilineTextAlignment(.center)
+            .foregroundStyle(.white)
+            .padding(.vertical, 60)
     }
+}
 
 
 
@@ -242,11 +384,11 @@ struct CustomTabBar: View {
     
     // Define your tabs
     let tabs: [(name: String, icon: String, type: Tab)] = [
-            ("Practice", "figure.mindful.relaxing", .practice),
-            ("Today", "sun.max", .today),
-            ("Challenges", "list.bullet.indent", .challenges),
-            ("Quotes", "book", .quotes),
-        ]
+        ("Track", "tree", .practice),
+        ("Today", "sun.max", .today),
+        ("Challenge", "figure.archery", .challenges),
+        ("Goal", "flame", .quotes),
+    ]
     
     
     var body: some View {
@@ -281,7 +423,61 @@ struct CustomTabBar: View {
     }
 }
 
-
+struct TodayView: View {
+    @Binding var showingQuote: Bool
+    let todayIndex: Int
+    let currentQuotes: [String]
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            Spacer()
+            
+            Button(action: {
+                withAnimation(.spring()) {
+                    showingQuote.toggle()
+                }
+            }) {
+                if showingQuote {
+                    VStack(spacing: 0) {
+                        AnimationView()
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 40, style: .continuous)
+                                .fill(Color.black.opacity(0.8))
+                                .frame(width: 350, height: 350)
+                            
+                            VStack {
+                                Text("Today's wisdom dose:".localized)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .background(.gray.opacity(0.4))
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                    .font(.title2)
+                                    .foregroundStyle(.white)
+                                
+                                DayQuoteView(index: todayIndex, currentQuotes: currentQuotes)
+                                    .padding(.horizontal)
+                                    .frame(maxWidth: 350, maxHeight: 300)
+                            }
+                        }
+                    }
+                } else {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 30, style: .continuous)
+                            .fill(Color.black.opacity(0.8))
+                            .frame(width: 220, height: 110)
+                        
+                        Text("Get today's wisdom".localized)
+                            .font(.title3)
+                            .bold()
+                            .foregroundStyle(.white)
+                    }
+                }
+            }
+            
+            Spacer()
+        }
+    }
+}
 
 #Preview {
     ContentView()

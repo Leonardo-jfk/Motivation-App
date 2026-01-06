@@ -10,8 +10,8 @@ import SwiftUI
 import Lottie
 
 
-struct ChallengesView: View {
-    var body: some View {
+public struct ChallengesView: View {
+    public var body: some View {
         VStack {
             Text("Challenges List")
                 .font(.largeTitle)
