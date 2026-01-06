@@ -31,7 +31,9 @@ class NavigationManager: ObservableObject {
 }
 
 enum MainNavigation: Hashable {
-    case quoteLibrary
+    case track
+    case challenges
+    case goals
     // Add other cases as needed in future
 }
 
@@ -59,9 +61,9 @@ public struct AnimationView: View {
 //for CustomTabBar
 enum Tab: Int {
     case today = 0
-    case practice = 1
+    case track = 1
     case challenges = 2
-    case quotes = 3
+    case goals = 3
     case settings = 4
 }
 
@@ -103,12 +105,13 @@ struct ContentView: View {
                         case .today:
                             TodayView(showingQuote: $showingQuote,
                                       todayIndex: todayIndex,
-                                      currentQuotes: currentQuotes)
+                                      currentQuotes: currentQuotes,
+                                      favoriteQuotes: $favoriteQuotes)
                         case .challenges:
                             ChallengesView()
-                        case .practice:
+                        case .track:
                             Text("Track / Practice View")
-                        case .quotes:
+                        case .goals:
                             Text("Goals View")
                         case .settings:
                             SettingsList()
@@ -119,48 +122,17 @@ struct ContentView: View {
                     
                     // TAB BAR
                     CustomTabBar(selectedTab: $selectedTab, onPracticeTap: {
-                        navManager.path.append(MainNavigation.quoteLibrary)
+                        navManager.path.append(MainNavigation.track)
+                        navManager.path.append(MainNavigation.challenges)
+                        navManager.path.append(MainNavigation.goals)
                     })
-                        .padding(.horizontal)
-                        .padding(.bottom, 10)
+                    .padding(.horizontal)
+                    .padding(.bottom, 10)
                 }
             }
             
-                            .toolbar {
-                                ToolbarItem(placement: .topBarLeading) {
-                                    NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
-                                        Image(systemName: "apple.books.pages")
-                                            .resizable()
-                                            .frame(width: 35, height: 35)
-                                            .foregroundStyle(.primary)
-                                            .padding(15) // touch target
-                                    }
-                                }
-                                ToolbarItem(placement: .topBarTrailing) {
-                                    NavigationLink(destination: HouseMenu()) {
-                                        Image(systemName: "house")
-                                            .resizable()
-                                            .frame(width: 35, height: 35)
-                                            .foregroundStyle(.primary)
-                                            .padding(15) // touch target
-                                    }
-                                }
-            
-                            }
-            
-                            .onReceive(NotificationCenter.default.publisher(for: .didPerformFullReset)) { _ in
-                                favoriteQuotes = []
-                            }
-            
-                        }
-                        .environmentObject(navManager)
-                .navigationDestination(for: MainNavigation.self) { dest in
-                    switch dest {
-                    case .quoteLibrary:
-                        ChallengesView()
-                    }
-                }
-            }
+        }
+        }
     
     // Background Helper
     var backgroundLayer: some View {
@@ -168,9 +140,11 @@ struct ContentView: View {
             .resizable()
             .scaledToFill()
             .ignoresSafeArea()
-    }
-}
+    
 
+        }
+    
+}
 
 
 
@@ -208,10 +182,10 @@ struct CustomTabBar: View {
     
     // Define your tabs
     let tabs: [(name: String, icon: String, type: Tab)] = [
-        ("Track", "tree", .practice),
+        ("Track", "tree", .track),
         ("Today", "sun.max", .today),
         ("Challenge", "figure.archery", .challenges),
-        ("Goal", "flame", .quotes),
+        ("Goal", "flame", .goals),
     ]
     
     
@@ -222,7 +196,7 @@ struct CustomTabBar: View {
                 
                 Button(action: {
                     selectedTab = tab.type
-                    if tab.type == .practice {
+                    if tab.type == .track {
                         onPracticeTap?()
                     }
                 }) {
@@ -256,6 +230,7 @@ struct TodayView: View {
     @Binding var showingQuote: Bool
     let todayIndex: Int
     let currentQuotes: [String]
+    @Binding var favoriteQuotes: Set<String>
     
     var body: some View {
         VStack(spacing: 0) {
@@ -302,9 +277,55 @@ struct TodayView: View {
                     }
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
+                        Image(systemName: "apple.books.pages")
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                            .foregroundStyle(.primary)
+                            .padding(15) // touch target
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(destination: HouseMenu()) {
+                        Image(systemName: "house")
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                            .foregroundStyle(.primary)
+                            .padding(15) // touch target
+                    }
+                }
+                
+            }
+            
             
             Spacer()
+            
+            //        .toolbar {
+            //            ToolbarItem(placement: .topBarLeading) {
+            //                NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
+            //                    Image(systemName: "apple.books.pages")
+            //                        .resizable()
+            //                        .frame(width: 35, height: 35)
+            //                        .foregroundStyle(.primary)
+            //                        .padding(15) // touch target
+            //                }
+            //            }
+            //            ToolbarItem(placement: .topBarTrailing) {
+            //                NavigationLink(destination: HouseMenu()) {
+            //                    Image(systemName: "house")
+            //                        .resizable()
+            //                        .frame(width: 35, height: 35)
+            //                        .foregroundStyle(.primary)
+            //                        .padding(15) // touch target
+            //                }
+            //            }
+            //            
+            //        }
+            
         }
+        
     }
 }
 

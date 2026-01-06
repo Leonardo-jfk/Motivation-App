@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D0F3EC12F0D42C5002B6F25 /* TrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F3EC02F0D42C4002B6F25 /* TrackView.swift */; };
+		1D0F3EC32F0D42CA002B6F25 /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F3EC22F0D42CA002B6F25 /* GoalsView.swift */; };
 		1D4803692EFA14820063C486 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4803682EFA14820063C486 /* FirebaseAnalytics */; };
 		1D48036B2EFA14820063C486 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 1D48036A2EFA14820063C486 /* FirebaseCrashlytics */; };
 		1D4BD70E2F08294C00F44D07 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1D4BD70D2F08294C00F44D07 /* Lottie */; };
@@ -50,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D0F3EC02F0D42C4002B6F25 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
+		1D0F3EC22F0D42CA002B6F25 /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
 		1D514E212F0C4A9D008A7B78 /* ChallengesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengesView.swift; sourceTree = "<group>"; };
 		1D6E581B2E919F1900E6B841 /* Motivation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Motivation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D6E58282E919F1B00E6B841 /* MotivationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MotivationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,6 +224,8 @@
 				1DFA7C232F0425F700A1D6E5 /* PrivacyInfo.xcprivacy */,
 				1DC0AEC22F0842DF00790DED /* TestScreen.swift */,
 				1D514E212F0C4A9D008A7B78 /* ChallengesView.swift */,
+				1D0F3EC02F0D42C4002B6F25 /* TrackView.swift */,
+				1D0F3EC22F0D42CA002B6F25 /* GoalsView.swift */,
 			);
 			path = Motivation;
 			sourceTree = "<group>";
@@ -390,6 +396,7 @@
 			files = (
 				1D7CC64B2F014CC400FAD66D /* QuoteLibrary.swift in Sources */,
 				1DFA7C1F2F04194C00A1D6E5 /* build_final.sh in Sources */,
+				1D0F3EC12F0D42C5002B6F25 /* TrackView.swift in Sources */,
 				1D7CC64C2F014CC400FAD66D /* Quotes365.swift in Sources */,
 				1DC0AEC32F0842DF00790DED /* TestScreen.swift in Sources */,
 				1D7CC64D2F014CC400FAD66D /* MotivationApp.swift in Sources */,
@@ -400,6 +407,7 @@
 				1D7CC6502F014CC400FAD66D /* HouseSettingsPage.swift in Sources */,
 				1D7CC6512F014CC400FAD66D /* NotifManager.swift in Sources */,
 				1D7CC6522F014CC400FAD66D /* HouseMenu.swift in Sources */,
+				1D0F3EC32F0D42CA002B6F25 /* GoalsView.swift in Sources */,
 				1D514E222F0C4A9D008A7B78 /* ChallengesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
