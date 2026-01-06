@@ -83,6 +83,7 @@
 		1D5820662F0709DB005CB6CF /* Exceptions for "Resourses" folder in "Motivation" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"ai animation Flow 1.json",
 				Assets.xcassets,
 				BackWitcher.mp3,
 				batman.json,
@@ -99,6 +100,8 @@
 				"Meditation Skull.json",
 				Menorah.json,
 				MessageSent.json,
+				MeteorBack.json,
+				SciFiBack.json,
 				"Time Management.json",
 			);
 			target = 1D6E581A2E919F1900E6B841 /* Motivation */;
@@ -106,6 +109,7 @@
 		1D5820672F0709DB005CB6CF /* Exceptions for "Resourses" folder in "MotivationTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"ai animation Flow 1.json",
 				Assets.xcassets,
 				BackWitcher.mp3,
 				batman.json,
@@ -122,6 +126,8 @@
 				"Meditation Skull.json",
 				Menorah.json,
 				MessageSent.json,
+				MeteorBack.json,
+				SciFiBack.json,
 				"Time Management.json",
 			);
 			target = 1D6E58272E919F1B00E6B841 /* MotivationTests */;

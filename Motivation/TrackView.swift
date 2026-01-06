@@ -20,17 +20,18 @@ public struct TrackView: View {
     
     public var body: some View {
         ZStack{
-            LottieView(animation: .named("LightBackground"))
+            LottieView(animation: .named("MeteorBack"))
                 .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
                 })
                 .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
                 .animationDidFinish { completed in onAnimationDidFinish?()
                 }
+                .resizable()
                 .ignoresSafeArea()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             
             VStack {
-                Text("Challenges List")
+                Text("Days that your lived well:")
                     .font(.largeTitle)
                 Image(systemName: "heart").resizable()
                     .scaledToFit()
