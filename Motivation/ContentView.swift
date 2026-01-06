@@ -93,24 +93,60 @@ struct ContentView: View {
     }
 
     var body: some View {
+//        NavigationStack(path: $navManager.path) {
+//            ZStack {
+//                // Background
+//                backgroundLayer
+//                
+//                VStack(spacing: 0) {
+//                    // PAGE ROUTER
+//                    Group {
+//                        switch selectedTab {
+//                        case .today:
+//                            TodayView(showingQuote: $showingQuote,
+//                                      todayIndex: todayIndex,
+//                                      currentQuotes: currentQuotes,
+//                                      favoriteQuotes: $favoriteQuotes)
+//                        case .challenges:
+//                            ChallengesView()
+//                        case .track:
+//                            Text("Track / Practice View")
+//                        case .goals:
+//                            Text("Goals View")
+//                        case .settings:
+//                            SettingsList()
+//                        }
+//                    }
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                    .transition(.opacity) // Smooth fade between tabs
+//                    
+//                    // TAB BAR
+//                    CustomTabBar(selectedTab: $selectedTab, onPracticeTap: {
+//                        navManager.path.append(MainNavigation.track)
+//                        navManager.path.append(MainNavigation.challenges)
+//                        navManager.path.append(MainNavigation.goals)
+//                    })
+//                    .padding(.horizontal)
+//                    .padding(.bottom, 10)
+//                }
+//            }
+//            
+//        }
+        
+        
         NavigationStack(path: $navManager.path) {
             ZStack {
-                // Background
                 backgroundLayer
                 
                 VStack(spacing: 0) {
-                    // PAGE ROUTER
                     Group {
                         switch selectedTab {
                         case .today:
-                            TodayView(showingQuote: $showingQuote,
-                                      todayIndex: todayIndex,
-                                      currentQuotes: currentQuotes,
-                                      favoriteQuotes: $favoriteQuotes)
+                            TodayView(showingQuote: $showingQuote, todayIndex: todayIndex, currentQuotes: currentQuotes, favoriteQuotes: $favoriteQuotes)
                         case .challenges:
                             ChallengesView()
                         case .track:
-                            Text("Track / Practice View")
+                            Text("Track Viffffffdfffdfdfdfew")
                         case .goals:
                             Text("Goals View")
                         case .settings:
@@ -118,20 +154,36 @@ struct ContentView: View {
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .transition(.opacity) // Smooth fade between tabs
                     
-                    // TAB BAR
-                    CustomTabBar(selectedTab: $selectedTab, onPracticeTap: {
+                    CustomTabBar(selectedTab: $selectedTab) {
+                        // If you want the button to "Push" a screen:
                         navManager.path.append(MainNavigation.track)
-                        navManager.path.append(MainNavigation.challenges)
-                        navManager.path.append(MainNavigation.goals)
-                    })
+                    }
                     .padding(.horizontal)
                     .padding(.bottom, 10)
                 }
             }
-            
+            // FIX: Attach destination here, at the root level of the Stack content
+            .navigationDestination(for: MainNavigation.self) { destination in
+                switch destination {
+                case .track:
+//                    Text("Detailed Track View")
+                    // Or your actual TrackView()
+                    TrackView()
+                case .challenges:
+                    ChallengesView()
+                case .goals:
+                    Text("Detailed Goals View")
+                }
+            }
         }
+        
+        
+        
+        
+        
+        
+        
         }
     
     // Background Helper
