@@ -47,6 +47,7 @@ public struct ChallengesView: View {
                 // Your future challenges logic here
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea()
         }
     }
 }

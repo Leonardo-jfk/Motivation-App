@@ -45,7 +45,9 @@ public struct AnimationView: View {
     var onAnimationDidFinish: (() -> Void)? = nil
     
     public var body: some View {
-        VStack(spacing: 0){
+//        VStack(spacing: 0){
+        VStack{
+
             LottieView(animation: .named(fileName))
                 .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
                 })
@@ -93,10 +95,28 @@ struct ContentView: View {
     var body: some View {
         
         NavigationStack(path: $navManager.path) {
-            ZStack {
+            ZStack(alignment: .bottom) {
                 backgroundLayer
                 
-                VStack {
+//                VStack {
+//                    Group {
+//                        switch selectedTab {
+//                        case .today:
+//                            TodayView(showingQuote: $showingQuote, todayIndex: todayIndex, currentQuotes: currentQuotes, favoriteQuotes: $favoriteQuotes)
+//                        case .challenges:
+//                            ChallengesView()
+//                        case .track:
+//                            TrackView()
+//                        case .goals:
+//                            GoalsView()
+//                        }
+//                    }
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                    
+//                    CustomTabBar(selectedTab: $selectedTab)
+//                }.ignoresSafeArea()
+                
+//                ZStack(alignment: .bottom) { // Align everything to the bottom
                     Group {
                         switch selectedTab {
                         case .today:
@@ -110,9 +130,14 @@ struct ContentView: View {
                         }
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    
+                    // Add padding to the bottom of the views so content doesn't
+                    // hide behind the TabBar. 80-100 is usually a good range.
+                    .padding(.bottom, 70)
+
                     CustomTabBar(selectedTab: $selectedTab)
-                }.ignoresSafeArea()
+                }
+                .ignoresSafeArea(edges: .bottom)
+                
             }
             // FIX: Attach destination here, at the root level of the Stack content
             .navigationDestination(for: MainNavigation.self) { destination in
@@ -124,7 +149,7 @@ struct ContentView: View {
                     case .goals:
                         GoalsView()
                     }
-                }
+//                }
             }
             
             
@@ -191,7 +216,7 @@ struct CustomTabBar: View {
     
     
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             ForEach(tabs, id: \.name) { tab in
                 Spacer()
                 
@@ -212,12 +237,12 @@ struct CustomTabBar: View {
                     .foregroundColor(selectedTab == tab.type ? .black : .secondary)
                     .padding(.vertical, 16)
                     .padding(.horizontal, 16)
-                    .ignoresSafeArea()
+//                    .ignoresSafeArea()
                     // The "Pill" effect for the active tab
                     .background(
                         Capsule()
                             .fill(selectedTab == tab.type ? Color.gray.opacity(0.25) : Color.clear)
-                            .ignoresSafeArea()
+//                            .ignoresSafeArea()
                     )
                 }
                 
@@ -225,8 +250,9 @@ struct CustomTabBar: View {
             }
         }
         .background(.ultraThinMaterial) // Translucent glass effect
-        .clipShape(RoundedRectangle(cornerRadius: 50, style: .continuous))
-        .ignoresSafeArea(edges: .bottom)
+        .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
+        .shadow(color: Color.black.opacity(0.45), radius: 10, x: 0, y: 5)
+//        .ignoresSafeArea(edges: .bottom)
     }
 }
 
