@@ -45,8 +45,7 @@ public struct AnimationView: View {
     var onAnimationDidFinish: (() -> Void)? = nil
     
     public var body: some View {
-        //        Text("books should be here")
-//        VStack(spacing: 0){
+        VStack(spacing: 0){
             LottieView(animation: .named(fileName))
                 .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
                 })
@@ -55,7 +54,7 @@ public struct AnimationView: View {
                 }
                 .frame(width: 150, height: 150)
         }
-//    }
+    }
 }
 
 //for CustomTabBar
@@ -64,7 +63,6 @@ enum Tab: Int {
     case track = 1
     case challenges = 2
     case goals = 3
-//    case settings = 4
 }
 
 struct ContentView: View {
@@ -93,52 +91,12 @@ struct ContentView: View {
     }
 
     var body: some View {
-        //        NavigationStack(path: $navManager.path) {
-        //            ZStack {
-        //                // Background
-        //                backgroundLayer
-        //
-        //                VStack(spacing: 0) {
-        //                    // PAGE ROUTER
-        //                    Group {
-        //                        switch selectedTab {
-        //                        case .today:
-        //                            TodayView(showingQuote: $showingQuote,
-        //                                      todayIndex: todayIndex,
-        //                                      currentQuotes: currentQuotes,
-        //                                      favoriteQuotes: $favoriteQuotes)
-        //                        case .challenges:
-        //                            ChallengesView()
-        //                        case .track:
-        //                            Text("Track / Practice View")
-        //                        case .goals:
-        //                            Text("Goals View")
-        //                        case .settings:
-        //                            SettingsList()
-        //                        }
-        //                    }
-        //                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-        //                    .transition(.opacity) // Smooth fade between tabs
-        //
-        //                    // TAB BAR
-        //                    CustomTabBar(selectedTab: $selectedTab, onPracticeTap: {
-        //                        navManager.path.append(MainNavigation.track)
-        //                        navManager.path.append(MainNavigation.challenges)
-        //                        navManager.path.append(MainNavigation.goals)
-        //                    })
-        //                    .padding(.horizontal)
-        //                    .padding(.bottom, 10)
-        //                }
-        //            }
-        //
-        //        }
-        
         
         NavigationStack(path: $navManager.path) {
             ZStack {
                 backgroundLayer
                 
-                VStack(spacing: 0) {
+                VStack {
                     Group {
                         switch selectedTab {
                         case .today:
@@ -146,27 +104,20 @@ struct ContentView: View {
                         case .challenges:
                             ChallengesView()
                         case .track:
-                            Text("Track Viffffffdfffdfdfdfew")
+                            TrackView()
                         case .goals:
                             GoalsView()
-                            //                        case .settings:
-                            //                            GoalsView()
-                                                    }
                         }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        
-                        CustomTabBar(selectedTab: $selectedTab) {
-                            // If you want the button to "Push" a screen:
-                            navManager.path.append(MainNavigation.track)
-                        }
-                        .padding(.horizontal)
-                        .padding(.bottom, 10)
                     }
-                }
-                // FIX: Attach destination here, at the root level of the Stack content
-                .navigationDestination(for: MainNavigation.self) { destination in
-                    switch destination {
-                    case .track:
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    
+                    CustomTabBar(selectedTab: $selectedTab)
+                }.ignoresSafeArea()
+            }
+            // FIX: Attach destination here, at the root level of the Stack content
+            .navigationDestination(for: MainNavigation.self) { destination in
+                switch destination {
+                case .track:
                         TrackView()
                     case .challenges:
                         ChallengesView()
@@ -261,10 +212,12 @@ struct CustomTabBar: View {
                     .foregroundColor(selectedTab == tab.type ? .black : .secondary)
                     .padding(.vertical, 16)
                     .padding(.horizontal, 16)
+                    .ignoresSafeArea()
                     // The "Pill" effect for the active tab
                     .background(
                         Capsule()
                             .fill(selectedTab == tab.type ? Color.gray.opacity(0.25) : Color.clear)
+                            .ignoresSafeArea()
                     )
                 }
                 
@@ -273,6 +226,7 @@ struct CustomTabBar: View {
         }
         .background(.ultraThinMaterial) // Translucent glass effect
         .clipShape(RoundedRectangle(cornerRadius: 50, style: .continuous))
+        .ignoresSafeArea(edges: .bottom)
     }
 }
 
@@ -351,28 +305,6 @@ struct TodayView: View {
             
             
             Spacer()
-            
-            //        .toolbar {
-            //            ToolbarItem(placement: .topBarLeading) {
-            //                NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
-            //                    Image(systemName: "apple.books.pages")
-            //                        .resizable()
-            //                        .frame(width: 35, height: 35)
-            //                        .foregroundStyle(.primary)
-            //                        .padding(15) // touch target
-            //                }
-            //            }
-            //            ToolbarItem(placement: .topBarTrailing) {
-            //                NavigationLink(destination: HouseMenu()) {
-            //                    Image(systemName: "house")
-            //                        .resizable()
-            //                        .frame(width: 35, height: 35)
-            //                        .foregroundStyle(.primary)
-            //                        .padding(15) // touch target
-            //                }
-            //            }
-            //            
-            //        }
             
         }
         

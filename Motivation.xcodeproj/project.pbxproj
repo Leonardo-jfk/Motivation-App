@@ -94,6 +94,8 @@
 				"Filling container.json",
 				"Girl with books.json",
 				GymBro.json,
+				"Japan Flow.json",
+				"Japanese fans.json",
 				LightBack2.json,
 				LightBackLottie.json,
 				Loading.json,
@@ -101,8 +103,10 @@
 				Menorah.json,
 				MessageSent.json,
 				MeteorBack.json,
+				ninjato.json,
 				SciFiBack.json,
 				"Time Management.json",
+				"Walking Broccoli.json",
 			);
 			target = 1D6E581A2E919F1900E6B841 /* Motivation */;
 		};
@@ -120,6 +124,8 @@
 				"Filling container.json",
 				"Girl with books.json",
 				GymBro.json,
+				"Japan Flow.json",
+				"Japanese fans.json",
 				LightBack2.json,
 				LightBackLottie.json,
 				Loading.json,
@@ -127,8 +133,10 @@
 				Menorah.json,
 				MessageSent.json,
 				MeteorBack.json,
+				ninjato.json,
 				SciFiBack.json,
 				"Time Management.json",
+				"Walking Broccoli.json",
 			);
 			target = 1D6E58272E919F1B00E6B841 /* MotivationTests */;
 		};

@@ -34,7 +34,7 @@ public struct GoalsView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             
             Rectangle()
-                .frame(width:100, height: 200)
+                .frame(width:300, height: 300)
                 .foregroundStyle(.white)
          
             VStack {
