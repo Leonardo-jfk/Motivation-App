@@ -45,7 +45,6 @@ public struct AnimationView: View {
     var onAnimationDidFinish: (() -> Void)? = nil
     
     public var body: some View {
-//        VStack(spacing: 0){
         VStack{
 
             LottieView(animation: .named(fileName))
@@ -97,47 +96,27 @@ struct ContentView: View {
         NavigationStack(path: $navManager.path) {
             ZStack(alignment: .bottom) {
                 backgroundLayer
-                
-//                VStack {
-//                    Group {
-//                        switch selectedTab {
-//                        case .today:
-//                            TodayView(showingQuote: $showingQuote, todayIndex: todayIndex, currentQuotes: currentQuotes, favoriteQuotes: $favoriteQuotes)
-//                        case .challenges:
-//                            ChallengesView()
-//                        case .track:
-//                            TrackView()
-//                        case .goals:
-//                            GoalsView()
-//                        }
-//                    }
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                    
-//                    CustomTabBar(selectedTab: $selectedTab)
-//                }.ignoresSafeArea()
-                
-//                ZStack(alignment: .bottom) { // Align everything to the bottom
-                    Group {
-                        switch selectedTab {
-                        case .today:
-                            TodayView(showingQuote: $showingQuote, todayIndex: todayIndex, currentQuotes: currentQuotes, favoriteQuotes: $favoriteQuotes)
-                        case .challenges:
-                            ChallengesView()
-                        case .track:
-                            TrackView()
-                        case .goals:
-                            GoalsView()
-                        }
+                Group {
+                    switch selectedTab {
+                    case .today:
+                        TodayView(showingQuote: $showingQuote, todayIndex: todayIndex, currentQuotes: currentQuotes, favoriteQuotes: $favoriteQuotes)
+                    case .challenges:
+                        ChallengesView()
+                    case .track:
+                        TrackView()
+                    case .goals:
+                        GoalsView()
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    // Add padding to the bottom of the views so content doesn't
-                    // hide behind the TabBar. 80-100 is usually a good range.
-                    .padding(.bottom, 70)
-
-                    CustomTabBar(selectedTab: $selectedTab)
                 }
-                .ignoresSafeArea(edges: .bottom)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                // Add padding to the bottom of the views so content doesn't
+                // hide behind the TabBar. 80-100 is usually a good range.
+                .padding(.bottom, 70)
                 
+                CustomTabBar(selectedTab: $selectedTab)
+            }
+            .ignoresSafeArea(edges: .bottom)
+            
             }
             // FIX: Attach destination here, at the root level of the Stack content
             .navigationDestination(for: MainNavigation.self) { destination in
@@ -147,28 +126,21 @@ struct ContentView: View {
                     case .challenges:
                         ChallengesView()
                     case .goals:
-                        GoalsView()
-                    }
-//                }
+                    GoalsView()
+                }
             }
-            
-            
-            
-            
-            
-            
-            
-        }
         
-        // Background Helper
-        var backgroundLayer: some View {
-            Image(colorScheme == .dark ? .backgroundDark : .backgroundLight)
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
-            
-            
-        }
+    }
+    
+    // Background Helper
+    var backgroundLayer: some View {
+        Image(colorScheme == .dark ? .backgroundDark : .backgroundLight)
+            .resizable()
+            .scaledToFill()
+            .ignoresSafeArea()
+        
+        
+    }
     
 }
 
@@ -210,15 +182,16 @@ struct CustomTabBar: View {
     let tabs: [(name: String, icon: String, type: Tab)] = [
         ("Track", "tree", .track),
         ("Today", "sun.max", .today),
-        ("Challenge", "figure.archery", .challenges),
         ("Goal", "flame", .goals),
+        ("Challenge", "figure.archery", .challenges),
     ]
     
     
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(alignment: .center) {
             ForEach(tabs, id: \.name) { tab in
-                Spacer()
+             
+                Spacer(minLength: 0)
                 
                 Button(action: {
                     selectedTab = tab.type
@@ -235,22 +208,26 @@ struct CustomTabBar: View {
                             .fontWeight(.medium)
                     }
                     .foregroundColor(selectedTab == tab.type ? .black : .secondary)
+//                    .frame(width: 75)
                     .padding(.vertical, 16)
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, 20)
 //                    .ignoresSafeArea()
                     // The "Pill" effect for the active tab
                     .background(
                         Capsule()
                             .fill(selectedTab == tab.type ? Color.gray.opacity(0.25) : Color.clear)
-//                            .ignoresSafeArea()
+                            .shadow(color: Color.black.opacity(0.45), radius: 10, x: 0, y: 5)
+//                            .frame(minWidth: .infinity)
                     )
                 }
-                
-                Spacer()
+                Spacer(minLength: 0)
             }
         }
+        .padding(.horizontal, 45) // This keeps buttons away from the screen edges
+                .padding(.top, 8)
+                .padding(.bottom, 10)
         .background(.ultraThinMaterial) // Translucent glass effect
-        .clipShape(RoundedRectangle(cornerRadius: 25, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
         .shadow(color: Color.black.opacity(0.45), radius: 10, x: 0, y: 5)
 //        .ignoresSafeArea(edges: .bottom)
     }
