@@ -14,6 +14,8 @@ struct TrackView: View {
     @State private var showingQuote = false
     @State private var currentRandomQuote: String = ""
     @State private var showNinjatoAnimation = false // Nuevo estado para la animación
+    @State private var ninjatoPlayback: LottiePlaybackMode = .paused(at: .progress(0))
+    
     // Aquí usamos AppStorage para guardar los días practicados de forma permanente
     @AppStorage("daysPracticed") private var daysPracticed: Int = 0
     
@@ -50,12 +52,27 @@ struct TrackView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 30))
                     //        }
                     
+                    LottieView(animation: .named("Japan Flow"))
+            .configure({ lottie in lottie.contentMode = .scaleAspectFit
+                lottie.animationSpeed = 0.5
+            })
+                        .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
+                        .animationDidFinish { completed in
+                            // Cuando termina la animación, cerramos todo
+                            withAnimation {
+                                showNinjatoAnimation = false
+                                showingQuote = false
+//                                ninjatoPlayback = .paused(at: .progress(0))
+                            }
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: 300) // Ajusta el tamaño que desees
+                        .transition(.opacity)
                     
                     Spacer()
                     if showNinjatoAnimation {
                                     LottieView(animation: .named("Ninjato"))
                             .configure({ lottie in lottie.contentMode = .scaleAspectFit
-                                lottie.animationSpeed = 0.2
+                                lottie.animationSpeed = 0.5
                             })
                                         .playbackMode(.playing(.toProgress(1, loopMode: .playOnce)))
                                         .animationDidFinish { completed in
@@ -63,6 +80,7 @@ struct TrackView: View {
                                             withAnimation {
                                                 showNinjatoAnimation = false
                                                 showingQuote = false
+                                                ninjatoPlayback = .paused(at: .progress(0))
                                             }
                                         }
                                         .frame(width: 300, height: 300) // Ajusta el tamaño que desees
@@ -107,7 +125,7 @@ struct TrackView: View {
                                     .padding(.top, 50)
                                 Spacer()
                                 ScrollView {
-                                    Text(currentRandomQuote)
+                                    Text(currentRandomQuote.localized)
                                         .font(.custom("CormorantGaramond-Italic", size: 22))
                                         .multilineTextAlignment(.center)
                                         .foregroundStyle(.white)
@@ -121,6 +139,7 @@ struct TrackView: View {
                                    let impact = UIImpactFeedbackGenerator(style: .medium)
                                     impact.impactOccurred()
                                     showNinjatoAnimation = true
+                                    ninjatoPlayback = .playing(.toProgress(1, loopMode: .playOnce))
                                     withAnimation { showingQuote = false }
                                 }) {
                                     Text("Mark day as mindful")
@@ -139,12 +158,21 @@ struct TrackView: View {
                     
                     Spacer()
                 }
-            }
+                   
+                    
+                                }
 //        .padding(.bottom, 100) // Espacio para la TabBar
     }
 //        .padding(.bottom, 100) // Espacio para la TabBar
     }
 }
+
+
+
+
+
+
+
 #Preview {
     TrackView()
 }
