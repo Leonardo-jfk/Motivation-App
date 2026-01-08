@@ -53,7 +53,7 @@ struct TrackView: View {
                             .font(.system(size: 80, weight: .bold, design: .serif))
                             .foregroundStyle(.white)
                         
-                        Text("Days lived mindfully")
+                        Text("Days lived mindfully".localized)
                             .font(.headline)
                             .foregroundStyle(.white.opacity(0.8))
                     }
@@ -116,7 +116,7 @@ struct TrackView: View {
                                 .fill(Color.black.opacity(0.5))
                                 .frame(width: 350, height: 700)
                             
-                            VStack(spacing: 20) {
+                            VStack{
                                 Text("Your guidance:".localized)
                                     .font(.title2).bold()
                                     .padding(.horizontal, 12).padding(.vertical, 6)
@@ -127,68 +127,17 @@ struct TrackView: View {
                                 Spacer()
                                 ScrollView {
                                     Text(currentRandomQuote.localized)
+                                        .padding(.horizontal, 95)
+                                    
+//                                        .frame(maxWidth: .infinity - 70)
                                         .font(.custom("CormorantGaramond-Italic", size: 22))
                                         .multilineTextAlignment(.center)
                                         .foregroundStyle(.white)
-                                        .padding()
-                                }
+                                                                        }
                                 .frame(height: 400)
                                 
                                 
-                                
-                                
-                                
-//                                // Botón para marcar día como completado
-//                                Button(action: {
-//                                    daysPracticed += 1
-//                                   let impact = UIImpactFeedbackGenerator(style: .medium)
-//                                    impact.impactOccurred()
-//                                    showNinjatoAnimation = true
-//                                    ninjatoPlayback = .playing(.toProgress(1, loopMode: .playOnce))
-//                                    withAnimation { showingQuote = false }
-//                                }) {
-//                                    Text("Mark day as mindful")
-//                                        .bold()
-//                                        .padding()
-//                                        .background(.white)
-//                                        .foregroundStyle(.black)
-//                                        .clipShape(Capsule())
-//                                    
-//                                }
-//                                .padding(.bottom, 50)
-                                
-//                                
-//                                Button(action: {
-//                                    // 1. Verificamos si podemos sumar al contador
-//                                    if canIncrementCounter() {
-//                                        daysPracticed += 1
-//                                        
-//                                        // Guardamos la fecha de hoy para bloquear futuras sumas hoy
-//                                        let formatter = DateFormatter()
-//                                        formatter.dateFormat = "yyyy-MM-dd"
-//                                        lastDatePracticed = formatter.string(from: Date())
-//                                        
-//                                        // Feedback táctico solo cuando suma
-//                                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-//                                    } else {
-//                                        // Opcional: Feedback ligero indicando que ya se sumó hoy
-//                                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
-//                                    }
-//                                    
-//                                    // 2. La animación y el cierre ocurren SIEMPRE
-//                                    showNinjatoAnimation = true
-//                                    ninjatoPlayback = .playing(.toProgress(1, loopMode: .playOnce))
-//                                    
-//                                }) {
-//                                    // Cambiamos el texto dinámicamente si ya practicó hoy
-//                                    Text(canIncrementCounter() ? "Mark day as mindful" : "Return to peace")
-//                                        .bold()
-//                                        .padding()
-////                                        .frame(maxWidth: .infinity)
-//                                        .background(canIncrementCounter() ? .white : .white.opacity(0.7))
-//                                        .foregroundStyle(.black)
-//                                        .clipShape(Capsule())
-//                                }
+                                Spacer()
                                 
                                 Button(action: {
                                     if canIncrementCounter() {
@@ -211,7 +160,7 @@ struct TrackView: View {
                                         }
                                     }
                                 }) {
-                                    Text(canIncrementCounter() ? "Mark day as mindful" : "Return to peace")
+                                    Text(canIncrementCounter() ? "Mark day as mindful".localized : "Return to peace")
                                         .bold()
                                         .padding()
 //                                        .frame(maxWidth: .infinity)
