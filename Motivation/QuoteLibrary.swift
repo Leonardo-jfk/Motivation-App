@@ -102,13 +102,14 @@ public struct QuoteLibrary: View {
                         }, label: {
                             ZStack {
                                 ButtonStyleSrt(.quoteLib)
-                                Text("Your own ideas")
+                                Text("Your own ideas".localized)
                                     .font(.title3)
                                     .bold()
                                     .foregroundStyle(.white)
                                     .background(.gray.opacity(0.5))
                                     .minimumScaleFactor(0.5)  // Allow text to shrink
                                     .lineLimit(1)
+                                    .padding(.horizontal, 10)
                             }
                             .padding(.horizontal, 4)
                         })

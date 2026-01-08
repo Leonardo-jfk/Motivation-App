@@ -275,7 +275,9 @@ struct TodayView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 30, style: .continuous)
                             .fill(Color.black.opacity(0.8))
-                            .frame(width: 220, height: 110)
+                            .frame(height: 110)
+                            .frame(maxWidth: .infinity)
+                            .padding(.horizontal, 70)
                         
                         Text("Get today's wisdom".localized)
                             .font(.title3)

@@ -77,7 +77,7 @@ extension ButtonStyleSrt {
     public var previewBody: some View {
         RoundedRectangle(cornerRadius: 12, style: .continuous)
             .fill(Color.blue.opacity(0.4))
-            .frame(width: 200, height: 60)
+            .frame(width: 300, height: 60)
     }
 }
 #endif
@@ -306,7 +306,10 @@ struct PersonalNotes: View {
                     .font(.title2)
                     .bold()
                     .foregroundStyle(.white)
-                    .background(.gray.opacity(0.5))
+                    .background(
+                        Color.gray
+                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                            .opacity(0.5))
             }
             .padding()
         }
@@ -320,11 +323,14 @@ struct PersonalNotes: View {
             {
                 ZStack {
                     ButtonStyleSrt() // defaults to .houseMenu
-                    Text("Settings ".localized)
+                    Text("Settings".localized)
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.white)
-                        .background(.gray.opacity(0.5))
+                        .background(
+                            Color.gray
+                                .clipShape(RoundedRectangle(cornerRadius: 30))
+                                .opacity(0.5))
                 }
             }
         }
@@ -380,7 +386,11 @@ struct PersonalNotes: View {
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.white)
-                        .background(.gray.opacity(0.5))
+//                        .background(.gray.opacity(0.5))
+                        .background(
+                            Color.gray
+                                .clipShape(RoundedRectangle(cornerRadius: 30))
+                                .opacity(0.5))
                 }
                 .padding()
             }
@@ -432,7 +442,10 @@ struct PersonalNotes: View {
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.white)
-                        .background(.gray.opacity(0.5))
+                        .background(
+                            Color.gray
+                                .clipShape(RoundedRectangle(cornerRadius: 30))
+                                .opacity(0.5))
                 }
                 .padding()
             }
