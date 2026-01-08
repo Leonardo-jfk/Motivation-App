@@ -18,12 +18,22 @@ struct TrackView: View {
     
     // Aquí usamos AppStorage para guardar los días practicados de forma permanente
     @AppStorage("daysPracticed") private var daysPracticed: Int = 0
-    
+    @AppStorage("lastDatePracticed") private var lastDatePracticed: String = ""
     // Animación de Lottie
     var contentMode: UIView.ContentMode = .scaleAspectFill
     var playLoopMode: LottieLoopMode = .playOnce
     
     var onAnimationDidFinish: (() -> Void)? = nil
+    
+    func canIncrementCounter() -> Bool {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let currentDateString = formatter.string(from: Date())
+        
+        // Si la fecha guardada es distinta a la de hoy, puede sumar
+        return lastDatePracticed != currentDateString
+    }
+    
     
     var body: some View {
         ZStack {
@@ -57,22 +67,13 @@ struct TrackView: View {
                 lottie.animationSpeed = 0.5
             })
                         .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
-                        .animationDidFinish { completed in
-                            // Cuando termina la animación, cerramos todo
-                            withAnimation {
-                                showNinjatoAnimation = false
-                                showingQuote = false
-//                                ninjatoPlayback = .paused(at: .progress(0))
-                            }
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: 300) // Ajusta el tamaño que desees
                         .transition(.opacity)
                     
                     Spacer()
                     if showNinjatoAnimation {
                                     LottieView(animation: .named("Ninjato"))
                             .configure({ lottie in lottie.contentMode = .scaleAspectFit
-                                lottie.animationSpeed = 0.5
+                                lottie.animationSpeed = 0.1
                             })
                                         .playbackMode(.playing(.toProgress(1, loopMode: .playOnce)))
                                         .animationDidFinish { completed in
@@ -133,24 +134,95 @@ struct TrackView: View {
                                 }
                                 .frame(height: 400)
                                 
-                                // Botón para marcar día como completado
+                                
+                                
+                                
+                                
+//                                // Botón para marcar día como completado
+//                                Button(action: {
+//                                    daysPracticed += 1
+//                                   let impact = UIImpactFeedbackGenerator(style: .medium)
+//                                    impact.impactOccurred()
+//                                    showNinjatoAnimation = true
+//                                    ninjatoPlayback = .playing(.toProgress(1, loopMode: .playOnce))
+//                                    withAnimation { showingQuote = false }
+//                                }) {
+//                                    Text("Mark day as mindful")
+//                                        .bold()
+//                                        .padding()
+//                                        .background(.white)
+//                                        .foregroundStyle(.black)
+//                                        .clipShape(Capsule())
+//                                    
+//                                }
+//                                .padding(.bottom, 50)
+                                
+//                                
+//                                Button(action: {
+//                                    // 1. Verificamos si podemos sumar al contador
+//                                    if canIncrementCounter() {
+//                                        daysPracticed += 1
+//                                        
+//                                        // Guardamos la fecha de hoy para bloquear futuras sumas hoy
+//                                        let formatter = DateFormatter()
+//                                        formatter.dateFormat = "yyyy-MM-dd"
+//                                        lastDatePracticed = formatter.string(from: Date())
+//                                        
+//                                        // Feedback táctico solo cuando suma
+//                                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+//                                    } else {
+//                                        // Opcional: Feedback ligero indicando que ya se sumó hoy
+//                                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+//                                    }
+//                                    
+//                                    // 2. La animación y el cierre ocurren SIEMPRE
+//                                    showNinjatoAnimation = true
+//                                    ninjatoPlayback = .playing(.toProgress(1, loopMode: .playOnce))
+//                                    
+//                                }) {
+//                                    // Cambiamos el texto dinámicamente si ya practicó hoy
+//                                    Text(canIncrementCounter() ? "Mark day as mindful" : "Return to peace")
+//                                        .bold()
+//                                        .padding()
+////                                        .frame(maxWidth: .infinity)
+//                                        .background(canIncrementCounter() ? .white : .white.opacity(0.7))
+//                                        .foregroundStyle(.black)
+//                                        .clipShape(Capsule())
+//                                }
+                                
                                 Button(action: {
-                                    daysPracticed += 1
-                                   let impact = UIImpactFeedbackGenerator(style: .medium)
-                                    impact.impactOccurred()
-                                    showNinjatoAnimation = true
-                                    ninjatoPlayback = .playing(.toProgress(1, loopMode: .playOnce))
-                                    withAnimation { showingQuote = false }
+                                    if canIncrementCounter() {
+                                        // PRIMERA VEZ HOY: Sumamos y animamos
+                                        daysPracticed += 1
+                                        let formatter = DateFormatter()
+                                        formatter.dateFormat = "yyyy-MM-dd"
+                                        lastDatePracticed = formatter.string(from: Date())
+                                        
+                                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                                        
+                                        // Mostramos al Ninja
+                                        showNinjatoAnimation = true
+                                        ninjatoPlayback = .playing(.toProgress(1, loopMode: .playOnce))
+                                    } else {
+                                        // YA SUMÓ HOY: El botón sirve para CERRAR la vista
+                                        withAnimation {
+                                            showingQuote = false
+                                            showNinjatoAnimation = false
+                                        }
+                                    }
                                 }) {
-                                    Text("Mark day as mindful")
+                                    Text(canIncrementCounter() ? "Mark day as mindful" : "Return to peace")
                                         .bold()
                                         .padding()
-                                        .background(.white)
+//                                        .frame(maxWidth: .infinity)
+                                        .background(canIncrementCounter() ? .white : .white.opacity(0.7))
                                         .foregroundStyle(.black)
                                         .clipShape(Capsule())
-                                    
+                                        .allowsHitTesting(false)
                                 }
-                                .padding(.bottom, 50)
+                                
+                                
+                                
                             }
                         }
                         .transition(.asymmetric(insertion: .scale, removal: .opacity))
@@ -167,7 +239,14 @@ struct TrackView: View {
     }
 }
 
-
+//func canIncrementCounter() -> Bool {
+//    let formatter = DateFormatter()
+//    formatter.dateFormat = "yyyy-MM-dd"
+//    let currentDateString = formatter.string(from: Date())
+//
+//    // Si la fecha guardada es distinta a la de hoy, puede sumar
+//    return lastDatePracticed != currentDateString
+//}
 
 
 
