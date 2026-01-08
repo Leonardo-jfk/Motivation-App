@@ -13,13 +13,15 @@ import Lottie
 struct TrackView: View {
     @State private var showingQuote = false
     @State private var currentRandomQuote: String = ""
-    
+    @State private var showNinjatoAnimation = false // Nuevo estado para la animación
     // Aquí usamos AppStorage para guardar los días practicados de forma permanente
     @AppStorage("daysPracticed") private var daysPracticed: Int = 0
     
     // Animación de Lottie
     var contentMode: UIView.ContentMode = .scaleAspectFill
     var playLoopMode: LottieLoopMode = .playOnce
+    
+    var onAnimationDidFinish: (() -> Void)? = nil
     
     var body: some View {
         ZStack {
@@ -30,7 +32,7 @@ struct TrackView: View {
                 .resizable()
                 .ignoresSafeArea()
             
-            VStack{
+                VStack(alignment: .center) {
                 if !showingQuote {
                     //            VStack(spacing: 30) {
                     // Contador de días
@@ -50,7 +52,22 @@ struct TrackView: View {
                     
                     
                     Spacer()
-                    
+                    if showNinjatoAnimation {
+                                    LottieView(animation: .named("Ninjato"))
+                            .configure({ lottie in lottie.contentMode = .scaleAspectFit
+                                lottie.animationSpeed = 0.2
+                            })
+                                        .playbackMode(.playing(.toProgress(1, loopMode: .playOnce)))
+                                        .animationDidFinish { completed in
+                                            // Cuando termina la animación, cerramos todo
+                                            withAnimation {
+                                                showNinjatoAnimation = false
+                                                showingQuote = false
+                                            }
+                                        }
+                                        .frame(width: 300, height: 300) // Ajusta el tamaño que desees
+                                        .transition(.opacity)
+                                }
                     // Botón para obtener sabiduría
                     //                Spacer()
                     Button(action: {
@@ -68,6 +85,7 @@ struct TrackView: View {
                             Text("Get guidance".localized)
                                 .font(.title3).bold().foregroundStyle(.white)
                         }
+                        .padding(.bottom, 50)
                     }
                 } else {
                     // Vista de la cita desplegada
@@ -100,8 +118,9 @@ struct TrackView: View {
                                 // Botón para marcar día como completado
                                 Button(action: {
                                     daysPracticed += 1
-                                    let impact = UIImpactFeedbackGenerator(style: .medium)
+                                   let impact = UIImpactFeedbackGenerator(style: .medium)
                                     impact.impactOccurred()
+                                    showNinjatoAnimation = true
                                     withAnimation { showingQuote = false }
                                 }) {
                                     Text("Mark day as mindful")
@@ -126,12 +145,6 @@ struct TrackView: View {
 //        .padding(.bottom, 100) // Espacio para la TabBar
     }
 }
-
-    
-    struct DayCountChanger {
-        //counting user days of practise
-    }
-
 #Preview {
     TrackView()
 }
@@ -147,20 +160,5 @@ struct TrackView: View {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //f
+
