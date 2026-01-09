@@ -50,13 +50,13 @@ struct SettingsList: View {
     @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
     @AppStorage("musicEnabled") private var musicEnabled: Bool = true
     @AppStorage("appLanguage") private var storedLanguage: String = AppLanguage.english.rawValue
-
+    
     @StateObject private var audioManager = AudioManager.shared
     @StateObject private var notifManager = NotifManager.shared
     @StateObject private var l10n = LocalizationManager.shared
-
-//    Text(l10n.currentLanguage == .english ? "Settings" : "Configuración")
-
+    
+    //    Text(l10n.currentLanguage == .english ? "Settings" : "Configuración")
+    
     // Local state for time picker
     @State private var notifTime: Date = {
         var comps = DateComponents()
@@ -64,31 +64,31 @@ struct SettingsList: View {
         comps.minute = UserDefaults.standard.object(forKey: "notifMinute") as? Int ?? 0
         return Calendar.current.date(from: comps) ?? Date()
     }()
-
+    
     // Alert for destructive reset
     @State private var showResetAlert = false
-
+    
     private var selectionBinding: Binding<AppColorScheme> {
         Binding(
             get: { AppColorScheme(rawValue: storedScheme) ?? .system },
             set: { storedScheme = $0.rawValue }
         )
     }
-
+    
     private var languageBinding: Binding<AppLanguage> {
         Binding(
             get: { AppLanguage(rawValue: storedLanguage) ?? .english },
             set: { storedLanguage = $0.rawValue }
         )
     }
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("settings_title".localized)
                 .font(.largeTitle)
                 .bold()
                 .padding(20)
-
+            
             List {
                 Section("appearance_title".localized) {
                     Picker("appearance_picker".localized, selection: selectionBinding) {
@@ -98,7 +98,7 @@ struct SettingsList: View {
                     }
                     .pickerStyle(.segmented)
                 }
-
+                
                 Section("music_title".localized) {
                     Toggle("music_toggle".localized, isOn: $audioManager.musicEnabled)
                     if musicEnabled {
@@ -106,10 +106,10 @@ struct SettingsList: View {
                             .tint(.blue)
                     }
                 }
-
+                
                 Section("notifications_title".localized) {
                     Toggle("notifications_toggle".localized, isOn: $notifManager.notifEnabled)
-
+                    
                     if notifManager.notifEnabled {
                         DatePicker(
                             "notifications_time".localized,
@@ -134,7 +134,7 @@ struct SettingsList: View {
                         }
                     }
                 }
-
+                
                 Section("data_title".localized) {
                     Button(role: .destructive) {
                         showResetAlert = true
@@ -150,7 +150,7 @@ struct SettingsList: View {
                         Text("data_reset_alert_message".localized)
                     }
                 }
-
+                
                 Section("language_section".localized) {
                     Picker("language_picker".localized, selection: Binding(
                         get: { AppLanguage(rawValue: storedLanguage) ?? .english },
@@ -165,7 +165,7 @@ struct SettingsList: View {
                     }
                     .pickerStyle(.segmented)
                 }
-
+                
                 Section("other_title".localized) {
                     ForEach(sections, id: \.self) { item in
                         Text(item)
@@ -176,7 +176,7 @@ struct SettingsList: View {
             }
         }.id(l10n.currentLanguage)
     }
-
+    
     private func performFullReset() {
         // 1) Stop notifications and disable preference
         NotifManager.shared.stopNotif()
@@ -184,21 +184,26 @@ struct SettingsList: View {
         // Optionally reset time back to defaults (9:00)
         UserDefaults.standard.set(9, forKey: "notifHour")
         UserDefaults.standard.set(0, forKey: "notifMinute")
-
+        
         // 2) Reset appearance to system
         UserDefaults.standard.set(AppColorScheme.system.rawValue, forKey: "appColorScheme")
         storedScheme = AppColorScheme.system.rawValue
-
+        
         // 3) Reset music settings
         UserDefaults.standard.set(false, forKey: "musicEnabled")
         audioManager.setMusicEnabled(false)
         UserDefaults.standard.set(0.5, forKey: "musicVolume")
         audioManager.setMusicVolume(0.5)
-
+        
         // 4) Clear favorites and notes
         FavoriteStorage.save([])
         NotesStorage.save([])
         NotificationCenter.default.post(name: .didPerformFullReset, object: nil)
+        
+//        TrackView.lastDatePracticed.save([])
+//        TrackView.daysPracticed.set(0)
+        çUserDefaults.standard.set(0, forKey: "daysPracticed")
+        UserDefaults.standard.set("", forKey: "lastDatePracticed")
     }
 }
 

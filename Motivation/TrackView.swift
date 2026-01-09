@@ -70,23 +70,23 @@ struct TrackView: View {
                         .transition(.opacity)
                     
                     Spacer()
-                    if showNinjatoAnimation {
-                                    LottieView(animation: .named("Ninjato"))
-                            .configure({ lottie in lottie.contentMode = .scaleAspectFit
-                                lottie.animationSpeed = 0.1
-                            })
-                                        .playbackMode(.playing(.toProgress(1, loopMode: .playOnce)))
-                                        .animationDidFinish { completed in
-                                            // Cuando termina la animación, cerramos todo
-                                            withAnimation {
-                                                showNinjatoAnimation = false
-                                                showingQuote = false
-                                                ninjatoPlayback = .paused(at: .progress(0))
-                                            }
-                                        }
-                                        .frame(width: 300, height: 300) // Ajusta el tamaño que desees
-                                        .transition(.opacity)
-                                }
+//                    if showNinjatoAnimation {
+//                                    LottieView(animation: .named("Ninjato"))
+//                            .configure({ lottie in lottie.contentMode = .scaleAspectFit
+//                                lottie.animationSpeed = 0.1
+//                            })
+//                                        .playbackMode(.playing(.toProgress(1, loopMode: .playOnce)))
+//                                        .animationDidFinish { completed in
+//                                            // Cuando termina la animación, cerramos todo
+//                                            withAnimation {
+//                                                showNinjatoAnimation = false
+//                                                showingQuote = false
+//                                                ninjatoPlayback = .paused(at: .progress(0))
+//                                            }
+//                                        }
+//                                        .frame(width: 300, height: 300) // Ajusta el tamaño que desees
+//                                        .transition(.opacity)
+//                                }
                     // Botón para obtener sabiduría
                     //                Spacer()
                     Button(action: {
@@ -182,6 +182,23 @@ struct TrackView: View {
                    
                     
                                 }
+            if showNinjatoAnimation {
+                            LottieView(animation: .named("Ninjato"))
+                    .configure({ lottie in lottie.contentMode = .scaleAspectFit
+                        lottie.animationSpeed = 0.4
+                    })
+                                .playbackMode(.playing(.toProgress(1, loopMode: .playOnce)))
+                                .animationDidFinish { completed in
+                                    // Cuando termina la animación, cerramos todo
+                                    withAnimation {
+                                        showNinjatoAnimation = false
+                                        showingQuote = false
+                                        ninjatoPlayback = .paused(at: .progress(0))
+                                    }
+                                }
+                                .frame(width: 300, height: 300) // Ajusta el tamaño que desees
+                                .transition(.opacity)
+                        }
 //        .padding(.bottom, 100) // Espacio para la TabBar
     }
 //        .padding(.bottom, 100) // Espacio para la TabBar
