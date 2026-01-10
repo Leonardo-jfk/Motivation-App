@@ -11,7 +11,7 @@
 
 //
 //"MENU" = "MENÚ";
-//"Settings" = "Ajustes";
+"Settings" = "Ajustes";
 //"Appearance" = "Apariencia";
 //"System" = "Sistema";
 //"Light" = "Claro";
@@ -41,7 +41,7 @@
 "No favorites yet" = "Aún no hay favoritos";
 "No notes yet" = "Aún no hay notas";
 "Personal Notes " = "Notas personales ";
-"Best sources of wisdom " = "Mejores fuentes de sabiduría ";
+"Best sourses of wisdom" = "Mejores fuentes de sabiduría";
 "Give us feedback " = "Danos tu opinión ";
 "How to give us feedback:" = "Cómo darnos tu opinión:";
 "Open the link to the Google Form and answer the questions" = "Abre el enlace al formulario de Google y responde las preguntas";

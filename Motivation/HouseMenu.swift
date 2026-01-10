@@ -44,11 +44,15 @@ public struct ButtonStyleSrt: View {
             case .houseMenu:
                 RoundedRectangle(cornerRadius: 40, style: .continuous)
                     .fill(tileFillColor)
-                    .frame(width: 200, height: 100)
+                    .frame(height: 100)
+                    .frame(maxWidth: .infinity)
+//                    .padding(.horizontal, 20)
             case .houseMenuBack:
                 RoundedRectangle(cornerRadius: 40, style: .continuous)
                     .fill(tileFillColor)
-                    .frame(width: 350, height: 350)
+                    .frame(height: 350)
+                    .frame(maxWidth: .infinity)
+//                    .padding(.horizontal, 50)
                 
             case .stoicList:
                 RoundedRectangle(cornerRadius: 30, style: .continuous)
@@ -77,7 +81,9 @@ extension ButtonStyleSrt {
     public var previewBody: some View {
         RoundedRectangle(cornerRadius: 12, style: .continuous)
             .fill(Color.blue.opacity(0.4))
-            .frame(width: 300, height: 60)
+            .frame(height: 60)
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 70)
     }
 }
 #endif
@@ -144,7 +150,7 @@ struct HouseMenu: View {
     
     
     var body: some View {
-        let lottieBackColor = (colorScheme == .dark) ? "DarkBackground" : "LightBackground"
+        let lottieBackColor = (colorScheme == .dark) ? "DarkBackLottie" : "LightBackLottie"
         ZStack{
             
             LottieView(animation: .named(lottieBackColor))
@@ -157,7 +163,8 @@ struct HouseMenu: View {
                 }
                 .ignoresSafeArea()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            VStack{
+            ZStack {
+            VStack(alignment: .center, spacing: 20 ){
                 Text("MENU")
                     .font(.largeTitle)
                     .bold()
@@ -178,7 +185,7 @@ struct HouseMenu: View {
                                                     selectedMenu = .mainSettings
                                                 })
                                 
-                                Color.clear.frame(height: 10)
+//                                Color.clear.frame(height: 10)
                                 
                                 Button(action: {
                                     selectedMenu = (selectedMenu == .mainSettings) ? .none : .mainSettings
@@ -189,7 +196,7 @@ struct HouseMenu: View {
                                 .simultaneousGesture(TapGesture().onEnded {
                                                     selectedMenu = .mainSettings
                                                 })
-                                Color.clear.frame(height: 10)
+//                                Color.clear.frame(height: 10)
                                 
                                 Button(action: {
                                     selectedMenu = (selectedMenu == .resources) ? .none : .resources
@@ -198,7 +205,7 @@ struct HouseMenu: View {
                                 }
                                 .buttonStyle(.plain)
                                 
-                                Color.clear.frame(height: 10)
+//                                Color.clear.frame(height: 10)
                                 
                                 Button(action: {
                                     selectedMenu = (selectedMenu == .feedback) ? .none : .feedback
@@ -207,76 +214,16 @@ struct HouseMenu: View {
                                 }
                                 .buttonStyle(.plain)
                                 
-                                Color.clear.frame(height: 10)
+//                                Color.clear.frame(height: 10)
                             }
-                            .padding(.horizontal)
+                            .padding(.horizontal, 50)
                             .onAppear {
                                 savedUserNotes = NotesStorage.load()
                             }
-                        }
+        }.padding(.horizontal, 50)
                     }
                 }
-                
-//                Button(action: {
-//                    showingPersonalNotes.toggle()
-//                    // Close others
-//                    showingMainSettings = false
-//                    showingResourses = false
-//                    showingFeedbackMenu = false
-//                }) {
-//                    PersonalNotes(showing: showingPersonalNotes, savedUserNotes: $savedUserNotes)
-//                }
-//                .buttonStyle(.plain)
-//                
-//                Color.clear.frame(height: 10)
-//                
-//                Button(action: {
-//                    showingMainSettings.toggle()
-//                    // Close others
-//                    showingPersonalNotes = false
-//                    showingResourses = false
-//                    showingFeedbackMenu = false
-//                }) {
-//                    MainSettings(showing: showingMainSettings)
-//                    
-//                }
-//                .buttonStyle(.plain)
-//                
-//                
-//                Color.clear.frame(height: 10)
-//                
-//                Button(action: {
-//                    showingResourses.toggle()
-//                    // Close others
-//                    showingPersonalNotes = false
-//                    showingMainSettings = false
-//                    showingFeedbackMenu = false
-//                }) {
-//                    Resourses(showing: showingResourses)
-//                }
-//                .buttonStyle(.plain)
-//                Color.clear.frame(height: 10)
-//                
-//                Button(action: {
-//                    showingFeedbackMenu.toggle()
-//                    // Close others
-//                    showingPersonalNotes = false
-//                    showingMainSettings = false
-//                    showingResourses = false
-//                }) {
-//                    GetFeedback(showing: showingFeedbackMenu)
-//                }
-//                .buttonStyle(.plain)
-//                
-//                Color.clear.frame(height: 10)
-//            }
-//            .padding(.horizontal)
-//            .onAppear{
-//                savedUserNotes = NotesStorage.load()
-//            }
-//        }
-//    }
-//}
+}
 
 
 struct PersonalNotes: View {
@@ -285,23 +232,10 @@ struct PersonalNotes: View {
     
     var body: some View {
         
-//        ZStack {
-//            ButtonStyleSrt()
-//            NavigationLink(destination: UserNotesViewWrapper(savedUserNotes: $savedUserNotes)){
-//                 // defaults to .houseMenu
-//                Text("Personal Notes ".localized)
-//                    .font(.title2)
-//                    .bold()
-//                    .foregroundStyle(.white)
-//                    .background(.gray.opacity(0.5))
-//            }
-//            .padding()
-//        }
-        
         NavigationLink(destination: UserNotesView(savedUserNotes: $savedUserNotes)){
         ZStack {
                  // defaults to .houseMenu
-                ButtonStyleSrt()
+            ButtonStyleSrt(.houseMenu)
                 Text("Personal Notes ".localized)
                     .font(.title2)
                     .bold()
@@ -322,7 +256,7 @@ struct PersonalNotes: View {
             NavigationLink(destination: SettingsList())
             {
                 ZStack {
-                    ButtonStyleSrt() // defaults to .houseMenu
+                    ButtonStyleSrt(.houseMenu)// defaults to .houseMenu
                     Text("Settings".localized)
                         .font(.title2)
                         .bold()
@@ -381,12 +315,12 @@ struct PersonalNotes: View {
             }
             } else {
                 ZStack {
-                    ButtonStyleSrt() // defaults to .houseMenu
-                    Text("Best sourses of wisdom ")
+                    ButtonStyleSrt(.houseMenu) // defaults to .houseMenu
+                    Text("Best sourses of wisdom".localized)
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.white)
-//                        .background(.gray.opacity(0.5))
+                        .background(.gray.opacity(0.5))
                         .background(
                             Color.gray
                                 .clipShape(RoundedRectangle(cornerRadius: 30))

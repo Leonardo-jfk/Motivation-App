@@ -202,7 +202,7 @@ struct SettingsList: View {
         
 //        TrackView.lastDatePracticed.save([])
 //        TrackView.daysPracticed.set(0)
-        çUserDefaults.standard.set(0, forKey: "daysPracticed")
+        UserDefaults.standard.set(0, forKey: "daysPracticed")
         UserDefaults.standard.set("", forKey: "lastDatePracticed")
     }
 }

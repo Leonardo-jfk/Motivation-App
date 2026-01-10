@@ -21,7 +21,7 @@
 "No favorites yet" = "Pas encore de favoris";
 "No notes yet" = "Pas encore de notes";
 "Personal Notes " = "Notes personnelles ";
-"Best sources of wisdom " = "Meilleures sources de sagesse ";
+"Best sources of wisdom" = "Meilleures sources de sagesse";
 "Give us feedback " = "Donnez-nous votre avis ";
 "How to give us feedback:" = "Comment nous donner votre avis :";
 "Open the link to the Google Form and answer the questions" = "Ouvrez le lien du Google Form et répondez aux questions";
@@ -55,3 +55,4 @@
 "Your guidance:" = "Votre guide:";
 "Mark day as mindful" = "Marquer le jour comme conscient";
 "Return to peace" = "Retour à la paix";
+"Settings" = "Ajustements";
