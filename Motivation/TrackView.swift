@@ -16,6 +16,8 @@ struct TrackView: View {
     @State private var showNinjatoAnimation = false // Nuevo estado para la animación
     @State private var ninjatoPlayback: LottiePlaybackMode = .paused(at: .progress(0))
     
+    @StateObject private var langManager = LocalizationManager.shared
+    
     // Aquí usamos AppStorage para guardar los días practicados de forma permanente
     @AppStorage("daysPracticed") private var daysPracticed: Int = 0
     @AppStorage("lastDatePracticed") private var lastDatePracticed: String = ""
@@ -33,6 +35,12 @@ struct TrackView: View {
         // Si la fecha guardada es distinta a la de hoy, puede sumar
         return lastDatePracticed != currentDateString
     }
+    
+    let allQuotes: [AppLanguage: [String]] = [
+        .english: quotesLongEng,
+        .spanish: quotesLongES,
+        .french: quotesLongFr // O como se llamen tus otras listas
+    ]
     
     
     var body: some View {
@@ -70,28 +78,18 @@ struct TrackView: View {
                         .transition(.opacity)
                     
                     Spacer()
-//                    if showNinjatoAnimation {
-//                                    LottieView(animation: .named("Ninjato"))
-//                            .configure({ lottie in lottie.contentMode = .scaleAspectFit
-//                                lottie.animationSpeed = 0.1
-//                            })
-//                                        .playbackMode(.playing(.toProgress(1, loopMode: .playOnce)))
-//                                        .animationDidFinish { completed in
-//                                            // Cuando termina la animación, cerramos todo
-//                                            withAnimation {
-//                                                showNinjatoAnimation = false
-//                                                showingQuote = false
-//                                                ninjatoPlayback = .paused(at: .progress(0))
-//                                            }
-//                                        }
-//                                        .frame(width: 300, height: 300) // Ajusta el tamaño que desees
-//                                        .transition(.opacity)
-//                                }
                     // Botón para obtener sabiduría
-                    //                Spacer()
                     Button(action: {
                         // Seleccionamos la cita aleatoria antes de mostrarla
-                        currentRandomQuote = quotesLongEng.randomElement() ?? "Sigue adelante."
+                        //                        currentRandomQuote = quotesLongEng.randomElement() ?? "Sigue adelante."
+                        
+                        let currentLang = langManager.currentLanguage
+                        
+                        // 2. Buscamos el array correspondiente (usamos inglés como fallback)
+                        let selectedQuotes = all[currentLang] ?? quotesLongEng
+                        
+                        // 3. Seleccionamos la cita
+                        currentRandomQuote = selectedQuotes.randomElement() ?? "..."
                         withAnimation(.spring()) {
                             showingQuote = true
                         }
@@ -108,15 +106,16 @@ struct TrackView: View {
                     }
                 } else {
                     // Vista de la cita desplegada
-                    VStack(spacing: -20) {
+                    VStack(alignment: .center, spacing: -20) {
                         //                        AnimationView() // Tu vista de Lottie de la chica
                         
-                        ZStack {
+                        ZStack(alignment: .center) {
                             RoundedRectangle(cornerRadius: 40, style: .continuous)
                                 .fill(Color.black.opacity(0.5))
                                 .frame(width: 350, height: 700)
                             
                             VStack{
+                                //.padding(.top, 50) and button are optimal for 16e, max needs more
                                 Text("Your guidance:".localized)
                                     .font(.title2).bold()
                                     .padding(.horizontal, 12).padding(.vertical, 6)
@@ -168,6 +167,7 @@ struct TrackView: View {
                                         .foregroundStyle(.black)
                                         .clipShape(Capsule())
                                         .allowsHitTesting(false)
+                                        .padding(.bottom, 50)
                                 }
                                 
                                 
