@@ -31,36 +31,36 @@ public struct ButtonStyleSrt: View {
     public init(_ style: ButtonShapeStyle) {
         self.style = style
     }
-   
+    
     public var body: some View {
-       
+        
+        
+        
+        switch style {
+        case .quoteLib:
+            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                .fill(tileFillColor)
+                .frame(width: 200, height: 60)
+        case .houseMenu:
+            RoundedRectangle(cornerRadius: 40, style: .continuous)
+                .fill(tileFillColor)
+                .frame(height: 100)
+                .frame(maxWidth: .infinity)
+            //                    .padding(.horizontal, 20)
+        case .houseMenuBack:
+            RoundedRectangle(cornerRadius: 40, style: .continuous)
+                .fill(tileFillColor)
+                .frame(height: 350)
+                .frame(maxWidth: .infinity)
+            //                    .padding(.horizontal, 50)
             
-            
-            switch style {
-            case .quoteLib:
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
-                    .fill(tileFillColor)
-                    .frame(width: 200, height: 60)
-            case .houseMenu:
-                RoundedRectangle(cornerRadius: 40, style: .continuous)
-                    .fill(tileFillColor)
-                    .frame(height: 100)
-                    .frame(maxWidth: .infinity)
-//                    .padding(.horizontal, 20)
-            case .houseMenuBack:
-                RoundedRectangle(cornerRadius: 40, style: .continuous)
-                    .fill(tileFillColor)
-                    .frame(height: 350)
-                    .frame(maxWidth: .infinity)
-//                    .padding(.horizontal, 50)
-                
-            case .stoicList:
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
-                    .fill(tileFillColor)
-                    .frame(width: 100, height: 150)
-            }
+        case .stoicList:
+            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                .fill(tileFillColor)
+                .frame(width: 100, height: 150)
         }
     }
+}
 
 //public var url = URL(string: "https://docs.google.com/forms/d/e/1FAIpQLSfspdMNWKv3vDnIB2WAuPbTMwECwIgIDgom0Dp9KNcuXFF-GQ/viewform?usp=dialog")
 
@@ -164,25 +164,25 @@ struct HouseMenu: View {
                 .ignoresSafeArea()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             ZStack {
-            VStack(alignment: .center, spacing: 20 ){
-                Text("MENU")
-                    .font(.largeTitle)
-                    .bold()
-                    .padding(20)
-                    .frame(maxWidth: 150)
-                    .background(
-                        Color.gray
-                            .clipShape(RoundedRectangle(cornerRadius: 30))
-                            .opacity(0.6))
-                Spacer()
-                Button(action: {
-                                    selectedMenu = (selectedMenu == .personalNotes) ? .none : .personalNotes
-                                }) {
-                                    PersonalNotes(showing: selectedMenu == .personalNotes, savedUserNotes: $savedUserNotes)
-                                }
-                                .buttonStyle(.plain)
-                                .simultaneousGesture(TapGesture().onEnded {
-                                                    selectedMenu = .mainSettings
+                VStack(alignment: .center, spacing: 20 ){
+                    Text("MENU")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(20)
+                        .frame(maxWidth: 150)
+                        .background(
+                            Color.gray
+                                .clipShape(RoundedRectangle(cornerRadius: 30))
+                                .opacity(0.6))
+                    Spacer()
+                    Button(action: {
+                        selectedMenu = (selectedMenu == .personalNotes) ? .none : .personalNotes
+                    }) {
+                        PersonalNotes(showing: selectedMenu == .personalNotes, savedUserNotes: $savedUserNotes)
+                    }
+                    .buttonStyle(.plain)
+                    .simultaneousGesture(TapGesture().onEnded {
+                        selectedMenu = .mainSettings
                                                 })
                                 
 //                                Color.clear.frame(height: 10)
@@ -216,11 +216,14 @@ struct HouseMenu: View {
                                 
 //                                Color.clear.frame(height: 10)
                             }
-                            .padding(.horizontal, 50)
+//                            .padding(.horizontal, 50)
                             .onAppear {
                                 savedUserNotes = NotesStorage.load()
                             }
-        }.padding(.horizontal, 50)
+                Spacer()
+        }
+            .padding(.horizontal, 30)
+//            Spacer()
                     }
                 }
 }
@@ -240,12 +243,14 @@ struct PersonalNotes: View {
                     .font(.title2)
                     .bold()
                     .foregroundStyle(.white)
+                    .padding(.horizontal, 10) // 1. Añade espacio a los lados
+                    .padding(.vertical, 10)
                     .background(
                         Color.gray
                             .clipShape(RoundedRectangle(cornerRadius: 30))
                             .opacity(0.5))
             }
-            .padding()
+//            .padding()
         }
     }
 }
@@ -261,6 +266,8 @@ struct PersonalNotes: View {
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.white)
+                        .padding(.horizontal, 10) // 1. Añade espacio a los lados
+                        .padding(.vertical, 10)
                         .background(
                             Color.gray
                                 .clipShape(RoundedRectangle(cornerRadius: 30))
@@ -320,13 +327,14 @@ struct PersonalNotes: View {
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.white)
-                        .background(.gray.opacity(0.5))
+                        .padding(.horizontal, 10) // 1. Añade espacio a los lados
+                        .padding(.vertical, 10)
                         .background(
                             Color.gray
                                 .clipShape(RoundedRectangle(cornerRadius: 30))
-                                .opacity(0.5))
+                                .opacity(0.3))
                 }
-                .padding()
+//                .padding()
             }
         }
     }
@@ -362,7 +370,7 @@ struct PersonalNotes: View {
                                 .foregroundStyle(.white)
                                 .padding(.horizontal)
                                 .padding(.vertical, 8)
-                                .background(.gray.opacity(0.5))
+                                .background(.gray.opacity(0.3))
                                 .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                         
                     }
@@ -376,12 +384,15 @@ struct PersonalNotes: View {
                         .font(.title2)
                         .bold()
                         .foregroundStyle(.white)
+                        .padding(.horizontal, 10) // 1. Añade espacio a los lados
+                            .padding(.vertical, 10)
                         .background(
                             Color.gray
                                 .clipShape(RoundedRectangle(cornerRadius: 30))
-                                .opacity(0.5))
+                                .opacity(0.3))
                 }
-                .padding()
+                
+//                .padding()
             }
         }
     }
