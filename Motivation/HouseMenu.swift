@@ -18,7 +18,7 @@ public enum ButtonShapeStyle {
 
 public struct ButtonStyleSrt: View {
     @Environment(\.colorScheme) var colorScheme
-    var tileFillColor: Color { colorScheme == .light ? Color.black.opacity(0.8)  : Color.gray.opacity(0.6) }
+    var tileFillColor: Color { colorScheme == .light ? Color.black.opacity(0.7)  : Color.gray.opacity(0.4) }
     
     private let style: ButtonShapeStyle
     
@@ -163,7 +163,20 @@ struct HouseMenu: View {
                 }
                 .ignoresSafeArea()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            
+            Color.black
+                    .opacity(colorScheme == .dark ? 0.5 : 0.0) // Más oscuro en Dark Mode
+                    .ignoresSafeArea()
+            
+            
             ZStack {
+//                
+//                Color.black
+//                        .opacity(colorScheme == .dark ? 0.5 : 0.0) // Más oscuro en Dark Mode
+//                        .ignoresSafeArea()
+//                
+                
                 VStack(alignment: .center, spacing: 20 ){
                     Text("MENU")
                         .font(.largeTitle)

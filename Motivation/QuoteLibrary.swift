@@ -76,7 +76,12 @@ public struct QuoteLibrary: View {
                                     .font(.title3)
                                     .bold()
                                     .foregroundStyle(.white)
-                                    .background(.gray.opacity(0.5))
+                                    .padding(.horizontal, 10) // 1. Añade espacio a los lados
+                                    .padding(.vertical, 10)
+                                    .background(
+                                        Color.gray
+                                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                                            .opacity(0.3))
                                     .minimumScaleFactor(0.5)  // Allow text to shrink
                                     .lineLimit(1)
                             }
@@ -106,10 +111,14 @@ public struct QuoteLibrary: View {
                                     .font(.title3)
                                     .bold()
                                     .foregroundStyle(.white)
-                                    .background(.gray.opacity(0.5))
-                                    .minimumScaleFactor(0.5)  // Allow text to shrink
+                                    .padding(.horizontal, 10) // 1. Añade espacio a los lados
+                                    .padding(.vertical, 10)
+                                    .background(
+                                        Color.gray
+                                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                                            .opacity(0.3)).minimumScaleFactor(0.5)  // Allow text to shrink
                                     .lineLimit(1)
-                                    .padding(.horizontal, 10)
+//                                    .padding(.horizontal, 10)
                             }
                             .padding(.horizontal, 4)
                         })
