@@ -23,12 +23,12 @@ public struct ChallengesView: View {
         ZStack{
             LottieView(animation: .named("SciFiBack"))
                 .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
-                 lottieAnimationView.animationSpeed = 0.2
+                    lottieAnimationView.animationSpeed = 0.2
                 })
-                
+            
                 .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
                 .animationDidFinish { completed in onAnimationDidFinish?()
-                        
+                    
                 }
                 .resizable()
                 .ignoresSafeArea()
@@ -37,20 +37,68 @@ public struct ChallengesView: View {
             Rectangle()
                 .frame(width:100, height: 200)
                 .foregroundStyle(.white)
-         
-            VStack {
-                Text("Challenges List")
-                    .font(.largeTitle)
-                Image(systemName: "book").resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                // Your future challenges logic here
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea()
+            NavigationStack{
+                
+                
+                VStack {
+                    HStack{
+                        ZStack{
+                            Rectangle()
+                                .frame(width:150, height: 100)
+                                .foregroundStyle(.gray)
+                            NavigationLink("1st", destination:
+                                Challenge1View())
+                            }
+                        }
+                        Rectangle()
+                            .frame(width:150, height: 100)
+                            .foregroundStyle(.gray)
+                        
+                        
+                    }
+                    Text("Challenges List")
+                        .font(.largeTitle)
+                    Image(systemName: "book").resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                    // Your future challenges logic here
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .ignoresSafeArea()
+            }.frame(maxWidth: .infinity)
+                .frame(height: 400)
         }
     }
+
+
+
+
+struct Challenge1View: View{
+    
+    
+    
+    var body: some View {
+        Image(systemName: "house")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 50, height: 50, alignment: .center)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #Preview {
     ChallengesView()
