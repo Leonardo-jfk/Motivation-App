@@ -44,20 +44,21 @@ public struct QuoteLibrary: View {
         
     }
     
-        public var body: some View {
+    public var body: some View {
+        GeometryReader { geometry in
             VStack(alignment: .center) {
                 
                 LottieView(animation: .named(fileName1))
                     .configure({lottieAnimationView in lottieAnimationView.contentMode = contentMode
                         lottieAnimationView.animationSpeed = 0.5
                     })
-                        .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
-                        .animationDidFinish { completed in onAnimationDidFinish?()
-                            
-                        }.resizable().scaledToFill()
+                    .playbackMode(.playing(.toProgress(1, loopMode: playLoopMode)))
+                    .animationDidFinish { completed in onAnimationDidFinish?()
+                        
+                    }.resizable().scaledToFill()
                     .frame(width: 50, height: 50)
                 
-            
+                
                 Text("Quote Library".localized)
                     .font(.largeTitle)
                     .bold()
@@ -65,97 +66,40 @@ public struct QuoteLibrary: View {
                     .minimumScaleFactor(0.5)
                     .lineLimit(1)
                 
-                HStack {
-                        Button(action: {
-                            showFavorites.toggle()
-                        }, label: {
-                            ZStack {
-                                ButtonStyleSrt(.quoteLib)
-                                    .frame(maxWidth: .infinity)
-                                Text("Favorites".localized)
-                                    .font(.title3)
-                                    .bold()
-                                    .foregroundStyle(.white)
-                                    .padding(.horizontal, 10) // 1. Añade espacio a los lados
-                                    .padding(.vertical, 10)
-                                    .background(
-                                        Color.gray
-                                            .clipShape(RoundedRectangle(cornerRadius: 30))
-                                            .opacity(0.3))
-                                    .minimumScaleFactor(0.5)  // Allow text to shrink
-                                    .lineLimit(1)
-                            }
-                            .padding(.horizontal, 4)
-                        })
-                        .buttonStyle(.plain)
-                        .sheet(isPresented: $showFavorites) {
-                            NavigationStack {
-                                ChosenQuotesView(favoriteQuotes: $favoriteQuotes)
-                                    .navigationTitle("Favorites")
-                                    .navigationBarTitleDisplayMode(.inline)
-                                    .toolbar {
-                                        ToolbarItem(placement: .topBarTrailing) {
-                                            Button("Done") { showFavorites = false }
-                                        }
-                                    }
-                            }
-                        }
-        
-                        // Your own ideas button
-                        Button(action: {
-                            showUserNotes.toggle()
-                        }, label: {
-                            ZStack {
-                                ButtonStyleSrt(.quoteLib)
-                                Text("Your own ideas".localized)
-                                    .font(.title3)
-                                    .bold()
-                                    .foregroundStyle(.white)
-                                    .padding(.horizontal, 10) // 1. Añade espacio a los lados
-                                    .padding(.vertical, 10)
-                                    .background(
-                                        Color.gray
-                                            .clipShape(RoundedRectangle(cornerRadius: 30))
-                                            .opacity(0.3)).minimumScaleFactor(0.5)  // Allow text to shrink
-                                    .lineLimit(1)
-//                                    .padding(.horizontal, 10)
-                            }
-                            .padding(.horizontal, 4)
-                        })
-                        .buttonStyle(.plain)
-                        .sheet(isPresented: $showUserNotes) {
-                            NavigationStack {
-                                UserNotesView(savedUserNotes: $savedUserNotes)
-                                    .navigationTitle("Your Notes")
-                                    .navigationBarTitleDisplayMode(.inline)
-                                    .toolbar {
-                                        ToolbarItem(placement: .topBarTrailing) {
-                                            Button("Done") { showUserNotes = false }
-                                        }
-                                    }
-                            }
-                        }
-                        .padding(.horizontal, 4)
-
-                    
-                    
-                    
-                }
-                .padding(.horizontal, 10)
                 
-                List {
-                    ForEach(currentQuotes, id: \.self) { quote in
-                        QuoteRow(quote: quote, isFavorite: favoriteQuotes.contains(quote)) {
-                            if favoriteQuotes.contains(quote) {
-                                favoriteQuotes.remove(quote)
-                            } else {
-                                favoriteQuotes.insert(quote)
-                            }
-                            FavoriteStorage.save(favoriteQuotes)
+                
+                if geometry.size.width < 375 { // iPhone SE, iPhone 8, etc.
+                    VStack(spacing: 12) {
+                        // Botones en columna para pantallas pequeñas
+                        createFavoritesButton()
+                        createUserNotesButton()
+                    }
+                    .padding(.horizontal, 16)
+                } else {
+                    HStack(spacing: 12) {
+                        // Botones en fila para pantallas más grandes
+                        createFavoritesButton()
+                        createUserNotesButton()
+                    }
+                    .padding(.horizontal, 16)
+                }
+                
+            
+//            .padding(.horizontal, 10)
+            
+            List {
+                ForEach(currentQuotes, id: \.self) { quote in
+                    QuoteRow(quote: quote, isFavorite: favoriteQuotes.contains(quote)) {
+                        if favoriteQuotes.contains(quote) {
+                            favoriteQuotes.remove(quote)
+                        } else {
+                            favoriteQuotes.insert(quote)
                         }
+                        FavoriteStorage.save(favoriteQuotes)
                     }
                 }
             }
+            //            }
             .onAppear {
                 savedUserNotes = NotesStorage.load()
             }
@@ -167,6 +111,76 @@ public struct QuoteLibrary: View {
             }
         }
     }
+}
+    func createFavoritesButton() -> some View {
+        Button(action: {
+            showFavorites.toggle()
+        }, label: {
+            ZStack {
+                ButtonStyleSrt(.quoteLib)
+                Text("Favorites".localized)
+                    .font(.title3)
+                    .bold()
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
+            .frame(maxWidth: .infinity) // Ocupa todo el ancho disponible
+            .frame(height: 50)
+        })
+        .buttonStyle(.plain)
+        .sheet(isPresented: $showFavorites) {
+            NavigationStack {
+                ChosenQuotesView(favoriteQuotes: $favoriteQuotes)
+                    .navigationTitle("Favorites")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button("Done") { showFavorites = false }
+                        }
+                    }
+            }
+        }
+    }
+    
+    // Función helper para crear el botón de User Notes
+    func createUserNotesButton() -> some View {
+        Button(action: {
+            showUserNotes.toggle()
+        }, label: {
+            ZStack {
+                ButtonStyleSrt(.quoteLib)
+                Text("Your own ideas")
+                    .font(.title3)
+                    .bold()
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
+            .frame(maxWidth: .infinity) // Ocupa todo el ancho disponible
+            .frame(height: 50)
+        })
+        .buttonStyle(.plain)
+        .sheet(isPresented: $showUserNotes) {
+            NavigationStack {
+                UserNotesView(savedUserNotes: $savedUserNotes)
+                    .navigationTitle("Your Notes")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button("Done") { showUserNotes = false }
+                        }
+                    }
+            }
+        }
+    }
+    
+    
+    
+    
+    
+        }
+    
 
     // Move QuoteRow outside of QuoteLibrary struct
     struct QuoteRow: View {
@@ -431,3 +445,24 @@ public enum FavoriteStorage {
 #Preview {
     QuoteLibrary(favoriteQuotes: .constant(["gg"]))
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
