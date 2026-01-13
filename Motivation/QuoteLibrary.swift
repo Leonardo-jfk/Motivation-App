@@ -319,8 +319,9 @@ public struct QuoteLibrary: View {
                                 lottieAnimationButton = false
                             }
                         }
+                        
                         .buttonStyle(.glassProminent)
-                    }
+                    }.padding(.horizontal, 20)
                     
                     Spacer()
                     
