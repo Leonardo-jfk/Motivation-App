@@ -86,7 +86,7 @@ struct TrackView: View {
                         let currentLang = langManager.currentLanguage
                         
                         // 2. Buscamos el array correspondiente (usamos inglés como fallback)
-                        let selectedQuotes = all[currentLang] ?? quotesLongEng
+                        let selectedQuotes = allQuotes[currentLang] ?? quotesLongEng
                         
                         // 3. Seleccionamos la cita
                         currentRandomQuote = selectedQuotes.randomElement() ?? "..."
