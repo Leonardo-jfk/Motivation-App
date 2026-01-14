@@ -93,43 +93,75 @@ struct ContentView: View {
 
     var body: some View {
         
-        NavigationStack(path: $navManager.path) {
-            ZStack(alignment: .bottom) {
-                backgroundLayer
-                Group {
-                    switch selectedTab {
-                    case .today:
-                        TodayView(showingQuote: $showingQuote, todayIndex: todayIndex, currentQuotes: currentQuotes, favoriteQuotes: $favoriteQuotes)
-                    case .challenges:
-                        ChallengesView()
-                    case .track:
-                        TrackView()
-                    case .goals:
-                        GoalsView()
-                    }
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                // Add padding to the bottom of the views so content doesn't
-                // hide behind the TabBar. 80-100 is usually a good range.
-                .padding(.bottom, 70)
-                
-                CustomTabBar(selectedTab: $selectedTab)
-            }
-            .ignoresSafeArea(edges: .bottom)
-            
-            }
+//        NavigationStack(path: $navManager.path) {
+//            ZStack(alignment: .bottom) {
+//                backgroundLayer
+//                Group {
+//                    switch selectedTab {
+//                    case .today:
+//                        TodayView(showingQuote: $showingQuote, todayIndex: todayIndex, currentQuotes: currentQuotes, favoriteQuotes: $favoriteQuotes)
+//                    case .challenges:
+//                        ChallengesView()
+//                    case .track:
+//                        TrackView()
+//                    case .goals:
+//                        GoalsView()
+//                    }
+//                }
+//                .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                // Add padding to the bottom of the views so content doesn't
+//                // hide behind the TabBar. 80-100 is usually a good range.
+//                .padding(.bottom, 70)
+//                
+//                CustomTabBar(selectedTab: $selectedTab)
+//            }
+//            .ignoresSafeArea(edges: .bottom)
+//            
+//            }
             // FIX: Attach destination here, at the root level of the Stack content
+        
+        
+        
+        NavigationStack(path: $navManager.path) {
+            TabView(selection: $selectedTab) {
+                TodayView(showingQuote: $showingQuote, todayIndex: todayIndex, currentQuotes: currentQuotes, favoriteQuotes: $favoriteQuotes)
+                    .tag(Tab.today)
+                    .tabItem {
+                        Label("Today", systemImage: "sun.max")
+                    }
+                
+                TrackView()
+                    .tag(Tab.track)
+                    .tabItem {
+                        Label("Track", systemImage: "tree")
+                    }
+                
+                GoalsView()
+                    .tag(Tab.goals)
+                    .tabItem {
+                        Label("Goals", systemImage: "flame")
+                    }
+                
+                ChallengesView()
+                    .tag(Tab.challenges)
+                    .tabItem {
+                        Label("Challenges", systemImage: "figure.archery")
+                    }
+            }
+            
+            
+            
             .navigationDestination(for: MainNavigation.self) { destination in
                 switch destination {
                 case .track:
-                        TrackView()
-                    case .challenges:
-                        ChallengesView()
-                    case .goals:
+                    TrackView()
+                case .challenges:
+                    ChallengesView()
+                case .goals:
                     GoalsView()
                 }
             }
-        
+        }
     }
     
     // Background Helper
@@ -191,7 +223,7 @@ struct CustomTabBar: View {
         HStack(alignment: .center) {
             ForEach(tabs, id: \.name) { tab in
              
-                Spacer(minLength: 0)
+//                Spacer(minLength: 0)
                 
                 Button(action: {
                     selectedTab = tab.type
@@ -240,7 +272,7 @@ struct TodayView: View {
     @Binding var favoriteQuotes: Set<String>
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .center, spacing: 0) {
             Spacer()
             
             Button(action: {
@@ -249,7 +281,7 @@ struct TodayView: View {
                 }
             }) {
                 if showingQuote {
-                    VStack(spacing: 0) {
+                    VStack(alignment: .center, spacing: 0) {
                         AnimationView()
                         ZStack {
                             RoundedRectangle(cornerRadius: 40, style: .continuous)
@@ -272,7 +304,7 @@ struct TodayView: View {
                         }
                     }
                 } else {
-                    ZStack {
+                    ZStack(alignment: .center,) {
                         RoundedRectangle(cornerRadius: 30, style: .continuous)
                             .fill(Color.black.opacity(0.8))
                             .frame(height: 110)
