@@ -44,7 +44,7 @@ struct TrackView: View {
     
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .center) {
             // Fondo con Lottie
             LottieView(animation: .named("MeteorBack"))
                 .configure({ lottie in lottie.contentMode = contentMode })

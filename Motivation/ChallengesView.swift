@@ -23,7 +23,7 @@ public struct ChallengesView: View {
         let backImage = (colorScheme == .dark) ? "BackDarkMarco" : "BackLightMarco"
         
         NavigationStack {
-            ZStack {
+            ZStack(alignment: .center) {
                 // Fondo
                 Image(backImage)
                     .resizable()
@@ -33,12 +33,13 @@ public struct ChallengesView: View {
                 
                 // Contenido principal
                 ScrollView {
-                    VStack(spacing: 30) {
+                    VStack(alignment: .center, spacing: 30) {
                         // Header
                         VStack(spacing: 15) {
                             Text("Challenges List")
                                 .font(.system(size: 36, weight: .bold))
                                 .foregroundColor(.white)
+                                .shadow(radius: 10)
                                 .shadow(radius: 3)
                             
                             // Estadísticas o información adicional
@@ -127,56 +128,27 @@ public struct ChallengesView: View {
                             
                             HStack(spacing: 20) {
                                 ChallengeCard(
-                                    title: "Early Wake",
-                                    subtitle: "Discipline",
-                                    icon: "sunrise.fill",
+                                    title: "Digital Decluttering",
+                                    subtitle: "Distraction alimination",
+                                    icon: "apps.iphone",
                                     destination: Challenge7View()
                                 )
                                 
                                 ChallengeCard(
                                     title: "Journaling",
                                     subtitle: "Self-awareness",
-                                    icon: "book.fill",
+                                    icon: "environments",
                                     destination: Challenge8View()
                                 )
                             }
                         }
                         .padding(.horizontal, 20)
-                        
-//                        // Estadísticas o información adicional
-//                        VStack(spacing: 15) {
-//                            Text("Your Progress")
-//                                .font(.title2)
-//                                .bold()
-//                                .foregroundColor(.red)
-//                            
-//                            HStack(spacing: 30) {
-//                                ProgressStat(
-//                                    value: "3",
-//                                    label: "Completed",
-//                                    color: .green
-//                                )
-//                                
-//                                ProgressStat(
-//                                    value: "2",
-//                                    label: "In Progress",
-//                                    color: .yellow
-//                                )
-//                                
-//                                ProgressStat(
-//                                    value: "5",
-//                                    label: "Available",
-//                                    color: .blue
-//                                )
-//                            }
-//                        }
-//                        .padding(.top, 20)
-//                        .padding(.bottom, 40)
+                        .padding(.bottom, 100)
                     }
                     .frame(maxWidth: .infinity)
                 }
             }
-            .navigationBarHidden(true)
+//            .navigationBarHidden(true)
         }
     }
 }
@@ -260,7 +232,7 @@ struct ProgressStat: View {
             
             Text(label)
                 .font(.caption)
-                .foregroundColor(.white.opacity(0.8))
+                .foregroundColor(.gray.opacity(0.8))
                 .multilineTextAlignment(.center)
         }
         .frame(width: 80)
@@ -274,7 +246,7 @@ struct Challenge1View: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color.purple]),
+                gradient: Gradient(colors: [Color.black, Color.gray]),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -378,7 +350,7 @@ struct Challenge2View: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color.purple]),
+                gradient: Gradient(colors: [Color.black, Color.gray]),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -480,7 +452,7 @@ struct Challenge3View: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color.purple]),
+                gradient: Gradient(colors: [Color.black, Color.gray]),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -582,7 +554,7 @@ struct Challenge4View: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color.purple]),
+                gradient: Gradient(colors: [Color.black, Color.gray]),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -684,7 +656,7 @@ struct Challenge5View: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color.purple]),
+                gradient: Gradient(colors: [Color.black, Color.gray]),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -786,7 +758,7 @@ struct Challenge6View: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color.purple]),
+                gradient: Gradient(colors: [Color.black, Color.gray]),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -890,7 +862,7 @@ struct Challenge7View: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color.purple]),
+                gradient: Gradient(colors: [Color.black, Color.gray]),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -918,7 +890,7 @@ struct Challenge7View: View {
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     
-                    Image(systemName: "hourglass")
+                    Image(systemName: "apps.iphone")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
@@ -941,10 +913,14 @@ struct Challenge7View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• Write for 5 minutes each morning about your mortality")
-                        Text("• Reflect on what truly matters in your life")
-                        Text("• Appreciate one thing you often take for granted")
-                        Text("• Set an intention for the day")
+                        Text("•  Track screen time.  Strict app limits (ex: Social Media 30min/day")
+                        Text("•  Identify 3 main digital triggers")
+                        Text("•  Log every 'unconscious pickup'")
+                        Text("•  Notice emotional states before/after use")
+                        Text("•  Analyze which apps drain vs. energize")
+                        Text("•  Observe your digital personas")
+                        Text("•  Review weekly digital footprint")
+                        Text("•  Notice emotional states before/afootprint")
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -993,7 +969,7 @@ struct Challenge8View: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color.purple]),
+                gradient: Gradient(colors: [Color.black, Color.gray]),
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -1021,7 +997,7 @@ struct Challenge8View: View {
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     
-                    Image(systemName: "hourglass")
+                    Image(systemName: "environments")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
