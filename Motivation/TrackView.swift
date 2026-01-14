@@ -42,15 +42,31 @@ struct TrackView: View {
         .french: quotesLongFr // O como se llamen tus otras listas
     ]
     
+    @Environment(\.colorScheme) var colorScheme
+    @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
+    private var appScheme: AppColorScheme {
+        AppColorScheme(rawValue: storedScheme) ?? .system
+    }
+    
+//    let lottieBack = (colorScheme == .dark) ? "MeteorBack" : "LightBackLottie"
+    
+    
+    
     
     var body: some View {
+        
+        let lottieBack = (colorScheme == .dark) ? "MeteorBack" : "LightBack3"
+        
+        
         ZStack(alignment: .center) {
             // Fondo con Lottie
-            LottieView(animation: .named("MeteorBack"))
-                .configure({ lottie in lottie.contentMode = contentMode })
-                .playbackMode(.playing(.toProgress(1, loopMode: .loop))) // .loop para que el fondo se mueva siempre
+            LottieView(animation: .named(lottieBack))
+                .configure({ lottie in lottie.contentMode = contentMode
+                    lottie.animationSpeed = 0.5})
+                .playbackMode(.playing(.toProgress(1, loopMode: .playOnce))) // .loop para que el fondo se mueva siempre
                 .resizable()
                 .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             
                 VStack(alignment: .center) {
                 if !showingQuote {
