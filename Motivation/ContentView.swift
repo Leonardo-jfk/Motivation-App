@@ -149,7 +149,41 @@ struct ContentView: View {
                     }
             }
             
-            
+            .toolbar {
+                            // Show toolbar only on Today tab
+                            if selectedTab == .today {
+                                
+                                    ToolbarItem(placement: .topBarLeading) {
+                                        NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
+                                            Image(systemName: "apple.books.pages")
+                                                .resizable()
+                                                .frame(width: 35, height: 35)
+                                                .foregroundStyle(.primary)
+                                                .padding(15) // touch target
+                                        }
+                                    }
+                                    ToolbarItem(placement: .topBarTrailing) {
+                                        NavigationLink(destination: HouseMenu()) {
+                                            Image(systemName: "house")
+                                                .resizable()
+                                                .frame(width: 35, height: 35)
+                                                .foregroundStyle(.primary)
+                                                .padding(15) // touch target
+                                        }
+                                    }
+                                    
+                            } else {
+                                // Add toolbar items for other tabs if needed
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    NavigationLink(destination: HouseMenu()) {
+                                        Image(systemName: "house")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .foregroundStyle(.primary)
+                                    }
+                                }
+                            }
+                        }
             
             .navigationDestination(for: MainNavigation.self) { destination in
                 switch destination {
@@ -164,15 +198,15 @@ struct ContentView: View {
         }
     }
     
-    // Background Helper
-    var backgroundLayer: some View {
-        Image(colorScheme == .dark ? .backgroundDark : .backgroundLight)
-            .resizable()
-            .scaledToFill()
-            .ignoresSafeArea()
-        
-        
-    }
+//    // Background Helper
+//    var backgroundLayer: some View {
+//        Image(colorScheme == .dark ? .backgroundDark : .backgroundLight)
+//            .resizable()
+//            .scaledToFill()
+//            .ignoresSafeArea()
+//        
+//        
+//    }
     
 }
 
@@ -249,19 +283,19 @@ struct CustomTabBar: View {
                         Capsule()
                             .fill(selectedTab == tab.type ? Color.gray.opacity(0.25) : Color.clear)
                             .shadow(color: Color.black.opacity(0.45), radius: 10, x: 0, y: 5)
-//                            .frame(minWidth: .infinity)
+                        //                            .frame(minWidth: .infinity)
                     )
                 }
                 Spacer(minLength: 0)
             }
         }
         .padding(.horizontal, 45) // This keeps buttons away from the screen edges
-                .padding(.top, 8)
-                .padding(.bottom, 10)
+        .padding(.top, 8)
+        .padding(.bottom, 10)
         .background(.ultraThinMaterial) // Translucent glass effect
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))
         .shadow(color: Color.black.opacity(0.45), radius: 10, x: 0, y: 5)
-//        .ignoresSafeArea(edges: .bottom)
+        //        .ignoresSafeArea(edges: .bottom)
     }
 }
 
@@ -271,84 +305,95 @@ struct TodayView: View {
     let currentQuotes: [String]
     @Binding var favoriteQuotes: Set<String>
     
+    @Environment(\.colorScheme) var colorScheme
+    @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
+    // Background Helper
+    var backgroundLayer: some View {
+        Image(colorScheme == .dark ? .backgroundDark : .backgroundLight)
+            .resizable()
+            .scaledToFill()
+            .ignoresSafeArea()
+        
+        
+    }
+    
     var body: some View {
-        VStack(alignment: .center, spacing: 0) {
-            Spacer()
-            
-            Button(action: {
-                withAnimation(.spring()) {
-                    showingQuote.toggle()
-                }
-            }) {
-                if showingQuote {
-                    VStack(alignment: .center, spacing: 0) {
-                        AnimationView()
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 40, style: .continuous)
-                                .fill(Color.black.opacity(0.8))
-                                .frame(width: 350, height: 350)
-                            
-                            VStack {
-                                Text("Today's wisdom dose:".localized)
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 4)
-                                    .background(.gray.opacity(0.4))
-                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                                    .font(.title2)
-                                    .foregroundStyle(.white)
+        ZStack{
+            backgroundLayer
+            VStack(alignment: .center, spacing: 0) {
+                Spacer()
+                
+                Button(action: {
+                    withAnimation(.spring()) {
+                        showingQuote.toggle()
+                    }
+                }) {
+                    if showingQuote {
+                        VStack(alignment: .center, spacing: 0) {
+                            AnimationView()
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 40, style: .continuous)
+                                    .fill(Color.black.opacity(0.8))
+                                    .frame(width: 350, height: 350)
                                 
-                                DayQuoteView(index: todayIndex, currentQuotes: currentQuotes)
-                                    .padding(.horizontal)
-                                    .frame(maxWidth: 350, maxHeight: 300)
+                                VStack {
+                                    Text("Today's wisdom dose:".localized)
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 4)
+                                        .background(.gray.opacity(0.4))
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        .font(.title2)
+                                        .foregroundStyle(.white)
+                                    
+                                    DayQuoteView(index: todayIndex, currentQuotes: currentQuotes)
+                                        .padding(.horizontal)
+                                        .frame(maxWidth: 350, maxHeight: 300)
+                                }
                             }
                         }
-                    }
-                } else {
-                    ZStack(alignment: .center,) {
-                        RoundedRectangle(cornerRadius: 30, style: .continuous)
-                            .fill(Color.black.opacity(0.8))
-                            .frame(height: 110)
-                            .frame(maxWidth: .infinity)
-                            .padding(.horizontal, 70)
-                        
-                        Text("Get today's wisdom".localized)
-                            .font(.title3)
-                            .bold()
-                            .foregroundStyle(.white)
-                    }
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    NavigationLink(destination: QuoteLibrary(favoriteQuotes: $favoriteQuotes)) {
-                        Image(systemName: "apple.books.pages")
-                            .resizable()
-                            .frame(width: 35, height: 35)
-                            .foregroundStyle(.primary)
-                            .padding(15) // touch target
+                    } else {
+                        ZStack(alignment: .center,) {
+                            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                .fill(Color.black.opacity(0.8))
+                                .frame(height: 110)
+                                .frame(maxWidth: .infinity)
+                                .padding(.horizontal, 70)
+                            
+                            Text("Get today's wisdom".localized)
+                                .font(.title3)
+                                .bold()
+                                .foregroundStyle(.white)
+                        }
                     }
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink(destination: HouseMenu()) {
-                        Image(systemName: "house")
-                            .resizable()
-                            .frame(width: 35, height: 35)
-                            .foregroundStyle(.primary)
-                            .padding(15) // touch target
-                    }
-                }
+                Spacer()
                 
             }
-            
-            
-            Spacer()
-            
         }
         
     }
+    
 }
 
 #Preview {
     ContentView()
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//f
