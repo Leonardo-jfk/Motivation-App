@@ -27,7 +27,7 @@ public struct ChallengesView: View {
                 // Fondo
                 Image(backImage)
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
                     .ignoresSafeArea()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
