@@ -82,3 +82,185 @@
 "Your guidance:" = "Tu guía:";
 "Mark day as mindful" = "Marcar día como consciente";
 "Return to peace" = "Volver a la paz";
+
+
+
+
+
+
+/* Challenges List */
+"Challenges List" = "Lista de Desafíos";
+"Your Progress" = "Tu Progreso";
+"Completed" = "Completados";
+"In Progress" = "En Progreso";
+"Available" = "Disponibles";
+
+/* Challenge 1: Memento Mori */
+"Memento Mori" = "Memento Mori";
+"Daily reflection" = "Reflexión diaria";
+"Challenge Description" = "Descripción del Desafío";
+"Practice daily reflection on mortality to appreciate the present moment and live intentionally." = "Practica la reflexión diaria sobre la mortalidad para apreciar el momento presente y vivir intencionalmente.";
+"Daily Task" = "Tarea Diaria";
+"Write for 5 minutes each morning about your mortality" = "Escribe 5 minutos cada mañana sobre tu mortalidad";
+"Reflect on what truly matters in your life" = "Reflexiona sobre lo que realmente importa en tu vida";
+"Appreciate one thing you often take for granted" = "Agradece una cosa que sueles dar por sentada";
+"Set an intention for the day" = "Establece una intención para el día";
+"Start Challenge" = "Comenzar Desafío";
+"Mark as Completed" = "Marcar como Completado";
+
+/* Challenge 2: Digital Fast */
+"Digital fast" = "Ayuno Digital";
+"Get back the focus" = "Recupera el enfoque";
+"Reclaim your attention from digital distractions. Break addictive screen habits to cultivate presence, focus, and authentic connection in the physical world." = "Recupera tu atención de las distracciones digitales. Rompe hábitos adictivos de pantalla para cultivar presencia, enfoque y conexión auténtica en el mundo físico.";
+"First 60 minutes after waking: No screens" = "Primeros 60 minutos después de despertar: Sin pantallas";
+"Designate 3 screen-free hours daily" = "Designa 3 horas sin pantallas diariamente";
+"Turn off all non-essential notifications" = "Desactiva todas las notificaciones no esenciales";
+"No devices during meals or conversations" = "Sin dispositivos durante comidas o conversaciones";
+"Digital sunset 2 hours before bed" = "Ocaso digital 2 horas antes de dormir";
+
+/* Challenge 3: No Complaints */
+"No Complaints" = "Sin Quejas";
+"Mindfulness" = "Atención Plena";
+"Replace complaining with constructive action. Train yourself to notice negative speech patterns and transform them into solution-oriented thinking." = "Reemplaza las quejas con acción constructiva. Entrénate para notar patrones de habla negativa y transformarlos en pensamiento orientado a soluciones.";
+"Wear a bracelet/reminder (switch wrists when complaining)" = "Usa una pulsera/recordatorio (cámbiala de muñeca cuando te quejes)";
+"Practice 10-second pause before speaking" = "Practica una pausa de 10 segundos antes de hablar";
+"Find one solution for every complaint voiced" = "Encuentra una solución por cada queja expresada";
+"Reframe obstacles as opportunities" = "Replantea obstáculos como oportunidades";
+"Practice Stoic acceptance of things outside control" = "Practica la aceptación estoica de cosas fuera de tu control";
+
+/* Challenge 4: Cold Exposure */
+"Cold Exposure" = "Exposición al Frío";
+"30 days challenge" = "Desafío de 30 días";
+"Build mental toughness through voluntary discomfort. Wear sweaters indoors, acclimate gradually, and build resilience through daily comfort reduction." = "Desarrolla fortaleza mental mediante malestar voluntario. Usa suéteres en interiores, aclimátate gradualmente y construye resiliencia reduciendo la comodidad diaria.";
+"1-minute cold shower finish" = "Termina con 1 minuto de ducha fría";
+"Full cold shower" = "Ducha completamente fría";
+"Open windows at night" = "Abre ventanas por la noche";
+"Reduce heating your home" = "Reduce la calefacción de tu hogar";
+"Wear appropriate wool/sweaters instead of heating" = "Usa lana/suéteres apropiados en lugar de calefacción";
+
+/* Challenge 5: Early Wake */
+"Early Wake" = "Despertar Temprano";
+"Discipline" = "Disciplina";
+"Reclaim the quiet hours before the world wakes. Build discipline through consistent early rising, creating space for intentional living before daily demands consume your attention and energy." = "Recupera las horas tranquilas antes de que el mundo despierte. Desarrolla disciplina mediante el levantamiento temprano consistente, creando espacio para vivir intencionalmente antes de que las demandas diarias consuman tu atención y energía.";
+"Wake 30 minutes earlier" = "Despierta 30 minutos antes";
+"Drink large glass of water" = "Bebe un gran vaso de agua";
+"One simple productive task" = "Una tarea productiva simple";
+"Plan day's top 3 priorities" = "Planifica las 3 principales prioridades del día";
+"Creative time with no interruptions (write, draw, create)" = "Tiempo creativo sin interrupciones (escribe, dibuja, crea)";
+
+/* Challenge 6: Journaling */
+"Journaling" = "Diario";
+"Self-awareness" = "Autoconciencia";
+"Transform random thoughts into structured wisdom through daily Stoic journaling. Move from mental clutter to philosophical clarity by systematically examining your day through the lens of Stoic principles." = "Transforma pensamientos aleatorios en sabiduría estructurada mediante el diario estoico diario. Pasa del desorden mental a la claridad filosófica examinando sistemáticamente tu día a través de los principios estoicos.";
+"10 minutes before bed: Review your day" = "10 minutos antes de dormir: Revisa tu día";
+"What went well? (3 things)" = "¿Qué salió bien? (3 cosas)";
+"Write a conversation with a Stoic philosopher" = "Escribe una conversación con un filósofo estoico";
+"Never take advice from someone who you wouldn’t trade your life with" = "Nunca tomes consejo de alguien con quien no cambiarías tu vida";
+"Establish some definite discipline and rules for yourself" = "Establece alguna disciplina y reglas definitivas para ti mismo";
+
+/* Challenge 7: Conscious Consumption */
+"Conscious Consumption" = "Consumo Consciente";
+"Question your desire" = "Cuestiona tu deseo";
+"Question every desire before acting on it. Practice the Stoic pause between impulse and action to cultivate wisdom in consumption." = "Cuestiona cada deseo antes de actuar. Practica la pausa estoica entre impulso y acción para cultivar sabiduría en el consumo.";
+"Wait 24 hours before any non-essential purchase" = "Espera 24 horas antes de cualquier compra no esencial";
+"Ask: 'Is this a want or a need?'" = "Pregunta: '¿Es esto un deseo o una necesidad?'";
+"Track all spending consciously" = "Registra todo gasto conscientemente";
+"One day per week: No spending" = "Un día por semana: Sin gastos";
+"Donate one item for every new item" = "Dona un artículo por cada artículo nuevo";
+
+/* Challenge 8: Delayed Gratification */
+"Delayed Gratification Mastery" = "Dominio de la Gratificación Diferida";
+"Do what matters" = "Haz lo que importa";
+"Master the art of waiting. Train yourself to value future abundance over immediate pleasure to build profound patience and long-term thinking." = "Domina el arte de esperar. Entrénate para valorar la abundancia futura sobre el placer inmediato para construir paciencia profunda y pensamiento a largo plazo.";
+"Save first, buy later" = "Ahorra primero, compra después";
+"What you plant today, others/God/future-you will enjoy" = "Lo que plantas hoy, otros/Dios/tú-futuro disfrutarán";
+"Create '3-Year Waiting List' for desired items" = "Crea una 'Lista de Espera de 3 Años' para artículos deseados";
+"Fix something broken instead of buying new" = "Arregla algo roto en lugar de comprar nuevo";
+"For each resisted purchase, transfer amount to savings" = "Por cada compra resistida, transfiere el monto a ahorros";
+
+
+
+
+
+
+
+
+// Spanish
+"Digital fast" = "Ayuno Digital";
+"Get back the focus" = "Recupera el Enfoque";
+"Reclaim your attention from digital distractions. Break addictive screen habits to cultivate presence, focus, and authentic connection in the physical world." = "Recupera tu atención de las distracciones digitales. Rompe los hábitos adictivos de pantalla para cultivar presencia, enfoque y conexión auténtica en el mundo físico.";
+"First 60 minutes after waking: No screens" = "Primeros 60 minutos después de despertar: Sin pantallas";
+"Designate 3 screen-free hours daily" = "Designa 3 horas sin pantalla diariamente";
+"Turn off all non-essential notifications" = "Apaga todas las notificaciones no esenciales";
+"No devices during meals or conversations" = "Sin dispositivos durante comidas o conversaciones";
+"Digital sunset 2 hours before bed" = "Atardecer digital 2 horas antes de dormir";
+
+"No Complaints" = "Sin Quejas";
+"Mindfulness" = "Atención Plena";
+"Replace complaining with constructive action. Train yourself to notice negative speech patterns and transform them into solution-oriented thinking." = "Reemplaza las quejas con acción constructiva. Entrénate para notar patrones de habla negativos y transformarlos en pensamiento orientado a soluciones.";
+"Wear a bracelet/reminder (switch wrists when complaining)" = "Usa una pulsera/recordatorio (cambia de muñeca cuando te quejes)";
+"Practice 10-second pause before speaking" = "Practica una pausa de 10 segundos antes de hablar";
+"Find one solution for every complaint voiced" = "Encuentra una solución por cada queja expresada";
+"Reframe obstacles as opportunities" = "Replantea los obstáculos como oportunidades";
+"Practice Stoic acceptance of things outside control" = "Practica la aceptación estoica de cosas fuera de tu control";
+
+"Cold Exposure" = "Exposición al Frío";
+"30 days challenge" = "Desafío de 30 días";
+"Build mental toughness through voluntary discomfort. Wear sweaters indoors, acclimate gradually, and build resilience through daily comfort reduction." = "Desarrolla dureza mental a través de la incomodidad voluntaria. Usa suéteres en interiores, aclimatate gradualmente y construye resiliencia reduciendo el confort diario.";
+"1-minute cold shower finish" = "Termina con 1 minuto de ducha fría";
+"Full cold shower" = "Ducha completamente fría";
+"Open windows at night" = "Abre ventanas por la noche";
+"Reduce heating your home" = "Reduce la calefacción de tu hogar";
+"Wear appropriate wool/sweaters instead of heating" = "Usa lana/suéteres apropiados en lugar de calefacción";
+
+
+
+
+
+
+
+
+
+"• Wake 30 minutes earlier" = "• Despiértate 30 minutos antes";
+"• Drink large glass of water" = "• Bebe un vaso grande de agua";
+"• One simple productive task" = "• Una tarea productiva simple";
+"• Plan day's top 3 priorities" = "• Planifica las 3 prioridades principales del día";
+"• Creative time with no interruptions (write, draw, create)" = "• Tiempo creativo sin interrupciones (escribe, dibuja, crea)";
+
+"• 10 minutes before bed: Review your day" = "• 10 minutos antes de dormir: Revisa tu día";
+"• What went well? (3 things)" = "• ¿Qué salió bien? (3 cosas)";
+"• Write a conversation with a Stoic philosopher" = "• Escribe una conversación con un filósofo estoico";
+"• Never take advice from someone who you wouldn't trade your life with" = "• Nunca tomes consejo de alguien con quien no intercambiarías tu vida";
+"• Establish some definite discipline and rules for yourself" = "• Establece alguna disciplina y reglas definidas para ti mismo";
+
+"• Wait 24 hours before any non-essential purchase" = "• Espera 24 horas antes de cualquier compra no esencial";
+"• Ask: 'Is this a want or a need?'" = "• Pregunta: '¿Esto es un deseo o una necesidad?'";
+"• Track all spending consciously" = "• Registra todos los gastos conscientemente";
+"• One day per week: No spending" = "• Un día por semana: Sin gastos";
+"• Donate one item for every new item" = "• Dona un artículo por cada artículo nuevo";
+
+"• Save first, buy later" = "• Ahorra primero, compra después";
+"• What you plant today, others/God/future-you will enjoy" = "• Lo que plantas hoy, otros/Dios/tu-yo-futuro disfrutarán";
+"• Create '3-Year Waiting List' for desired items" = "• Crea una 'Lista de Espera de 3 Años' para artículos deseados";
+"• Fix something broken instead of buying new" = "• Arregla algo roto en lugar de comprar nuevo";
+"• For each resisted purchase, transfer amount to savings" = "• Por cada compra resistida, transfiere el monto a ahorros";
+
+"• Write for 5 minutes each morning about your mortality" = "• Escribe 5 minutos cada mañana sobre tu mortalidad";
+"• Reflect on what truly matters in your life" = "• Reflexiona sobre lo que realmente importa en tu vida";
+"• Appreciate one thing you often take for granted" = "• Aprecia una cosa que sueles dar por sentada";
+"• Set an intention for the day" = "• Establece una intención para el día";
+"• First 60 minutes after waking: No screens" = "• Primeros 60 minutos después de despertar: Sin pantallas";
+"• Designate 3 screen-free hours daily" = "• Designa 3 horas sin pantalla diariamente";
+"• Turn off all non-essential notifications" = "• Apaga todas las notificaciones no esenciales";
+"• No devices during meals or conversations" = "• Sin dispositivos durante comidas o conversaciones";
+"• Digital sunset 2 hours before bed" = "• Atardecer digital 2 horas antes de dormir";
+"• Wear a bracelet/reminder (switch wrists when complaining)" = "• Usa una pulsera/recordatorio (cambia de muñeca cuando te quejes)";
+"• Practice 10-second pause before speaking" = "• Practica una pausa de 10 segundos antes de hablar";
+"• Find one solution for every complaint voiced" = "• Encuentra una solución por cada queja expresada";
+"• Reframe obstacles as opportunities" = "• Replantea los obstáculos como oportunidades";
+"• Practice Stoic acceptance of things outside control" = "• Practica la aceptación estoica de cosas fuera de tu control";
+"• 1-minute cold shower finish" = "• Termina con 1 minuto de ducha fría";
+"• Full cold shower" = "• Ducha completamente fría";
+"• Open windows at night" = "• Abre ventanas por la noche";
+"• Reduce heating your home" = "• Reduce la calefacción de tu hogar";
+"• Wear appropriate wool/sweaters instead of heating" = "• Usa lana/suéteres apropiados en lugar de calefacción";

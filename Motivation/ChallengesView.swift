@@ -36,7 +36,7 @@ public struct ChallengesView: View {
                     VStack(alignment: .center, spacing: 30) {
                         // Header
                         VStack(spacing: 15) {
-                            Text("Challenges List")
+                            Text("Challenges List".localized)
                                 .font(.system(size: 36, weight: .bold))
                                 .foregroundColor(.white)
                                 .shadow(radius: 10)
@@ -44,7 +44,7 @@ public struct ChallengesView: View {
                             
                             // Estadísticas o información adicional
                             VStack(spacing: 15) {
-                                Text("Your Progress")
+                                Text("Your Progress".localized)
                                     .font(.title2)
                                     .bold()
                                     .foregroundColor(.red)
@@ -52,19 +52,19 @@ public struct ChallengesView: View {
                                 HStack(spacing: 30) {
                                     ProgressStat(
                                         value: "3",
-                                        label: "Completed",
+                                        label: "Completed".localized,
                                         color: .green
                                     )
                                     
                                     ProgressStat(
                                         value: "2",
-                                        label: "In Progress",
+                                        label: "In Progress".localized,
                                         color: .yellow
                                     )
                                     
                                     ProgressStat(
                                         value: "5",
-                                        label: "Available",
+                                        label: "Available".localized,
                                         color: .blue
                                     )
                                 }
@@ -80,14 +80,14 @@ public struct ChallengesView: View {
                             HStack(spacing: 20) {
                                 ChallengeCard(
                                     title: "Memento Mori",
-                                    subtitle: "Daily reflection",
+                                    subtitle: "Daily reflection".localized,
                                     icon: "hourglass",
                                     destination: Challenge1View()
                                 )
                                 
                                 ChallengeCard(
-                                    title: "Digital fast",
-                                    subtitle: "Get back the focus",
+                                    title: "Digital fast".localized,
+                                    subtitle: "Get back the focus".localized,
                                     icon: "iphone.slash",
                                     destination: Challenge2View()
                                 )
@@ -96,15 +96,15 @@ public struct ChallengesView: View {
                             // Segunda fila
                             HStack(spacing: 20) {
                                 ChallengeCard(
-                                    title: "No Complaints",
-                                    subtitle: "Mindfulness",
+                                    title: "No Complaints".localized,
+                                    subtitle: "Mindfulness".localized,
                                     icon: "mouth",
                                     destination: Challenge3View()
                                 )
                                 
                                 ChallengeCard(
-                                    title: "Cold Exposure",
-                                    subtitle: "30 days challenge",
+                                    title: "Cold Exposure".localized,
+                                    subtitle: "30 days challenge".localized,
                                     icon: "drop.fill",
                                     destination: Challenge4View()
                                 )
@@ -112,15 +112,15 @@ public struct ChallengesView: View {
                             
                             HStack(spacing: 20) {
                                 ChallengeCard(
-                                    title: "Early Wake",
-                                    subtitle: "Discipline",
+                                    title: "Early Wake".localized,
+                                    subtitle: "Discipline".localized,
                                     icon: "sunrise.fill",
                                     destination: Challenge5View()
                                 )
                                 
                                 ChallengeCard(
-                                    title: "Journaling",
-                                    subtitle: "Self-awareness",
+                                    title: "Journaling".localized,
+                                    subtitle: "Self-awareness".localized,
                                     icon: "book.fill",
                                     destination: Challenge6View()
                                 )
@@ -128,15 +128,15 @@ public struct ChallengesView: View {
                             
                             HStack(spacing: 20) {
                                 ChallengeCard(
-                                    title: "Consumption",
-                                    subtitle: "Question your desire",
+                                    title: "Consumption".localized,
+                                    subtitle: "Question your desire".localized,
                                     icon: "sterlingsign.ring.dashed",
                                     destination: Challenge7View()
                                 )
                                 
                                 ChallengeCard(
-                                    title: "Gratification",
-                                    subtitle: "Do what matters",
+                                    title: "Gratification".localized,
+                                    subtitle: "Do what matters".localized,
                                     icon: "figure.mind.and.body",
                                     destination: Challenge8View()
                                 )
@@ -281,26 +281,26 @@ struct Challenge1View: View {
                         .foregroundColor(.white)
                     
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Challenge Description")
+                        Text("Challenge Description".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Practice daily reflection on mortality to appreciate the present moment and live intentionally.")
+                        Text("Practice daily reflection on mortality to appreciate the present moment and live intentionally.".localized)
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
                             .background(Color.white.opacity(0.3))
                         
-                        Text("Daily Task")
+                        Text("Daily Task".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• Write for 5 minutes each morning about your mortality")
-                        Text("• Reflect on what truly matters in your life")
-                        Text("• Appreciate one thing you often take for granted")
-                        Text("• Set an intention for the day")
+                        Text("• Write for 5 minutes each morning about your mortality".localized)
+                        Text("• Reflect on what truly matters in your life".localized)
+                        Text("• Appreciate one thing you often take for granted".localized)
+                        Text("• Set an intention for the day".localized)
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -317,7 +317,7 @@ struct Challenge1View: View {
                     Button(action: {
                         // Start challenge
                     }) {
-                        Text("Start Challenge")
+                        Text("Start Challenge".localized)
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -329,7 +329,7 @@ struct Challenge1View: View {
                     Button(action: {
                         // Mark as completed
                     }) {
-                        Text("Mark as Completed")
+                        Text("Mark as Completed".localized)
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
                     }
@@ -373,7 +373,7 @@ struct Challenge2View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("Digital fast")
+                    Text("Digital fast".localized)
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -385,27 +385,27 @@ struct Challenge2View: View {
                         .foregroundColor(.white)
                     
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Challenge Description")
+                        Text("Challenge Description".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Reclaim your attention from digital distractions. Break addictive screen habits to cultivate presence, focus, and authentic connection in the physical world.")
+                        Text("Reclaim your attention from digital distractions. Break addictive screen habits to cultivate presence, focus, and authentic connection in the physical world.".localized)
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
                             .background(Color.white.opacity(0.3))
                         
-                        Text("Daily Task")
+                        Text("Daily Task".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• First 60 minutes after waking: No screens")
-                        Text("• Designate 3 screen-free hours daily")
-                        Text("• Turn off all non-essential notifications")
-                        Text("• No devices during meals or conversations")
-                        Text("• Digital sunset 2 hours before bed")
+                        Text("• First 60 minutes after waking: No screens".localized)
+                        Text("• Designate 3 screen-free hours daily".localized)
+                        Text("• Turn off all non-essential notifications".localized)
+                        Text("• No devices during meals or conversations".localized)
+                        Text("• Digital sunset 2 hours before bed".localized)
                         
                     }
                     .font(.body)
@@ -423,7 +423,7 @@ struct Challenge2View: View {
                     Button(action: {
                         // Start challenge
                     }) {
-                        Text("Start Challenge")
+                        Text("Start Challenge".localized)
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -435,7 +435,7 @@ struct Challenge2View: View {
                     Button(action: {
                         // Mark as completed
                     }) {
-                        Text("Mark as Completed")
+                        Text("Mark as Completed".localized)
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
                     }
@@ -477,7 +477,7 @@ struct Challenge3View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("No Complaints")
+                    Text("No Complaints".localized)
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -489,27 +489,27 @@ struct Challenge3View: View {
                         .foregroundColor(.white)
                     
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Challenge Description")
+                        Text("Challenge Description".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Replace complaining with constructive action. Train yourself to notice negative speech patterns and transform them into solution-oriented thinking.")
+                        Text("Replace complaining with constructive action. Train yourself to notice negative speech patterns and transform them into solution-oriented thinking.".localized)
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
                             .background(Color.white.opacity(0.3))
                         
-                        Text("Daily Task")
+                        Text("Daily Task".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• Wear a bracelet/reminder (switch wrists when complaining)")
-                        Text("• Practice 10-second pause before speaking")
-                        Text("• Find one solution for every complaint voiced")
-                        Text("• Reframe obstacles as opportunities")
-                        Text("• Practice Stoic acceptance of things outside control")
+                        Text("• Wear a bracelet/reminder (switch wrists when complaining)".localized)
+                        Text("• Practice 10-second pause before speaking".localized)
+                        Text("• Find one solution for every complaint voiced".localized)
+                        Text("• Reframe obstacles as opportunities".localized)
+                        Text("• Practice Stoic acceptance of things outside control".localized)
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -526,7 +526,7 @@ struct Challenge3View: View {
                     Button(action: {
                         // Start challenge
                     }) {
-                        Text("Start Challenge")
+                        Text("Start Challenge".localized)
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -538,7 +538,7 @@ struct Challenge3View: View {
                     Button(action: {
                         // Mark as completed
                     }) {
-                        Text("Mark as Completed")
+                        Text("Mark as Completed".localized)
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
                     }
@@ -580,7 +580,7 @@ struct Challenge4View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("Cold Exposure")
+                    Text("Cold Exposure".localized)
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -592,27 +592,27 @@ struct Challenge4View: View {
                         .foregroundColor(.white)
                     
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Challenge Description")
+                        Text("Challenge Description".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Build mental toughness through voluntary discomfort. Wear sweaters indoors, acclimate gradually, and build resilience through daily comfort reduction.")
+                        Text("Build mental toughness through voluntary discomfort. Wear sweaters indoors, acclimate gradually, and build resilience through daily comfort reduction.".localized)
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
                             .background(Color.white.opacity(0.3))
                         
-                        Text("Daily Task")
+                        Text("Daily Task".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• 1-minute cold shower finish")
-                        Text("• Full cold shower")
-                        Text("• Open windows at night")
-                        Text("• Reduce heating your home")
-                        Text("• Wear appropriate wool/sweaters instead of heating")
+                        Text("• 1-minute cold shower finish".localized)
+                        Text("• Full cold shower".localized)
+                        Text("• Open windows at night".localized)
+                        Text("• Reduce heating your home".localized)
+                        Text("• Wear appropriate wool/sweaters instead of heating".localized)
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -629,7 +629,7 @@ struct Challenge4View: View {
                     Button(action: {
                         // Start challenge
                     }) {
-                        Text("Start Challenge")
+                        Text("Start Challenge".localized)
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -641,7 +641,7 @@ struct Challenge4View: View {
                     Button(action: {
                         // Mark as completed
                     }) {
-                        Text("Mark as Completed")
+                        Text("Mark as Completed".localized)
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
                     }
@@ -683,7 +683,7 @@ struct Challenge5View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("Early Wake")
+                    Text("Early Wake".localized)
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -695,27 +695,27 @@ struct Challenge5View: View {
                         .foregroundColor(.white)
                     
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Challenge Description")
+                        Text("Challenge Description".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Reclaim the quiet hours before the world wakes. Build discipline through consistent early rising, creating space for intentional living before daily demands consume your attention and energy.")
+                        Text("Reclaim the quiet hours before the world wakes. Build discipline through consistent early rising, creating space for intentional living before daily demands consume your attention and energy.".localized)
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
                             .background(Color.white.opacity(0.3))
                         
-                        Text("Daily Task")
+                        Text("Daily Task".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• Wake 30 minutes earlier")
-                        Text("• Drink large glass of water")
-                        Text("• One simple productive task")
-                        Text("• Plan day's top 3 priorities")
-                        Text("• Creative time with no interruptions (write, draw, create)")
+                        Text("• Wake 30 minutes earlier".localized)
+                        Text("• Drink large glass of water".localized)
+                        Text("• One simple productive task".localized)
+                        Text("• Plan day's top 3 priorities".localized)
+                        Text("• Creative time with no interruptions (write, draw, create)".localized)
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -732,7 +732,7 @@ struct Challenge5View: View {
                     Button(action: {
                         // Start challenge
                     }) {
-                        Text("Start Challenge")
+                        Text("Start Challenge".localized)
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -744,7 +744,7 @@ struct Challenge5View: View {
                     Button(action: {
                         // Mark as completed
                     }) {
-                        Text("Mark as Completed")
+                        Text("Mark as Completed".localized)
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
                     }
@@ -786,7 +786,7 @@ struct Challenge6View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("Journaling")
+                    Text("Journaling".localized)
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -798,27 +798,27 @@ struct Challenge6View: View {
                         .foregroundColor(.white)
                     
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Challenge Description")
+                        Text("Challenge Description".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Transform random thoughts into structured wisdom through daily Stoic journaling. Move from mental clutter to philosophical clarity by systematically examining your day through the lens of Stoic principles.")
+                        Text("Transform random thoughts into structured wisdom through daily Stoic journaling. Move from mental clutter to philosophical clarity by systematically examining your day through the lens of Stoic principles.".localized)
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
                             .background(Color.white.opacity(0.3))
                         
-                        Text("Daily Task")
+                        Text("Daily Task".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• 10 minutes before bed: Review your day")
-                        Text("• What went well? (3 things)")
-                        Text("• Write a conversation with a Stoic philosopher")
-                        Text("• Never take advice from someone who you wouldn’t trade your life with")
-                        Text("• Establish some definite discipline and rules for yourself")
+                        Text("• 10 minutes before bed: Review your day".localized)
+                        Text("• What went well? (3 things)".localized)
+                        Text("• Write a conversation with a Stoic philosopher".localized)
+                        Text("• Never take advice from someone who you wouldn’t trade your life with".localized)
+                        Text("• Establish some definite discipline and rules for yourself".localized)
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -835,7 +835,7 @@ struct Challenge6View: View {
                     Button(action: {
                         // Start challenge
                     }) {
-                        Text("Start Challenge")
+                        Text("Start Challenge".localized)
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -847,7 +847,7 @@ struct Challenge6View: View {
                     Button(action: {
                         // Mark as completed
                     }) {
-                        Text("Mark as Completed")
+                        Text("Mark as Completed".localized)
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
                     }
@@ -891,7 +891,7 @@ struct Challenge7View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("Conscious Consumption")
+                    Text("Conscious Consumption".localized)
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -903,27 +903,27 @@ struct Challenge7View: View {
                         .foregroundColor(.white)
                     
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Challenge Description")
+                        Text("Challenge Description".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Question every desire before acting on it. Practice the Stoic pause between impulse and action to cultivate wisdom in consumption.")
+                        Text("Question every desire before acting on it. Practice the Stoic pause between impulse and action to cultivate wisdom in consumption.".localized)
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
                             .background(Color.white.opacity(0.3))
                         
-                        Text("Daily Task")
+                        Text("Daily Task".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("•  Wait 24 hours before any non-essential purchase")
-                        Text("•  Ask: 'Is this a want or a need?' ")
-                        Text("•  Track all spending consciously")
-                        Text("•  One day per week: No spending")
-                        Text("•  Donate one item for every new item")
+                        Text("•  Wait 24 hours before any non-essential purchase".localized)
+                        Text("•  Ask: 'Is this a want or a need?' ".localized)
+                        Text("•  Track all spending consciously".localized)
+                        Text("•  One day per week: No spending".localized)
+                        Text("•  Donate one item for every new item".localized)
                         
                     }
                     .font(.body)
@@ -941,7 +941,7 @@ struct Challenge7View: View {
                     Button(action: {
                         // Start challenge
                     }) {
-                        Text("Start Challenge")
+                        Text("Start Challenge".localized)
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -953,7 +953,7 @@ struct Challenge7View: View {
                     Button(action: {
                         // Mark as completed
                     }) {
-                        Text("Mark as Completed")
+                        Text("Mark as Completed".localized)
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
                     }
@@ -996,7 +996,7 @@ struct Challenge8View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text(" Delayed Gratification Mastery")
+                    Text(" Delayed Gratification Mastery".localized)
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -1008,27 +1008,27 @@ struct Challenge8View: View {
                         .foregroundColor(.white)
                     
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Challenge Description")
+                        Text("Challenge Description".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Master the art of waiting.  Train yourself to value future abundance over immediate pleasure to build profound patience and long-term thinking.")
+                        Text("Master the art of waiting.  Train yourself to value future abundance over immediate pleasure to build profound patience and long-term thinking.".localized)
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
                             .background(Color.white.opacity(0.3))
                         
-                        Text("Daily Task")
+                        Text("Daily Task".localized)
                             .font(.title2)
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• Save first, buy later")
-                        Text("• What you plant today, others/God/future-you will enjoy")
-                        Text("• Create '3-Year Waiting List' for desired items")
-                        Text("• Fix something broken instead of buying new")
-                        Text("• For each resisted purchase, transfer amount to savings")
+                        Text("• Save first, buy later".localized)
+                        Text("• What you plant today, others/God/future-you will enjoy".localized)
+                        Text("• Create '3-Year Waiting List' for desired items".localized)
+                        Text("• Fix something broken instead of buying new".localized)
+                        Text("• For each resisted purchase, transfer amount to savings".localized)
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -1045,7 +1045,7 @@ struct Challenge8View: View {
                     Button(action: {
                         // Start challenge
                     }) {
-                        Text("Start Challenge")
+                        Text("Start Challenge".localized)
                             .font(.headline)
                             .foregroundColor(.white)
                             .padding()
@@ -1057,7 +1057,7 @@ struct Challenge8View: View {
                     Button(action: {
                         // Mark as completed
                     }) {
-                        Text("Mark as Completed")
+                        Text("Mark as Completed".localized)
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
                     }
