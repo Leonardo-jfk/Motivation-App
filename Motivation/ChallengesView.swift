@@ -135,9 +135,9 @@ public struct ChallengesView: View {
                                 )
                                 
                                 ChallengeCard(
-                                    title: "Journaling",
-                                    subtitle: "Self-awareness",
-                                    icon: "environments",
+                                    title: "Gratification",
+                                    subtitle: "Do what matters",
+                                    icon: "figure.mind.and.body",
                                     destination: Challenge8View()
                                 )
                             }
@@ -683,12 +683,12 @@ struct Challenge5View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("Digital fast")
+                    Text("Early Wake")
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     
-                    Image(systemName: "hourglass")
+                    Image(systemName: "sun.haze")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
@@ -700,7 +700,7 @@ struct Challenge5View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Practice daily reflection on mortality to appreciate the present moment and live intentionally.")
+                        Text("Reclaim the quiet hours before the world wakes. Build discipline through consistent early rising, creating space for intentional living before daily demands consume your attention and energy.")
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
@@ -711,10 +711,11 @@ struct Challenge5View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• Write for 5 minutes each morning about your mortality")
-                        Text("• Reflect on what truly matters in your life")
-                        Text("• Appreciate one thing you often take for granted")
-                        Text("• Set an intention for the day")
+                        Text("• Wake 30 minutes earlier")
+                        Text("• Drink large glass of water")
+                        Text("• One simple productive task")
+                        Text("• Plan day's top 3 priorities")
+                        Text("• Creative time with no interruptions (write, draw, create)")
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -995,12 +996,12 @@ struct Challenge8View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("Memento Mori")
+                    Text(" Delayed Gratification Mastery")
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     
-                    Image(systemName: "environments")
+                    Image(systemName: "apple.meditate")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
@@ -1012,7 +1013,7 @@ struct Challenge8View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Practice daily reflection on mortality to appreciate the present moment and live intentionally.")
+                        Text("Master the art of waiting.  Train yourself to value future abundance over immediate pleasure to build profound patience and long-term thinking.")
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
@@ -1023,10 +1024,11 @@ struct Challenge8View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• Write for 5 minutes each morning about your mortality")
-                        Text("• Reflect on what truly matters in your life")
-                        Text("• Appreciate one thing you often take for granted")
-                        Text("• Set an intention for the day")
+                        Text("• Save first, buy later")
+                        Text("• What you plant today, others/God/future-you will enjoy")
+                        Text("• Create '3-Year Waiting List' for desired items")
+                        Text("• Fix something broken instead of buying new")
+                        Text("• For each resisted purchase, transfer amount to savings")
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
