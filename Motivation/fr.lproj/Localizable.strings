@@ -154,7 +154,11 @@
 "Fix something broken instead of buying new" = "Réparer quelque chose de cassé au lieu d'acheter du neuf";
 "For each resisted purchase, transfer amount to savings" = "Pour chaque achat résisté, transférez le montant à l'épargne";
 
-
+"• Wait 24 hours before any non-essential purchase" = "• Attendez 24 heures avant tout achat non essentiel";
+"• Ask: 'Is this a want or a need?'" = "• Demandez : 'Est-ce un désir ou un besoin ?'";
+"• Track all spending consciously" = "• Suivez toutes les dépenses consciemment";
+"• One day per week: No spending" = "• Un jour par semaine : Pas de dépenses";
+"• Donate one item for every new item" = "• Donnez un article pour chaque nouvel article";
 
 
 

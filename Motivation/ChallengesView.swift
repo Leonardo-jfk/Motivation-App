@@ -919,11 +919,11 @@ struct Challenge7View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("•  Wait 24 hours before any non-essential purchase".localized)
-                        Text("•  Ask: 'Is this a want or a need?' ".localized)
-                        Text("•  Track all spending consciously".localized)
-                        Text("•  One day per week: No spending".localized)
-                        Text("•  Donate one item for every new item".localized)
+                        Text("• Wait 24 hours before any non-essential purchase".localized)
+                        Text("• Ask: 'Is this a want or a need?' ".localized)
+                        Text("• Track all spending consciously".localized)
+                        Text("• One day per week: No spending".localized)
+                        Text("• Donate one item for every new item".localized)
                         
                     }
                     .font(.body)
@@ -994,9 +994,9 @@ struct Challenge8View: View {
                 }
                 .padding(.top, 20)
                 
-                // Contenido
+                // Contenid"Delayed Gratification Mastery"o
                 VStack(spacing: 25) {
-                    Text(" Delayed Gratification Mastery".localized)
+                    Text("Delayed Gratification Mastery".localized)
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -1013,7 +1013,7 @@ struct Challenge8View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Master the art of waiting.  Train yourself to value future abundance over immediate pleasure to build profound patience and long-term thinking.".localized)
+                        Text("Master the art of waiting. Train yourself to value future abundance over immediate pleasure to build profound patience and long-term thinking.".localized)
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
