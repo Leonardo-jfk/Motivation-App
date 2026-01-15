@@ -80,6 +80,8 @@ struct TrackView: View {
                         Text("Days lived mindfully".localized)
                             .font(.headline)
                             .foregroundStyle(.white.opacity(0.8))
+                            .shadow(radius: 3)
+                            .shadow(radius: 7)
                     }
                     .padding(30)
                     .background(.ultraThinMaterial)

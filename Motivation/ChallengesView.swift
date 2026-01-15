@@ -86,9 +86,9 @@ public struct ChallengesView: View {
                                 )
                                 
                                 ChallengeCard(
-                                    title: "Cold Shower",
-                                    subtitle: "30 days challenge",
-                                    icon: "drop.fill",
+                                    title: "Digital fast",
+                                    subtitle: "Get back the focus",
+                                    icon: "iphone.slash",
                                     destination: Challenge2View()
                                 )
                             }
@@ -103,9 +103,9 @@ public struct ChallengesView: View {
                                 )
                                 
                                 ChallengeCard(
-                                    title: "Digital Fast",
-                                    subtitle: "Focus training",
-                                    icon: "iphone.slash",
+                                    title: "Cold Exposure",
+                                    subtitle: "30 days challenge",
+                                    icon: "drop.fill",
                                     destination: Challenge4View()
                                 )
                             }
@@ -128,9 +128,9 @@ public struct ChallengesView: View {
                             
                             HStack(spacing: 20) {
                                 ChallengeCard(
-                                    title: "Digital Decluttering",
-                                    subtitle: "Distraction alimination",
-                                    icon: "apps.iphone",
+                                    title: "Consumption",
+                                    subtitle: "Question your desire",
+                                    icon: "sterlingsign.ring.dashed",
                                     destination: Challenge7View()
                                 )
                                 
@@ -378,7 +378,7 @@ struct Challenge2View: View {
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     
-                    Image(systemName: "hourglass")
+                    Image(systemName: "iphone.slash")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
@@ -390,7 +390,7 @@ struct Challenge2View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Practice daily reflection on mortality to appreciate the present moment and live intentionally.")
+                        Text("Reclaim your attention from digital distractions. Break addictive screen habits to cultivate presence, focus, and authentic connection in the physical world.")
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
@@ -401,10 +401,12 @@ struct Challenge2View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• Write for 5 minutes each morning about your mortality")
-                        Text("• Reflect on what truly matters in your life")
-                        Text("• Appreciate one thing you often take for granted")
-                        Text("• Set an intention for the day")
+                        Text("• First 60 minutes after waking: No screens")
+                        Text("• Designate 3 screen-free hours daily")
+                        Text("• Turn off all non-essential notifications")
+                        Text("• No devices during meals or conversations")
+                        Text("• Digital sunset 2 hours before bed")
+                        
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -475,12 +477,12 @@ struct Challenge3View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("Digital fast")
+                    Text("No Complaints")
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     
-                    Image(systemName: "hourglass")
+                    Image(systemName: "person.spatialaudio.fill")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
@@ -492,7 +494,7 @@ struct Challenge3View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Practice daily reflection on mortality to appreciate the present moment and live intentionally.")
+                        Text("Replace complaining with constructive action. Train yourself to notice negative speech patterns and transform them into solution-oriented thinking.")
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
@@ -503,10 +505,11 @@ struct Challenge3View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• Write for 5 minutes each morning about your mortality")
-                        Text("• Reflect on what truly matters in your life")
-                        Text("• Appreciate one thing you often take for granted")
-                        Text("• Set an intention for the day")
+                        Text("• Wear a bracelet/reminder (switch wrists when complaining)")
+                        Text("• Practice 10-second pause before speaking")
+                        Text("• Find one solution for every complaint voiced")
+                        Text("• Reframe obstacles as opportunities")
+                        Text("• Practice Stoic acceptance of things outside control")
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -577,12 +580,12 @@ struct Challenge4View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("Digital fast")
+                    Text("Cold Exposure")
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     
-                    Image(systemName: "hourglass")
+                    Image(systemName: "thermometer.snowflake")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
@@ -594,7 +597,7 @@ struct Challenge4View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Practice daily reflection on mortality to appreciate the present moment and live intentionally.")
+                        Text("Build mental toughness through voluntary discomfort. Wear sweaters indoors, acclimate gradually, and build resilience through daily comfort reduction.")
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
@@ -605,10 +608,11 @@ struct Challenge4View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• Write for 5 minutes each morning about your mortality")
-                        Text("• Reflect on what truly matters in your life")
-                        Text("• Appreciate one thing you often take for granted")
-                        Text("• Set an intention for the day")
+                        Text("• 1-minute cold shower finish")
+                        Text("• Full cold shower")
+                        Text("• Open windows at night")
+                        Text("• Reduce heating your home")
+                        Text("• Wear appropriate wool/sweaters instead of heating")
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -781,12 +785,12 @@ struct Challenge6View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("Digital fast")
+                    Text("Journaling")
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     
-                    Image(systemName: "hourglass")
+                    Image(systemName: "highlighter")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
@@ -798,7 +802,7 @@ struct Challenge6View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Practice daily reflection on mortality to appreciate the present moment and live intentionally.")
+                        Text("Transform random thoughts into structured wisdom through daily Stoic journaling. Move from mental clutter to philosophical clarity by systematically examining your day through the lens of Stoic principles.")
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
@@ -809,10 +813,11 @@ struct Challenge6View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("• Write for 5 minutes each morning about your mortality")
-                        Text("• Reflect on what truly matters in your life")
-                        Text("• Appreciate one thing you often take for granted")
-                        Text("• Set an intention for the day")
+                        Text("• 10 minutes before bed: Review your day")
+                        Text("• What went well? (3 things)")
+                        Text("• Write a conversation with a Stoic philosopher")
+                        Text("• Never take advice from someone who you wouldn’t trade your life with")
+                        Text("• Establish some definite discipline and rules for yourself")
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -885,12 +890,12 @@ struct Challenge7View: View {
                 
                 // Contenido
                 VStack(spacing: 25) {
-                    Text("Memento Mori")
+                    Text("Conscious Consumption")
                         .font(.system(size: 40, weight: .bold))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     
-                    Image(systemName: "apps.iphone")
+                    Image(systemName: "shekelsign.arrow.trianglehead.counterclockwise.rotate.90")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
@@ -902,7 +907,7 @@ struct Challenge7View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("Practice daily reflection on mortality to appreciate the present moment and live intentionally.")
+                        Text("Question every desire before acting on it. Practice the Stoic pause between impulse and action to cultivate wisdom in consumption.")
                             .foregroundColor(.white.opacity(0.9))
                         
                         Divider()
@@ -913,14 +918,12 @@ struct Challenge7View: View {
                             .bold()
                             .foregroundColor(.white)
                         
-                        Text("•  Track screen time.  Strict app limits (ex: Social Media 30min/day")
-                        Text("•  Identify 3 main digital triggers")
-                        Text("•  Log every 'unconscious pickup'")
-                        Text("•  Notice emotional states before/after use")
-                        Text("•  Analyze which apps drain vs. energize")
-                        Text("•  Observe your digital personas")
-                        Text("•  Review weekly digital footprint")
-                        Text("•  Notice emotional states before/afootprint")
+                        Text("•  Wait 24 hours before any non-essential purchase")
+                        Text("•  Ask: 'Is this a want or a need?' ")
+                        Text("•  Track all spending consciously")
+                        Text("•  One day per week: No spending")
+                        Text("•  Donate one item for every new item")
+                        
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
