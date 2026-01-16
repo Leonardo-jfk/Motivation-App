@@ -14,7 +14,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		ggQYuqiqsDuGgiRO/6USw/JMhSg=
+		dZNbCPAz05eikAFBFnZNF8wpAQo=
 		</data>
 		<key>BackWitcher.mp3</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>Frameworks/FirebaseAnalytics.framework/FirebaseAnalytics</key>
 		<data>
-		2s3CRbpDG4dXZqdT7tXM81MlLig=
+		cRBnSjAy8w1x2cNhiPwe5eO3/64=
 		</data>
 		<key>Frameworks/FirebaseAnalytics.framework/Info.plist</key>
 		<data>
@@ -106,7 +106,7 @@
 		</data>
 		<key>Frameworks/GoogleAdsOnDeviceConversion.framework/GoogleAdsOnDeviceConversion</key>
 		<data>
-		DuVHrB6jiT0vIp+f/l946lD1PZM=
+		Swr/KM7xhR8w0yBjnWlGTKTZPt8=
 		</data>
 		<key>Frameworks/GoogleAdsOnDeviceConversion.framework/Info.plist</key>
 		<data>
@@ -118,7 +118,7 @@
 		</data>
 		<key>Frameworks/GoogleAppMeasurement.framework/GoogleAppMeasurement</key>
 		<data>
-		Cf5Y2FPkaetWOr9kxT1Qe3rHGBs=
+		m2B+TidUck2FwsbGFAmReM/wMHM=
 		</data>
 		<key>Frameworks/GoogleAppMeasurement.framework/Info.plist</key>
 		<data>
@@ -130,7 +130,7 @@
 		</data>
 		<key>Frameworks/GoogleAppMeasurementIdentitySupport.framework/GoogleAppMeasurementIdentitySupport</key>
 		<data>
-		Nqjt3qwZHsmVtZaBM1wAJU0ZQ0I=
+		LDk4N0qG/w39DUESleeJ/Gz2teg=
 		</data>
 		<key>Frameworks/GoogleAppMeasurementIdentitySupport.framework/Info.plist</key>
 		<data>
@@ -235,6 +235,10 @@
 		<key>LightBack2.json</key>
 		<data>
 		kOBLFxP6fBQ0S8YosU+taYv+DFo=
+		</data>
+		<key>LightBack3.json</key>
+		<data>
+		V1zTROZ38Ky5m8/CE+LC9E0NnT0=
 		</data>
 		<key>LightBackLottie.json</key>
 		<data>
@@ -341,7 +345,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			QQstpiLrepSKclyMcxS5Dpr0rP4=
+			/b+F4ucEXxHkPYpGl1shMKZO4Ks=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -350,7 +354,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6yUKQlE1uoKtTDDZ/nj2CXaw534=
+			mcNuRQ4GABnsyl+FGSox7ixtaUM=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -384,7 +388,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6dJT6x7oths53uOlPUU3bl6cmrqgeCBRfCIAi4X7pLk=
+			rTbzgc9MXoJ0ZAXDnQFCvvqyyQxKNLCPrLzifAWKhRo=
 			</data>
 		</dict>
 		<key>BackWitcher.mp3</key>
@@ -524,7 +528,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SuHx0DK1RhwM/dZ8B0h6JnR3YIfuYLaSMSqZx5rp44s=
+			4bpKXEjqsKoFdHAf1i3wpyBYvd0Da4rpBv307sikbR4=
 			</data>
 		</dict>
 		<key>Frameworks/FirebaseAnalytics.framework/Info.plist</key>
@@ -545,7 +549,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FRBKIK733yyuzojkdHjQqJ295Hh7SoeKiVM10iGAYZA=
+			35J9b++w970d9dIb9qLfQvzYRMGE3d/5w9kHxi8w3Oo=
 			</data>
 		</dict>
 		<key>Frameworks/GoogleAdsOnDeviceConversion.framework/Info.plist</key>
@@ -566,7 +570,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			hwIUnAARKtbVxgfix2a8pygY2s8USm20t/Y99ikBhaE=
+			CyK2cBAUgggX1RLa+G3XlrNYPobV49Kv0/AWYe7ycPE=
 			</data>
 		</dict>
 		<key>Frameworks/GoogleAppMeasurement.framework/Info.plist</key>
@@ -587,7 +591,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SEAFwzD+x01GwND64GXpB2wun7dXaGCCTC6/SrQmbxg=
+			0RYqGqvzhx/rKq3GO3T7Wg0jVvXIkIZTN2S00xpcTDw=
 			</data>
 		</dict>
 		<key>Frameworks/GoogleAppMeasurementIdentitySupport.framework/Info.plist</key>
@@ -765,6 +769,13 @@
 			+2iAxYXfKeZl61V1nl3P9vG1iE0199X7DknqWc9OKi4=
 			</data>
 		</dict>
+		<key>LightBack3.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			EY2iac/rFWBccGg+6ruEuA6x6a3TFAh2jtMRa88LMXQ=
+			</data>
+		</dict>
 		<key>LightBackLottie.json</key>
 		<dict>
 			<key>hash2</key>
@@ -932,7 +943,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			XJaMXCB3aJAOFjAyQNJLxKydIQvawlqUX06VU7hG/sU=
+			s2bbSBpC9ifAnE7JgOQmkyy/ut18138aS2PijnJGAxE=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -941,7 +952,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6AwywiuDJ+7D0LqA8QPQUNZrvEU5N/vwjIGxwmbXBKY=
+			TY8JSh/3vh6RU86qOqiJ0gUqHvPvQdeNjr5Lxm3gzIA=
 			</data>
 			<key>optional</key>
 			<true/>
