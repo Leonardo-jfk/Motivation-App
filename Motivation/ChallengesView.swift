@@ -234,26 +234,6 @@ public struct ChallengesView: View {
                                     .foregroundColor(colorScheme == .dark ? .white : .black)
                                     .opacity(0.7)
                                 
-//                                HStack(spacing: 30) {
-                                //                                    ProgressStat(
-                                //                                        value: "3",
-                                //                                        label: "Completed".localized,
-                                //                                        color: .green
-                                //                                    )
-                                //
-                                //                                    ProgressStat(
-                                //                                        value: "2",
-                                //                                        label: "In Progress".localized,
-                                //                                        color: .yellow
-                                //                                    )
-                                //
-                                //                                    ProgressStat(
-                                //                                        value: "5",
-                                //                                        label: "Available".localized,
-                                //                                        color: .blue
-                                //                                    )
-                                //                                }
-                                
                                 HStack(spacing: 30) {
                                     ProgressStat(
                                         value: "\(progressManager.getCompletedCount())",
@@ -291,15 +271,15 @@ public struct ChallengesView: View {
                                     subtitle: "Daily reflection".localized,
                                     icon: "hourglass",
                                     progress: progressManager.getProgress("challenge1"),
-                                    destination: Challenge1View()
+                                    destination: Challenge1View(progressManager: progressManager)
                                 )
                                 
                                 ChallengeCard(
                                     title: "Digital fast".localized,
                                     subtitle: "Get back the focus".localized,
                                     icon: "iphone.slash",
-                                    progress: progressManager.getProgress("challenge1"),
-                                    destination: Challenge2View()
+                                    progress: progressManager.getProgress("challenge2"),
+                                    destination: Challenge2View(progressManager: progressManager)
                                     
                                 )
                             }
@@ -310,16 +290,16 @@ public struct ChallengesView: View {
                                     title: "No Complaints".localized,
                                     subtitle: "Mindfulness".localized,
                                     icon: "mouth",
-                                    progress: progressManager.getProgress("challenge1"),
-                                    destination: Challenge3View()
+                                    progress: progressManager.getProgress("challenge3"),
+                                    destination: Challenge3View(progressManager: progressManager)
                                 )
                                 
                                 ChallengeCard(
                                     title: "Cold Exposure".localized,
                                     subtitle: "30 days challenge".localized,
                                     icon: "drop.fill",
-                                    progress: progressManager.getProgress("challenge1"),
-                                    destination: Challenge4View()
+                                    progress: progressManager.getProgress("challenge4"),
+                                    destination: Challenge4View(progressManager: progressManager)
                                 )
                             }
                             
@@ -328,16 +308,16 @@ public struct ChallengesView: View {
                                     title: "Early Wake".localized,
                                     subtitle: "Discipline".localized,
                                     icon: "sunrise.fill",
-                                    progress: progressManager.getProgress("challenge1"),
-                                    destination: Challenge5View()
+                                    progress: progressManager.getProgress("challenge5"),
+                                    destination: Challenge5View(progressManager: progressManager)
                                 )
                                 
                                 ChallengeCard(
                                     title: "Journaling".localized,
                                     subtitle: "Self-awareness".localized,
                                     icon: "book.fill",
-                                    progress: progressManager.getProgress("challenge1"),
-                                    destination: Challenge6View()
+                                    progress: progressManager.getProgress("challenge6"),
+                                    destination: Challenge6View(progressManager: progressManager)
                                 )
                             }
                             
@@ -346,16 +326,16 @@ public struct ChallengesView: View {
                                     title: "Consumption".localized,
                                     subtitle: "Question your desire".localized,
                                     icon: "sterlingsign.ring.dashed",
-                                    progress: progressManager.getProgress("challenge1"),
-                                    destination: Challenge7View()
+                                    progress: progressManager.getProgress("challenge7"),
+                                    destination: Challenge7View(progressManager: progressManager)
                                 )
                                 
                                 ChallengeCard(
                                     title: "Gratification".localized,
                                     subtitle: "Do what matters".localized,
                                     icon: "figure.mind.and.body",
-                                    progress: progressManager.getProgress("challenge1"),
-                                    destination: Challenge8View()
+                                    progress: progressManager.getProgress("challenge8"),
+                                    destination: Challenge8View(progressManager: progressManager)
                                 )
                             }
                         }
@@ -369,72 +349,6 @@ public struct ChallengesView: View {
         }
     }
 }
-
-// Componente para tarjetas de desafío
-//struct ChallengeCard<Destination: View>: View {
-//    let title: String
-//    let subtitle: String
-//    let icon: String
-//    let destination: Destination
-//    
-//    var body: some View {
-//        NavigationLink(destination: destination) {
-//            ZStack {
-//                // Fondo con efecto
-//                RoundedRectangle(cornerRadius: 20)
-//                    .fill(
-//                        LinearGradient(
-//                            gradient: Gradient(colors: [
-//                                Color.blue.opacity(0.8),
-//                                Color.purple.opacity(0.6)
-//                            ]),
-//                            startPoint: .topLeading,
-//                            endPoint: .bottomTrailing
-//                        )
-//                    )
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 20)
-//                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
-//                    )
-//                    .shadow(color: Color.black.opacity(0.3), radius: 10, x: 0, y: 5)
-//                
-//                VStack(spacing: 12) {
-//                    // Icono
-//                    Image(systemName: icon)
-//                        .font(.system(size: 30))
-//                        .foregroundColor(.white)
-//                        .frame(width: 60, height: 60)
-//                        .background(
-//                            Circle()
-//                                .fill(Color.white.opacity(0.2))
-//                        )
-//                    
-//                    // Texto
-//                    VStack(spacing: 4) {
-//                        Text(title)
-//                            .font(.headline)
-//                            .bold()
-//                            .foregroundColor(.white)
-//                            .multilineTextAlignment(.center)
-//                            .lineLimit(1)
-//                            .minimumScaleFactor(0.8)
-//                        
-//                        Text(subtitle)
-//                            .font(.caption)
-//                            .foregroundColor(.white.opacity(0.8))
-//                            .multilineTextAlignment(.center)
-//                            .lineLimit(2)
-//                    }
-//                    .padding(.horizontal, 8)
-//                }
-//                .padding(.vertical, 15)
-//            }
-//            .frame(width: 160, height: 160)
-//        }
-//        .buttonStyle(PlainButtonStyle())
-//    }
-//}
-
 
 
 struct ChallengeCard<Destination: View>: View {
@@ -578,28 +492,6 @@ struct ChallengeCard<Destination: View>: View {
 }
 
 // Componente para estadísticas
-//struct ProgressStat: View {
-//    let value: String
-//    let label: String
-//    let color: Color
-//    
-//    var body: some View {
-//        VStack(spacing: 8) {
-//            Text(value)
-//                .font(.system(size: 28, weight: .bold))
-//                .foregroundColor(color)
-//            
-//            Text(label)
-//                .font(.caption)
-//                .foregroundColor(.gray.opacity(0.8))
-//                .multilineTextAlignment(.center)
-//        }
-//        .frame(width: 80)
-//    }
-//}
-
-
-// Componente para estadísticas
 struct ProgressStat: View {
     let value: String
     let label: String
@@ -633,12 +525,6 @@ struct ProgressStat: View {
                 }
             }
             
-//            Text(label)
-//                .font(.caption)
-////                .foregroundColor(.black.opacity(0.7))
-//                .foregroundColor(colorScheme == .dark ? .white : .black)
-//                .opacity(0.9)
-//                .multilineTextAlignment(.center)
         }
         .frame(width: 80)
     }
@@ -649,7 +535,9 @@ struct ProgressStat: View {
 // Vistas de desafío mejoradas
 struct Challenge1View: View {
     @Environment(\.dismiss) var dismiss
+    @ObservedObject var progressManager: ChallengeProgressManager
     
+    private let challengeId = "challenge1"
     var body: some View {
         ZStack {
             LinearGradient(
@@ -722,7 +610,7 @@ struct Challenge1View: View {
                 // Botón de acción
                 VStack(spacing: 15) {
                     Button(action: {
-                        // Start challenge
+                        progressManager.startChallenge(challengeId)
                     }) {
                         Text("Start Challenge".localized)
                             .font(.headline)
@@ -734,7 +622,9 @@ struct Challenge1View: View {
                     }
                     
                     Button(action: {
-                        // Mark as completed
+                        //resetChallenge can be another button
+                        progressManager.markChallengeCompleted(challengeId)
+                        
                     }) {
                         Text("Mark as Completed".localized)
                             .font(.subheadline)
@@ -753,7 +643,10 @@ struct Challenge1View: View {
 
 struct Challenge2View: View {
     @Environment(\.dismiss) var dismiss
+    @ObservedObject var progressManager: ChallengeProgressManager
     
+    private let challengeId = "challenge2"
+
     var body: some View {
         ZStack {
             LinearGradient(
@@ -828,7 +721,7 @@ struct Challenge2View: View {
                 // Botón de acción
                 VStack(spacing: 15) {
                     Button(action: {
-                        // Start challenge
+                        progressManager.resetChallenge(challengeId)
                     }) {
                         Text("Start Challenge".localized)
                             .font(.headline)
@@ -840,7 +733,8 @@ struct Challenge2View: View {
                     }
                     
                     Button(action: {
-                        // Mark as completed
+                        progressManager.startChallenge(challengeId, totalDays: 30)
+
                     }) {
                         Text("Mark as Completed".localized)
                             .font(.subheadline)
@@ -858,6 +752,8 @@ struct Challenge2View: View {
 struct Challenge3View: View {
     @Environment(\.dismiss) var dismiss
     
+    @ObservedObject var progressManager: ChallengeProgressManager
+    private let challengeId = "challenge3"
     var body: some View {
         ZStack {
             LinearGradient(
@@ -931,7 +827,7 @@ struct Challenge3View: View {
                 // Botón de acción
                 VStack(spacing: 15) {
                     Button(action: {
-                        // Start challenge
+                        progressManager.resetChallenge(challengeId)
                     }) {
                         Text("Start Challenge".localized)
                             .font(.headline)
@@ -943,7 +839,7 @@ struct Challenge3View: View {
                     }
                     
                     Button(action: {
-                        // Mark as completed
+                        progressManager.startChallenge(challengeId, totalDays: 30)
                     }) {
                         Text("Mark as Completed".localized)
                             .font(.subheadline)
@@ -960,7 +856,8 @@ struct Challenge3View: View {
 
 struct Challenge4View: View {
     @Environment(\.dismiss) var dismiss
-    
+    @ObservedObject var progressManager: ChallengeProgressManager
+    private let challengeId = "challenge3"
     var body: some View {
         ZStack {
             LinearGradient(
@@ -1063,7 +960,8 @@ struct Challenge4View: View {
 
 struct Challenge5View: View {
     @Environment(\.dismiss) var dismiss
-    
+    @ObservedObject var progressManager: ChallengeProgressManager
+    private let challengeId = "challenge3"
     var body: some View {
         ZStack {
             LinearGradient(
@@ -1166,7 +1064,8 @@ struct Challenge5View: View {
 
 struct Challenge6View: View {
     @Environment(\.dismiss) var dismiss
-    
+    @ObservedObject var progressManager: ChallengeProgressManager
+    private let challengeId = "challenge3"
     var body: some View {
         ZStack {
             LinearGradient(
@@ -1271,7 +1170,8 @@ struct Challenge6View: View {
 
 struct Challenge7View: View {
     @Environment(\.dismiss) var dismiss
-    
+    @ObservedObject var progressManager: ChallengeProgressManager
+    private let challengeId = "challenge3"
     var body: some View {
         ZStack {
             LinearGradient(
@@ -1376,7 +1276,8 @@ struct Challenge7View: View {
 
 struct Challenge8View: View {
     @Environment(\.dismiss) var dismiss
-    
+    @ObservedObject var progressManager: ChallengeProgressManager
+    private let challengeId = "challenge3"
     var body: some View {
         ZStack {
             LinearGradient(

@@ -63,7 +63,7 @@ struct TrackView: View {
             LottieView(animation: .named(lottieBack))
                 .configure({ lottie in lottie.contentMode = contentMode
                     lottie.animationSpeed = 0.5})
-                .playbackMode(.playing(.toProgress(1, loopMode: .playOnce))) // .loop para que el fondo se mueva siempre
+                .playbackMode(.playing(.toProgress(1, loopMode: .loop))) // .loop para que el fondo se mueva siempre
                 .resizable()
                 .ignoresSafeArea()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
