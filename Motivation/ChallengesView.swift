@@ -231,7 +231,8 @@ public struct ChallengesView: View {
                                 Text("Your Progress".localized)
                                     .font(.title2)
                                     .bold()
-                                    .foregroundColor(.red)
+                                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                                    .opacity(0.7)
                                 
 //                                HStack(spacing: 30) {
                                 //                                    ProgressStat(
@@ -459,11 +460,11 @@ struct ChallengeCard<Destination: View>: View {
         guard let progress = progress else { return .white }
         
         if progress.isCompleted {
-            return .white
+            return .gray
         } else if progress.isStarted {
-            return .white
+            return .gray
         } else {
-            return .white
+            return .gray
         }
     }
     
@@ -483,9 +484,9 @@ struct ChallengeCard<Destination: View>: View {
         guard let progress = progress else { return .clear }
         
         if progress.isCompleted {
-            return .white.opacity(0.8)
+            return .gray.opacity(0.8)
         } else if progress.isStarted {
-            return .white.opacity(0.5)
+            return .gray.opacity(0.5)
         } else {
             return .clear
         }
@@ -604,12 +605,19 @@ struct ProgressStat: View {
     let label: String
     let opacity: Double // 0.8 para Available, menos para otros
     
+    @Environment(\.colorScheme) var colorScheme
+    @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
+    private var appScheme: AppColorScheme {
+        AppColorScheme(rawValue: storedScheme) ?? .system
+    }
+    
+    
     var body: some View {
         VStack(spacing: 8) {
             // Círculo con número
             ZStack {
                 Circle()
-                    .fill(Color.white.opacity(opacity))
+                    .fill(Color.gray.opacity(opacity))
                     .frame(width: 60, height: 60)
                 
                 Text(value)
@@ -619,7 +627,9 @@ struct ProgressStat: View {
             
             Text(label)
                 .font(.caption)
-                .foregroundColor(.white.opacity(0.9))
+//                .foregroundColor(.black.opacity(0.7))
+                .foregroundColor(colorScheme == .dark ? .white : .black)
+                .opacity(0.9)
                 .multilineTextAlignment(.center)
         }
         .frame(width: 80)
