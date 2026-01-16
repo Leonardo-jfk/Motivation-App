@@ -442,17 +442,17 @@ struct ChallengeCard<Destination: View>: View {
                 VStack(spacing: 12) {
                     // Indicador de progreso
                     if !progressText.isEmpty {
-                        ZStack {
-                            Circle()
-                                .fill(circleColor.opacity(circleOpacity))
-                                .frame(width: 30, height: 30)
-                            
-                            Text(progressText)
-                                .font(.caption)
-                                .bold()
-                                .foregroundColor(.black)
-                        }
-                        .offset(x: 60, y: -60)
+//                        ZStack {
+//                            Circle()
+//                                .fill(circleColor.opacity(circleOpacity))
+//                                .frame(width: 30, height: 30)
+//                            
+//                            Text(progressText)
+//                                .font(.caption)
+//                                .bold()
+//                                .foregroundColor(.black)
+//                        }
+//                        .offset(x: 50, y: 6)
                     }
                     
                     // Icono
@@ -533,11 +533,175 @@ struct ProgressStat: View {
 
 
 // Vistas de desafío mejoradas
+//struct Challenge1View: View {
+//    @Environment(\.dismiss) var dismiss
+//    @ObservedObject var progressManager: ChallengeProgressManager
+//    
+//    
+//    
+//    private let challengeId = "challenge1"
+//    var body: some View {
+//        ZStack {
+//            LinearGradient(
+//                gradient: Gradient(colors: [Color.black, Color.gray]),
+//                startPoint: .top,
+//                endPoint: .bottom
+//            )
+//            .ignoresSafeArea()
+//            
+//            VStack(spacing: 30) {
+//                if !progressText.isEmpty {
+//                        ZStack {
+//                            Circle()
+//                                .fill(circleColor.opacity(circleOpacity))
+//                                .frame(width: 30, height: 30)
+//
+//                            Text(progressText)
+//                                .font(.caption)
+//                                .bold()
+//                                .foregroundColor(.black)
+//                        }
+//                        .offset(x: 50, y: 6)
+//                }
+//                // Botón de regreso
+//                HStack {
+//                    Button(action: {
+//                        dismiss()
+//                    }) {
+//                        Image(systemName: "chevron.left")
+//                            .font(.title2)
+//                            .foregroundColor(.white)
+//                            .padding()
+//                    }
+//                    Spacer()
+//                }
+//                .padding(.top, 20)
+//                
+//                // Contenido
+//                VStack(spacing: 25) {
+//                    Text("Memento Mori")
+//                        .font(.system(size: 40, weight: .bold))
+//                        .foregroundColor(.white)
+//                        .multilineTextAlignment(.center)
+//                    
+//                    Image(systemName: "hourglass")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 100, height: 100)
+//                        .foregroundColor(.white)
+//                    
+//                    VStack(alignment: .leading, spacing: 15) {
+//                        Text("Challenge Description".localized)
+//                            .font(.title2)
+//                            .bold()
+//                            .foregroundColor(.white)
+//                        
+//                        Text("Practice daily reflection on mortality to appreciate the present moment and live intentionally.".localized)
+//                            .foregroundColor(.white.opacity(0.9))
+//                        
+//                        Divider()
+//                            .background(Color.white.opacity(0.3))
+//                        
+//                        Text("Daily Task".localized)
+//                            .font(.title2)
+//                            .bold()
+//                            .foregroundColor(.white)
+//                        
+//                        Text("• Write for 5 minutes each morning about your mortality".localized)
+//                        Text("• Reflect on what truly matters in your life".localized)
+//                        Text("• Appreciate one thing you often take for granted".localized)
+//                        Text("• Set an intention for the day".localized)
+//                    }
+//                    .font(.body)
+//                    .foregroundColor(.white.opacity(0.9))
+//                    .padding()
+//                    .background(Color.white.opacity(0.1))
+//                    .cornerRadius(15)
+//                    .padding(.horizontal, 20)
+//                }
+//                
+//                Spacer()
+//                
+//                // Botón de acción
+//                VStack(spacing: 15) {
+//                    Button(action: {
+//                        progressManager.startChallenge(challengeId)
+//                    }) {
+//                        Text("Start Challenge".localized)
+//                            .font(.headline)
+//                            .foregroundColor(.white)
+//                            .padding()
+//                            .frame(maxWidth: .infinity)
+//                            .background(Color.green)
+//                            .cornerRadius(15)
+//                    }
+//                    
+//                    Button(action: {
+//                        //resetChallenge can be another button
+//                        progressManager.markChallengeCompleted(challengeId)
+//                        
+//                    }) {
+//                        Text("Mark as Completed".localized)
+//                            .font(.subheadline)
+//                            .foregroundColor(.white.opacity(0.8))
+//                    }
+//                }
+//                .padding(.horizontal, 40)
+//                .padding(.bottom, 30)
+//            }
+//        }
+//        .navigationBarHidden(true)
+//    }
+//}
+
+
 struct Challenge1View: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var progressManager: ChallengeProgressManager
     
     private let challengeId = "challenge1"
+    
+    // Calculamos las propiedades basándonos en el progreso actual
+    private var progress: ChallengeProgress? {
+        progressManager.getProgress(challengeId)
+    }
+    
+    private var circleOpacity: Double {
+        guard let progress = progress else { return 0.8 }
+        
+        if progress.isCompleted {
+            return 0.9 // Casi sólido para completado
+        } else if progress.isStarted {
+            return 0.6 // Medio para en progreso
+        } else {
+            return 0.4 // Más transparente para disponible
+        }
+    }
+    
+    private var circleColor: Color {
+        guard let progress = progress else { return .gray }
+        
+        if progress.isCompleted {
+            return .gray
+        } else if progress.isStarted {
+            return .gray
+        } else {
+            return .gray
+        }
+    }
+    
+    private var progressText: String {
+        guard let progress = progress else { return "" }
+        
+        if progress.isCompleted {
+            return "✓"
+        } else if progress.isStarted {
+            return "\(Int(progress.progressPercentage * 100))%"
+        } else {
+            return ""
+        }
+    }
+    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -548,7 +712,7 @@ struct Challenge1View: View {
             .ignoresSafeArea()
             
             VStack(spacing: 30) {
-                // Botón de regreso
+                // Botón de regreso con círculo de progreso
                 HStack {
                     Button(action: {
                         dismiss()
@@ -559,6 +723,21 @@ struct Challenge1View: View {
                             .padding()
                     }
                     Spacer()
+                    
+                    // Círculo de progreso al lado del botón de regreso
+                    if !progressText.isEmpty {
+                        ZStack {
+                            Circle()
+                                .fill(circleColor.opacity(circleOpacity))
+                                .frame(width: 40, height: 40)
+                            
+                            Text(progressText)
+                                .font(.caption)
+                                .bold()
+                                .foregroundColor(.black)
+                        }
+                        .padding(.trailing, 20)
+                    }
                 }
                 .padding(.top, 20)
                 
@@ -603,32 +782,129 @@ struct Challenge1View: View {
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(15)
                     .padding(.horizontal, 20)
+                    
+                    // Información de progreso adicional
+                    if let progress = progress, progress.isStarted {
+                        VStack(spacing: 10) {
+                            if progress.isCompleted {
+                                Text("Challenge Completed!")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            } else {
+                                Text("Progress: \(Int(progress.progressPercentage * 100))%")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                
+                                Text("Current Streak: \(progress.currentStreak) days")
+                                    .foregroundColor(.white.opacity(0.8))
+                                Text("Best Streak: \(progress.bestStreak) days")
+                                    .foregroundColor(.white.opacity(0.8))
+                            }
+                        }
+                        .padding()
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(10)
+                    }
                 }
                 
                 Spacer()
                 
-                // Botón de acción
+                // Botones de acción condicionales
                 VStack(spacing: 15) {
-                    Button(action: {
-                        progressManager.startChallenge(challengeId)
-                    }) {
-                        Text("Start Challenge".localized)
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.green)
-                            .cornerRadius(15)
-                    }
-                    
-                    Button(action: {
-                        //resetChallenge can be another button
-                        progressManager.markChallengeCompleted(challengeId)
-                        
-                    }) {
-                        Text("Mark as Completed".localized)
-                            .font(.subheadline)
-                            .foregroundColor(.white.opacity(0.8))
+                    if let progress = progress {
+                        if progress.isCompleted {
+                            // Si ya está completado
+                            Text("✓ Challenge Completed")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.white.opacity(0.2))
+                                .cornerRadius(15)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(Color.white.opacity(0.4), lineWidth: 1)
+                                )
+                            
+                            Button(action: {
+                                progressManager.resetChallenge(challengeId)
+                            }) {
+                                Text("Restart Challenge".localized)
+                                    .font(.subheadline)
+                                    .foregroundColor(.white.opacity(0.8))
+                            }
+                            
+                        } else if progress.isStarted && !progress.isCompleted {
+                            // Si ya empezó pero no completó
+                            VStack(spacing: 15) {
+                                Button(action: {
+                                    progressManager.markDayCompleted(challengeId)
+                                }) {
+                                    Text("Mark Today as Completed".localized)
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .frame(maxWidth: .infinity)
+                                        .background(Color.white.opacity(0.3))
+                                        .cornerRadius(15)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                        )
+                                }
+                                
+                                Button(action: {
+                                    progressManager.markChallengeCompleted(challengeId)
+                                }) {
+                                    Text("Complete Entire Challenge".localized)
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .frame(maxWidth: .infinity)
+                                        .background(Color.white.opacity(0.2))
+                                        .cornerRadius(15)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                        )
+                                }
+                            }
+                            
+                        } else {
+                            // Si no ha empezado
+                            Button(action: {
+                                progressManager.startChallenge(challengeId, totalDays: 30)
+                            }) {
+                                Text("Start Challenge".localized)
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.white.opacity(0.2))
+                                    .cornerRadius(15)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                    )
+                            }
+                        }
+                    } else {
+                        // Estado inicial (no hay progreso)
+                        Button(action: {
+                            progressManager.startChallenge(challengeId, totalDays: 30)
+                        }) {
+                            Text("Start Challenge".localized)
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.white.opacity(0.2))
+                                .cornerRadius(15)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                )
+                        }
                     }
                 }
                 .padding(.horizontal, 40)
@@ -639,14 +915,162 @@ struct Challenge1View: View {
     }
 }
 
-// Challenge2View, Challenge3View, etc. similares pero con diferentes colores
 
+// Challenge2View, Challenge3View, etc. similares pero con diferentes colores
+//
+//struct Challenge2View: View {
+//    @Environment(\.dismiss) var dismiss
+//    @ObservedObject var progressManager: ChallengeProgressManager
+//    
+//    private let challengeId = "challenge2"
+//
+//    var body: some View {
+//        ZStack {
+//            LinearGradient(
+//                gradient: Gradient(colors: [Color.black, Color.gray]),
+//                startPoint: .top,
+//                endPoint: .bottom
+//            )
+//            .ignoresSafeArea()
+//            
+//            VStack(spacing: 30) {
+//                // Botón de regreso
+//                HStack {
+//                    Button(action: {
+//                        dismiss()
+//                    }) {
+//                        Image(systemName: "chevron.left")
+//                            .font(.title2)
+//                            .foregroundColor(.white)
+//                            .padding()
+//                    }
+//                    Spacer()
+//                }
+//                .padding(.top, 20)
+//                
+//                // Contenido
+//                VStack(spacing: 25) {
+//                    Text("Digital fast".localized)
+//                        .font(.system(size: 40, weight: .bold))
+//                        .foregroundColor(.white)
+//                        .multilineTextAlignment(.center)
+//                    
+//                    Image(systemName: "iphone.slash")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(width: 100, height: 100)
+//                        .foregroundColor(.white)
+//                    
+//                    VStack(alignment: .leading, spacing: 15) {
+//                        Text("Challenge Description".localized)
+//                            .font(.title2)
+//                            .bold()
+//                            .foregroundColor(.white)
+//                        
+//                        Text("Reclaim your attention from digital distractions. Break addictive screen habits to cultivate presence, focus, and authentic connection in the physical world.".localized)
+//                            .foregroundColor(.white.opacity(0.9))
+//                        
+//                        Divider()
+//                            .background(Color.white.opacity(0.3))
+//                        
+//                        Text("Daily Task".localized)
+//                            .font(.title2)
+//                            .bold()
+//                            .foregroundColor(.white)
+//                        
+//                        Text("• First 60 minutes after waking: No screens".localized)
+//                        Text("• Designate 3 screen-free hours daily".localized)
+//                        Text("• Turn off all non-essential notifications".localized)
+//                        Text("• No devices during meals or conversations".localized)
+//                        Text("• Digital sunset 2 hours before bed".localized)
+//                        
+//                    }
+//                    .font(.body)
+//                    .foregroundColor(.white.opacity(0.9))
+//                    .padding()
+//                    .background(Color.white.opacity(0.1))
+//                    .cornerRadius(15)
+//                    .padding(.horizontal, 20)
+//                }
+//                
+//                Spacer()
+//                
+//                // Botón de acción
+//                VStack(spacing: 15) {
+//                    Button(action: {
+//                        progressManager.startChallenge(challengeId)
+//                    }) {
+//                        Text("Start Challenge".localized)
+//                            .font(.headline)
+//                            .foregroundColor(.white)
+//                            .padding()
+//                            .frame(maxWidth: .infinity)
+//                            .background(Color.green)
+//                            .cornerRadius(15)
+//                    }
+//                    
+//                    Button(action: {
+//                        progressManager.markChallengeCompleted(challengeId)
+//                    }) {
+//                        Text("Mark as Completed".localized)
+//                            .font(.subheadline)
+//                            .foregroundColor(.white.opacity(0.8))
+//                    }
+//                }
+//                .padding(.horizontal, 40)
+//                .padding(.bottom, 30)
+//            }
+//        }
+//        .navigationBarHidden(true)
+//    }
+//}
 struct Challenge2View: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var progressManager: ChallengeProgressManager
     
     private let challengeId = "challenge2"
-
+    
+    // Calculamos las propiedades basándonos en el progreso actual
+    private var progress: ChallengeProgress? {
+        progressManager.getProgress(challengeId)
+    }
+    
+    private var circleOpacity: Double {
+        guard let progress = progress else { return 0.8 }
+        
+        if progress.isCompleted {
+            return 0.9 // Casi sólido para completado
+        } else if progress.isStarted {
+            return 0.6 // Medio para en progreso
+        } else {
+            return 0.4 // Más transparente para disponible
+        }
+    }
+    
+    private var circleColor: Color {
+        guard let progress = progress else { return .gray }
+        
+        if progress.isCompleted {
+            return .gray
+        } else if progress.isStarted {
+            return .gray
+        } else {
+            return .gray
+        }
+    }
+    
+    private var progressText: String {
+        guard let progress = progress else { return "" }
+        
+        if progress.isCompleted {
+            return "✓"
+        } else if progress.isStarted {
+            return "\(Int(progress.progressPercentage * 100))%"
+        } else {
+            return ""
+        }
+    }
+    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -657,7 +1081,7 @@ struct Challenge2View: View {
             .ignoresSafeArea()
             
             VStack(spacing: 30) {
-                // Botón de regreso
+                // Botón de regreso con círculo de progreso
                 HStack {
                     Button(action: {
                         dismiss()
@@ -668,6 +1092,21 @@ struct Challenge2View: View {
                             .padding()
                     }
                     Spacer()
+                    
+                    // Círculo de progreso al lado del botón de regreso
+                    if !progressText.isEmpty {
+                        ZStack {
+                            Circle()
+                                .fill(circleColor.opacity(circleOpacity))
+                                .frame(width: 40, height: 40)
+                            
+                            Text(progressText)
+                                .font(.caption)
+                                .bold()
+                                .foregroundColor(.black)
+                        }
+                        .padding(.trailing, 20)
+                    }
                 }
                 .padding(.top, 20)
                 
@@ -706,7 +1145,6 @@ struct Challenge2View: View {
                         Text("• Turn off all non-essential notifications".localized)
                         Text("• No devices during meals or conversations".localized)
                         Text("• Digital sunset 2 hours before bed".localized)
-                        
                     }
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
@@ -714,31 +1152,129 @@ struct Challenge2View: View {
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(15)
                     .padding(.horizontal, 20)
+                    
+                    // Información de progreso adicional
+                    if let progress = progress, progress.isStarted {
+                        VStack(spacing: 10) {
+                            if progress.isCompleted {
+                                Text("Challenge Completed!")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            } else {
+                                Text("Progress: \(Int(progress.progressPercentage * 100))%")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                
+                                Text("Current Streak: \(progress.currentStreak) days")
+                                    .foregroundColor(.white.opacity(0.8))
+                                Text("Best Streak: \(progress.bestStreak) days")
+                                    .foregroundColor(.white.opacity(0.8))
+                            }
+                        }
+                        .padding()
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(10)
+                    }
                 }
                 
                 Spacer()
                 
-                // Botón de acción
+                // Botones de acción condicionales
                 VStack(spacing: 15) {
-                    Button(action: {
-                        progressManager.resetChallenge(challengeId)
-                    }) {
-                        Text("Start Challenge".localized)
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.green)
-                            .cornerRadius(15)
-                    }
-                    
-                    Button(action: {
-                        progressManager.startChallenge(challengeId, totalDays: 30)
-
-                    }) {
-                        Text("Mark as Completed".localized)
-                            .font(.subheadline)
-                            .foregroundColor(.white.opacity(0.8))
+                    if let progress = progress {
+                        if progress.isCompleted {
+                            // Si ya está completado
+                            Text("✓ Challenge Completed")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.white.opacity(0.2))
+                                .cornerRadius(15)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(Color.white.opacity(0.4), lineWidth: 1)
+                                )
+                            
+                            Button(action: {
+                                progressManager.resetChallenge(challengeId)
+                            }) {
+                                Text("Restart Challenge".localized)
+                                    .font(.subheadline)
+                                    .foregroundColor(.white.opacity(0.8))
+                            }
+                            
+                        } else if progress.isStarted && !progress.isCompleted {
+                            // Si ya empezó pero no completó
+                            VStack(spacing: 15) {
+                                Button(action: {
+                                    progressManager.markDayCompleted(challengeId)
+                                }) {
+                                    Text("Mark Today as Completed".localized)
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .frame(maxWidth: .infinity)
+                                        .background(Color.white.opacity(0.3))
+                                        .cornerRadius(15)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                        )
+                                }
+                                
+                                Button(action: {
+                                    progressManager.markChallengeCompleted(challengeId)
+                                }) {
+                                    Text("Complete Entire Challenge".localized)
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .frame(maxWidth: .infinity)
+                                        .background(Color.white.opacity(0.2))
+                                        .cornerRadius(15)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                        )
+                                }
+                            }
+                            
+                        } else {
+                            // Si no ha empezado
+                            Button(action: {
+                                progressManager.startChallenge(challengeId, totalDays: 30)
+                            }) {
+                                Text("Start Challenge".localized)
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.white.opacity(0.2))
+                                    .cornerRadius(15)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                    )
+                            }
+                        }
+                    } else {
+                        // Estado inicial (no hay progreso)
+                        Button(action: {
+                            progressManager.startChallenge(challengeId, totalDays: 30)
+                        }) {
+                            Text("Start Challenge".localized)
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.white.opacity(0.2))
+                                .cornerRadius(15)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                )
+                        }
                     }
                 }
                 .padding(.horizontal, 40)
@@ -748,6 +1284,7 @@ struct Challenge2View: View {
         .navigationBarHidden(true)
     }
 }
+
 
 struct Challenge3View: View {
     @Environment(\.dismiss) var dismiss
@@ -827,7 +1364,7 @@ struct Challenge3View: View {
                 // Botón de acción
                 VStack(spacing: 15) {
                     Button(action: {
-                        progressManager.resetChallenge(challengeId)
+                        progressManager.startChallenge(challengeId)
                     }) {
                         Text("Start Challenge".localized)
                             .font(.headline)
@@ -839,7 +1376,7 @@ struct Challenge3View: View {
                     }
                     
                     Button(action: {
-                        progressManager.startChallenge(challengeId, totalDays: 30)
+                        progressManager.markChallengeCompleted(challengeId)
                     }) {
                         Text("Mark as Completed".localized)
                             .font(.subheadline)
@@ -857,7 +1394,7 @@ struct Challenge3View: View {
 struct Challenge4View: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var progressManager: ChallengeProgressManager
-    private let challengeId = "challenge3"
+    private let challengeId = "challenge4"
     var body: some View {
         ZStack {
             LinearGradient(
@@ -931,7 +1468,7 @@ struct Challenge4View: View {
                 // Botón de acción
                 VStack(spacing: 15) {
                     Button(action: {
-                        // Start challenge
+                        progressManager.startChallenge(challengeId)
                     }) {
                         Text("Start Challenge".localized)
                             .font(.headline)
@@ -943,7 +1480,7 @@ struct Challenge4View: View {
                     }
                     
                     Button(action: {
-                        // Mark as completed
+                        progressManager.markChallengeCompleted(challengeId)
                     }) {
                         Text("Mark as Completed".localized)
                             .font(.subheadline)
@@ -961,7 +1498,7 @@ struct Challenge4View: View {
 struct Challenge5View: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var progressManager: ChallengeProgressManager
-    private let challengeId = "challenge3"
+    private let challengeId = "challenge5"
     var body: some View {
         ZStack {
             LinearGradient(
@@ -1035,7 +1572,7 @@ struct Challenge5View: View {
                 // Botón de acción
                 VStack(spacing: 15) {
                     Button(action: {
-                        // Start challenge
+                        progressManager.startChallenge(challengeId)
                     }) {
                         Text("Start Challenge".localized)
                             .font(.headline)
@@ -1047,7 +1584,7 @@ struct Challenge5View: View {
                     }
                     
                     Button(action: {
-                        // Mark as completed
+                        progressManager.markChallengeCompleted(challengeId)
                     }) {
                         Text("Mark as Completed".localized)
                             .font(.subheadline)
@@ -1065,7 +1602,7 @@ struct Challenge5View: View {
 struct Challenge6View: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var progressManager: ChallengeProgressManager
-    private let challengeId = "challenge3"
+    private let challengeId = "challenge6"
     var body: some View {
         ZStack {
             LinearGradient(
@@ -1139,7 +1676,7 @@ struct Challenge6View: View {
                 // Botón de acción
                 VStack(spacing: 15) {
                     Button(action: {
-                        // Start challenge
+                        progressManager.startChallenge(challengeId)
                     }) {
                         Text("Start Challenge".localized)
                             .font(.headline)
@@ -1151,7 +1688,7 @@ struct Challenge6View: View {
                     }
                     
                     Button(action: {
-                        // Mark as completed
+                        progressManager.markChallengeCompleted(challengeId)
                     }) {
                         Text("Mark as Completed".localized)
                             .font(.subheadline)
@@ -1171,7 +1708,7 @@ struct Challenge6View: View {
 struct Challenge7View: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var progressManager: ChallengeProgressManager
-    private let challengeId = "challenge3"
+    private let challengeId = "challenge7"
     var body: some View {
         ZStack {
             LinearGradient(
@@ -1246,7 +1783,7 @@ struct Challenge7View: View {
                 // Botón de acción
                 VStack(spacing: 15) {
                     Button(action: {
-                        // Start challenge
+                        progressManager.startChallenge(challengeId)
                     }) {
                         Text("Start Challenge".localized)
                             .font(.headline)
@@ -1258,7 +1795,7 @@ struct Challenge7View: View {
                     }
                     
                     Button(action: {
-                        // Mark as completed
+                        progressManager.markChallengeCompleted(challengeId)
                     }) {
                         Text("Mark as Completed".localized)
                             .font(.subheadline)
@@ -1277,7 +1814,7 @@ struct Challenge7View: View {
 struct Challenge8View: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var progressManager: ChallengeProgressManager
-    private let challengeId = "challenge3"
+    private let challengeId = "challenge8"
     var body: some View {
         ZStack {
             LinearGradient(
@@ -1351,7 +1888,7 @@ struct Challenge8View: View {
                 // Botón de acción
                 VStack(spacing: 15) {
                     Button(action: {
-                        // Start challenge
+                        progressManager.startChallenge(challengeId)
                     }) {
                         Text("Start Challenge".localized)
                             .font(.headline)
@@ -1363,7 +1900,7 @@ struct Challenge8View: View {
                     }
                     
                     Button(action: {
-                        // Mark as completed
+                        progressManager.markChallengeCompleted(challengeId)
                     }) {
                         Text("Mark as Completed".localized)
                             .font(.subheadline)
