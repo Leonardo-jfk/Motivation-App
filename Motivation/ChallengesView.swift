@@ -616,21 +616,29 @@ struct ProgressStat: View {
         VStack(spacing: 8) {
             // Círculo con número
             ZStack {
-                Circle()
+                RoundedRectangle(cornerRadius: 20)
                     .fill(Color.gray.opacity(opacity))
-                    .frame(width: 60, height: 60)
-                
-                Text(value)
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(.black)
+                    .frame(width: 72, height: 72)
+                VStack{
+                    Text(value)
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(.black)
+                    
+                    Text(label)
+                        .font(.caption)
+                    //                .foregroundColor(.black.opacity(0.7))
+                        .foregroundColor(colorScheme == .dark ? .white : .black)
+                        .opacity(0.9)
+                        .multilineTextAlignment(.center)
+                }
             }
             
-            Text(label)
-                .font(.caption)
-//                .foregroundColor(.black.opacity(0.7))
-                .foregroundColor(colorScheme == .dark ? .white : .black)
-                .opacity(0.9)
-                .multilineTextAlignment(.center)
+//            Text(label)
+//                .font(.caption)
+////                .foregroundColor(.black.opacity(0.7))
+//                .foregroundColor(colorScheme == .dark ? .white : .black)
+//                .opacity(0.9)
+//                .multilineTextAlignment(.center)
         }
         .frame(width: 80)
     }
