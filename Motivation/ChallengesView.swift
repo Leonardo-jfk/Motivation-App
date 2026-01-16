@@ -631,6 +631,300 @@ struct ProgressStat: View {
     }
 }
 
+//struct Challenge1View: View {
+//    @Environment(\.dismiss) var dismiss
+//    @ObservedObject var progressManager: ChallengeProgressManager
+//    
+//    private let challengeId = "challenge1"
+//    
+//    // Calculamos las propiedades basándonos en el progreso actual
+//    private var progress: ChallengeProgress? {
+//        progressManager.getProgress(challengeId)
+//    }
+//    
+//    private var circleOpacity: Double {
+//        guard let progress = progress else { return 0.8 }
+//        
+//        if progress.isCompleted {
+//            return 0.9 // Casi sólido para completado
+//        } else if progress.isStarted {
+//            return 0.6 // Medio para en progreso
+//        } else {
+//            return 0.4 // Más transparente para disponible
+//        }
+//    }
+//    
+//    private var circleColor: Color {
+//        guard let progress = progress else { return .gray }
+//        
+//        if progress.isCompleted {
+//            return .gray
+//        } else if progress.isStarted {
+//            return .gray
+//        } else {
+//            return .gray
+//        }
+//    }
+//    
+//    private var progressText: String {
+//        guard let progress = progress else { return "" }
+//        
+//        if progress.isCompleted {
+//            return "✓"
+//        } else if progress.isStarted {
+//            return "\(Int(progress.progressPercentage * 100))%"
+//        } else {
+//            return ""
+//        }
+//    }
+//    
+//    @AppStorage("daysPracticed") private var daysPracticed: Int = 0
+//    @AppStorage("lastDatePracticed") private var lastDatePracticed: String = ""
+//    func canIncrementCounter() -> Bool {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        let currentDateString = formatter.string(from: Date())
+//        
+//        // Si la fecha guardada es distinta a la de hoy, puede sumar
+//        return lastDatePracticed != currentDateString
+//    }
+//    
+//    var body: some View {
+//        ZStack {
+//            LinearGradient(
+//                gradient: Gradient(colors: [Color.black, Color.gray]),
+//                startPoint: .top,
+//                endPoint: .bottom
+//            )
+//            .ignoresSafeArea()
+//            
+//            VStack(spacing: 30) {
+//                // Botón de regreso con círculo de progreso
+//                HStack {
+//                    Button(action: {
+//                        dismiss()
+//                    }) {
+//                        Image(systemName: "chevron.left")
+//                            .font(.title2)
+//                            .foregroundColor(.white)
+//                            .padding()
+//                    }
+//                    Spacer()
+//                    
+//                    // Círculo de progreso al lado del botón de regreso
+////                    if let progress = progress, progress.isCompleted {
+////                        ZStack {
+////                            Circle()
+////                                .fill(circleColor.opacity(circleOpacity))
+////                                .frame(width: 40, height: 40)
+////                            
+////                            Text("✓")
+////                                .font(.caption)
+////                                .bold()
+////                                .foregroundColor(.black)
+////                        }
+////                        .padding(.trailing, 20)
+////                    }
+//                }
+//                .padding(.top, 20)
+//                
+//                // Contenido
+////                VStack(spacing: 25) {
+////                    Text("Memento Mori")
+////                        .font(.system(size: 40, weight: .bold))
+////                        .foregroundColor(.white)
+////                        .multilineTextAlignment(.center)
+////                    
+////                    Image(systemName: "hourglass")
+////                        .resizable()
+////                        .scaledToFit()
+////                        .frame(width: 100, height: 100)
+////                        .foregroundColor(.white)
+//                VStack(spacing: 25) {
+//                    if let progress = progress, !progress.isStarted  {
+//                        
+//                        Text("Memento Mori")
+//                            .font(.system(size: 40, weight: .bold))
+//                            .foregroundColor(.white)
+//                            .multilineTextAlignment(.center)
+//                        
+//                        Image(systemName: "hourglass")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 100, height: 100)
+//                            .foregroundColor(.white)
+//                    }
+//                    else{
+//                        
+//                        Text("Memento Mori")
+//                            .font(.system(size: 20, weight: .bold))
+//                            .foregroundColor(.white)
+//                            .multilineTextAlignment(.center)
+//                        
+//                        Image(systemName: "hourglass")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 50, height: 50)
+//                            .foregroundColor(.white)
+//                        
+//                    } }
+//                    
+//                    VStack(alignment: .leading, spacing: 15) {
+//                        Text("Challenge Description".localized)
+//                            .font(.title2)
+//                            .bold()
+//                            .foregroundColor(.white)
+//                        
+//                        Text("Practice daily reflection on mortality to appreciate the present moment and live intentionally.".localized)
+//                            .foregroundColor(.white.opacity(0.9))
+//                        
+//                        Divider()
+//                            .background(Color.white.opacity(0.3))
+//                        
+//                        Text("Daily Task".localized)
+//                            .font(.title2)
+//                            .bold()
+//                            .foregroundColor(.white)
+//                        
+//                        Text("• Write for 5 minutes each morning about your mortality".localized)
+//                        Text("• Reflect on what truly matters in your life".localized)
+//                        Text("• Appreciate one thing you often take for granted".localized)
+//                        Text("• Set an intention for the day".localized)
+//                    }
+//                    .font(.body)
+//                    .foregroundColor(.white.opacity(0.9))
+//                    .padding()
+//                    .background(Color.white.opacity(0.1))
+//                    .cornerRadius(15)
+//                    .padding(.horizontal, 20)
+//                    
+////                    Spacer()
+//                   
+//                    if let progress = progress, progress.isStarted && !progress.isCompleted {
+//                        VStack(spacing: 10) {
+//                            Text("Progress: \(Int(progress.progressPercentage * 100))%")
+//                                .font(.headline)
+//                                .foregroundColor(.white)
+//                            
+//                            Text("Current Streak: \(progress.currentStreak) days")
+//                                .foregroundColor(.white.opacity(0.8))
+//                            Text("Best Streak: \(progress.bestStreak) days")
+//                                .foregroundColor(.white.opacity(0.8))
+//                        }
+//                        .padding()
+//                        .background(Color.white.opacity(0.1))
+//                        .cornerRadius(10)
+//                    }
+////                }
+//                
+////                Spacer()
+//                
+//                // Botones de acción condicionales
+//                VStack(spacing: 15) {
+//                    if let progress = progress, !progress.isCompleted {
+////                        if progress.isCompleted {
+////                            // Si ya está completado
+////                                VStack(spacing: 15) {
+//                        if canIncrementCounter() {
+//                            Button(action: {
+//                                progressManager.markDayCompleted(challengeId)
+//                            }) {
+//                                Text("Mark Today as Completed".localized)
+//                                    .font(.headline)
+//                                    .foregroundColor(.white)
+//                                    .padding()
+//                                    .frame(maxWidth: .infinity)
+//                                    .background(Color.white.opacity(0.3))
+//                                    .cornerRadius(15)
+//                                    .overlay(
+//                                        RoundedRectangle(cornerRadius: 15)
+//                                            .stroke(Color.white.opacity(0.5), lineWidth: 1)
+//                                    )
+//                            }
+//                        }
+//                                     else {
+//                                        Button(action: {
+//                                            // YA SUMÓ HOY: El botón sirve para CERRAR la vista
+//                                            dismiss() // Usa dismiss() para cerrar la vista
+//                                        }) {
+//                                            Text("Completed Today ✓")
+//                                                .font(.headline)
+//                                                .foregroundColor(.white.opacity(0.6))
+//                                                .padding()
+//                                                .frame(maxWidth: .infinity)
+//                                                .background(Color.white.opacity(0.1))
+//                                                .cornerRadius(15)
+//                                                .overlay(
+//                                                    RoundedRectangle(cornerRadius: 15)
+//                                                        .stroke(Color.white.opacity(0.3), lineWidth: 1)
+//                                                )
+//                                        }
+//                                    }
+//                                
+//                                
+//                                
+//                                Button(action: {
+//                                    progressManager.markChallengeCompleted(challengeId)
+//                                }) {
+//                                    Text("Complete Entire Challenge".localized)
+//                                        .font(.headline)
+//                                        .foregroundColor(.white)
+//                                        .padding()
+//                                        .frame(maxWidth: .infinity)
+//                                        .background(Color.white.opacity(0.2))
+//                                        .cornerRadius(15)
+//                                        .overlay(
+//                                            RoundedRectangle(cornerRadius: 15)
+//                                                .stroke(Color.white.opacity(0.5), lineWidth: 1)
+//                                        )
+//                                }
+//                            
+//                            
+//                        } else {
+//                            // Si no ha empezado
+//                            Button(action: {
+//                                progressManager.startChallenge(challengeId, totalDays: 30)
+//                            }) {
+//                                Text("Start Challenge".localized)
+//                                    .font(.headline)
+//                                    .foregroundColor(.white)
+//                                    .padding()
+//                                    .frame(maxWidth: .infinity)
+//                                    .background(Color.white.opacity(0.2))
+//                                    .cornerRadius(15)
+//                                    .overlay(
+//                                        RoundedRectangle(cornerRadius: 15)
+//                                            .stroke(Color.white.opacity(0.5), lineWidth: 1)
+//                                    )
+//                            }
+//                        }
+//                    }
+////                else {
+////                        // Estado inicial (no hay progreso)
+////                        Button(action: {
+////                            progressManager.startChallenge(challengeId, totalDays: 30)
+////                        }) {
+////                            Text("Start Challenge".localized)
+////                                .font(.headline)
+////                                .foregroundColor(.white)
+////                                .padding()
+////                                .frame(maxWidth: .infinity)
+////                                .background(Color.white.opacity(0.2))
+////                                .cornerRadius(15)
+////                                .overlay(
+////                                    RoundedRectangle(cornerRadius: 15)
+////                                        .stroke(Color.white.opacity(0.5), lineWidth: 1)
+////                                )
+////                        }
+////                    }
+//                }
+//                .padding(.horizontal, 40)
+//                .padding(.bottom, 30)
+//            }.navigationBarHidden(true)
+//        }
+////        .navigationBarHidden(true)
+//    }
+
 struct Challenge1View: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var progressManager: ChallengeProgressManager
@@ -678,6 +972,24 @@ struct Challenge1View: View {
         }
     }
     
+    @AppStorage("lastDatePracticed_\("challenge1")") private var lastDatePracticed: String = ""
+    
+    func canIncrementCounter() -> Bool {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let currentDateString = formatter.string(from: Date())
+        
+        // Si la fecha guardada es distinta a la de hoy, puede sumar
+        return lastDatePracticed != currentDateString
+    }
+    
+    private func saveCurrentDate() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let currentDateString = formatter.string(from: Date())
+        lastDatePracticed = currentDateString
+    }
+    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -699,39 +1011,13 @@ struct Challenge1View: View {
                             .padding()
                     }
                     Spacer()
-                    
-                    // Círculo de progreso al lado del botón de regreso
-//                    if let progress = progress, progress.isCompleted {
-//                        ZStack {
-//                            Circle()
-//                                .fill(circleColor.opacity(circleOpacity))
-//                                .frame(width: 40, height: 40)
-//                            
-//                            Text("✓")
-//                                .font(.caption)
-//                                .bold()
-//                                .foregroundColor(.black)
-//                        }
-//                        .padding(.trailing, 20)
-//                    }
                 }
                 .padding(.top, 20)
                 
                 // Contenido
-//                VStack(spacing: 25) {
-//                    Text("Memento Mori")
-//                        .font(.system(size: 40, weight: .bold))
-//                        .foregroundColor(.white)
-//                        .multilineTextAlignment(.center)
-//                    
-//                    Image(systemName: "hourglass")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 100, height: 100)
-//                        .foregroundColor(.white)
                 VStack(spacing: 25) {
-                if let progress = progress, !progress.isStarted  {
-                    
+                    // Título e icono condicionales
+                    if let progress = progress, !progress.isStarted {
                         Text("Memento Mori")
                             .font(.system(size: 40, weight: .bold))
                             .foregroundColor(.white)
@@ -742,20 +1028,17 @@ struct Challenge1View: View {
                             .scaledToFit()
                             .frame(width: 100, height: 100)
                             .foregroundColor(.white)
-                     }
-                    else{
+                    } else {
+                        Text("Memento Mori")
+                            .font(.system(size: 20, weight: .bold))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
                         
-                            Text("Memento Mori")
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(.white)
-                                .multilineTextAlignment(.center)
-                            
-                            Image(systemName: "hourglass")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50, height: 50)
-                                .foregroundColor(.white)
-                        
+                        Image(systemName: "hourglass")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                            .foregroundColor(.white)
                     }
                     
                     VStack(alignment: .leading, spacing: 15) {
@@ -787,8 +1070,7 @@ struct Challenge1View: View {
                     .cornerRadius(15)
                     .padding(.horizontal, 20)
                     
-//                    Spacer()
-                   
+                    // Información de progreso adicional
                     if let progress = progress, progress.isStarted && !progress.isCompleted {
                         VStack(spacing: 10) {
                             Text("Progress: \(Int(progress.progressPercentage * 100))%")
@@ -806,7 +1088,7 @@ struct Challenge1View: View {
                     }
                 }
                 
-//                Spacer()
+                Spacer()
                 
                 // Botones de acción condicionales
                 VStack(spacing: 15) {
@@ -827,6 +1109,8 @@ struct Challenge1View: View {
                             
                             Button(action: {
                                 progressManager.resetChallenge(challengeId)
+                                // También reseteamos la fecha guardada
+                                lastDatePracticed = ""
                             }) {
                                 Text("Restart Challenge".localized)
                                     .font(.subheadline)
@@ -836,20 +1120,39 @@ struct Challenge1View: View {
                         } else if progress.isStarted && !progress.isCompleted {
                             // Si ya empezó pero no completó
                             VStack(spacing: 15) {
-                                Button(action: {
-                                    progressManager.markDayCompleted(challengeId)
-                                }) {
-                                    Text("Mark Today as Completed".localized)
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                        .background(Color.white.opacity(0.3))
-                                        .cornerRadius(15)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 15)
-                                                .stroke(Color.white.opacity(0.5), lineWidth: 1)
-                                        )
+                                if canIncrementCounter() {
+                                    Button(action: {
+                                        progressManager.markDayCompleted(challengeId)
+                                        saveCurrentDate() // Guarda la fecha actual
+                                    }) {
+                                        Text("Mark Today as Completed".localized)
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background(Color.white.opacity(0.3))
+                                            .cornerRadius(15)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 15)
+                                                    .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                                            )
+                                    }
+                                } else {
+                                    Button(action: {
+                                        dismiss()
+                                    }) {
+                                        Text("Completed Today ✓")
+                                            .font(.headline)
+                                            .foregroundColor(.white.opacity(0.6))
+                                            .padding()
+                                            .frame(maxWidth: .infinity)
+                                            .background(Color.white.opacity(0.1))
+                                            .cornerRadius(15)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 15)
+                                                    .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                                            )
+                                    }
                                 }
                                 
                                 Button(action: {
