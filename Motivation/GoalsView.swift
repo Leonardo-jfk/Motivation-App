@@ -588,7 +588,7 @@ struct GoalsView: View {
     @State private var showingQuoteSheet = false
     
     var body: some View {
-        let lottieBack = (colorScheme == .dark) ? "BackWave" : "BackLightMolido"
+        let lottieBack = (colorScheme == .dark) ? "BackDarkDev" : "BackLightMolido"
         
         NavigationStack {
             ZStack(alignment: .center) {
@@ -602,6 +602,7 @@ struct GoalsView: View {
                     .resizable()
                     .ignoresSafeArea()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .brightness(-0.5)
                 
                 // Contenido principal
                 TabView(selection: $selectedTab) {
@@ -623,31 +624,31 @@ struct GoalsView: View {
                 }
                 
                 // Animation overlay
-                if showNinjatoAnimation {
-                    Color.black.opacity(0.7)
-                        .ignoresSafeArea()
-                        .onTapGesture {
-                            withAnimation {
-                                showNinjatoAnimation = false
-                            }
-                        }
-                    
-                    LottieView(animation: .named("Ninjato"))
-                        .configure { lottie in
-                            lottie.contentMode = .scaleAspectFit
-                            lottie.animationSpeed = 1.0
-                        }
-                        .playbackMode(ninjatoPlayback)
-                        .animationDidFinish { completed in
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                withAnimation {
-                                    showNinjatoAnimation = false
-                                }
-                            }
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .padding(.bottom, 100)
-                }
+//                if showNinjatoAnimation {
+//                    Color.black.opacity(0.7)
+//                        .ignoresSafeArea()
+//                        .onTapGesture {
+//                            withAnimation {
+//                                showNinjatoAnimation = false
+//                            }
+//                        }
+//                    
+//                    LottieView(animation: .named("Ninjato"))
+//                        .configure { lottie in
+//                            lottie.contentMode = .scaleAspectFit
+//                            lottie.animationSpeed = 1.0
+//                        }
+//                        .playbackMode(ninjatoPlayback)
+//                        .animationDidFinish { completed in
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                                withAnimation {
+//                                    showNinjatoAnimation = false
+//                                }
+//                            }
+//                        }
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                        .padding(.bottom, 100)
+//                }
             
 //                // Lottie animación de escritorio (de tu código original)
 //                LottieView(animation: .named("Desk"))
@@ -679,12 +680,12 @@ struct GoalsView: View {
         return lastDatePracticed != currentDateString
     }
     
-    private func showRandomQuote() {
-        let currentLang = langManager.currentLanguage
-        let selectedQuotes = allQuotes[currentLang] ?? stoicGoalQuotesEng
-        currentRandomQuote = selectedQuotes.randomElement() ?? stoicGoalQuotesEng.randomElement() ?? ""
-        showingQuoteSheet = true
-    }
+//    private func showRandomQuote() {
+//        let currentLang = langManager.currentLanguage
+//        let selectedQuotes = allQuotes[currentLang] ?? stoicGoalQuotesEng
+//        currentRandomQuote = selectedQuotes.randomElement() ?? stoicGoalQuotesEng.randomElement() ?? ""
+//        showingQuoteSheet = true
+//    }
     
     private func markDayAsMindful() {
         if canIncrementCounter() {
@@ -781,10 +782,10 @@ extension GoalsView {
                     )
                     
                     ActionButton(
-                        title: "Get Guidance".localized,
+                        title: "Weekly review".localized,
                         icon: "quote.bubble.fill",
                         color: .purple,
-                        action: showRandomQuote
+                        action:  { showingWeeklyReviewSheet = true }
                     )
                     
                     ActionButton(
@@ -826,33 +827,33 @@ extension GoalsView {
                 }
                 
                 // Daily Stoic Action Prompt
-                VStack(spacing: 15) {
-                    Text("Today's Stoic Action".localized)
-                        .font(.title3)
-                        .bold()
-                        .foregroundColor(.white)
-                    
-                    Text("What is one thing you can do today to practice virtue?")
-                        .font(.body)
-                        .foregroundColor(.white.opacity(0.8))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 30)
-                    
-                    Button("Reflect & Act") {
-                        showRandomQuote()
-                    }
-                    .padding()
-                    .background(Color.purple.opacity(0.8))
-                    .foregroundColor(.white)
-                    .cornerRadius(15)
-                }
-                .padding()
-                .background(.ultraThinMaterial)
-                .cornerRadius(20)
-                .padding(.horizontal, 20)
-                .padding(.top, 10)
-                
-                Spacer(minLength: 150)
+//                VStack(spacing: 15) {
+//                    Text("Today's Stoic Action".localized)
+//                        .font(.title3)
+//                        .bold()
+//                        .foregroundColor(.white)
+//                    
+//                    Text("What is one thing you can do today to practice virtue?")
+//                        .font(.body)
+//                        .foregroundColor(.white.opacity(0.8))
+//                        .multilineTextAlignment(.center)
+//                        .padding(.horizontal, 30)
+//                    
+//                    Button("Reflect & Act") {
+//                        showRandomQuote()
+//                    }
+//                    .padding()
+//                    .background(Color.purple.opacity(0.8))
+//                    .foregroundColor(.white)
+//                    .cornerRadius(15)
+//                }
+//                .padding()
+//                .background(.ultraThinMaterial)
+//                .cornerRadius(20)
+//                .padding(.horizontal, 20)
+//                .padding(.top, 10)
+//                
+//                Spacer(minLength: 150)
             }
         }
     }
