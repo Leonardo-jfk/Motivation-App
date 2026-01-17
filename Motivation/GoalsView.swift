@@ -5,316 +5,6 @@
 //  Created by Leonardo Aurelio on 06/01/2026.
 //
 
-//import Foundation
-//import SwiftUI
-//import Lottie
-//
-//struct GoalsView: View {
-//    
-//        @State private var showingQuote = false
-//        @State private var currentRandomQuote: String = ""
-//        @State private var showNinjatoAnimation = false // Nuevo estado para la animación
-//        @State private var ninjatoPlayback: LottiePlaybackMode = .paused(at: .progress(0))
-//        
-//        @StateObject private var langManager = LocalizationManager.shared
-//        
-//        // Aquí usamos AppStorage para guardar los días practicados de forma permanente
-//        @AppStorage("daysPracticed") private var daysPracticed: Int = 0
-//        @AppStorage("lastDatePracticed") private var lastDatePracticed: String = ""
-//        // Animación de Lottie
-//        var contentMode: UIView.ContentMode = .scaleAspectFill
-//        var playLoopMode: LottieLoopMode = .playOnce
-//        
-//        var onAnimationDidFinish: (() -> Void)? = nil
-//        
-//        func canIncrementCounter() -> Bool {
-//            let formatter = DateFormatter()
-//            formatter.dateFormat = "yyyy-MM-dd"
-//            let currentDateString = formatter.string(from: Date())
-//            
-//            // Si la fecha guardada es distinta a la de hoy, puede sumar
-//            return lastDatePracticed != currentDateString
-//        }
-//        
-//        let allQuotes: [AppLanguage: [String]] = [
-//            .english: quotesLongEng,
-//            .spanish: quotesLongES,
-//            .french: quotesLongFr // O como se llamen tus otras listas
-//        ]
-//        
-//        @Environment(\.colorScheme) var colorScheme
-//        @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
-//        private var appScheme: AppColorScheme {
-//            AppColorScheme(rawValue: storedScheme) ?? .system
-//        }
-//        
-//        var body: some View {
-//            
-//            let lottieBack = (colorScheme == .dark) ? "BackWave" : "BackLightMolido"
-//            
-//            
-//            ZStack(alignment: .center) {
-//                // Fondo con Lottie
-//                LottieView(animation: .named(lottieBack))
-//                    .configure({ lottie in lottie.contentMode = contentMode
-//                        lottie.animationSpeed = 0.5})
-//                    .playbackMode(.playing(.toProgress(1, loopMode: .loop))) // .loop para que el fondo se mueva siempre
-//                    .resizable()
-//                    .ignoresSafeArea()
-//                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                
-//                VStack(alignment: .center) {
-//                    if !showingQuote {
-//                        //            VStack(spacing: 30) {
-//                        // Contador de días
-//                        VStack {
-//                            Text("\(daysPracticed)")
-//                                .font(.system(size: 80, weight: .bold, design: .serif))
-//                                .foregroundStyle(.white)
-//                            
-//                            Text("Days lived mindfully".localized)
-//                                .font(.headline)
-//                                .foregroundStyle(.white.opacity(0.8))
-//                                .shadow(radius: 3)
-//                                .shadow(radius: 7)
-//                        }
-//                        .padding(30)
-//                        .background(.ultraThinMaterial)
-//                        .clipShape(RoundedRectangle(cornerRadius: 30))
-//                        //        }
-//                        
-//                        
-//                        
-//                        Spacer()
-//                        // Botón para obtener sabiduría
-//                        Button(action: {
-//                            // Seleccionamos la cita aleatoria antes de mostrarla
-//                            //                        currentRandomQuote = quotesLongEng.randomElement() ?? "Sigue adelante."
-//                            
-//                            let currentLang = langManager.currentLanguage
-//                            
-//                            // 2. Buscamos el array correspondiente (usamos inglés como fallback)
-//                            let selectedQuotes = allQuotes[currentLang] ?? quotesLongEng
-//                            
-//                            // 3. Seleccionamos la cita
-//                            currentRandomQuote = selectedQuotes.randomElement() ?? "..."
-//                            withAnimation(.spring()) {
-//                                showingQuote = true
-//                            }
-//                        }) {
-//                            ZStack {
-//                                RoundedRectangle(cornerRadius: 30, style: .continuous)
-//                                    .fill(Color.black.opacity(0.8))
-//                                    .frame(width: 250, height: 100)
-//                                
-//                                Text("Get guidance".localized)
-//                                    .font(.title3).bold().foregroundStyle(.white)
-//                            }
-//                            .padding(.bottom, 50)
-//                        }
-//                    } else {
-//                        // Vista de la cita desplegada
-//                        VStack(alignment: .center, spacing: -20) {
-//                            //                        AnimationView() // Tu vista de Lottie de la chica
-//                            
-//                            ZStack(alignment: .center) {
-//                                RoundedRectangle(cornerRadius: 40, style: .continuous)
-//                                    .fill(Color.black.opacity(0.5))
-//                                    .frame(width: 350, height: 700)
-//                                
-//                                VStack{
-//                                    //.padding(.top, 50) and button are optimal for 16e, max needs more
-//                                    Text("Your guidance:".localized)
-//                                        .font(.title2).bold()
-//                                        .padding(.horizontal, 12).padding(.vertical, 6)
-//                                        .background(.white.opacity(0.2))
-//                                        .clipShape(Capsule())
-//                                        .foregroundStyle(.white)
-//                                        .padding(.top, 50)
-//                                    Spacer()
-//                                    ScrollView {
-//                                        Text(currentRandomQuote.localized)
-//                                            .padding(.horizontal, 95)
-//                                        
-//                                        //                                        .frame(maxWidth: .infinity - 70)
-//                                            .font(.custom("CormorantGaramond-Italic", size: 22))
-//                                            .multilineTextAlignment(.center)
-//                                            .foregroundStyle(.white)
-//                                    }
-//                                    .frame(height: 400)
-//                                    
-//                                    
-//                                    Spacer()
-//                                    
-//                                    Button(action: {
-//                                        if canIncrementCounter() {
-//                                            // PRIMERA VEZ HOY: Sumamos y animamos
-//                                            daysPracticed += 1
-//                                            let formatter = DateFormatter()
-//                                            formatter.dateFormat = "yyyy-MM-dd"
-//                                            lastDatePracticed = formatter.string(from: Date())
-//                                            
-//                                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-//                                            
-//                                            // Mostramos al Ninja
-//                                            showNinjatoAnimation = true
-//                                            ninjatoPlayback = .playing(.toProgress(1, loopMode: .playOnce))
-//                                        } else {
-//                                            // YA SUMÓ HOY: El botón sirve para CERRAR la vista
-//                                            withAnimation {
-//                                                showingQuote = false
-//                                                showNinjatoAnimation = false
-//                                            }
-//                                        }
-//                                    }) {
-//                                        Text(canIncrementCounter() ? "Mark day as mindful".localized : "Return to peace")
-//                                            .bold()
-//                                            .padding()
-//                                        //                                        .frame(maxWidth: .infinity)
-//                                            .background(canIncrementCounter() ? .white : .white.opacity(0.7))
-//                                            .foregroundStyle(.black)
-//                                            .clipShape(Capsule())
-//                                            .allowsHitTesting(false)
-//                                            .padding(.bottom, 50)
-//                                    }
-//                                    
-//                                    
-//                                    
-//                                }
-//                            }
-//                            .transition(.asymmetric(insertion: .scale, removal: .opacity))
-//                        }
-//                        
-//                        Spacer()
-//                    }
-//                    Spacer()
-//                    LottieView(animation: .named("Desk"))
-//                        .configure({ lottie in lottie.contentMode = .scaleAspectFit
-//                            lottie.animationSpeed = 0.8
-//                        })
-//                        .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
-//                        .animationDidFinish { completed in
-//                            // Cuando termina la animación, cerramos todo
-//                            withAnimation {
-//                                showNinjatoAnimation = false
-//                                showingQuote = false
-//                                ninjatoPlayback = .paused(at: .progress(0))
-//                            }
-//                        }
-////                        .ignoresSafeArea()
-////                        .resizable
-////                        .scaledToFit()
-//                        .frame(width: 300, height: 250) // Ajusta el tamaño que desees
-//                        .transition(.opacity)
-//                }
-//               
-//    //        .padding(.bottom, 100) // Espacio para la TabBar
-//        }
-//    //        .padding(.bottom, 100) // Espacio para la TabBar
-//        }
-//    }
-//
-//    
-//
-//
-//#Preview {
-//    GoalsView()
-//}
-//
-
-
-
-//
-//
-//CHALLENGE: "BEGIN WITH THE END IN MIND"
-//
-//Challenge Description:
-//
-//"Based on Stephen Covey's '7 Habits of Highly Effective People' - Habit 2: Begin with the End in Mind. Define your life's ultimate purpose and work backward to create meaningful goals. Shift from reactive living to intentional creation by first clarifying what matters most, then building daily actions that align with your deepest values and desired legacy."
-//
-//30-Day Daily Tasks:
-//
-//Week 1: DEFINE YOUR ULTIMATE "END"
-//
-//Day 1-2: Funeral Visualization
-//
-//Write your ideal eulogy (3 versions: Family, Friends, Community)
-//What do you want people to say about you?
-//What character qualities do you want remembered?
-//What contributions do you want to be known for?
-//Day 3-4: 80th Birthday Speech
-//
-//Imagine your 80th birthday celebration
-//What achievements would make you proud?
-//What relationships would you cherish?
-//What wisdom would you share?
-//Day 5-7: Core Values Identification
-//
-//List your 5 core non-negotiable values
-//Rank them in order of importance
-//Write why each matters deeply to you
-//Identify when you've lived these values recently
-//Week 2: CREATE YOUR PERSONAL MISSION STATEMENT
-//
-//Day 8-10: Brainstorm Draft
-//
-//Start with "My life purpose is to..."
-//Include roles (parent, professional, community member)
-//Incorporate your core values
-//Make it inspiring and personal
-//Day 11-12: Refine & Polish
-//
-//Shorten to 1-2 powerful sentences
-//Make it memorable and repeatable
-//Ensure it guides daily decisions
-//Test: Does this feel true when you read it?
-//Day 13-14: Visualization & Internalization
-//
-//Read mission statement morning/night
-//Create visual representation (vision board)
-//Record yourself saying it
-//Share with one trusted person
-//Week 3: BACKWARD GOAL PLANNING
-//
-//Day 15-16: 10-Year Vision
-//
-//Where are you in 10 years if mission accomplished?
-//Health, relationships, career, finances, personal growth
-//Be specific but flexible on "how"
-//Focus on being, not just having
-//Day 17-19: 5-Year Milestones
-//
-//What must be true in 5 years to reach 10-year vision?
-//Break into categories
-//Identify key relationships to build
-//Skills to develop
-//Day 20-21: 1-Year Goals
-//
-//Specific, measurable 1-year objectives
-//Aligned with 5-year milestones
-//Focus on habits, not just outcomes
-//Create quarterly review points
-//Week 4: DAILY ALIGNMENT SYSTEM
-//
-//Day 22-24: Weekly Planning
-//
-//Each Sunday: Review mission statement
-//Plan week's priorities using "Important/Urgent" matrix
-//Schedule "big rocks" first (most important tasks)
-//Ensure each week moves toward your "end"
-//Day 25-27: Daily Decision Filter
-//
-//Morning: Read mission, ask "Does today's plan align?"
-//Use "Will this matter in 5 years?" as decision filter
-//Evening: Review alignment, adjust tomorrow
-//Practice saying "no" to non-aligned opportunities
-//Day 28-30: Integration & Adjustment
-//
-//Full system implementation
-//Identify what's working/not working
-//Adjust mission statement if needed
-//Plan next quarter's focus
-
 
 import Combine
 import Foundation
@@ -410,6 +100,12 @@ struct StoicPrinciple: Identifiable {
     
     static let stoicHabits: [StoicPrinciple] = [
         StoicPrinciple(
+            title: "Be Proactive (The Discipline of Assent)",
+            description: "Between stimulus and response, there is a space. In that space is our power to choose our response.",
+            habitRelation: "Habit 1: Be Proactive",
+            actionStep: "Identify one automatic reaction and consciously choose a different response"
+        ),
+        StoicPrinciple(
             title: "Begin with the End in Mind (Memento Mori)",
             description: "Live each day as if it were your last. What would you want to have accomplished? This Stoic practice aligns with habit 2, focusing on what truly matters.",
             habitRelation: "Habit 2: Begin with the End in Mind",
@@ -444,13 +140,8 @@ struct StoicPrinciple: Identifiable {
             description: "Daily practice of morning preparation and evening review - the Stoic disciplines of assent, desire, and action.",
             habitRelation: "Habit 7: Sharpen the Saw",
             actionStep: "Create a 10-minute morning ritual of intention setting"
-        ),
-        StoicPrinciple(
-            title: "Be Proactive (The Discipline of Assent)",
-            description: "Between stimulus and response, there is a space. In that space is our power to choose our response.",
-            habitRelation: "Habit 1: Be Proactive",
-            actionStep: "Identify one automatic reaction and consciously choose a different response"
         )
+        
     ]
 }
 
@@ -623,42 +314,6 @@ struct GoalsView: View {
                     GoalsTabBar(selectedTab: $selectedTab)
                 }
                 
-                // Animation overlay
-//                if showNinjatoAnimation {
-//                    Color.black.opacity(0.7)
-//                        .ignoresSafeArea()
-//                        .onTapGesture {
-//                            withAnimation {
-//                                showNinjatoAnimation = false
-//                            }
-//                        }
-//                    
-//                    LottieView(animation: .named("Ninjato"))
-//                        .configure { lottie in
-//                            lottie.contentMode = .scaleAspectFit
-//                            lottie.animationSpeed = 1.0
-//                        }
-//                        .playbackMode(ninjatoPlayback)
-//                        .animationDidFinish { completed in
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//                                withAnimation {
-//                                    showNinjatoAnimation = false
-//                                }
-//                            }
-//                        }
-//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                        .padding(.bottom, 100)
-//                }
-            
-//                // Lottie animación de escritorio (de tu código original)
-//                LottieView(animation: .named("Desk"))
-//                    .configure { lottie in
-//                        lottie.contentMode = .scaleAspectFit
-//                        lottie.animationSpeed = 0.8
-//                    }
-//                    .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
-//                    .frame(width: 300, height: 250)
-//                    .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 145)
             }
         }
         .sheet(isPresented: $showingAddGoalSheet) {
@@ -679,13 +334,6 @@ struct GoalsView: View {
         let currentDateString = formatter.string(from: Date())
         return lastDatePracticed != currentDateString
     }
-    
-//    private func showRandomQuote() {
-//        let currentLang = langManager.currentLanguage
-//        let selectedQuotes = allQuotes[currentLang] ?? stoicGoalQuotesEng
-//        currentRandomQuote = selectedQuotes.randomElement() ?? stoicGoalQuotesEng.randomElement() ?? ""
-//        showingQuoteSheet = true
-//    }
     
     private func markDayAsMindful() {
         if canIncrementCounter() {
@@ -825,35 +473,6 @@ extension GoalsView {
                         }
                     }
                 }
-                
-                // Daily Stoic Action Prompt
-//                VStack(spacing: 15) {
-//                    Text("Today's Stoic Action".localized)
-//                        .font(.title3)
-//                        .bold()
-//                        .foregroundColor(.white)
-//                    
-//                    Text("What is one thing you can do today to practice virtue?")
-//                        .font(.body)
-//                        .foregroundColor(.white.opacity(0.8))
-//                        .multilineTextAlignment(.center)
-//                        .padding(.horizontal, 30)
-//                    
-//                    Button("Reflect & Act") {
-//                        showRandomQuote()
-//                    }
-//                    .padding()
-//                    .background(Color.purple.opacity(0.8))
-//                    .foregroundColor(.white)
-//                    .cornerRadius(15)
-//                }
-//                .padding()
-//                .background(.ultraThinMaterial)
-//                .cornerRadius(20)
-//                .padding(.horizontal, 20)
-//                .padding(.top, 10)
-//                
-//                Spacer(minLength: 150)
             }
         }
     }
