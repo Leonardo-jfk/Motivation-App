@@ -499,7 +499,7 @@ struct ChallengeDetailView: View {
             )
             .ignoresSafeArea()
             
-            VStack(spacing: 30) {
+            VStack(spacing: 10) {
                 // Header
                 HStack {
                     Button(action: { dismiss() }) {
@@ -510,7 +510,7 @@ struct ChallengeDetailView: View {
                     }
                     Spacer()
                 }
-                .padding(.top, 20)
+                .padding(.top, 10)
                 
                 // Content
                 ScrollView {
