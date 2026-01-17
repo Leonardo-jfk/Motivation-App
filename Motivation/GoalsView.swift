@@ -280,9 +280,10 @@ struct GoalsView: View {
     @State private var showingWeeklyReviewSheet = false
     @State private var showingQuoteSheet = false
     
+    
+    
     var body: some View {
         let lottieBack = (colorScheme == .dark) ? "BackDarkDev" : "BackLightMolido"
-        
         NavigationStack {
             ZStack(alignment: .center) {
                 // Fondo animado
@@ -320,21 +321,21 @@ struct GoalsView: View {
                                 value: "\(goalManager.completedGoalsCount)",
                                 label: "Completed",
                                 icon: "checkmark.circle.fill",
-                                color: .green
+                                color: colorScheme == .dark ? Color.white : Color.black
                             )
                             
                             StatsCard(
                                 value: "\(Int(goalManager.averageProgress * 100))%",
                                 label: "Progress",
                                 icon: "chart.line.uptrend.xyaxis",
-                                color: .blue
+                                color: colorScheme == .dark ? Color.white : Color.black
                             )
                             
                             StatsCard(
                                 value: "\(goalManager.goals.count)",
                                 label: "Active",
                                 icon: "target",
-                                color: .orange
+                                color: colorScheme == .dark ? Color.white : Color.black
                             )
                         }
                         .padding(.horizontal)
@@ -346,7 +347,7 @@ struct GoalsView: View {
                                 GoalsListView(goalManager: goalManager)
                             } label: {
                                 ActionButtonContent(
-                                    title: "Set New Goal".localized,
+                                    title: "Your Goals".localized,
                                     icon: "plus.circle.fill",
                                     color: .blue
                                 )
@@ -367,10 +368,10 @@ struct GoalsView: View {
                             
                             // Bouton 3: Habitudes Stoïques
                             NavigationLink {
-                                StoicHabitsListView()
+                                HabitsListView()
                             } label: {
                                 ActionButtonContent(
-                                    title: "Stoic Habits".localized,
+                                    title: "Successful Habits".localized,
                                     icon: "brain.head.profile",
                                     color: .green
                                 )
@@ -557,7 +558,7 @@ struct GoalsListView: View {
 }
 
 
-struct StoicHabitsListView: View {
+struct HabitsListView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -601,19 +602,6 @@ struct StoicHabitsListView: View {
                         StoicHabitCard(principle: principle)
                             .padding(.horizontal, 20)
                     }
-                    
-                    // Optionnel : Bouton pour revue hebdomadaire
-                    Button {
-                        // Tu peux ajouter une navigation ici si tu veux
-                    } label: {
-                        Text("Start Weekly Review")
-                            .padding()
-                            .background(Color.orange.opacity(0.8))
-                            .foregroundColor(.white)
-                            .cornerRadius(15)
-                    }
-                    .padding(.top, 10)
-                    
                     Spacer(minLength: 50)
                 }
             }
@@ -622,280 +610,7 @@ struct StoicHabitsListView: View {
     }
 }
 
-//// MARK: - View Components
-//extension GoalsView {
-////    private var mainInspirationView: some View {
-////        ScrollView {
-////            VStack(spacing: 30) {
-////                // Header
-////                VStack(spacing: 10) {
-////                    Text("Stoic Goals")
-////                        .font(.system(size: 48, weight: .heavy, design: .serif))
-////                        .foregroundStyle(.white)
-////                        .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 2)
-////                    
-////                    Text("Wisdom through intentional action".localized)
-////                        .font(.title3)
-////                        .foregroundStyle(.white.opacity(0.9))
-////                        .italic()
-////                }
-////                .padding(.top, 40)
-////                
-////                // Quick Stats
-////                HStack(spacing: 20) {
-////                    StatsCard(
-////                        value: "\(goalManager.completedGoalsCount)",
-////                        label: "Completed",
-////                        icon: "checkmark.circle.fill",
-////                        color: .green
-////                    )
-////                    
-////                    StatsCard(
-////                        value: "\(Int(goalManager.averageProgress * 100))%",
-////                        label: "Progress",
-////                        icon: "chart.line.uptrend.xyaxis",
-////                        color: .blue
-////                    )
-////                    
-////                    StatsCard(
-////                        value: "\(goalManager.goals.count)",
-////                        label: "Active",
-////                        icon: "target",
-////                        color: .orange
-////                    )
-////                }
-////                .padding(.horizontal)
-////                
-////                // Mindful Days Counter (from your original)
-//////                VStack {
-//////                    Text("\(daysPracticed)")
-//////                        .font(.system(size: 80, weight: .bold, design: .serif))
-//////                        .foregroundStyle(.white)
-//////                    
-//////                    Text("Days lived mindfully".localized)
-//////                        .font(.headline)
-//////                        .foregroundStyle(.white.opacity(0.8))
-//////                        .shadow(radius: 3)
-//////                }
-//////                .padding(30)
-//////                .background(.ultraThinMaterial)
-//////                .clipShape(RoundedRectangle(cornerRadius: 30))
-//////                .padding(.horizontal, 20)
-//////                .onTapGesture {
-//////                    if canIncrementCounter() {
-//////                        markDayAsMindful()
-//////                    }
-//////                }
-////                
-////                // Quick Actions
-////                VStack(spacing: 15) {
-////                    ActionButton(
-////                        title: "Set New Goal".localized,
-////                        icon: "plus.circle.fill",
-////                        color: .blue,
-////                        action: {
-////                            selectedTab = 1
-////                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-////                                showingAddGoalSheet = true
-////                            }
-////                        }
-////                    )
-////                    
-////                    ActionButton(
-////                        title: "Weekly review".localized,
-////                        icon: "quote.bubble.fill",
-////                        color: .purple,
-////                        action:  { showingWeeklyReviewSheet = true }
-////                    )
-////                    
-////                    ActionButton(
-////                        title: "Stoic Habits".localized,
-////                        icon: "brain.head.profile",
-////                        color: .green,
-////                        action: { selectedTab = 2 }
-////                    )
-////                }
-////                .padding(.horizontal, 20)
-////                
-////                // Recent Goals Preview
-////                if !goalManager.goals.isEmpty {
-////                    VStack(alignment: .leading, spacing: 15) {
-////                        HStack {
-////                            Text("Recent Goals")
-////                                .font(.title2)
-////                                .bold()
-////                                .foregroundColor(.white)
-////                            
-////                            Spacer()
-////                            
-////                            Button("See All") {
-////                                selectedTab = 1
-////                            }
-////                            .foregroundColor(.blue)
-////                        }
-////                        .padding(.horizontal, 20)
-////                        
-////                        ScrollView(.horizontal, showsIndicators: false) {
-////                            HStack(spacing: 15) {
-////                                ForEach(goalManager.goals.prefix(3)) { goal in
-////                                    GoalPreviewCard(goal: goal)
-////                                }
-////                            }
-////                            .padding(.horizontal, 20)
-////                        }
-////                    }
-////                }
-////            }
-////        }
-////    }
-//    
-//    private var goalsListView: some View {
-//        ScrollView {
-//            VStack(spacing: 20) {
-//                // Header
-//                VStack(spacing: 10) {
-//                    Text("Your Stoic Goals".localized)
-//                        .font(.system(size: 36, weight: .bold, design: .serif))
-//                        .foregroundStyle(.white)
-//                    
-//                    Text("What you can control, improve".localized)
-//                        .font(.body)
-//                        .foregroundStyle(.white.opacity(0.8))
-//                }
-//                .padding(.top, 40)
-//                
-//                // Goals List
-//                if goalManager.goals.isEmpty {
-//                    EmptyGoalsView()
-//                        .padding(.horizontal, 20)
-//                } else {
-//                    ForEach(goalManager.goals) { goal in
-//                        GoalCard(goal: goal, goalManager: goalManager)
-//                            .padding(.horizontal, 20)
-//                    }
-//                }
-//                
-//                // Add Goal Button
-//                Button(action: { showingAddGoalSheet = true }) {
-//                    HStack {
-//                        Image(systemName: "plus.circle.fill")
-//                        Text("Add New Goal".localized)
-//                            .bold()
-//                    }
-//                    .padding()
-//                    .frame(maxWidth: .infinity)
-//                    .background(Color.blue.opacity(0.8))
-//                    .foregroundColor(.white)
-//                    .cornerRadius(15)
-//                }
-//                .padding(.horizontal, 20)
-//                .padding(.top, 10)
-//                
-//                Spacer(minLength: 150)
-//            }
-//        }
-//    }
-//    
-//    private var stoicHabitsView: some View {
-//        ScrollView {
-//            VStack(spacing: 25) {
-//                // Header
-//                VStack(spacing: 10) {
-//                    Text("7 Stoic Habits".localized)
-//                        .font(.system(size: 36, weight: .bold, design: .serif))
-//                        .foregroundStyle(.white)
-//                    
-//                    Text("Ancient wisdom for modern effectiveness".localized)
-//                        .font(.body)
-//                        .foregroundStyle(.white.opacity(0.8))
-//                        .italic()
-//                }
-//                .padding(.top, 40)
-//                
-//                // Habits List
-//                ForEach(StoicPrinciple.stoicHabits) { principle in
-//                    StoicHabitCard(principle: principle)
-//                        .padding(.horizontal, 20)
-//                }
-//                
-//                // Weekly Review Prompt
-//                VStack(spacing: 15) {
-//                    Text("Weekly Stoic Review".localized)
-//                        .font(.title2)
-//                        .bold()
-//                        .foregroundColor(.white)
-//                    
-//                    Text("Take time each week to reflect on your progress and alignment with Stoic principles.")
-//                        .font(.body)
-//                        .foregroundColor(.white.opacity(0.8))
-//                        .multilineTextAlignment(.center)
-//                        .padding(.horizontal, 20)
-//                    
-//                    Button("Start Weekly Review") {
-//                        showingWeeklyReviewSheet = true
-//                    }
-//                    .padding()
-//                    .background(Color.orange.opacity(0.8))
-//                    .foregroundColor(.white)
-//                    .cornerRadius(15)
-//                }
-//                .padding()
-//                .background(.ultraThinMaterial)
-//                .cornerRadius(20)
-//                .padding(.horizontal, 20)
-//                .padding(.top, 10)
-//                
-//                Spacer(minLength: 150)
-//            }
-//        }
-//    }
-//}
 
-//// MARK: - Supporting Views
-//struct GoalsTabBar: View {
-//    @Binding var selectedTab: Int
-//    
-//    var body: some View {
-//        HStack(spacing: 0) {
-//            ForEach(0..<3) { index in
-//                Button(action: { withAnimation { selectedTab = index } }) {
-//                    VStack(spacing: 4) {
-//                        Image(systemName: tabIcon(for: index))
-//                            .font(.title2)
-//                        Text(tabTitle(for: index))
-//                            .font(.caption)
-//                    }
-//                    .foregroundColor(selectedTab == index ? .white : .white.opacity(0.6))
-//                    .frame(maxWidth: .infinity)
-//                    .padding(.vertical, 10)
-//                    .background(selectedTab == index ? Color.white.opacity(0.2) : Color.clear)
-//                }
-//            }
-//        }
-//        .background(.ultraThinMaterial)
-//        .clipShape(RoundedRectangle(cornerRadius: 25))
-//        .padding(.horizontal, 20)
-//        .padding(.bottom, 20)
-//    }
-//    
-//    private func tabIcon(for index: Int) -> String {
-//        switch index {
-//        case 0: return "house.fill"
-//        case 1: return "target"
-//        case 2: return "brain.head.profile"
-//        default: return "circle"
-//        }
-//    }
-//    
-//    private func tabTitle(for index: Int) -> String {
-//        switch index {
-//        case 0: return "Home".localized
-//        case 1: return "Goals".localized
-//        case 2: return "Habits".localized
-//        default: return ""
-//        }
-//    }
-//}
 
 struct StatsCard: View {
     let value: String
@@ -1140,7 +855,7 @@ struct StoicHabitCard: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text(principle.habitRelation)
                         .font(.caption)
-                        .foregroundColor(.blue)
+                        .foregroundColor(.white.opacity(0.7))
                         .bold()
                     
                     Text(principle.title)
@@ -1379,7 +1094,10 @@ struct GoalDetailView: View {
                             
                             Slider(value: $progress, in: 0...1, step: 0.01)
                                 .accentColor(goal.priority.color)
-                                .onChange(of: progress) { newValue in
+//                                .onChange(of: progress) { newValue in
+//                                    goalManager.updateProgress(for: goal.id, progress: newValue)
+//                                }
+                                .onChange(of: progress) { oldValue, newValue in
                                     goalManager.updateProgress(for: goal.id, progress: newValue)
                                 }
                         }
