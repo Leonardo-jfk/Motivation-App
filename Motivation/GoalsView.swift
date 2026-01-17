@@ -246,13 +246,15 @@ class GoalManager: ObservableObject {
     }
 }
 
+
+
 // MARK: - Main Goals View
 struct GoalsView: View {
     @State private var showingQuote = false
     @State private var currentRandomQuote: String = ""
     @State private var showNinjatoAnimation = false
     @State private var ninjatoPlayback: LottiePlaybackMode = .paused(at: .progress(0))
-    @State private var selectedTab = 0
+//    @State private var selectedTab = 0
     
     @StateObject private var goalManager = GoalManager()
     @StateObject private var langManager = LocalizationManager.shared
@@ -287,7 +289,7 @@ struct GoalsView: View {
                 LottieView(animation: .named(lottieBack))
                     .configure { lottie in
                         lottie.contentMode = .scaleAspectFill
-                        lottie.animationSpeed = 0.5
+                        lottie.animationSpeed = 0.3
                     }
                     .playbackMode(.playing(.toProgress(1, loopMode: .loop)))
                     .resizable()
@@ -296,24 +298,124 @@ struct GoalsView: View {
                     .brightness(-0.5)
                 
                 // Contenido principal
-                TabView(selection: $selectedTab) {
-                    // Tab 1: Vista Principal (Inspiración)
-                    mainInspirationView
-                        .tag(0)
-                    
-                    // Tab 2: Lista de Objetivos
-                    goalsListView
-                        .tag(1)
-                    
-                    // Tab 3: 7 Hábitos Stoic
-                    stoicHabitsView
-                        .tag(2)
+                ScrollView {
+                    VStack(spacing: 30) {
+                        // Header
+                        VStack(spacing: 10) {
+                            Text("Stoic Goals")
+                                .font(.system(size: 48, weight: .heavy, design: .serif))
+                                .foregroundStyle(.white)
+                                .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 2)
+                            
+                            Text("Wisdom through intentional action".localized)
+                                .font(.title3)
+                                .foregroundStyle(.white.opacity(0.9))
+                                .italic()
+                        }
+                        .padding(.top, 40)
+                        
+                        // Statistiques rapides
+                        HStack(spacing: 20) {
+                            StatsCard(
+                                value: "\(goalManager.completedGoalsCount)",
+                                label: "Completed",
+                                icon: "checkmark.circle.fill",
+                                color: .green
+                            )
+                            
+                            StatsCard(
+                                value: "\(Int(goalManager.averageProgress * 100))%",
+                                label: "Progress",
+                                icon: "chart.line.uptrend.xyaxis",
+                                color: .blue
+                            )
+                            
+                            StatsCard(
+                                value: "\(goalManager.goals.count)",
+                                label: "Active",
+                                icon: "target",
+                                color: .orange
+                            )
+                        }
+                        .padding(.horizontal)
+                        
+                        // Actions rapides - NOUVEAUX BOUTONS
+                        VStack(spacing: 15) {
+                            // Bouton 1: Nouvel objectif
+                            NavigationLink {
+                                GoalsListView(goalManager: goalManager)
+                            } label: {
+                                ActionButtonContent(
+                                    title: "Set New Goal".localized,
+                                    icon: "plus.circle.fill",
+                                    color: .blue
+                                )
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            
+                            // Bouton 2: Revue hebdomadaire
+                            Button {
+                                showingWeeklyReviewSheet = true
+                            } label: {
+                                ActionButtonContent(
+                                    title: "Weekly review".localized,
+                                    icon: "chart.bar.fill",
+                                    color: .purple
+                                )
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            
+                            // Bouton 3: Habitudes Stoïques
+                            NavigationLink {
+                                StoicHabitsListView()
+                            } label: {
+                                ActionButtonContent(
+                                    title: "Stoic Habits".localized,
+                                    icon: "brain.head.profile",
+                                    color: .green
+                                )
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .padding(.horizontal, 20)
+                        
+                        // Aperçu des objectifs récents
+                        if !goalManager.goals.isEmpty {
+                            VStack(alignment: .leading, spacing: 15) {
+                                HStack {
+                                    Text("Recent Goals")
+                                        .font(.title2)
+                                        .bold()
+                                        .foregroundColor(.white)
+                                    
+                                    Spacer()
+                                    
+                                    NavigationLink("See All") {
+                                        GoalsListView(goalManager: goalManager)
+                                    }
+                                    .foregroundColor(.blue)
+                                }
+                                .padding(.horizontal, 20)
+                                
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 15) {
+                                        ForEach(goalManager.goals.prefix(3)) { goal in
+                                            NavigationLink {
+                                                GoalDetailView(goal: goal, goalManager: goalManager)
+                                            } label: {
+                                                GoalPreviewCard(goal: goal)
+                                            }
+                                            .buttonStyle(PlainButtonStyle())
+                                        }
+                                    }
+                                    .padding(.horizontal, 20)
+                                }
+                            }
+                        }
+                        
+                        Spacer(minLength: 50)
+                    }
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .overlay(alignment: .bottom) {
-                    GoalsTabBar(selectedTab: $selectedTab)
-                }
-                
             }
         }
         .sheet(isPresented: $showingAddGoalSheet) {
@@ -350,280 +452,450 @@ struct GoalsView: View {
     }
 }
 
-// MARK: - View Components
-extension GoalsView {
-    private var mainInspirationView: some View {
-        ScrollView {
-            VStack(spacing: 30) {
-                // Header
-                VStack(spacing: 10) {
-                    Text("Stoic Goals")
-                        .font(.system(size: 48, weight: .heavy, design: .serif))
-                        .foregroundStyle(.white)
-                        .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 2)
-                    
-                    Text("Wisdom through intentional action".localized)
-                        .font(.title3)
-                        .foregroundStyle(.white.opacity(0.9))
-                        .italic()
-                }
-                .padding(.top, 40)
-                
-                // Quick Stats
-                HStack(spacing: 20) {
-                    StatsCard(
-                        value: "\(goalManager.completedGoalsCount)",
-                        label: "Completed",
-                        icon: "checkmark.circle.fill",
-                        color: .green
-                    )
-                    
-                    StatsCard(
-                        value: "\(Int(goalManager.averageProgress * 100))%",
-                        label: "Progress",
-                        icon: "chart.line.uptrend.xyaxis",
-                        color: .blue
-                    )
-                    
-                    StatsCard(
-                        value: "\(goalManager.goals.count)",
-                        label: "Active",
-                        icon: "target",
-                        color: .orange
-                    )
-                }
-                .padding(.horizontal)
-                
-                // Mindful Days Counter (from your original)
-//                VStack {
-//                    Text("\(daysPracticed)")
-//                        .font(.system(size: 80, weight: .bold, design: .serif))
-//                        .foregroundStyle(.white)
-//                    
-//                    Text("Days lived mindfully".localized)
-//                        .font(.headline)
-//                        .foregroundStyle(.white.opacity(0.8))
-//                        .shadow(radius: 3)
-//                }
-//                .padding(30)
-//                .background(.ultraThinMaterial)
-//                .clipShape(RoundedRectangle(cornerRadius: 30))
-//                .padding(.horizontal, 20)
-//                .onTapGesture {
-//                    if canIncrementCounter() {
-//                        markDayAsMindful()
-//                    }
-//                }
-                
-                // Quick Actions
-                VStack(spacing: 15) {
-                    ActionButton(
-                        title: "Set New Goal".localized,
-                        icon: "plus.circle.fill",
-                        color: .blue,
-                        action: {
-                            selectedTab = 1
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                showingAddGoalSheet = true
-                            }
-                        }
-                    )
-                    
-                    ActionButton(
-                        title: "Weekly review".localized,
-                        icon: "quote.bubble.fill",
-                        color: .purple,
-                        action:  { showingWeeklyReviewSheet = true }
-                    )
-                    
-                    ActionButton(
-                        title: "Stoic Habits".localized,
-                        icon: "brain.head.profile",
-                        color: .green,
-                        action: { selectedTab = 2 }
-                    )
-                }
-                .padding(.horizontal, 20)
-                
-                // Recent Goals Preview
-                if !goalManager.goals.isEmpty {
-                    VStack(alignment: .leading, spacing: 15) {
-                        HStack {
-                            Text("Recent Goals")
-                                .font(.title2)
-                                .bold()
-                                .foregroundColor(.white)
-                            
-                            Spacer()
-                            
-                            Button("See All") {
-                                selectedTab = 1
-                            }
-                            .foregroundColor(.blue)
-                        }
-                        .padding(.horizontal, 20)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 15) {
-                                ForEach(goalManager.goals.prefix(3)) { goal in
-                                    GoalPreviewCard(goal: goal)
-                                }
-                            }
-                            .padding(.horizontal, 20)
-                        }
-                    }
-                }
-            }
-        }
-    }
+struct ActionButtonContent: View {
+    let title: String
+    let icon: String
+    let color: Color
     
-    private var goalsListView: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                // Header
-                VStack(spacing: 10) {
-                    Text("Your Stoic Goals".localized)
-                        .font(.system(size: 36, weight: .bold, design: .serif))
-                        .foregroundStyle(.white)
-                    
-                    Text("What you can control, improve".localized)
-                        .font(.body)
-                        .foregroundStyle(.white.opacity(0.8))
-                }
-                .padding(.top, 40)
-                
-                // Goals List
-                if goalManager.goals.isEmpty {
-                    EmptyGoalsView()
-                        .padding(.horizontal, 20)
-                } else {
-                    ForEach(goalManager.goals) { goal in
-                        GoalCard(goal: goal, goalManager: goalManager)
-                            .padding(.horizontal, 20)
-                    }
-                }
-                
-                // Add Goal Button
-                Button(action: { showingAddGoalSheet = true }) {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Add New Goal".localized)
-                            .bold()
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue.opacity(0.8))
-                    .foregroundColor(.white)
-                    .cornerRadius(15)
-                }
-                .padding(.horizontal, 20)
-                .padding(.top, 10)
-                
-                Spacer(minLength: 150)
-            }
+    var body: some View {
+        HStack {
+            Image(systemName: icon)
+                .font(.title2)
+                .foregroundColor(color)
+            
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.white)
+            
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .foregroundColor(.white.opacity(0.6))
         }
-    }
-    
-    private var stoicHabitsView: some View {
-        ScrollView {
-            VStack(spacing: 25) {
-                // Header
-                VStack(spacing: 10) {
-                    Text("7 Stoic Habits".localized)
-                        .font(.system(size: 36, weight: .bold, design: .serif))
-                        .foregroundStyle(.white)
-                    
-                    Text("Ancient wisdom for modern effectiveness".localized)
-                        .font(.body)
-                        .foregroundStyle(.white.opacity(0.8))
-                        .italic()
-                }
-                .padding(.top, 40)
-                
-                // Habits List
-                ForEach(StoicPrinciple.stoicHabits) { principle in
-                    StoicHabitCard(principle: principle)
-                        .padding(.horizontal, 20)
-                }
-                
-                // Weekly Review Prompt
-                VStack(spacing: 15) {
-                    Text("Weekly Stoic Review".localized)
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(.white)
-                    
-                    Text("Take time each week to reflect on your progress and alignment with Stoic principles.")
-                        .font(.body)
-                        .foregroundColor(.white.opacity(0.8))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 20)
-                    
-                    Button("Start Weekly Review") {
-                        showingWeeklyReviewSheet = true
-                    }
-                    .padding()
-                    .background(Color.orange.opacity(0.8))
-                    .foregroundColor(.white)
-                    .cornerRadius(15)
-                }
-                .padding()
-                .background(.ultraThinMaterial)
-                .cornerRadius(20)
-                .padding(.horizontal, 20)
-                .padding(.top, 10)
-                
-                Spacer(minLength: 150)
-            }
-        }
+        .padding()
+        .background(.ultraThinMaterial)
+        .cornerRadius(15)
     }
 }
 
-// MARK: - Supporting Views
-struct GoalsTabBar: View {
-    @Binding var selectedTab: Int
+struct GoalsListView: View {
+    @ObservedObject var goalManager: GoalManager
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        HStack(spacing: 0) {
-            ForEach(0..<3) { index in
-                Button(action: { withAnimation { selectedTab = index } }) {
-                    VStack(spacing: 4) {
-                        Image(systemName: tabIcon(for: index))
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [Color.black, Color.gray]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+            
+            ScrollView {
+                VStack(spacing: 20) {
+                    // Header avec bouton retour
+                    HStack {
+                        Button(action: { dismiss() }) {
+                            Image(systemName: "chevron.left")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .padding()
+                        }
+                        
+                        Spacer()
+                        
+                        Text("Your Stoic Goals".localized)
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                        
+                        // Espace vide pour alignement
+                        Image(systemName: "chevron.left")
                             .font(.title2)
-                        Text(tabTitle(for: index))
-                            .font(.caption)
+                            .foregroundColor(.clear)
+                            .padding()
                     }
-                    .foregroundColor(selectedTab == index ? .white : .white.opacity(0.6))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 10)
-                    .background(selectedTab == index ? Color.white.opacity(0.2) : Color.clear)
+                    .padding(.top, 20)
+                    
+                    // Liste des objectifs (copie de ta vue existante)
+                    if goalManager.goals.isEmpty {
+                        EmptyGoalsView()
+                            .padding(.horizontal, 20)
+                    } else {
+                        ForEach(goalManager.goals) { goal in
+                            GoalCard(goal: goal, goalManager: goalManager)
+                                .padding(.horizontal, 20)
+                        }
+                    }
+                    
+                    // Bouton pour ajouter un objectif
+                    NavigationLink {
+                        AddGoalView(goalManager: goalManager)
+                    } label: {
+                        HStack {
+                            Image(systemName: "plus.circle.fill")
+                            Text("Add New Goal".localized)
+                                .bold()
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue.opacity(0.8))
+                        .foregroundColor(.white)
+                        .cornerRadius(15)
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 10)
+                    
+                    Spacer(minLength: 50)
                 }
             }
         }
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 25))
-        .padding(.horizontal, 20)
-        .padding(.bottom, 20)
-    }
-    
-    private func tabIcon(for index: Int) -> String {
-        switch index {
-        case 0: return "house.fill"
-        case 1: return "target"
-        case 2: return "brain.head.profile"
-        default: return "circle"
-        }
-    }
-    
-    private func tabTitle(for index: Int) -> String {
-        switch index {
-        case 0: return "Home".localized
-        case 1: return "Goals".localized
-        case 2: return "Habits".localized
-        default: return ""
-        }
+        .navigationBarHidden(true)
     }
 }
+
+
+struct StoicHabitsListView: View {
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                gradient: Gradient(colors: [Color.black, Color.gray]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+            
+            ScrollView {
+                VStack(spacing: 25) {
+                    // Header avec bouton retour
+                    HStack {
+                        Button(action: { dismiss() }) {
+                            Image(systemName: "chevron.left")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                                .padding()
+                        }
+                        
+                        Spacer()
+                        
+                        Text("7 Stoic Habits".localized)
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.left")
+                            .font(.title2)
+                            .foregroundColor(.clear)
+                            .padding()
+                    }
+                    .padding(.top, 20)
+                    
+                    // Liste des habitudes
+                    ForEach(StoicPrinciple.stoicHabits) { principle in
+                        StoicHabitCard(principle: principle)
+                            .padding(.horizontal, 20)
+                    }
+                    
+                    // Optionnel : Bouton pour revue hebdomadaire
+                    Button {
+                        // Tu peux ajouter une navigation ici si tu veux
+                    } label: {
+                        Text("Start Weekly Review")
+                            .padding()
+                            .background(Color.orange.opacity(0.8))
+                            .foregroundColor(.white)
+                            .cornerRadius(15)
+                    }
+                    .padding(.top, 10)
+                    
+                    Spacer(minLength: 50)
+                }
+            }
+        }
+        .navigationBarHidden(true)
+    }
+}
+
+//// MARK: - View Components
+//extension GoalsView {
+////    private var mainInspirationView: some View {
+////        ScrollView {
+////            VStack(spacing: 30) {
+////                // Header
+////                VStack(spacing: 10) {
+////                    Text("Stoic Goals")
+////                        .font(.system(size: 48, weight: .heavy, design: .serif))
+////                        .foregroundStyle(.white)
+////                        .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 2)
+////                    
+////                    Text("Wisdom through intentional action".localized)
+////                        .font(.title3)
+////                        .foregroundStyle(.white.opacity(0.9))
+////                        .italic()
+////                }
+////                .padding(.top, 40)
+////                
+////                // Quick Stats
+////                HStack(spacing: 20) {
+////                    StatsCard(
+////                        value: "\(goalManager.completedGoalsCount)",
+////                        label: "Completed",
+////                        icon: "checkmark.circle.fill",
+////                        color: .green
+////                    )
+////                    
+////                    StatsCard(
+////                        value: "\(Int(goalManager.averageProgress * 100))%",
+////                        label: "Progress",
+////                        icon: "chart.line.uptrend.xyaxis",
+////                        color: .blue
+////                    )
+////                    
+////                    StatsCard(
+////                        value: "\(goalManager.goals.count)",
+////                        label: "Active",
+////                        icon: "target",
+////                        color: .orange
+////                    )
+////                }
+////                .padding(.horizontal)
+////                
+////                // Mindful Days Counter (from your original)
+//////                VStack {
+//////                    Text("\(daysPracticed)")
+//////                        .font(.system(size: 80, weight: .bold, design: .serif))
+//////                        .foregroundStyle(.white)
+//////                    
+//////                    Text("Days lived mindfully".localized)
+//////                        .font(.headline)
+//////                        .foregroundStyle(.white.opacity(0.8))
+//////                        .shadow(radius: 3)
+//////                }
+//////                .padding(30)
+//////                .background(.ultraThinMaterial)
+//////                .clipShape(RoundedRectangle(cornerRadius: 30))
+//////                .padding(.horizontal, 20)
+//////                .onTapGesture {
+//////                    if canIncrementCounter() {
+//////                        markDayAsMindful()
+//////                    }
+//////                }
+////                
+////                // Quick Actions
+////                VStack(spacing: 15) {
+////                    ActionButton(
+////                        title: "Set New Goal".localized,
+////                        icon: "plus.circle.fill",
+////                        color: .blue,
+////                        action: {
+////                            selectedTab = 1
+////                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+////                                showingAddGoalSheet = true
+////                            }
+////                        }
+////                    )
+////                    
+////                    ActionButton(
+////                        title: "Weekly review".localized,
+////                        icon: "quote.bubble.fill",
+////                        color: .purple,
+////                        action:  { showingWeeklyReviewSheet = true }
+////                    )
+////                    
+////                    ActionButton(
+////                        title: "Stoic Habits".localized,
+////                        icon: "brain.head.profile",
+////                        color: .green,
+////                        action: { selectedTab = 2 }
+////                    )
+////                }
+////                .padding(.horizontal, 20)
+////                
+////                // Recent Goals Preview
+////                if !goalManager.goals.isEmpty {
+////                    VStack(alignment: .leading, spacing: 15) {
+////                        HStack {
+////                            Text("Recent Goals")
+////                                .font(.title2)
+////                                .bold()
+////                                .foregroundColor(.white)
+////                            
+////                            Spacer()
+////                            
+////                            Button("See All") {
+////                                selectedTab = 1
+////                            }
+////                            .foregroundColor(.blue)
+////                        }
+////                        .padding(.horizontal, 20)
+////                        
+////                        ScrollView(.horizontal, showsIndicators: false) {
+////                            HStack(spacing: 15) {
+////                                ForEach(goalManager.goals.prefix(3)) { goal in
+////                                    GoalPreviewCard(goal: goal)
+////                                }
+////                            }
+////                            .padding(.horizontal, 20)
+////                        }
+////                    }
+////                }
+////            }
+////        }
+////    }
+//    
+//    private var goalsListView: some View {
+//        ScrollView {
+//            VStack(spacing: 20) {
+//                // Header
+//                VStack(spacing: 10) {
+//                    Text("Your Stoic Goals".localized)
+//                        .font(.system(size: 36, weight: .bold, design: .serif))
+//                        .foregroundStyle(.white)
+//                    
+//                    Text("What you can control, improve".localized)
+//                        .font(.body)
+//                        .foregroundStyle(.white.opacity(0.8))
+//                }
+//                .padding(.top, 40)
+//                
+//                // Goals List
+//                if goalManager.goals.isEmpty {
+//                    EmptyGoalsView()
+//                        .padding(.horizontal, 20)
+//                } else {
+//                    ForEach(goalManager.goals) { goal in
+//                        GoalCard(goal: goal, goalManager: goalManager)
+//                            .padding(.horizontal, 20)
+//                    }
+//                }
+//                
+//                // Add Goal Button
+//                Button(action: { showingAddGoalSheet = true }) {
+//                    HStack {
+//                        Image(systemName: "plus.circle.fill")
+//                        Text("Add New Goal".localized)
+//                            .bold()
+//                    }
+//                    .padding()
+//                    .frame(maxWidth: .infinity)
+//                    .background(Color.blue.opacity(0.8))
+//                    .foregroundColor(.white)
+//                    .cornerRadius(15)
+//                }
+//                .padding(.horizontal, 20)
+//                .padding(.top, 10)
+//                
+//                Spacer(minLength: 150)
+//            }
+//        }
+//    }
+//    
+//    private var stoicHabitsView: some View {
+//        ScrollView {
+//            VStack(spacing: 25) {
+//                // Header
+//                VStack(spacing: 10) {
+//                    Text("7 Stoic Habits".localized)
+//                        .font(.system(size: 36, weight: .bold, design: .serif))
+//                        .foregroundStyle(.white)
+//                    
+//                    Text("Ancient wisdom for modern effectiveness".localized)
+//                        .font(.body)
+//                        .foregroundStyle(.white.opacity(0.8))
+//                        .italic()
+//                }
+//                .padding(.top, 40)
+//                
+//                // Habits List
+//                ForEach(StoicPrinciple.stoicHabits) { principle in
+//                    StoicHabitCard(principle: principle)
+//                        .padding(.horizontal, 20)
+//                }
+//                
+//                // Weekly Review Prompt
+//                VStack(spacing: 15) {
+//                    Text("Weekly Stoic Review".localized)
+//                        .font(.title2)
+//                        .bold()
+//                        .foregroundColor(.white)
+//                    
+//                    Text("Take time each week to reflect on your progress and alignment with Stoic principles.")
+//                        .font(.body)
+//                        .foregroundColor(.white.opacity(0.8))
+//                        .multilineTextAlignment(.center)
+//                        .padding(.horizontal, 20)
+//                    
+//                    Button("Start Weekly Review") {
+//                        showingWeeklyReviewSheet = true
+//                    }
+//                    .padding()
+//                    .background(Color.orange.opacity(0.8))
+//                    .foregroundColor(.white)
+//                    .cornerRadius(15)
+//                }
+//                .padding()
+//                .background(.ultraThinMaterial)
+//                .cornerRadius(20)
+//                .padding(.horizontal, 20)
+//                .padding(.top, 10)
+//                
+//                Spacer(minLength: 150)
+//            }
+//        }
+//    }
+//}
+
+//// MARK: - Supporting Views
+//struct GoalsTabBar: View {
+//    @Binding var selectedTab: Int
+//    
+//    var body: some View {
+//        HStack(spacing: 0) {
+//            ForEach(0..<3) { index in
+//                Button(action: { withAnimation { selectedTab = index } }) {
+//                    VStack(spacing: 4) {
+//                        Image(systemName: tabIcon(for: index))
+//                            .font(.title2)
+//                        Text(tabTitle(for: index))
+//                            .font(.caption)
+//                    }
+//                    .foregroundColor(selectedTab == index ? .white : .white.opacity(0.6))
+//                    .frame(maxWidth: .infinity)
+//                    .padding(.vertical, 10)
+//                    .background(selectedTab == index ? Color.white.opacity(0.2) : Color.clear)
+//                }
+//            }
+//        }
+//        .background(.ultraThinMaterial)
+//        .clipShape(RoundedRectangle(cornerRadius: 25))
+//        .padding(.horizontal, 20)
+//        .padding(.bottom, 20)
+//    }
+//    
+//    private func tabIcon(for index: Int) -> String {
+//        switch index {
+//        case 0: return "house.fill"
+//        case 1: return "target"
+//        case 2: return "brain.head.profile"
+//        default: return "circle"
+//        }
+//    }
+//    
+//    private func tabTitle(for index: Int) -> String {
+//        switch index {
+//        case 0: return "Home".localized
+//        case 1: return "Goals".localized
+//        case 2: return "Habits".localized
+//        default: return ""
+//        }
+//    }
+//}
 
 struct StatsCard: View {
     let value: String
