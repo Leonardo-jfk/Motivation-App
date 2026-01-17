@@ -249,3 +249,88 @@
 "• Open windows at night" = "• Ouvrez les fenêtres la nuit";
 "• Reduce heating your home" = "• Réduisez le chauffage de votre maison";
 "• Wear appropriate wool/sweaters instead of heating" = "• Portez de la laine/pulls appropriés au lieu de chauffer";
+// GoalsView
+    "Stoic Goals" = "Objectifs Stoïques";
+    "Wisdom through intentional action" = "Sagesse par l'action intentionnelle";
+    "Completed" = "Terminés";
+    "Progress" = "En Cours";
+    "Active" = "Actifs";
+    "Your Goals" = "Tes Objectifs";
+    "Weekly review" = "Revue Hebdomadaire";
+    "Successful Habits" = "Habitudes de Succès";
+    "Recent Goals" = "Objectifs Récents";
+    "See All" = "Voir Tout";
+    "No goals yet" = "Aucun objectif encore";
+    "Add New Goal" = "Ajouter un Nouvel Objectif";
+    
+    // ChallengeView
+    "Challenges List" = "Liste des Défis";
+    "Your Progress" = "Ton Progrès";
+    "Completed" = "Terminés";
+    "In Progress" = "En Cours";
+    "Available" = "Disponibles";
+    "Daily reflection" = "Réflexion quotidienne";
+    "Get back the focus" = "Retrouver la concentration";
+    "Mindfulness" = "Pleine conscience";
+    "30 days challenge" = "Défi de 30 jours";
+    "Discipline" = "Discipline";
+    "Self-awareness" = "Conscience de soi";
+    "Question your desire" = "Questionne ton désir";
+    "Do what matters" = "Fais ce qui compte";
+    "Challenge Description" = "Description du Défi";
+    "Daily Task" = "Tâche Quotidienne";
+    "Mark Today as Completed" = "Marquer Aujourd'hui comme Terminé";
+    "Complete Entire Challenge" = "Terminer le Défi Complet";
+    "Start Challenge" = "Commencer le Défi";
+    "Restart Challenge" = "Redémarrer le Défi";
+    "Completed Today ✓" = "Terminé Aujourd'hui ✓";
+    
+    // Goal Categories
+    "Character & Virtue" = "Caractère et Vertu";
+    "Career & Contribution" = "Carrière et Contribution";
+    "Health & Discipline" = "Santé et Discipline";
+    "Relationships" = "Relations";
+    "Learning & Wisdom" = "Apprentissage et Sagesse";
+    "Financial Wisdom" = "Sagesse Financière";
+    "Legacy & Impact" = "Héritage et Impact";
+    
+    // Priority Levels
+    "Low" = "Basse";
+    "Medium" = "Moyenne";
+    "High" = "Haute";
+    "Critical" = "Critique";
+    
+    // Actions générales
+    "Save" = "Enregistrer";
+    "Cancel" = "Annuler";
+    "Done" = "Terminé";
+    "Close" = "Fermer";
+    "Delete" = "Supprimer";
+    "Edit" = "Modifier";
+    "Back" = "Retour";
+    
+    // Formulaires
+    "What do you want to achieve?" = "Que veux-tu accomplir ?";
+    "Description (optional)" = "Description (optionnelle)";
+    "Target Date" = "Date Cible";
+    "Daily Stoic Action" = "Action Stoïque Quotidienne";
+    "What will you do today to move forward?" = "Que feras-tu aujourd'hui pour avancer ?";
+    "Goal Details" = "Détails de l'Objectif";
+    "Category" = "Catégorie";
+    "Priority & Timeline" = "Priorité et Calendrier";
+    "New Stoic Goal" = "Nouvel Objectif Stoïque";
+    
+    // Review
+    "Weekly Stoic Review" = "Revue Stoïque Hebdomadaire";
+    "Take time to reflect on your week through a Stoic lens." = "Prends le temps de réfléchir à ta semaine à travers une lentille stoïque.";
+    "Complete Review" = "Terminer la Revue";
+    "Your reflection..." = "Ta réflexion...";
+    
+    // Guidance
+    "Stoic Guidance" = "Conseil Stoïque";
+    "Reflect on how this applies to your current goals and challenges." = "Réfléchis à la façon dont cela s'applique à tes objectifs et défis actuels.";
+    
+    // Habitudes
+    "7 Stoic Habits" = "7 Habitudes Stoïques";
+    "Ancient wisdom for modern effectiveness" = "Sagesse ancienne pour une efficacité moderne";
+    "Stoic Action:" = "Action Stoïque :";

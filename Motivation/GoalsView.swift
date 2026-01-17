@@ -63,14 +63,14 @@ enum GoalCategory: String, CaseIterable, Codable {
     
     var stoicQuote: String {
         switch self {
-        case .character: return "Waste no more time arguing what a good man should be. Be one."
-        case .career: return "Whatever you do, do it with excellence."
-        case .health: return "The body is our primary tool. Keep it sharp and ready."
-        case .relationships: return "What is not good for the swarm is not good for the bee."
-        case .learning: return "The mind is not a vessel to be filled but a fire to be kindled."
-        case .financial: return "Wealth consists not in having great possessions, but in having few wants."
-        case .legacy: return "Think of yourself as dead. You have lived your life. Now, take what's left and live it properly."
-        }
+                case .character: return "Waste no more time arguing what a good man should be. Be one.".localized()
+                case .career: return "Whatever you do, do it with excellence.".localized()
+                case .health: return "The body is our primary tool. Keep it sharp and ready.".localized()
+                case .relationships: return "What is not good for the swarm is not good for the bee.".localized()
+                case .learning: return "The mind is not a vessel to be filled but a fire to be kindled.".localized()
+                case .financial: return "Wealth consists not in having great possessions, but in having few wants.".localized()
+                case .legacy: return "Think of yourself as dead. You have lived your life. Now, take what's left and live it properly.".localized()
+                }
     }
 }
 
@@ -100,47 +100,47 @@ struct StoicPrinciple: Identifiable {
     
     static let stoicHabits: [StoicPrinciple] = [
         StoicPrinciple(
-            title: "Be Proactive (The Discipline of Assent)",
-            description: "Between stimulus and response, there is a space. In that space is our power to choose our response.",
-            habitRelation: "Habit 1: Be Proactive",
-            actionStep: "Identify one automatic reaction and consciously choose a different response"
-        ),
-        StoicPrinciple(
-            title: "Begin with the End in Mind (Memento Mori)",
-            description: "Live each day as if it were your last. What would you want to have accomplished? This Stoic practice aligns with habit 2, focusing on what truly matters.",
-            habitRelation: "Habit 2: Begin with the End in Mind",
-            actionStep: "Write your eulogy. What would you want to be remembered for?"
-        ),
-        StoicPrinciple(
-            title: "Put First Things First (Dichotomy of Control)",
-            description: "Focus only on what you can control. Your actions, judgments, and responses. Let go of external outcomes.",
-            habitRelation: "Habit 3: Put First Things First",
-            actionStep: "Create a daily list separating: 1) What you control 2) What you don't"
-        ),
-        StoicPrinciple(
-            title: "Think Win-Win (Sympatheia)",
-            description: "The Stoic concept of interconnectedness. Understand that helping others helps the whole community, which includes yourself.",
-            habitRelation: "Habit 4: Think Win-Win",
-            actionStep: "Identify one relationship where you can create mutual benefit today"
-        ),
-        StoicPrinciple(
-            title: "Seek First to Understand (Objective Judgment)",
-            description: "Practice seeing things as they are, not as you wish them to be. Remove emotional coloring from your perceptions.",
-            habitRelation: "Habit 5: Seek First to Understand, Then to Be Understood",
-            actionStep: "Listen without judgment for 5 minutes to someone you disagree with"
-        ),
-        StoicPrinciple(
-            title: "Synergize (Universal Reason)",
-            description: "Everything in the universe works together according to rational principles. Find harmony in collaboration.",
-            habitRelation: "Habit 6: Synergize",
-            actionStep: "Combine two different skills or perspectives to solve a problem"
-        ),
-        StoicPrinciple(
-            title: "Sharpen the Saw (Morning & Evening Meditation)",
-            description: "Daily practice of morning preparation and evening review - the Stoic disciplines of assent, desire, and action.",
-            habitRelation: "Habit 7: Sharpen the Saw",
-            actionStep: "Create a 10-minute morning ritual of intention setting"
-        )
+                    title: "Be Proactive (The Discipline of Assent)".localized(),
+                    description: "Between stimulus and response, there is a space. In that space is our power to choose our response.".localized(),
+                    habitRelation: "Habit 1: Be Proactive".localized(),
+                    actionStep: "Identify one automatic reaction and consciously choose a different response".localized()
+                ),
+                StoicPrinciple(
+                    title: "Begin with the End in Mind (Memento Mori)".localized(),
+                    description: "Live each day as if it were your last. What would you want to have accomplished? This Stoic practice aligns with habit 2, focusing on what truly matters.".localized(),
+                    habitRelation: "Habit 2: Begin with the End in Mind".localized(),
+                    actionStep: "Write your eulogy. What would you want to be remembered for?".localized()
+                ),
+                StoicPrinciple(
+                    title: "Put First Things First (Dichotomy of Control)".localized(),
+                    description: "Focus only on what you can control. Your actions, judgments, and responses. Let go of external outcomes.".localized(),
+                    habitRelation: "Habit 3: Put First Things First".localized(),
+                    actionStep: "Create a daily list separating: 1) What you control 2) What you don't".localized()
+                ),
+                StoicPrinciple(
+                    title: "Think Win-Win (Sympatheia)".localized(),
+                    description: "The Stoic concept of interconnectedness. Understand that helping others helps the whole community, which includes yourself.".localized(),
+                    habitRelation: "Habit 4: Think Win-Win".localized(),
+                    actionStep: "Identify one relationship where you can create mutual benefit today".localized()
+                ),
+                StoicPrinciple(
+                    title: "Seek First to Understand (Objective Judgment)".localized(),
+                    description: "Practice seeing things as they are, not as you wish them to be. Remove emotional coloring from your perceptions.".localized(),
+                    habitRelation: "Habit 5: Seek First to Understand, Then to Be Understood".localized(),
+                    actionStep: "Listen without judgment for 5 minutes to someone you disagree with".localized()
+                ),
+                StoicPrinciple(
+                    title: "Synergize (Universal Reason)".localized(),
+                    description: "Everything in the universe works together according to rational principles. Find harmony in collaboration.".localized(),
+                    habitRelation: "Habit 6: Synergize".localized(),
+                    actionStep: "Combine two different skills or perspectives to solve a problem".localized()
+                ),
+                StoicPrinciple(
+                    title: "Sharpen the Saw (Morning & Evening Meditation)".localized(),
+                    description: "Daily practice of morning preparation and evening review - the Stoic disciplines of assent, desire, and action.".localized(),
+                    habitRelation: "Habit 7: Sharpen the Saw".localized(),
+                    actionStep: "Create a 10-minute morning ritual of intention setting".localized()
+                )
         
     ]
 }
@@ -269,11 +269,11 @@ struct GoalsView: View {
         AppColorScheme(rawValue: storedScheme) ?? .system
     }
     
-    private let allQuotes: [AppLanguage: [String]] = [
-        .english: stoicGoalQuotesEng,
-        .spanish: stoicGoalQuotesES,
-        .french: stoicGoalQuotesFr
-    ]
+//    private let allQuotes: [AppLanguage: [String]] = [
+//        .english: stoicGoalQuotesEng,
+//        .spanish: stoicGoalQuotesES,
+//        .french: stoicGoalQuotesFr
+//    ]
     
     // MARK: - View States
     @State private var showingAddGoalSheet = false
@@ -303,7 +303,7 @@ struct GoalsView: View {
                     VStack(spacing: 30) {
                         // Header
                         VStack(spacing: 10) {
-                            Text("Stoic Goals")
+                            Text("Stoic Goals".localized)
                                 .font(.system(size: 48, weight: .heavy, design: .serif))
                                 .foregroundStyle(.white)
                                 .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 2)
@@ -319,21 +319,21 @@ struct GoalsView: View {
                         HStack(spacing: 20) {
                             StatsCard(
                                 value: "\(goalManager.completedGoalsCount)",
-                                label: "Completed",
+                                label: "Completed".localized,
                                 icon: "checkmark.circle.fill",
                                 color: colorScheme == .dark ? Color.white : Color.black
                             )
                             
                             StatsCard(
                                 value: "\(Int(goalManager.averageProgress * 100))%",
-                                label: "Progress",
+                                label: "Progress".localized,
                                 icon: "chart.line.uptrend.xyaxis",
                                 color: colorScheme == .dark ? Color.white : Color.black
                             )
                             
                             StatsCard(
                                 value: "\(goalManager.goals.count)",
-                                label: "Active",
+                                label: "Active".localized,
                                 icon: "target",
                                 color: colorScheme == .dark ? Color.white : Color.black
                             )
@@ -384,14 +384,14 @@ struct GoalsView: View {
                         if !goalManager.goals.isEmpty {
                             VStack(alignment: .leading, spacing: 15) {
                                 HStack {
-                                    Text("Recent Goals")
+                                    Text("Recent Goals".localized)
                                         .font(.title2)
                                         .bold()
                                         .foregroundColor(.white)
                                     
                                     Spacer()
                                     
-                                    NavigationLink("See All") {
+                                    NavigationLink("See All".localized) {
                                         GoalsListView(goalManager: goalManager)
                                     }
                                     .foregroundColor(.blue)
@@ -430,27 +430,27 @@ struct GoalsView: View {
         }
     }
     
-    // MARK: - Helper Methods
-    private func canIncrementCounter() -> Bool {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let currentDateString = formatter.string(from: Date())
-        return lastDatePracticed != currentDateString
-    }
-    
-    private func markDayAsMindful() {
-        if canIncrementCounter() {
-            daysPracticed += 1
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            lastDatePracticed = formatter.string(from: Date())
-            
-            // Trigger animation
-            showNinjatoAnimation = true
-            ninjatoPlayback = .playing(.toProgress(1, loopMode: .playOnce))
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        }
-    }
+//    // MARK: - Helper Methods
+//    private func canIncrementCounter() -> Bool {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd"
+//        let currentDateString = formatter.string(from: Date())
+//        return lastDatePracticed != currentDateString
+//    }
+//    
+//    private func markDayAsMindful() {
+//        if canIncrementCounter() {
+//            daysPracticed += 1
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "yyyy-MM-dd"
+//            lastDatePracticed = formatter.string(from: Date())
+//            
+//            // Trigger animation
+//            showNinjatoAnimation = true
+//            ninjatoPlayback = .playing(.toProgress(1, loopMode: .playOnce))
+//            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+//        }
+//    }
 }
 
 struct ActionButtonContent: View {
@@ -464,7 +464,7 @@ struct ActionButtonContent: View {
                 .font(.title2)
                 .foregroundColor(color)
             
-            Text(title)
+            Text(title.localized)
                 .font(.headline)
                 .foregroundColor(.white)
             
@@ -630,7 +630,7 @@ struct StatsCard: View {
                     .foregroundColor(color)
             }
             
-            Text(value)
+            Text(value.localized)
                 .font(.title3)
                 .bold()
                 .foregroundColor(.white)
@@ -659,7 +659,7 @@ struct ActionButton: View {
                     .font(.title2)
                     .foregroundColor(color)
                 
-                Text(title)
+                Text(title.localized)
                     .font(.headline)
                     .foregroundColor(.white)
                 
@@ -685,12 +685,12 @@ struct GoalPreviewCard: View {
                     .foregroundColor(goal.priority.color)
                 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(goal.title)
+                    Text(goal.title.localized)
                         .font(.headline)
                         .foregroundColor(.white)
                         .lineLimit(1)
                     
-                    Text(goal.category.rawValue)
+                    Text(goal.category.rawValue.localized)
                         .font(.caption)
                         .foregroundColor(.white.opacity(0.7))
                 }
@@ -716,7 +716,7 @@ struct GoalPreviewCard: View {
             }
             .frame(height: 4)
             
-            Text("\(Int(goal.progress * 100))% complete")
+            Text("\(Int(goal.progress * 100))% complete".localized)
                 .font(.caption)
                 .foregroundColor(.white.opacity(0.8))
         }
@@ -741,12 +741,12 @@ struct GoalCard: View {
                         .font(.title3)
                     
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(goal.title)
+                        Text(goal.title.localized)
                             .font(.headline)
                             .foregroundColor(.white)
                             .lineLimit(1)
                         
-                        Text(goal.category.rawValue)
+                        Text(goal.category.rawValue.localized)
                             .font(.caption)
                             .foregroundColor(.white.opacity(0.7))
                     }
@@ -763,13 +763,13 @@ struct GoalCard: View {
                 // Progress Bar
                 VStack(alignment: .leading, spacing: 6) {
                     HStack {
-                        Text("\(Int(goal.progress * 100))%")
+                        Text("\(Int(goal.progress * 100))%".localized)
                             .font(.caption)
                             .foregroundColor(.white.opacity(0.8))
                         
                         Spacer()
                         
-                        Text(goal.priority.rawValue)
+                        Text(goal.priority.rawValue.localized)
                             .font(.caption)
                             .foregroundColor(goal.priority.color)
                             .padding(.horizontal, 8)
@@ -826,10 +826,7 @@ struct EmptyGoalsView: View {
                     .bold()
                     .foregroundColor(.white)
                 
-                Text("""
-                "First say to yourself what you would be; 
-                and then do what you have to do."
-                """)
+                Text("First say to yourself what you would be and then do what you have to do".localized)
                 .font(.body)
                 .italic()
                 .foregroundColor(.white.opacity(0.8))
@@ -858,7 +855,7 @@ struct StoicHabitCard: View {
                         .foregroundColor(.white.opacity(0.7))
                         .bold()
                     
-                    Text(principle.title)
+                    Text(principle.title.localized)
                         .font(.headline)
                         .foregroundColor(.white)
                 }
@@ -866,17 +863,17 @@ struct StoicHabitCard: View {
                 Spacer()
             }
             
-            Text(principle.description)
+            Text(principle.description.localized)
                 .font(.body)
                 .foregroundColor(.white.opacity(0.9))
             
             VStack(alignment: .leading, spacing: 8) {
-                Text("Stoic Action:")
+                Text("Stoic Action:".localized)
                     .font(.subheadline)
                     .bold()
                     .foregroundColor(.white)
                 
-                Text(principle.actionStep)
+                Text(principle.actionStep.localized)
                     .font(.body)
                     .foregroundColor(.white.opacity(0.9))
                     .padding()
@@ -890,60 +887,60 @@ struct StoicHabitCard: View {
     }
 }
 
-// MARK: - Quote Data
-let stoicGoalQuotesEng = [
-    "The impediment to action advances action. What stands in the way becomes the way.",
-    "You have power over your mind - not outside events. Realize this, and you will find strength.",
-    "Waste no more time arguing what a good man should be. Be one.",
-    "The happiness of your life depends upon the quality of your thoughts.",
-    "We suffer more often in imagination than in reality.",
-    "He who fears death will never do anything worthy of a living man.",
-    "First say to yourself what you would be; and then do what you have to do.",
-    "No man is free who is not master of himself.",
-    "It's not what happens to you, but how you react to it that matters.",
-    "The soul becomes dyed with the color of its thoughts.",
-    "If it is not right, do not do it. If it is not true, do not say it.",
-    "The best revenge is to be unlike him who performed the injury.",
-    "Receive without pride, let go without attachment.",
-    "When you arise in the morning, think of what a precious privilege it is to be alive.",
-    "Very little is needed to make a happy life; it is all within yourself, in your way of thinking."
-]
-
-let stoicGoalQuotesES = [
-    "El obstáculo para la acción avanza la acción. Lo que se interpone en el camino se convierte en el camino.",
-    "Tienes poder sobre tu mente, no sobre los eventos externos. Date cuenta de esto y encontrarás fuerza.",
-    "No pierdas más tiempo discutiendo cómo debería ser un buen hombre. Sé uno.",
-    "La felicidad de tu vida depende de la calidad de tus pensamientos.",
-    "Sufrimos más a menudo en la imaginación que en la realidad.",
-    "Quien teme a la muerte nunca hará nada digno de un hombre vivo.",
-    "Primero dígase a sí mismo lo que sería; y luego haga lo que tiene que hacer.",
-    "Ningún hombre es libre si no es dueño de sí mismo.",
-    "No es lo que te pasa, sino cómo reaccionas lo que importa.",
-    "El alma se tiñe con el color de sus pensamientos.",
-    "Si no es correcto, no lo hagas. Si no es verdad, no lo digas.",
-    "La mejor venganza es no ser como quien causó la ofensa.",
-    "Recibe sin orgullo, suelta sin apego.",
-    "Cuando te levantes por la mañana, piensa en el precioso privilegio que es estar vivo.",
-    "Muy poco se necesita para hacer una vida feliz; todo está dentro de ti, en tu forma de pensar."
-]
-
-let stoicGoalQuotesFr = [
-    "L'obstacle à l'action fait avancer l'action. Ce qui se dresse sur le chemin devient le chemin.",
-    "Vous avez du pouvoir sur votre esprit - pas sur les événements extérieurs. Réalisez cela et vous trouverez la fuerza.",
-    "Ne perdez plus de temps à discuter de ce qu'un homme bon devrait être. Soyez-en un.",
-    "Le bonheur de votre vie dépend de la qualité de vos pensées.",
-    "Nous souffrons plus souvent dans l'imagination que dans la réalité.",
-    "Celui qui craint la mort ne fera jamais rien digne d'un homme vivant.",
-    "Dites-vous d'abord ce que vous seriez ; puis faites ce que vous avez à faire.",
-    "Aucun homme n'est libre s'il n'est pas maître de lui-même.",
-    "Ce n'est pas ce qui vous arrive, mais comment vous y réagissez qui compte.",
-    "L'âme se teint de la couleur de ses pensées.",
-    "Si ce n'est pas juste, ne le faites pas. Si ce n'est pas vrai, ne le dites pas.",
-    "La meilleure vengeance est de ne pas être comme celui qui a commis l'injure.",
-    "Recevez sans fierté, laissez aller sans attachement.",
-    "Quand vous vous levez le matin, pensez au précieux privilège qu'est d'être en vie.",
-    "Très peu est nécessaire pour faire une vie heureuse ; tout est en vous, dans votre façon de penser."
-]
+//// MARK: - Quote Data
+//let stoicGoalQuotesEng = [
+//    "The impediment to action advances action. What stands in the way becomes the way.",
+//    "You have power over your mind - not outside events. Realize this, and you will find strength.",
+//    "Waste no more time arguing what a good man should be. Be one.",
+//    "The happiness of your life depends upon the quality of your thoughts.",
+//    "We suffer more often in imagination than in reality.",
+//    "He who fears death will never do anything worthy of a living man.",
+//    "First say to yourself what you would be; and then do what you have to do.",
+//    "No man is free who is not master of himself.",
+//    "It's not what happens to you, but how you react to it that matters.",
+//    "The soul becomes dyed with the color of its thoughts.",
+//    "If it is not right, do not do it. If it is not true, do not say it.",
+//    "The best revenge is to be unlike him who performed the injury.",
+//    "Receive without pride, let go without attachment.",
+//    "When you arise in the morning, think of what a precious privilege it is to be alive.",
+//    "Very little is needed to make a happy life; it is all within yourself, in your way of thinking."
+//]
+//
+//let stoicGoalQuotesES = [
+//    "El obstáculo para la acción avanza la acción. Lo que se interpone en el camino se convierte en el camino.",
+//    "Tienes poder sobre tu mente, no sobre los eventos externos. Date cuenta de esto y encontrarás fuerza.",
+//    "No pierdas más tiempo discutiendo cómo debería ser un buen hombre. Sé uno.",
+//    "La felicidad de tu vida depende de la calidad de tus pensamientos.",
+//    "Sufrimos más a menudo en la imaginación que en la realidad.",
+//    "Quien teme a la muerte nunca hará nada digno de un hombre vivo.",
+//    "Primero dígase a sí mismo lo que sería; y luego haga lo que tiene que hacer.",
+//    "Ningún hombre es libre si no es dueño de sí mismo.",
+//    "No es lo que te pasa, sino cómo reaccionas lo que importa.",
+//    "El alma se tiñe con el color de sus pensamientos.",
+//    "Si no es correcto, no lo hagas. Si no es verdad, no lo digas.",
+//    "La mejor venganza es no ser como quien causó la ofensa.",
+//    "Recibe sin orgullo, suelta sin apego.",
+//    "Cuando te levantes por la mañana, piensa en el precioso privilegio que es estar vivo.",
+//    "Muy poco se necesita para hacer una vida feliz; todo está dentro de ti, en tu forma de pensar."
+//]
+//
+//let stoicGoalQuotesFr = [
+//    "L'obstacle à l'action fait avancer l'action. Ce qui se dresse sur le chemin devient le chemin.",
+//    "Vous avez du pouvoir sur votre esprit - pas sur les événements extérieurs. Réalisez cela et vous trouverez la fuerza.",
+//    "Ne perdez plus de temps à discuter de ce qu'un homme bon devrait être. Soyez-en un.",
+//    "Le bonheur de votre vie dépend de la qualité de vos pensées.",
+//    "Nous souffrons plus souvent dans l'imagination que dans la réalité.",
+//    "Celui qui craint la mort ne fera jamais rien digne d'un homme vivant.",
+//    "Dites-vous d'abord ce que vous seriez ; puis faites ce que vous avez à faire.",
+//    "Aucun homme n'est libre s'il n'est pas maître de lui-même.",
+//    "Ce n'est pas ce qui vous arrive, mais comment vous y réagissez qui compte.",
+//    "L'âme se teint de la couleur de ses pensées.",
+//    "Si ce n'est pas juste, ne le faites pas. Si ce n'est pas vrai, ne le dites pas.",
+//    "La meilleure vengeance est de ne pas être comme celui qui a commis l'injure.",
+//    "Recevez sans fierté, laissez aller sans attachement.",
+//    "Quand vous vous levez le matin, pensez au précieux privilège qu'est d'être en vie.",
+//    "Très peu est nécessaire pour faire une vie heureuse ; tout est en vous, dans votre façon de penser."
+//]
 
 // MARK: - Additional Views (Add these in the same file or separate files)
 
@@ -961,13 +958,13 @@ struct AddGoalView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Goal Details")) {
-                    TextField("What do you want to achieve?", text: $title)
-                    TextField("Description (optional)", text: $description, axis: .vertical)
+                Section(header: Text("Goal Details".localized)) {
+                    TextField("What do you want to achieve?".localized, text: $title)
+                    TextField("Description (optional)".localized, text: $description, axis: .vertical)
                         .lineLimit(3...6)
                 }
                 
-                Section(header: Text("Category")) {
+                Section(header: Text("Category".localized)) {
                     Picker("Category", selection: $selectedCategory) {
                         ForEach(GoalCategory.allCases, id: \.self) { category in
                             Label(category.rawValue, systemImage: category.icon)
@@ -975,14 +972,14 @@ struct AddGoalView: View {
                         }
                     }
                     
-                    Text(selectedCategory.stoicQuote)
+                    Text(selectedCategory.stoicQuote.localized)
                         .font(.caption)
                         .foregroundColor(.gray)
                         .italic()
                 }
                 
-                Section(header: Text("Priority & Timeline")) {
-                    Picker("Priority", selection: $selectedPriority) {
+                Section(header: Text("Priority & Timeline".localized)) {
+                    Picker("Priority".localized, selection: $selectedPriority) {
                         ForEach(PriorityLevel.allCases, id: \.self) { priority in
                             Text(priority.rawValue)
                                 .tag(priority)
@@ -990,24 +987,24 @@ struct AddGoalView: View {
                     }
                     .pickerStyle(.segmented)
                     
-                    DatePicker("Target Date", selection: $targetDate, in: Date()..., displayedComponents: .date)
+                    DatePicker("Target Date".localized, selection: $targetDate, in: Date()..., displayedComponents: .date)
                 }
                 
-                Section(header: Text("Daily Stoic Action")) {
-                    TextField("What will you do today to move forward?", text: $dailyAction)
+                Section(header: Text("Daily Stoic Action".localized)) {
+                    TextField("What will you do today to move forward?".localized, text: $dailyAction)
                 }
             }
-            .navigationTitle("New Stoic Goal")
+            .navigationTitle("New Stoic Goal".localized)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button("Cancel".localized) {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
+                    Button("Save".localized) {
                         saveGoal()
                     }
                     .disabled(title.isEmpty)
@@ -1060,14 +1057,14 @@ struct GoalDetailView: View {
                                     .font(.title)
                                     .bold()
                                 
-                                Text(goal.category.rawValue)
+                                Text(goal.category.rawValue.localized)
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                             }
                         }
                         
                         if !goal.description.isEmpty {
-                            Text(goal.description)
+                            Text(goal.description.localized)
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -1075,19 +1072,19 @@ struct GoalDetailView: View {
                     
                     // Progress Section
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Progress")
+                        Text("Progress".localized)
                             .font(.headline)
                         
                         VStack(spacing: 10) {
                             HStack {
-                                Text("\(Int(progress * 100))%")
+                                Text("\(Int(progress * 100))%".localized)
                                     .font(.title2)
                                     .bold()
                                 
                                 Spacer()
                                 
                                 if goal.isCompleted {
-                                    Label("Completed", systemImage: "checkmark.circle.fill")
+                                    Label("Completed".localized, systemImage: "checkmark.circle.fill")
                                         .foregroundColor(.green)
                                 }
                             }
@@ -1115,7 +1112,7 @@ struct GoalDetailView: View {
                         }) {
                             HStack {
                                 Spacer()
-                                Label("Mark as Complete", systemImage: "checkmark.circle.fill")
+                                Label("Mark as Complete".localized, systemImage: "checkmark.circle.fill")
                                     .bold()
                                 Spacer()
                             }
@@ -1128,11 +1125,11 @@ struct GoalDetailView: View {
                     }
                 }
             }
-            .navigationTitle("Goal Details")
+            .navigationTitle("Goal Details".localized)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button("Done".localized) {
                         dismiss()
                     }
                 }
@@ -1154,13 +1151,13 @@ struct QuoteSheetView: View {
                         .bold()
                         .padding(.top, 30)
                     
-                    Text(quote)
+                    Text(quote.localized)
                         .font(.title2)
                         .italic()
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 30)
                     
-                    Text("Reflect on how this applies to your current goals and challenges.")
+                    Text("Reflect on how this applies to your current goals and challenges".localized)
                         .font(.body)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -1172,7 +1169,7 @@ struct QuoteSheetView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Close") {
+                    Button("Close".localized) {
                         isPresented = false
                     }
                 }
@@ -1186,13 +1183,13 @@ struct WeeklyReviewView: View {
     @ObservedObject var goalManager: GoalManager
     
     private let reviewQuestions = [
-        "What did I accomplish this week that aligns with Stoic virtues?",
-        "Where did I let external events disturb my inner peace?",
-        "What am I most grateful for this week?",
-        "What challenges did I face, and how did I respond?",
-        "What can I improve for next week?",
-        "Did I help others without expecting anything in return?",
-        "What did I learn about myself this week?"
+        "What did I accomplish this week that aligns with Stoic virtues?".localized(),
+                "Where did I let external events disturb my inner peace?".localized(),
+                "What am I most grateful for this week?".localized(),
+                "What challenges did I face, and how did I respond?".localized(),
+                "What can I improve for next week?".localized(),
+                "Did I help others without expecting anything in return?".localized(),
+                "What did I learn about myself this week?".localized()
     ]
     
     var body: some View {
@@ -1204,7 +1201,7 @@ struct WeeklyReviewView: View {
                         .bold()
                         .padding(.top, 30)
                     
-                    Text("Take time to reflect on your week through a Stoic lens.")
+                    Text("Take time to reflect on your week through a Stoic lens".localized)
                         .font(.body)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -1215,7 +1212,7 @@ struct WeeklyReviewView: View {
                             Text("\(index + 1). \(question.localized)")
                                 .font(.headline)
                             
-                            TextField("Your reflection...", text: Binding(
+                            TextField("Your reflection...".localized, text: Binding(
                                 get: { goalManager.weeklyReviewAnswers.indices.contains(index) ? goalManager.weeklyReviewAnswers[index] : "" },
                                 set: { newValue in
                                     if goalManager.weeklyReviewAnswers.indices.contains(index) {
@@ -1233,7 +1230,7 @@ struct WeeklyReviewView: View {
                         .padding(.horizontal, 20)
                     }
                     
-                    Button("Complete Review") {
+                    Button("Complete Review".localized) {
                         dismiss()
                     }
                     .padding()
