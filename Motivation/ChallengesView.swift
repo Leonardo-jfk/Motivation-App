@@ -11,237 +11,7 @@ import Lottie
 import Combine
 
 
-//
-//struct ChallengeCard<Destination: View>: View {
-//    let title: String
-//    let subtitle: String
-//    let icon: String
-//    let progress: ChallengeProgress? // Mantenemos esto como let
-//    let destination: Destination
-//    
-//    // Cambia las propiedades computadas a @State o usa @State para evitar mutación concurrente
-//    @State private var circleOpacity: Double = 0.8
-////    @State private var progressText: String = ""
-//    @State private var borderColor: Color = .clear
-//    @State private var borderWidth: CGFloat = 0
-//    
-//    init(title: String, subtitle: String, icon: String, progress: ChallengeProgress?, destination: Destination) {
-//        self.title = title
-//        self.subtitle = subtitle
-//        self.icon = icon
-//        self.progress = progress
-//        self.destination = destination
-//        
-//        // Inicializamos los valores en el init
-//        _borderColor = State(initialValue: Self.calculateBorderColor(progress: progress))
-//        _borderWidth = State(initialValue: Self.calculateBorderWidth(progress: progress))
-//    }
-//    
-//    // Métodos estáticos para calcular los valores
-//    private static func calculateBorderColor(progress: ChallengeProgress?) -> Color {
-//        guard let progress = progress else { return .clear }
-//        
-//        if progress.isCompleted {
-//            return .gray.opacity(0.8)
-//        } else if progress.isStarted {
-//            return .gray.opacity(0.5)
-//        } else {
-//            return .clear
-//        }
-//    }
-//    
-//    private static func calculateBorderWidth(progress: ChallengeProgress?) -> CGFloat {
-//        guard let progress = progress else { return 0 }
-//        
-//        if progress.isCompleted {
-//            return 5
-//        } else if progress.isStarted {
-//            return 2
-//        } else {
-//            return 0
-//        }
-//    }
-//    
-//    var body: some View {
-//        NavigationLink(destination: destination) {
-//            ZStack {
-//                // Fondo en escala de grises
-//                RoundedRectangle(cornerRadius: 20)
-//                    .fill(
-//                        LinearGradient(
-//                            gradient: Gradient(colors: [
-//                                Color.black.opacity(0.7),
-//                                Color.gray.opacity(0.5)
-//                            ]),
-//                            startPoint: .topLeading,
-//                            endPoint: .bottomTrailing
-//                        )
-//                    )
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 20)
-//                            .stroke(borderColor, lineWidth: borderWidth)
-//                    )
-//                    .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 5)
-//                
-//                VStack(spacing: 12) {
-//                    // Icono
-//                    Image(systemName: icon)
-//                        .font(.system(size: 30))
-//                        .foregroundColor(.white)
-//                        .frame(width: 60, height: 60)
-//                        .background(
-//                            Circle()
-//                                .fill(Color.white.opacity(0.2))
-//                        )
-//                    
-//                    // Texto
-//                    VStack(spacing: 4) {
-//                        Text(title)
-//                            .font(.headline)
-//                            .bold()
-//                            .foregroundColor(.white)
-//                            .multilineTextAlignment(.center)
-//                            .lineLimit(1)
-//                            .minimumScaleFactor(0.8)
-//                        
-//                        Text(subtitle)
-//                            .font(.caption)
-//                            .foregroundColor(.white.opacity(0.8))
-//                            .multilineTextAlignment(.center)
-//                            .lineLimit(2)
-//                    }
-//                    .padding(.horizontal, 8)
-//                }
-//                .padding(.vertical, 15)
-//            }
-//            .frame(width: 160, height: 160)
-//        }
-//        .buttonStyle(PlainButtonStyle())
-//    }
-//}
 
-
-//struct ChallengeCard<Destination: View>: View {
-//    let title: String
-//    let subtitle: String
-//    let icon: String
-//    let progress: ChallengeProgress?
-//    let destination: Destination
-//    
-//    // Make these @State so they can update
-//    @State private var borderColor: Color = .clear
-//    @State private var borderWidth: CGFloat = 0
-//    
-//    init(title: String, subtitle: String, icon: String, progress: ChallengeProgress?, destination: Destination) {
-//        self.title = title
-//        self.subtitle = subtitle
-//        self.icon = icon
-//        self.progress = progress
-//        self.destination = destination
-//        
-//        // Initialize with current values
-//        _borderColor = State(initialValue: Self.calculateBorderColor(progress: progress))
-//        _borderWidth = State(initialValue: Self.calculateBorderWidth(progress: progress))
-//    }
-//    
-//    // Métodos estáticos para calcular los valores
-//    private static func calculateBorderColor(progress: ChallengeProgress?) -> Color {
-//        guard let progress = progress else { return .clear }
-//        
-//        if progress.isCompleted {
-//            return .gray.opacity(0.8)
-//        } else if progress.isStarted {
-//            return .gray.opacity(0.5)
-//        } else {
-//            return .clear
-//        }
-//    }
-//    
-//    private static func calculateBorderWidth(progress: ChallengeProgress?) -> CGFloat {
-//        guard let progress = progress else { return 0 }
-//        
-//        if progress.isCompleted {
-//            return 5
-//        } else if progress.isStarted {
-//            return 2
-//        } else {
-//            return 0
-//        }
-//    }
-//    
-//    // Helper to update border when progress changes
-//    private func updateBorder() {
-//        borderColor = Self.calculateBorderColor(progress: progress)
-//        borderWidth = Self.calculateBorderWidth(progress: progress)
-//    }
-//    
-//    var body: some View {
-//        NavigationLink(destination: destination) {
-//            ZStack {
-//                // Fondo en escala de grises
-//                RoundedRectangle(cornerRadius: 20)
-//                    .fill(
-//                        LinearGradient(
-//                            gradient: Gradient(colors: [
-//                                Color.black.opacity(0.7),
-//                                Color.gray.opacity(0.5)
-//                            ]),
-//                            startPoint: .topLeading,
-//                            endPoint: .bottomTrailing
-//                        )
-//                    )
-//                    .overlay(
-//                        RoundedRectangle(cornerRadius: 20)
-//                            .stroke(borderColor, lineWidth: borderWidth)
-//                    )
-//                    .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 5)
-//                
-//                VStack(spacing: 12) {
-//                    // Icono
-//                    Image(systemName: icon)
-//                        .font(.system(size: 30))
-//                        .foregroundColor(.white)
-//                        .frame(width: 60, height: 60)
-//                        .background(
-//                            Circle()
-//                                .fill(Color.white.opacity(0.2))
-//                        )
-//                    
-//                    // Texto
-//                    VStack(spacing: 4) {
-//                        Text(title)
-//                            .font(.headline)
-//                            .bold()
-//                            .foregroundColor(.white)
-//                            .multilineTextAlignment(.center)
-//                            .lineLimit(1)
-//                            .minimumScaleFactor(0.8)
-//                        
-//                        Text(subtitle)
-//                            .font(.caption)
-//                            .foregroundColor(.white.opacity(0.8))
-//                            .multilineTextAlignment(.center)
-//                            .lineLimit(2)
-//                    }
-//                    .padding(.horizontal, 8)
-//                }
-//                .padding(.vertical, 15)
-//            }
-//            .frame(width: 160, height: 160)
-//            // Add animation for smooth border changes
-//            .animation(.easeInOut(duration: 0.3), value: borderColor)
-//            .animation(.easeInOut(duration: 0.3), value: borderWidth)
-//        }
-//        .buttonStyle(PlainButtonStyle())
-//        // Update border when view appears or when progress changes
-//        .onAppear {
-//            updateBorder()
-//        }
-//        .onChange(of: progress) { _ in
-//            updateBorder()
-//        }
-//    }
-//}
 
 struct ChallengeCard<Destination: View>: View {
     let title: String
@@ -710,6 +480,16 @@ struct ChallengeDetailView: View {
         progressManager.canIncrementCounter(for: challengeData.id)
     }
     
+    private var titleFontSize: CGFloat {
+        guard let progress = progress else { return 20 }
+        return !progress.isStarted ? 40 : 20
+    }
+
+    private var iconSize: CGFloat {
+        guard let progress = progress else { return 50 }
+        return !progress.isStarted ? 100 : 50
+    }
+    
     var body: some View {
         ZStack {
             LinearGradient(
@@ -736,29 +516,49 @@ struct ChallengeDetailView: View {
                 ScrollView {
                     VStack(spacing: 25) {
                         // Title and Icon
-                        if let progress = progress, !progress.isStarted {
-                            Text(challengeData.title.localized)
-                                .font(.system(size: 40, weight: .bold))
-                                .foregroundColor(.white)
-                                .multilineTextAlignment(.center)
-                            
-                            Image(systemName: challengeData.icon)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                                .foregroundColor(.white)
-                        } else {
-                            Text(challengeData.title.localized)
-                                .font(.system(size: 20, weight: .bold))
-                                .foregroundColor(.white)
-                                .multilineTextAlignment(.center)
-                            
-                            Image(systemName: challengeData.icon)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 50, height: 50)
-                                .foregroundColor(.white)
-                        }
+//                        if let progress = progress, !progress.isStarted {
+//                            Text(challengeData.title.localized)
+//                                .font(.system(size: titleFontSize, weight: .bold))
+//                                .foregroundColor(.white)
+//                                .multilineTextAlignment(.center)
+//                                .transition(.scale.combined(with: .opacity))
+//                            
+//                            Image(systemName: challengeData.icon)
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: iconSize, height: 100)
+//                                .foregroundColor(.white)
+//                                .transition(.scale.combined(with: .opacity))
+//                        } else {
+//                            Text(challengeData.title.localized)
+//                                .font(.system(size: titleFontSize, weight: .bold))
+//                                .foregroundColor(.white)
+//                                .multilineTextAlignment(.center)
+//                                .transition(.scale.combined(with: .opacity))
+//                            
+//                            Image(systemName: challengeData.icon)
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: iconSize, height: 50)
+//                                .foregroundColor(.white)
+//                                .transition(.scale.combined(with: .opacity))
+//                        }
+                        
+                        
+                        Text(challengeData.title.localized)
+                            .font(.system(size: titleFontSize, weight: .bold))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .animation(.easeInOut(duration: 0.4), value: titleFontSize)
+
+                        Image(systemName: challengeData.icon)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: iconSize, height: iconSize)
+                            .foregroundColor(.white)
+                            .animation(.easeInOut(duration: 0.4), value: iconSize)
+                        
+                        
                         
                         // Description and Tasks
                         VStack(alignment: .leading, spacing: 15) {
