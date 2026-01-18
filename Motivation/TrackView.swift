@@ -177,7 +177,7 @@ struct TrackView: View {
                                         }
                                     }
                                 }) {
-                                    Text(canIncrementCounter() ? "Mark day as mindful".localized : "Return to peace")
+                                    Text(canIncrementCounter() ? "Mark day as mindful".localized : "Return to peace".localized)
                                         .bold()
                                         .padding()
 //                                        .frame(maxWidth: .infinity)
