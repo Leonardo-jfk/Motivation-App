@@ -1037,12 +1037,6 @@ struct AddGoalView: View {
             .navigationTitle("New Stoic Goal".localized)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-//                ToolbarItem(placement: .navigationBarLeading) {
-//                    Button("Cancel".localized) {
-//                        dismiss()
-//                    }
-//                }
-                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save".localized) {
                         saveGoal()
@@ -1131,9 +1125,6 @@ struct GoalDetailView: View {
                             
                             Slider(value: $progress, in: 0...1, step: 0.01)
                                 .accentColor(goal.priority.color)
-//                                .onChange(of: progress) { newValue in
-//                                    goalManager.updateProgress(for: goal.id, progress: newValue)
-//                                }
                                 .onChange(of: progress) { oldValue, newValue in
                                     goalManager.updateProgress(for: goal.id, progress: newValue)
                                 }
