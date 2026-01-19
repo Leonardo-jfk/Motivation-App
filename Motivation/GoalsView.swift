@@ -38,9 +38,19 @@ struct StoicGoal: Identifiable, Codable {
         self.dailyAction = ""
         self.weeklyReview = ""
     }
+    
+//    
+//    var  financialWisdom = "Financial Wisdom".localized()
+//     var legacyImpact = "Legacy & Impact".localized()
+//    
+//    
 }
 
 enum GoalCategory: String, CaseIterable, Codable {
+    
+    
+    
+    
     case character = "Character & Virtue"
     case career = "Career & Contribution"
     case health = "Health & Discipline"
@@ -48,6 +58,32 @@ enum GoalCategory: String, CaseIterable, Codable {
     case learning = "Learning & Wisdom"
     case financial = "Financial Wisdom"
     case legacy = "Legacy & Impact"
+    
+    var displayName: String {
+           switch self {
+           case .character: return NSLocalizedString("Character & Virtue", comment: "")
+           case .career: return NSLocalizedString("Career & Contribution", comment: "")
+           case .health: return NSLocalizedString("Health & Discipline", comment: "")
+           case .relationships: return NSLocalizedString("Relationships", comment: "")
+           case .learning: return NSLocalizedString("Learning & Wisdom", comment: "")
+           case .financial: return NSLocalizedString("Financial Wisdom", comment: "")
+           case .legacy: return NSLocalizedString("Legacy & Impact", comment: "")
+           }
+       }
+//    var displayName: String {
+//            let key: String
+//            switch self {
+//            case .character: key = "Character & Virtue"
+//            case .career: key = "Career & Contribution"
+//            case .health: key = "Health & Discipline"
+//            case .relationships: key = "Relationships"
+//            case .learning: key = "Learning & Wisdom"
+//            case .financial: key = "Financial Wisdom"
+//            case .legacy: key = "Legacy & Impact"
+//            }
+//            return NSLocalizedString(key, comment: "")
+//        }
+
     
     var icon: String {
         switch self {
@@ -731,6 +767,10 @@ struct GoalCard: View {
     let goal: StoicGoal
     @ObservedObject var goalManager: GoalManager
     @State private var showingDetail = false
+//    var dailyLetter:String = "Daily: ".localized
+    var dailyLetter: String {
+        "Daily: ".localized
+    }
     
     var body: some View {
         Button(action: { showingDetail = true }) {
@@ -796,7 +836,7 @@ struct GoalCard: View {
                 }
                 
                 if !goal.dailyAction.isEmpty {
-                    Text("Daily: \(goal.dailyAction)")
+                    Text("\(dailyLetter)\(goal.dailyAction)")
                         .font(.caption)
                         .foregroundColor(.white.opacity(0.8))
                         .lineLimit(2)
@@ -1255,3 +1295,4 @@ struct WeeklyReviewView: View {
 #Preview {
     GoalsView()
 }
+
