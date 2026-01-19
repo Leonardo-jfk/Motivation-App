@@ -541,7 +541,7 @@ struct GoalsListView: View {
                         
                         Spacer()
                         
-                        Text("Your Stoic Goals".localized)
+                        Text("Your Stoic Goals".localized())
                             .font(.title)
                             .bold()
                             .foregroundColor(.white)
@@ -1005,9 +1005,9 @@ struct AddGoalView: View {
                 }
                 
                 Section(header: Text("Category".localized)) {
-                    Picker("Category", selection: $selectedCategory) {
+                    Picker("Category".localized, selection: $selectedCategory) {
                         ForEach(GoalCategory.allCases, id: \.self) { category in
-                            Label(category.rawValue, systemImage: category.icon)
+                            Label(category.rawValue.localized, systemImage: category.icon)
                                 .tag(category)
                         }
                     }
@@ -1021,7 +1021,7 @@ struct AddGoalView: View {
                 Section(header: Text("Priority & Timeline".localized)) {
                     Picker("Priority".localized, selection: $selectedPriority) {
                         ForEach(PriorityLevel.allCases, id: \.self) { priority in
-                            Text(priority.rawValue)
+                            Text(priority.rawValue.localized)
                                 .tag(priority)
                         }
                     }
@@ -1037,11 +1037,11 @@ struct AddGoalView: View {
             .navigationTitle("New Stoic Goal".localized)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel".localized) {
-                        dismiss()
-                    }
-                }
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button("Cancel".localized) {
+//                        dismiss()
+//                    }
+//                }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save".localized) {
