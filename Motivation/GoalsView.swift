@@ -834,7 +834,7 @@ struct GoalCard: View {
                     }
                     .frame(height: 6)
                 }
-                
+//                [clean] i didn't expect the breakpoints to be like this. It can be useful
                 if !goal.dailyAction.isEmpty {
                     Text("\(dailyLetter)\(goal.dailyAction)")
                         .font(.caption)
