@@ -73,4 +73,4 @@ Build and run on an iPhone simulator or physical device.
 
 | Today View | Challenges View | Goals View |
 |------------|----------------|------------|
-| ![Today](photo/readme/HomeView.jpg) | ![Challenges](screenshots/challenges.png) | ![Goals](screenshots/goals.png) |
+| ![Today View](photo/readme/HomeView.jpg){: width="250" } | ![Challenges](screenshots/challenges.png) | ![Goals](screenshots/goals.png) |
