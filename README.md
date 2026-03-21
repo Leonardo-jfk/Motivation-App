@@ -1,4 +1,4 @@
-# 🧘 Motivation
+# 🇨🇭 Motivation 🇨🇭
 
 **Motivation** is an iOS app that helps users cultivate a stoic mindset through daily wisdom, habit tracking, challenges, and intentional goal setting.  
 This project was developed as my first solo iOS project, blending modern development with ancient philosophy.
