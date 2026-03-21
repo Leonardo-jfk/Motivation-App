@@ -53,3 +53,24 @@ Ensure you have the Lottie package dependency installed.
 Build and run on an iPhone simulator or physical device.
 
 “Waste no more time arguing what a good man should be. Be one.” — Marcus Aurelius
+
+
+
+## 🛠️ Tech Stack
+
+| Technology         | Purpose                                      |
+|--------------------|----------------------------------------------|
+| SwiftUI            | Modern declarative UI framework               |
+| Lottie             | Smooth animations and visual engagement       |
+| Combine            | Reactive state management                     |
+| UserDefaults       | Local persistence for user preferences & data |
+| AsyncStorage       | (React Native version)                        |
+| Xcode              | Development environment                       |
+
+---
+
+## 📸 Screenshots
+
+| Today View | Challenges View | Goals View |
+|------------|----------------|------------|
+| ![Today](screenshots/today.png) | ![Challenges](screenshots/challenges.png) | ![Goals](screenshots/goals.png) |
