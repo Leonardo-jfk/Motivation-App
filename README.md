@@ -8,9 +8,9 @@ This project was developed as my first solo iOS project, blending modern develop
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="photo/readme/HomeView.jpg" width="220" alt="Today View">
-  <img src="photo/readme/ChallengesView.jpg" width="220" alt="Challenges View">
-  <img src="photo/readme/GoalsView.jpg" width="220" alt="Goals View">
+  <img src="photo/readme/Collage2.jpg" width="220" alt="Today View">
+  <img src="photo/readme/Collage1.jpg" width="220" alt="Challenges View">
+  <img src="photo/readme/Collage3.jpg" width="220" alt="Goals View">
 </p>
 <p align="center">
   <em>Today View &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Challenges View &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Goals View</em>
