@@ -141,35 +141,10 @@ To run the project in your local environment, follow these steps:
 ## 🙏 Acknowledgments
 
 The Stoic community – for keeping timeless wisdom alive
+
 LottieFiles – for beautiful, free animations
+
 AI tools – for accelerating learning and code structure during this solo journey
 
 ## ⭐ If this project inspires you, consider giving it a star on GitHub!
 
-## 🛠️ Tech Stack
-
-| Technology         | Purpose                                      |
-|--------------------|----------------------------------------------|
-| SwiftUI            | Modern declarative UI framework               |
-| Lottie             | Smooth animations and visual engagement       |
-| Combine            | Reactive state management                     |
-| UserDefaults       | Local persistence for user preferences & data |
-| AsyncStorage       | (React Native version)                        |
-| Xcode              | Development environment                       |
-
----
-
-## 📸 Screenshots
-
-| Today View | Challenges View | Goals View |
-|------------|----------------|------------|
-| ![Today View](photo/readme/HomeView.jpg) | ![Challenges](screenshots/challenges.png) | ![Goals](screenshots/goals.png) |
-
-
-## 📸 Screenshots
-
-<p align="center">
-  <img src="photo/readme/HomeView.jpg" width="30%" alt="Today View">
-  <img src="screenshots/challenges.png" width="30%" alt="Challenges View">
-  <img src="screenshots/goals.png" width="30%" alt="Goals View">
-</p>
