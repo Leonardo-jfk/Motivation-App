@@ -8,6 +8,8 @@ import UserNotifications
 import SwiftUI
 import Combine
 
+import WidgetKit
+
 @MainActor
 final class NotifManager: ObservableObject {
     
@@ -136,5 +138,22 @@ final class NotifManager: ObservableObject {
         let hour = storedHour
         let minute = storedMinute
         sheduleDailyNotification(hour: hour, minute: minute, title: "Your wisdom", body: "\(todaysQuoteText())")
+    }
+    
+    
+}
+// Fichier: NotifManager.swift ou là où vous calculez la citation du jour
+extension NotifManager {
+    func updateWidgetData() {
+        let sharedDefaults = UserDefaults(suiteName: "group.com.tonnom.MotivationApp")
+        let quote = todaysQuoteText() // Votre fonction existante[cite: 1]
+        
+        // Enregistrer la citation
+        sharedDefaults?.set(quote, forKey: "todayQuote")
+        
+        // Indiquer à iOS de recharger le widget
+        #if canImport(WidgetKit)
+        WidgetCenter.shared.reloadAllTimelines()
+        #endif
     }
 }

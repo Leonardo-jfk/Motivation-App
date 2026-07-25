@@ -33,6 +33,10 @@
 		1DFA7C212F041F9600A1D6E5 /* Motivation.entitlements in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA7C202F041F9600A1D6E5 /* Motivation.entitlements */; };
 		1DFA7C222F041F9600A1D6E5 /* Motivation.entitlements in Sources */ = {isa = PBXBuildFile; fileRef = 1DFA7C202F041F9600A1D6E5 /* Motivation.entitlements */; };
 		1DFA7C242F0425F800A1D6E5 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 1DFA7C232F0425F700A1D6E5 /* PrivacyInfo.xcprivacy */; };
+		E43ED16E3015216C008CFF94 /* MotivationWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43ED16D3015216C008CFF94 /* MotivationWidget.swift */; };
+		E43ED17530157A19008CFF94 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43ED17430157A18008CFF94 /* WidgetKit.framework */; };
+		E43ED17730157A19008CFF94 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E43ED17630157A19008CFF94 /* SwiftUI.framework */; };
+		E43ED18830157A1B008CFF94 /* WidgetMotivationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E43ED17330157A18008CFF94 /* WidgetMotivationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +54,28 @@
 			remoteGlobalIDString = 1D6E581A2E919F1900E6B841;
 			remoteInfo = Motivation;
 		};
+		E43ED18630157A1B008CFF94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1D6E58132E919F1900E6B841 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E43ED17230157A18008CFF94;
+			remoteInfo = WidgetMotivationExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E43ED18D30157A1B008CFF94 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E43ED18830157A1B008CFF94 /* WidgetMotivationExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1D0F3EC02F0D42C4002B6F25 /* TrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackView.swift; sourceTree = "<group>"; };
@@ -79,6 +104,10 @@
 		1DFA7C202F041F9600A1D6E5 /* Motivation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Motivation.entitlements; sourceTree = "<group>"; };
 		1DFA7C232F0425F700A1D6E5 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1DFA7C2A2F0449D200A1D6E5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E43ED16D3015216C008CFF94 /* MotivationWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotivationWidget.swift; sourceTree = "<group>"; };
+		E43ED17330157A18008CFF94 /* WidgetMotivationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetMotivationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E43ED17430157A18008CFF94 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		E43ED17630157A19008CFF94 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -152,6 +181,13 @@
 			);
 			target = 1D6E58272E919F1B00E6B841 /* MotivationTests */;
 		};
+		E43ED18C30157A1B008CFF94 /* Exceptions for "WidgetMotivation" folder in "WidgetMotivationExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E43ED17230157A18008CFF94 /* WidgetMotivationExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -172,6 +208,14 @@
 		1D6E58352E919F1B00E6B841 /* MotivationUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = MotivationUITests;
+			sourceTree = "<group>";
+		};
+		E43ED17830157A19008CFF94 /* WidgetMotivation */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E43ED18C30157A1B008CFF94 /* Exceptions for "WidgetMotivation" folder in "WidgetMotivationExtension" target */,
+			);
+			path = WidgetMotivation;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -204,6 +248,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E43ED17030157A18008CFF94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E43ED17730157A19008CFF94 /* SwiftUI.framework in Frameworks */,
+				E43ED17530157A19008CFF94 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -214,6 +267,7 @@
 				1D7CC64A2F014CC300FAD66D /* Motivation */,
 				1D6E582B2E919F1B00E6B841 /* MotivationTests */,
 				1D6E58352E919F1B00E6B841 /* MotivationUITests */,
+				E43ED17830157A19008CFF94 /* WidgetMotivation */,
 				1D9FEFBA2F01A42F009C6612 /* Frameworks */,
 				1D6E581C2E919F1900E6B841 /* Products */,
 			);
@@ -225,6 +279,7 @@
 				1D6E581B2E919F1900E6B841 /* Motivation.app */,
 				1D6E58282E919F1B00E6B841 /* MotivationTests.xctest */,
 				1D6E58322E919F1B00E6B841 /* MotivationUITests.xctest */,
+				E43ED17330157A18008CFF94 /* WidgetMotivationExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -242,6 +297,7 @@
 				1D7CC6422F014CC300FAD66D /* Info.plist */,
 				1D7CC6452F014CC300FAD66D /* Localizable.strings */,
 				1D7CC6462F014CC300FAD66D /* MotivationApp.swift */,
+				E43ED16D3015216C008CFF94 /* MotivationWidget.swift */,
 				1D7CC6472F014CC300FAD66D /* NotifManager.swift */,
 				1D7CC6482F014CC300FAD66D /* QuoteLibrary.swift */,
 				1D7CC6492F014CC300FAD66D /* Quotes365.swift */,
@@ -260,6 +316,8 @@
 		1D9FEFBA2F01A42F009C6612 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E43ED17430157A18008CFF94 /* WidgetKit.framework */,
+				E43ED17630157A19008CFF94 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -274,10 +332,12 @@
 				1D6E58172E919F1900E6B841 /* Sources */,
 				1D6E58182E919F1900E6B841 /* Frameworks */,
 				1D6E58192E919F1900E6B841 /* Resources */,
+				E43ED18D30157A1B008CFF94 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E43ED18730157A1B008CFF94 /* PBXTargetDependency */,
 			);
 			name = Motivation;
 			packageProductDependencies = (
@@ -339,6 +399,28 @@
 			productReference = 1D6E58322E919F1B00E6B841 /* MotivationUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		E43ED17230157A18008CFF94 /* WidgetMotivationExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E43ED18930157A1B008CFF94 /* Build configuration list for PBXNativeTarget "WidgetMotivationExtension" */;
+			buildPhases = (
+				E43ED16F30157A18008CFF94 /* Sources */,
+				E43ED17030157A18008CFF94 /* Frameworks */,
+				E43ED17130157A18008CFF94 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E43ED17830157A19008CFF94 /* WidgetMotivation */,
+			);
+			name = WidgetMotivationExtension;
+			packageProductDependencies = (
+			);
+			productName = WidgetMotivationExtension;
+			productReference = E43ED17330157A18008CFF94 /* WidgetMotivationExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -346,7 +428,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2600;
+				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					1D6E581A2E919F1900E6B841 = {
@@ -359,6 +441,9 @@
 					1D6E58312E919F1B00E6B841 = {
 						CreatedOnToolsVersion = 26.0.1;
 						TestTargetID = 1D6E581A2E919F1900E6B841;
+					};
+					E43ED17230157A18008CFF94 = {
+						CreatedOnToolsVersion = 26.6;
 					};
 				};
 			};
@@ -385,6 +470,7 @@
 				1D6E581A2E919F1900E6B841 /* Motivation */,
 				1D6E58272E919F1B00E6B841 /* MotivationTests */,
 				1D6E58312E919F1B00E6B841 /* MotivationUITests */,
+				E43ED17230157A18008CFF94 /* WidgetMotivationExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -414,6 +500,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E43ED17130157A18008CFF94 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -426,6 +519,7 @@
 				1D0F3EC12F0D42C5002B6F25 /* TrackView.swift in Sources */,
 				1D7CC64C2F014CC400FAD66D /* Quotes365.swift in Sources */,
 				1DC0AEC32F0842DF00790DED /* TestScreen.swift in Sources */,
+				E43ED16E3015216C008CFF94 /* MotivationWidget.swift in Sources */,
 				1D7CC64D2F014CC400FAD66D /* MotivationApp.swift in Sources */,
 				1D7CC64E2F014CC400FAD66D /* AudioManager.swift in Sources */,
 				1D7971BD2F06AF1500912FFA /* WistomSourses.swift in Sources */,
@@ -455,6 +549,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E43ED16F30157A18008CFF94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -467,6 +568,11 @@
 			isa = PBXTargetDependency;
 			target = 1D6E581A2E919F1900E6B841 /* Motivation */;
 			targetProxy = 1D6E58332E919F1B00E6B841 /* PBXContainerItemProxy */;
+		};
+		E43ED18730157A1B008CFF94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E43ED17230157A18008CFF94 /* WidgetMotivationExtension */;
+			targetProxy = E43ED18630157A1B008CFF94 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -761,6 +867,68 @@
 			};
 			name = Release;
 		};
+		E43ED18A30157A1B008CFF94 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QPGAAW2VT2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WidgetMotivation/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WidgetMotivation;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Leonardo.Motivation.WidgetMotivation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E43ED18B30157A1B008CFF94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QPGAAW2VT2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WidgetMotivation/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WidgetMotivation;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Leonardo.Motivation.WidgetMotivation;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -796,6 +964,15 @@
 			buildConfigurations = (
 				1D6E58432E919F1B00E6B841 /* Debug */,
 				1D6E58442E919F1B00E6B841 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E43ED18930157A1B008CFF94 /* Build configuration list for PBXNativeTarget "WidgetMotivationExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E43ED18A30157A1B008CFF94 /* Debug */,
+				E43ED18B30157A1B008CFF94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

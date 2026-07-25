@@ -55,6 +55,7 @@ struct MotivationApp: App {
 //                .id(storedScheme) 
                 .onAppear {
                     NotifManager.shared.requestPermission()
+                    NotifManager.shared.updateWidgetData()
                     
                     NotifManager.shared.sheduleDailyNotification(
                         hour:9,
