@@ -146,9 +146,12 @@ struct MotivationWidgetEntryView : View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Image(systemName: "sun.max.fill")
-                    .foregroundColor(.yellow)
-                Text("WISDOMhh")
+                Image("arnoldPhoto")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(minWidth: 50, idealWidth: 75, maxWidth: 100, minHeight: 50, idealHeight: 75, maxHeight: 100, alignment: .topLeading)
+                    .clipShape(Circle())
+                Text("WISDOM")
                     .font(.caption)
                     .fontWeight(.bold)
                     .foregroundColor(.gray)
@@ -158,6 +161,8 @@ struct MotivationWidgetEntryView : View {
             
             Text(entry.quote)
                 .font(.custom("CormorantGaramond-Italic", size: 16))
+//                .foregroundStyle(.secondary.opacity(100))
+                .foregroundColor(.gray)
                 .lineLimit(4)
                 .minimumScaleFactor(0.8)
                 .multilineTextAlignment(.leading)
@@ -182,6 +187,6 @@ struct WidgetMotivation: Widget {
         }
         .configurationDisplayName("Citation du Jour")
         .description("Affiche votre dose quotidienne de sagesse stoïcienne.")
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }

@@ -184,6 +184,7 @@
 		E43ED18C30157A1B008CFF94 /* Exceptions for "WidgetMotivation" folder in "WidgetMotivationExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				arnoldPhoto.jpg,
 				Info.plist,
 			);
 			target = E43ED17230157A18008CFF94 /* WidgetMotivationExtension */;
