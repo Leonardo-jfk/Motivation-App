@@ -10,7 +10,7 @@ import SwiftUI
 import UserNotifications
 import Combine
 import Lottie
-
+import WidgetKit // <-- AJOUTER CET IMPORT
 
 
 
@@ -43,6 +43,7 @@ public struct AnimationView: View {
     var contentMode: UIView.ContentMode = .scaleAspectFill
     var playLoopMode: LottieLoopMode = .playOnce
     var onAnimationDidFinish: (() -> Void)? = nil
+    let appGroupID = "group.Leonardo.Motivation"
     
     public var body: some View {
         VStack{
@@ -299,6 +300,86 @@ struct CustomTabBar: View {
     }
 }
 
+//struct TodayView: View {
+//    @Binding var showingQuote: Bool
+//    let todayIndex: Int
+//    let currentQuotes: [String]
+//    @Binding var favoriteQuotes: Set<String>
+//    
+//    @Environment(\.colorScheme) var colorScheme
+//    @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
+//    // Background Helper
+//    var backgroundLayer: some View {
+//        Image(colorScheme == .dark ? .backgroundDark : .backgroundLight)
+//            .resizable()
+//            .scaledToFill()
+//            .ignoresSafeArea()
+//        
+//        
+//    }
+//    
+//    var body: some View {
+//        ZStack{
+//            backgroundLayer
+//            VStack(alignment: .center, spacing: 0) {
+//                Spacer()
+//                
+//                Button(action: {
+//                    withAnimation(.spring()) {
+//                        showingQuote.toggle()
+//                    }
+//                }) {
+//                    if showingQuote {
+//                        VStack(alignment: .center, spacing: 0) {
+//                            AnimationView()
+//                            ZStack {
+//                                RoundedRectangle(cornerRadius: 40, style: .continuous)
+//                                    .fill(Color.black.opacity(0.8))
+//                                    .frame(width: 350, height: 350)
+//                                
+//                                VStack {
+//                                    Text("Today's wisdom dose:".localized)
+//                                        .padding(.horizontal, 8)
+//                                        .padding(.vertical, 4)
+//                                        .background(.gray.opacity(0.4))
+//                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+//                                        .font(.title2)
+//                                        .foregroundStyle(.white)
+//                                    
+//                                    DayQuoteView(index: todayIndex, currentQuotes: currentQuotes)
+//                                        .padding(.horizontal)
+//                                        .frame(maxWidth: 350, maxHeight: 300)
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        ZStack(alignment: .center,) {
+//                            RoundedRectangle(cornerRadius: 30, style: .continuous)
+//                                .fill(Color.black.opacity(0.8))
+//                                .frame(height: 110)
+//                                .frame(maxWidth: .infinity)
+//                                .padding(.horizontal, 70)
+//                            
+//                            Text("Get today's wisdom".localized)
+//                                .font(.title3)
+//                                .bold()
+//                                .foregroundStyle(.white)
+//                        }
+//                    }
+//                }
+//                Spacer()
+//                
+//            }
+//        }
+//        
+//    }
+//    
+//}
+
+
+
+
+
 struct TodayView: View {
     @Binding var showingQuote: Bool
     let todayIndex: Int
@@ -307,14 +388,30 @@ struct TodayView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
-    // Background Helper
+    
+    // ID de votre App Group (assurez-vous qu'il correspond exactement à Xcode)
+    let appGroupID = "group.Leonardo.Motivation"
+
+    // Calcule le texte de la citation du jour
+    var todayQuoteText: String {
+        guard !currentQuotes.isEmpty else { return "No quotes available.".localized }
+        let safeIndex = max(0, min(todayIndex, currentQuotes.count - 1))
+        return currentQuotes[safeIndex]
+    }
+
+    // Fonction de mise à jour du widget
+    func updateWidgetQuote() {
+        if let sharedDefaults = UserDefaults(suiteName: appGroupID) {
+            sharedDefaults.set(todayQuoteText, forKey: "todayQuote")
+        }
+        WidgetCenter.shared.reloadAllTimelines()
+    }
+
     var backgroundLayer: some View {
         Image(colorScheme == .dark ? .backgroundDark : .backgroundLight)
             .resizable()
             .scaledToFill()
             .ignoresSafeArea()
-        
-        
     }
     
     var body: some View {
@@ -352,7 +449,7 @@ struct TodayView: View {
                             }
                         }
                     } else {
-                        ZStack(alignment: .center,) {
+                        ZStack(alignment: .center) {
                             RoundedRectangle(cornerRadius: 30, style: .continuous)
                                 .fill(Color.black.opacity(0.8))
                                 .frame(height: 110)
@@ -367,12 +464,16 @@ struct TodayView: View {
                     }
                 }
                 Spacer()
-                
             }
         }
-        
+        // Mise à jour du widget à l'affichage de la vue ou au changement de citation :
+        .onAppear {
+            updateWidgetQuote()
+        }
+        .onChange(of: todayQuoteText) { _, _ in
+            updateWidgetQuote()
+        }
     }
-    
 }
 
 #Preview {
