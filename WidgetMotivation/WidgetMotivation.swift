@@ -149,7 +149,8 @@ struct MotivationWidgetEntryView : View {
                 Image("arnoldPhoto")
                     .resizable()
                     .scaledToFit()
-                    .frame(minWidth: 50, idealWidth: 75, maxWidth: 100, minHeight: 50, idealHeight: 75, maxHeight: 100, alignment: .topLeading)
+                    /*.frame(minWidth: 50, idealWidth: 75, maxWidth: 100, minHeight: 50, idealHeight: 75, maxHeight: 100, alignment: .topLeading)*/
+                    .frame(width: 45, height: 45)
                     .clipShape(Circle())
                 Text("WISDOM")
                     .font(.caption)
