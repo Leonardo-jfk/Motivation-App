@@ -191,10 +191,285 @@
 //        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
 //    }
 //}
-
-
-
-
+//
+//
+//
+//
+//import Foundation
+//import WidgetKit
+//import SwiftUI
+//
+//struct SimpleEntry: TimelineEntry {
+//    let date: Date
+//    let quote: String
+//}
+//
+//struct Provider: TimelineProvider {
+//    
+//    let placeholderQuote = "Waste no more time arguing what a good man should be. Be one."
+//
+//    func placeholder(in context: Context) -> SimpleEntry {
+//        SimpleEntry(date: Date(), quote: placeholderQuote)
+//    }
+//
+//    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+//        let entry = SimpleEntry(date: Date(), quote: fetchTodayQuote())
+//        completion(entry)
+//    }
+//
+//    func getTimeline(in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
+//        let currentDate = Date()
+//        let quote = fetchTodayQuote()
+//        let entry = SimpleEntry(date: currentDate, quote: quote)
+//
+//        let nextUpdate = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!)
+//        let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+//        
+//        completion(timeline)
+//    }
+//    
+//    // Correction ici : Utilisation du bon ID de groupe ("group.Leonardo.Motivation")
+//    private func fetchTodayQuote() -> String {
+//        let sharedDefaults = UserDefaults(suiteName: "group.Leonardo.Motivation")
+//        return sharedDefaults?.string(forKey: "todayQuote") ?? placeholderQuote
+//    }
+//}
+//
+//
+//func authorPhotoName(for quote: String) -> String {
+//    let lower = quote.lowercased()
+//    
+//    if lower.contains("épictète") || lower.contains("epictetus") {
+//        return "EpictetusPhoto"
+//    } else if lower.contains("marc") || lower.contains("aurelius") || lower.contains("marco") {
+//        return "MarcoPhoto"
+//    } else if lower.contains("sénèque") || lower.contains("seneca") {
+//        return "SenecaPhoto"
+//    } else if lower.contains("caton") || lower.contains("cato") {
+//        return "CatoPhoto"
+//    } else if lower.contains("zénon") || lower.contains("zeno") || lower.contains("zenon") {
+//        return "ZenonPhoto"
+//    } else if lower.contains("chrysippus") || lower.contains("chrysippe") || lower.contains("chrysippos") {
+//        return "ChrysipposPhoto"
+//    } else if lower.contains("cléanthe") || lower.contains("cleanthes") {
+//        return "CleanthesPhoto"
+//    } else if lower.contains("hiéroclès") || lower.contains("hierocles") {
+//        return "HieroclesPhoto"
+//    } else if lower.contains("musonius") {
+//        return "MusoniusPhoto"
+//    } else if lower.contains("posidonios") || lower.contains("posidonio") {
+//        return "PosidonioPhoto"
+//    } else if lower.contains("stockdale") {
+//        return "StockdalePhoto"
+//    } else if lower.contains("zeus") {
+//        return "ZeusPhoto"
+//    }
+//    
+//    // Photo par défaut si aucun auteur correspondant n'est trouvé
+//    return "arnoldPhoto"
+//}
+//
+////struct MotivationWidgetEntryView : View {
+////    var entry: Provider.Entry
+////
+////    var body: some View {
+////        VStack(alignment: .leading, spacing: 8) {
+////            HStack {
+//////                Image("arnoldPhoto")
+////                Image(authorPhotoName(for: entry.quote))
+////                    .resizable()
+////                    .scaledToFit()
+////                    .frame(minWidth: 45, idealWidth: 75, maxWidth: 100, minHeight: 45, idealHeight: 75, maxHeight: 100, alignment: .topLeading)
+////                    .clipShape(Circle())
+////                Text("WISDOM")
+////                    .font(.caption)
+////                    .fontWeight(.bold)
+////                    .foregroundColor(.gray)
+////            }
+////            
+////            Spacer()
+////            
+////            Text(entry.quote)
+////                .font(.custom("CormorantGaramond-Italic", size: 16))
+////                .foregroundColor(.gray)
+////                .lineLimit(4)
+////                .minimumScaleFactor(0.8)
+////                .multilineTextAlignment(.leading)
+////            
+////            Spacer()
+////        }
+////        .padding()
+////        .containerBackground(for: .widget) {
+////            Color.black
+////        }
+////    }
+////}
+//
+////
+////struct MotivationWidgetEntryView : View {
+////    var entry: Provider.Entry
+////    @Environment(\.widgetFamily) var family
+////
+////    var body: some View {
+////        VStack(alignment: .leading, spacing: family == .systemSmall ? 6 : 10) {
+////            
+////            // En-tête : Image dynamique + Titre
+////            HStack(spacing: 10) {
+////                Image(authorPhotoName(for: entry.quote))
+////                    .resizable()
+////                    .scaledToFill()
+////                    .frame(width: family == .systemSmall ? 36 : 42,
+////                           height: family == .systemSmall ? 36 : 42)
+////                    .clipShape(Circle())
+////                    .overlay(
+////                        Circle().stroke(Color.white.opacity(0.2), lineWidth: 1)
+////                    )
+////                
+////                VStack(alignment: .leading, spacing: 2) {
+////                    Text("WISDOM")
+////                        .font(.system(size: 11, weight: .bold, design: .monospaced))
+////                        .foregroundColor(.gray)
+////                }
+////                
+////                Spacer()
+////            }
+////            
+////            Spacer(minLength: 0)
+////            
+////            // Text de la citation
+////            Text("“\(entry.quote)”")
+////                .font(.custom("CormorantGaramond-Italic", size: family == .systemSmall ? 13 : 16))
+////                .foregroundColor(.white.opacity(0.95))
+////                .lineLimit(family == .systemSmall ? 4 : 5)
+////                .minimumScaleFactor(0.8)
+////                .multilineTextAlignment(.leading)
+////            
+////            Spacer(minLength: 0)
+////        }
+////        .padding(family == .systemSmall ? 12 : 16)
+////        .containerBackground(for: .widget) {
+////            Color.black
+////        }
+////    }
+////}
+//
+//func extractAuthorName(from quote: String) -> String {
+//    let components = quote.components(separatedBy: "—")
+//    if components.count > 1 {
+//        let name = components.last?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+//        return name.isEmpty ? "WISDOM" : name.uppercased()
+//    }
+//    return "WISDOM"
+//}
+//
+//
+//func cleanQuoteText(_ quote: String) -> String {
+//    let components = quote.components(separatedBy: "—")
+//    return components.first?.trimmingCharacters(in: .whitespacesAndNewlines) ?? quote
+//}
+//
+//
+//struct MotivationWidgetEntryView : View {
+//    var entry: Provider.Entry
+//    @Environment(\.widgetFamily) var family
+//
+//    var body: some View {
+//        VStack(alignment: .leading, spacing: family == .systemSmall ? 6 : 10) {
+//            
+//            // En-tête : Image dynamique + Nom de l'auteur
+////            HStack(spacing: 10) {
+////                Image(authorPhotoName(for: entry.quote))
+////                    .resizable()
+////                    .scaledToFill()
+////                    .frame(width: family == .systemSmall ? 36 : 42,
+////                           height: family == .systemSmall ? 36 : 42)
+////                    .clipShape(Circle())
+////                    .overlay(
+////                        Circle().stroke(Color.white.opacity(0.2), lineWidth: 1)
+////                    )
+////                
+////                VStack(alignment: .leading, spacing: 2) {
+////                    // Remplace le texte "WISDOM" fixe par le nom dynamiquement extrait
+////                    Text(extractAuthorName(from: entry.quote))
+////                        .font(.system(size: 11, weight: .bold, design: .monospaced))
+////                        .foregroundColor(.gray)
+////                        .lineLimit(1)
+////                }
+////                
+////                Spacer()
+////            }
+////            
+////            Spacer(minLength: 0)
+////            
+////            // Texte de la citation
+////            Text("“\(entry.quote)”")
+////                .font(.custom("CormorantGaramond-Italic", size: family == .systemSmall ? 13 : 16))
+////                .foregroundColor(.white.opacity(0.95))
+////                .lineLimit(family == .systemSmall ? 4 : 5)
+////                .minimumScaleFactor(0.8)
+////                .multilineTextAlignment(.leading)
+////            
+////            Spacer(minLength: 0)
+////        }
+////        .padding(family == .systemSmall ? 12 : 16)
+////        .containerBackground(for: .widget) {
+////            Color.black
+////        }
+//            
+//            
+//            HStack(spacing: 8) {
+//                            Image(authorPhotoName(for: entry.quote))
+//                                .resizable()
+//                                .scaledToFill()
+//                                .frame(width: family == .systemSmall ? 28 : 38,
+//                                       height: family == .systemSmall ? 28 : 38)
+//                                .clipShape(Circle())
+//                                .overlay(
+//                                    Circle().stroke(Color.white.opacity(0.2), lineWidth: 1)
+//                                )
+//                            
+//                            // Affichage du nom de l'auteur sans le texte "WISDOM" qui surcharge
+//                            Text(extractAuthorName(from: entry.quote))
+//                                .font(.system(size: family == .systemSmall ? 10 : 12, weight: .bold, design: .monospaced))
+//                                .foregroundColor(.gray)
+//                                .lineLimit(1)
+//                            
+//                            Spacer()
+//                        }
+//                        
+//                        Spacer(minLength: 0)
+//                        
+//                        // Citation propre (sans le "— Auteur" répété)
+//                        Text("“\(cleanQuoteText(entry.quote))”")
+//                            .font(.custom("CormorantGaramond-Italic", size: family == .systemSmall ? 12 : 16))
+//                            .foregroundColor(.white.opacity(0.95))
+//                            .lineLimit(family == .systemSmall ? 3 : 5)
+//                            .minimumScaleFactor(0.75)
+//                            .multilineTextAlignment(.leading)
+//                        
+//                        Spacer(minLength: 0)
+//                    }
+//                    .padding(family == .systemSmall ? 10 : 16)
+//                    .containerBackground(for: .widget) {
+//                        Color.black
+//                    }
+//    }
+//}
+//
+//// Assurez-vous que @main est décommenté si c'est le point d'entrée principal du widget
+//@main
+//struct WidgetMotivation: Widget {
+//    let kind: String = "MotivationWidget"
+//
+//    var body: some WidgetConfiguration {
+//        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+//            MotivationWidgetEntryView(entry: entry)
+//        }
+//        .configurationDisplayName("Citation du Jour")
+//        .description("Affiche votre dose quotidienne de sagesse stoïcienne.")
+//        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+//    }
+//}
 import Foundation
 import WidgetKit
 import SwiftUI
@@ -206,7 +481,7 @@ struct SimpleEntry: TimelineEntry {
 
 struct Provider: TimelineProvider {
     
-    let placeholderQuote = "Waste no more time arguing what a good man should be. Be one."
+    let placeholderQuote = "Waste no more time arguing what a good man should be. Be one. — Marcus Aurelius"
 
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date(), quote: placeholderQuote)
@@ -228,13 +503,11 @@ struct Provider: TimelineProvider {
         completion(timeline)
     }
     
-    // Correction ici : Utilisation du bon ID de groupe ("group.Leonardo.Motivation")
     private func fetchTodayQuote() -> String {
         let sharedDefaults = UserDefaults(suiteName: "group.Leonardo.Motivation")
         return sharedDefaults?.string(forKey: "todayQuote") ?? placeholderQuote
     }
 }
-
 
 func authorPhotoName(for quote: String) -> String {
     let lower = quote.lowercased()
@@ -265,127 +538,136 @@ func authorPhotoName(for quote: String) -> String {
         return "ZeusPhoto"
     }
     
-    // Photo par défaut si aucun auteur correspondant n'est trouvé
     return "arnoldPhoto"
 }
-
-//struct MotivationWidgetEntryView : View {
-//    var entry: Provider.Entry
-//
-//    var body: some View {
-//        VStack(alignment: .leading, spacing: 8) {
-//            HStack {
-////                Image("arnoldPhoto")
-//                Image(authorPhotoName(for: entry.quote))
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(minWidth: 45, idealWidth: 75, maxWidth: 100, minHeight: 45, idealHeight: 75, maxHeight: 100, alignment: .topLeading)
-//                    .clipShape(Circle())
-//                Text("WISDOM")
-//                    .font(.caption)
-//                    .fontWeight(.bold)
-//                    .foregroundColor(.gray)
-//            }
-//            
-//            Spacer()
-//            
-//            Text(entry.quote)
-//                .font(.custom("CormorantGaramond-Italic", size: 16))
-//                .foregroundColor(.gray)
-//                .lineLimit(4)
-//                .minimumScaleFactor(0.8)
-//                .multilineTextAlignment(.leading)
-//            
-//            Spacer()
-//        }
-//        .padding()
-//        .containerBackground(for: .widget) {
-//            Color.black
-//        }
-//    }
-//}
-
-//
-//struct MotivationWidgetEntryView : View {
-//    var entry: Provider.Entry
-//    @Environment(\.widgetFamily) var family
-//
-//    var body: some View {
-//        VStack(alignment: .leading, spacing: family == .systemSmall ? 6 : 10) {
-//            
-//            // En-tête : Image dynamique + Titre
-//            HStack(spacing: 10) {
-//                Image(authorPhotoName(for: entry.quote))
-//                    .resizable()
-//                    .scaledToFill()
-//                    .frame(width: family == .systemSmall ? 36 : 42,
-//                           height: family == .systemSmall ? 36 : 42)
-//                    .clipShape(Circle())
-//                    .overlay(
-//                        Circle().stroke(Color.white.opacity(0.2), lineWidth: 1)
-//                    )
-//                
-//                VStack(alignment: .leading, spacing: 2) {
-//                    Text("WISDOM")
-//                        .font(.system(size: 11, weight: .bold, design: .monospaced))
-//                        .foregroundColor(.gray)
-//                }
-//                
-//                Spacer()
-//            }
-//            
-//            Spacer(minLength: 0)
-//            
-//            // Text de la citation
-//            Text("“\(entry.quote)”")
-//                .font(.custom("CormorantGaramond-Italic", size: family == .systemSmall ? 13 : 16))
-//                .foregroundColor(.white.opacity(0.95))
-//                .lineLimit(family == .systemSmall ? 4 : 5)
-//                .minimumScaleFactor(0.8)
-//                .multilineTextAlignment(.leading)
-//            
-//            Spacer(minLength: 0)
-//        }
-//        .padding(family == .systemSmall ? 12 : 16)
-//        .containerBackground(for: .widget) {
-//            Color.black
-//        }
-//    }
-//}
 
 func extractAuthorName(from quote: String) -> String {
     let components = quote.components(separatedBy: "—")
     if components.count > 1 {
         let name = components.last?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        return name.isEmpty ? "WISDOM" : name.uppercased()
+        return name.isEmpty ? "STOÏCISME" : name.uppercased()
     }
-    return "WISDOM"
+    return "STOÏCISME"
 }
+
+func cleanQuoteText(_ quote: String) -> String {
+    let components = quote.components(separatedBy: "—")
+    return components.first?.trimmingCharacters(in: .whitespacesAndNewlines) ?? quote
+}
+
 struct MotivationWidgetEntryView : View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var family
 
     var body: some View {
-        VStack(alignment: .leading, spacing: family == .systemSmall ? 6 : 10) {
-            
-            // En-tête : Image dynamique + Nom de l'auteur
-            HStack(spacing: 10) {
+        Group {
+            switch family {
+            case .systemSmall:
+                smallView
+            case .systemMedium:
+                mediumView
+            default:
+                largeView
+            }
+        }
+        .containerBackground(for: .widget) {
+            Color.black
+        }
+    }
+
+    // MARK: - Format Small
+    private var smallView: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 8) {
                 Image(authorPhotoName(for: entry.quote))
                     .resizable()
                     .scaledToFill()
-                    .frame(width: family == .systemSmall ? 36 : 42,
-                           height: family == .systemSmall ? 36 : 42)
+                    .frame(width: 28, height: 28)
                     .clipShape(Circle())
-                    .overlay(
-                        Circle().stroke(Color.white.opacity(0.2), lineWidth: 1)
-                    )
+                    .overlay(Circle().stroke(Color.white.opacity(0.2), lineWidth: 1))
+                
+                Text(extractAuthorName(from: entry.quote))
+                    .font(.system(size: 10, weight: .bold, design: .monospaced))
+                    .foregroundColor(.gray)
+                    .lineLimit(1)
+                
+                Spacer(minLength: 0)
+            }
+            
+            Spacer(minLength: 0)
+            
+            Text("“\(cleanQuoteText(entry.quote))”")
+                .font(.custom("CormorantGaramond-Italic", size: 13))
+                .foregroundColor(.white.opacity(0.95))
+                .lineLimit(4)
+                .minimumScaleFactor(0.75)
+                .multilineTextAlignment(.leading)
+            
+            Spacer(minLength: 0)
+        }
+        .padding(10)
+    }
+
+    // MARK: - Format Medium (2 Colonnes)
+    private var mediumView: some View {
+        HStack(spacing: 16) {
+            // Colonne Auteur
+            VStack(spacing: 8) {
+                Image(authorPhotoName(for: entry.quote))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 52, height: 52)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white.opacity(0.25), lineWidth: 1))
+                
+                Text(extractAuthorName(from: entry.quote))
+                    .font(.system(size: 11, weight: .bold, design: .monospaced))
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+            }
+            .frame(width: 85)
+
+            Divider()
+                .background(Color.white.opacity(0.15))
+
+            // Colonne Citation
+            VStack(alignment: .leading, spacing: 0) {
+                Spacer(minLength: 0)
+                
+                Text("“\(cleanQuoteText(entry.quote))”")
+                    .font(.custom("CormorantGaramond-Italic", size: 16))
+                    .foregroundColor(.white.opacity(0.95))
+                    .lineLimit(5)
+                    .minimumScaleFactor(0.8)
+                    .multilineTextAlignment(.leading)
+                
+                Spacer(minLength: 0)
+            }
+        }
+        .padding(14)
+    }
+
+    // MARK: - Format Large
+    private var largeView: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack(spacing: 12) {
+                Image(authorPhotoName(for: entry.quote))
+                    .resizable()
+                    .scaledToFill()
+//                    .frame(width: 46, height: 46)
+                    .frame(minWidth: 45, idealWidth: 75, maxWidth: 100, minHeight: 45, idealHeight: 75, maxHeight: 100, alignment: .topLeading)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white.opacity(0.2), lineWidth: 1))
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    // Remplace le texte "WISDOM" fixe par le nom dynamiquement extrait
                     Text(extractAuthorName(from: entry.quote))
-                        .font(.system(size: 11, weight: .bold, design: .monospaced))
+                        .font(.system(size: 13, weight: .bold, design: .monospaced))
+                        .foregroundColor(.white)
+                    
+                    Text("SAGESSE DU JOUR")
+                        .font(.system(size: 9, weight: .semibold, design: .monospaced))
                         .foregroundColor(.gray)
-                        .lineLimit(1)
                 }
                 
                 Spacer()
@@ -393,24 +675,19 @@ struct MotivationWidgetEntryView : View {
             
             Spacer(minLength: 0)
             
-            // Texte de la citation
-            Text("“\(entry.quote)”")
-                .font(.custom("CormorantGaramond-Italic", size: family == .systemSmall ? 13 : 16))
+            Text("“\(cleanQuoteText(entry.quote))”")
+                .font(.custom("CormorantGaramond-Italic", size: 20))
                 .foregroundColor(.white.opacity(0.95))
-                .lineLimit(family == .systemSmall ? 4 : 5)
+                .lineLimit(8)
                 .minimumScaleFactor(0.8)
                 .multilineTextAlignment(.leading)
             
             Spacer(minLength: 0)
         }
-        .padding(family == .systemSmall ? 12 : 16)
-        .containerBackground(for: .widget) {
-            Color.black
-        }
+        .padding(18)
     }
 }
 
-// Assurez-vous que @main est décommenté si c'est le point d'entrée principal du widget
 @main
 struct WidgetMotivation: Widget {
     let kind: String = "MotivationWidget"
