@@ -8,7 +8,7 @@
 import WidgetKit
 import SwiftUI
 
-@main
+//@main
 struct WidgetMotivationBundle: WidgetBundle {
     var body: some Widget {
         WidgetMotivation()

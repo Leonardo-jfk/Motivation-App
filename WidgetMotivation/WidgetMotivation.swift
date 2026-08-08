@@ -271,7 +271,7 @@ struct MotivationWidgetEntryView : View {
 }
 
 // Assurez-vous que @main est décommenté si c'est le point d'entrée principal du widget
-//@main
+@main
 struct WidgetMotivation: Widget {
     let kind: String = "MotivationWidget"
 
