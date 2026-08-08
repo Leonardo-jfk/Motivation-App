@@ -305,7 +305,62 @@ func authorPhotoName(for quote: String) -> String {
 //    }
 //}
 
+//
+//struct MotivationWidgetEntryView : View {
+//    var entry: Provider.Entry
+//    @Environment(\.widgetFamily) var family
+//
+//    var body: some View {
+//        VStack(alignment: .leading, spacing: family == .systemSmall ? 6 : 10) {
+//            
+//            // En-tête : Image dynamique + Titre
+//            HStack(spacing: 10) {
+//                Image(authorPhotoName(for: entry.quote))
+//                    .resizable()
+//                    .scaledToFill()
+//                    .frame(width: family == .systemSmall ? 36 : 42,
+//                           height: family == .systemSmall ? 36 : 42)
+//                    .clipShape(Circle())
+//                    .overlay(
+//                        Circle().stroke(Color.white.opacity(0.2), lineWidth: 1)
+//                    )
+//                
+//                VStack(alignment: .leading, spacing: 2) {
+//                    Text("WISDOM")
+//                        .font(.system(size: 11, weight: .bold, design: .monospaced))
+//                        .foregroundColor(.gray)
+//                }
+//                
+//                Spacer()
+//            }
+//            
+//            Spacer(minLength: 0)
+//            
+//            // Text de la citation
+//            Text("“\(entry.quote)”")
+//                .font(.custom("CormorantGaramond-Italic", size: family == .systemSmall ? 13 : 16))
+//                .foregroundColor(.white.opacity(0.95))
+//                .lineLimit(family == .systemSmall ? 4 : 5)
+//                .minimumScaleFactor(0.8)
+//                .multilineTextAlignment(.leading)
+//            
+//            Spacer(minLength: 0)
+//        }
+//        .padding(family == .systemSmall ? 12 : 16)
+//        .containerBackground(for: .widget) {
+//            Color.black
+//        }
+//    }
+//}
 
+func extractAuthorName(from quote: String) -> String {
+    let components = quote.components(separatedBy: "—")
+    if components.count > 1 {
+        let name = components.last?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        return name.isEmpty ? "WISDOM" : name.uppercased()
+    }
+    return "WISDOM"
+}
 struct MotivationWidgetEntryView : View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var family
@@ -313,7 +368,7 @@ struct MotivationWidgetEntryView : View {
     var body: some View {
         VStack(alignment: .leading, spacing: family == .systemSmall ? 6 : 10) {
             
-            // En-tête : Image dynamique + Titre
+            // En-tête : Image dynamique + Nom de l'auteur
             HStack(spacing: 10) {
                 Image(authorPhotoName(for: entry.quote))
                     .resizable()
@@ -326,9 +381,11 @@ struct MotivationWidgetEntryView : View {
                     )
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("WISDOM")
+                    // Remplace le texte "WISDOM" fixe par le nom dynamiquement extrait
+                    Text(extractAuthorName(from: entry.quote))
                         .font(.system(size: 11, weight: .bold, design: .monospaced))
                         .foregroundColor(.gray)
+                        .lineLimit(1)
                 }
                 
                 Spacer()
@@ -336,7 +393,7 @@ struct MotivationWidgetEntryView : View {
             
             Spacer(minLength: 0)
             
-            // Text de la citation
+            // Texte de la citation
             Text("“\(entry.quote)”")
                 .font(.custom("CormorantGaramond-Italic", size: family == .systemSmall ? 13 : 16))
                 .foregroundColor(.white.opacity(0.95))

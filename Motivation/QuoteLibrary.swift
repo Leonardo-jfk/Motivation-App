@@ -407,6 +407,15 @@ public struct QuoteLibrary: View {
             }
         }
     }
+//
+//func extractAuthorName(from quote: String) -> String {
+//    let components = quote.components(separatedBy: "—")
+//    if components.count > 1 {
+//        let name = components.last?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+//        return name.isEmpty ? "WISDOM" : name.uppercased()
+//    }
+//    return "WISDOM"
+//}
 
 
 public enum NotesStorage {

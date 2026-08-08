@@ -380,6 +380,111 @@ struct CustomTabBar: View {
 
 
 
+//struct TodayView: View {
+//    @Binding var showingQuote: Bool
+//    let todayIndex: Int
+//    let currentQuotes: [String]
+//    @Binding var favoriteQuotes: Set<String>
+//    
+//    @Environment(\.colorScheme) var colorScheme
+//    @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
+//    
+//    // ID de votre App Group (assurez-vous qu'il correspond exactement à Xcode)
+//    let appGroupID = "group.Leonardo.Motivation"
+//
+//    // Calcule le texte de la citation du jour
+//    var todayQuoteText: String {
+//        guard !currentQuotes.isEmpty else { return "No quotes available.".localized }
+//        let safeIndex = max(0, min(todayIndex, currentQuotes.count - 1))
+//        return currentQuotes[safeIndex]
+//    }
+//
+//    // Fonction de mise à jour du widget
+//    func updateWidgetQuote() {
+//        if let sharedDefaults = UserDefaults(suiteName: appGroupID) {
+//            sharedDefaults.set(todayQuoteText, forKey: "todayQuote")
+//        }
+//        WidgetCenter.shared.reloadAllTimelines()
+//    }
+//
+//    var backgroundLayer: some View {
+//        Image(colorScheme == .dark ? .backgroundDark : .backgroundLight)
+//            .resizable()
+//            .scaledToFill()
+//            .ignoresSafeArea()
+//    }
+//    
+//    var body: some View {
+//        ZStack{
+//            backgroundLayer
+//            VStack(alignment: .center, spacing: 0) {
+//                Spacer()
+//                
+//                Button(action: {
+//                    withAnimation(.spring()) {
+//                        showingQuote.toggle()
+//                    }
+//                }) {
+//                    if showingQuote {
+//                        VStack(alignment: .center, spacing: 0) {
+//                            AnimationView()
+//                            ZStack {
+//                                RoundedRectangle(cornerRadius: 40, style: .continuous)
+//                                    .fill(Color.black.opacity(0.8))
+//                                    .frame(width: 350, height: 350)
+//                                
+//                                VStack {
+//                                    Text("Today's wisdom dose:".localized)
+//                                        .padding(.horizontal, 8)
+//                                        .padding(.vertical, 4)
+//                                        .background(.gray.opacity(0.4))
+//                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+//                                        .font(.title2)
+//                                        .foregroundStyle(.white)
+//                                    
+//                                    DayQuoteView(index: todayIndex, currentQuotes: currentQuotes)
+//                                        .padding(.horizontal)
+//                                        .frame(maxWidth: 350, maxHeight: 300)
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        ZStack(alignment: .center) {
+//                            RoundedRectangle(cornerRadius: 30, style: .continuous)
+//                                .fill(Color.black.opacity(0.8))
+//                                .frame(height: 110)
+//                                .frame(maxWidth: .infinity)
+//                                .padding(.horizontal, 70)
+//                            
+//                            Text("Get today's wisdom".localized)
+//                                .font(.title3)
+//                                .bold()
+//                                .foregroundStyle(.white)
+//                        }
+//                    }
+//                }
+//                Spacer()
+//            }
+//        }
+//        // Mise à jour du widget à l'affichage de la vue ou au changement de citation :
+//        .onAppear {
+//            updateWidgetQuote()
+//        }
+//        .onChange(of: todayQuoteText) { _, _ in
+//            updateWidgetQuote()
+//        }
+//    }
+//}
+
+func extractAuthorName(from quote: String) -> String {
+    let components = quote.components(separatedBy: "—")
+    if components.count > 1 {
+        let name = components.last?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        return name.isEmpty ? "WISDOM" : name.uppercased()
+    }
+    return "WISDOM"
+}
+
 struct TodayView: View {
     @Binding var showingQuote: Bool
     let todayIndex: Int
@@ -389,17 +494,14 @@ struct TodayView: View {
     @Environment(\.colorScheme) var colorScheme
     @AppStorage("appColorScheme") private var storedScheme: String = AppColorScheme.system.rawValue
     
-    // ID de votre App Group (assurez-vous qu'il correspond exactement à Xcode)
     let appGroupID = "group.Leonardo.Motivation"
 
-    // Calcule le texte de la citation du jour
     var todayQuoteText: String {
         guard !currentQuotes.isEmpty else { return "No quotes available.".localized }
         let safeIndex = max(0, min(todayIndex, currentQuotes.count - 1))
         return currentQuotes[safeIndex]
     }
 
-    // Fonction de mise à jour du widget
     func updateWidgetQuote() {
         if let sharedDefaults = UserDefaults(suiteName: appGroupID) {
             sharedDefaults.set(todayQuoteText, forKey: "todayQuote")
@@ -415,7 +517,7 @@ struct TodayView: View {
     }
     
     var body: some View {
-        ZStack{
+        ZStack {
             backgroundLayer
             VStack(alignment: .center, spacing: 0) {
                 Spacer()
@@ -433,18 +535,20 @@ struct TodayView: View {
                                     .fill(Color.black.opacity(0.8))
                                     .frame(width: 350, height: 350)
                                 
-                                VStack {
-                                    Text("Today's wisdom dose:".localized)
-                                        .padding(.horizontal, 8)
-                                        .padding(.vertical, 4)
+                                VStack(spacing: 12) {
+                                    // Affiche dynamiquement le nom de l'auteur à la place du texte fixe
+                                    Text(extractAuthorName(from: todayQuoteText))
+                                        .font(.caption)
+                                        .fontWeight(.bold)
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 6)
                                         .background(.gray.opacity(0.4))
                                         .clipShape(RoundedRectangle(cornerRadius: 8))
-                                        .font(.title2)
                                         .foregroundStyle(.white)
                                     
                                     DayQuoteView(index: todayIndex, currentQuotes: currentQuotes)
                                         .padding(.horizontal)
-                                        .frame(maxWidth: 350, maxHeight: 300)
+                                        .frame(maxWidth: 350, maxHeight: 250)
                                 }
                             }
                         }
@@ -466,7 +570,6 @@ struct TodayView: View {
                 Spacer()
             }
         }
-        // Mise à jour du widget à l'affichage de la vue ou au changement de citation :
         .onAppear {
             updateWidgetQuote()
         }
