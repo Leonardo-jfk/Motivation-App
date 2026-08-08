@@ -235,35 +235,118 @@ struct Provider: TimelineProvider {
     }
 }
 
+
+func authorPhotoName(for quote: String) -> String {
+    let lower = quote.lowercased()
+    
+    if lower.contains("épictète") || lower.contains("epictetus") {
+        return "EpictetusPhoto"
+    } else if lower.contains("marc") || lower.contains("aurelius") || lower.contains("marco") {
+        return "MarcoPhoto"
+    } else if lower.contains("sénèque") || lower.contains("seneca") {
+        return "SenecaPhoto"
+    } else if lower.contains("caton") || lower.contains("cato") {
+        return "CatoPhoto"
+    } else if lower.contains("zénon") || lower.contains("zeno") || lower.contains("zenon") {
+        return "ZenonPhoto"
+    } else if lower.contains("chrysippus") || lower.contains("chrysippe") || lower.contains("chrysippos") {
+        return "ChrysipposPhoto"
+    } else if lower.contains("cléanthe") || lower.contains("cleanthes") {
+        return "CleanthesPhoto"
+    } else if lower.contains("hiéroclès") || lower.contains("hierocles") {
+        return "HieroclesPhoto"
+    } else if lower.contains("musonius") {
+        return "MusoniusPhoto"
+    } else if lower.contains("posidonios") || lower.contains("posidonio") {
+        return "PosidonioPhoto"
+    } else if lower.contains("stockdale") {
+        return "StockdalePhoto"
+    } else if lower.contains("zeus") {
+        return "ZeusPhoto"
+    }
+    
+    // Photo par défaut si aucun auteur correspondant n'est trouvé
+    return "arnoldPhoto"
+}
+
+//struct MotivationWidgetEntryView : View {
+//    var entry: Provider.Entry
+//
+//    var body: some View {
+//        VStack(alignment: .leading, spacing: 8) {
+//            HStack {
+////                Image("arnoldPhoto")
+//                Image(authorPhotoName(for: entry.quote))
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(minWidth: 45, idealWidth: 75, maxWidth: 100, minHeight: 45, idealHeight: 75, maxHeight: 100, alignment: .topLeading)
+//                    .clipShape(Circle())
+//                Text("WISDOM")
+//                    .font(.caption)
+//                    .fontWeight(.bold)
+//                    .foregroundColor(.gray)
+//            }
+//            
+//            Spacer()
+//            
+//            Text(entry.quote)
+//                .font(.custom("CormorantGaramond-Italic", size: 16))
+//                .foregroundColor(.gray)
+//                .lineLimit(4)
+//                .minimumScaleFactor(0.8)
+//                .multilineTextAlignment(.leading)
+//            
+//            Spacer()
+//        }
+//        .padding()
+//        .containerBackground(for: .widget) {
+//            Color.black
+//        }
+//    }
+//}
+
+
 struct MotivationWidgetEntryView : View {
     var entry: Provider.Entry
+    @Environment(\.widgetFamily) var family
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Image("arnoldPhoto")
+        VStack(alignment: .leading, spacing: family == .systemSmall ? 6 : 10) {
+            
+            // En-tête : Image dynamique + Titre
+            HStack(spacing: 10) {
+                Image(authorPhotoName(for: entry.quote))
                     .resizable()
-                    .scaledToFit()
-                    .frame(minWidth: 45, idealWidth: 75, maxWidth: 100, minHeight: 45, idealHeight: 75, maxHeight: 100, alignment: .topLeading)
+                    .scaledToFill()
+                    .frame(width: family == .systemSmall ? 36 : 42,
+                           height: family == .systemSmall ? 36 : 42)
                     .clipShape(Circle())
-                Text("WISDOM")
-                    .font(.caption)
-                    .fontWeight(.bold)
-                    .foregroundColor(.gray)
+                    .overlay(
+                        Circle().stroke(Color.white.opacity(0.2), lineWidth: 1)
+                    )
+                
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("WISDOM")
+                        .font(.system(size: 11, weight: .bold, design: .monospaced))
+                        .foregroundColor(.gray)
+                }
+                
+                Spacer()
             }
             
-            Spacer()
+            Spacer(minLength: 0)
             
-            Text(entry.quote)
-                .font(.custom("CormorantGaramond-Italic", size: 16))
-                .foregroundColor(.gray)
-                .lineLimit(4)
+            // Text de la citation
+            Text("“\(entry.quote)”")
+                .font(.custom("CormorantGaramond-Italic", size: family == .systemSmall ? 13 : 16))
+                .foregroundColor(.white.opacity(0.95))
+                .lineLimit(family == .systemSmall ? 4 : 5)
                 .minimumScaleFactor(0.8)
                 .multilineTextAlignment(.leading)
             
-            Spacer()
+            Spacer(minLength: 0)
         }
-        .padding()
+        .padding(family == .systemSmall ? 12 : 16)
         .containerBackground(for: .widget) {
             Color.black
         }
